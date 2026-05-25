@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shan Wesley Bachain — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c0c0c;
+  --surface: #141414;
+  --border: rgba(255,255,255,0.08);
+  --white: #ffffff;
+  --dim: #888;
+  --muted: #444;
+  --font-h: 'Syne', sans-serif;
+  --font-b: 'Inter', sans-serif;
+  --font-m: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+#cur { position:fixed; width:6px; height:6px; background:#fff; border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+#cur-r { position:fixed; width:32px; height:32px; border:1px solid rgba(255,255,255,0.3); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .25s,height .25s; mix-blend-mode:difference; }
+body:has(a:hover) #cur-r, body:has(button:hover) #cur-r { width:48px; height:48px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.75rem 4rem;
+  background: rgba(12,12,12,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--font-h); font-weight: 800; font-size: 1rem; letter-spacing: 0.2em; text-decoration: none; color: var(--white); }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a { font-family: var(--font-m); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color: var(--white); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 4rem 5rem;
+  border-bottom: 1px solid var(--border);
+}
+.hero-eyebrow {
+  font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem;
+}
+.hero-name {
+  font-family: var(--font-h); font-weight: 800;
+  font-size: clamp(3.5rem, 9vw, 10rem);
+  line-height: 0.92; letter-spacing: -0.02em;
+  color: var(--white); text-transform: uppercase;
+  overflow: hidden; margin-bottom: 2.5rem;
+}
+.hero-name span { display: block; transform: translateY(110%); animation: up .8s cubic-bezier(.16,1,.3,1) forwards; }
+.hero-name span:nth-child(1) { animation-delay:.05s; }
+.hero-name span:nth-child(2) { animation-delay:.15s; color: transparent; -webkit-text-stroke:1px rgba(255,255,255,0.25); }
+.hero-name span:nth-child(3) { animation-delay:.25s; }
+@keyframes up { to { transform:translateY(0); } }
+
+.hero-meta {
+  display: flex; gap: 3rem; align-items: center;
+  opacity:0; animation: fade .5s ease .6s forwards;
+}
+@keyframes fade { to { opacity:1; } }
+.hero-desc { max-width: 380px; font-size: 0.9rem; color: var(--dim); line-height: 1.8; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2); padding: .85rem 1.8rem;
+  transition: background .2s, border-color .2s;
+  white-space: nowrap;
+}
+.hero-cta:hover { background: var(--white); color: var(--bg); border-color: var(--white); }
+
+/* ── SECTIONS ── */
+section { padding: 6rem 4rem; border-bottom: 1px solid var(--border); }
+
+.sec-label {
+  font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 3rem;
+}
+
+.sec-title {
+  font-family: var(--font-h); font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.02em; color: var(--white);
+  text-transform: uppercase; line-height: 1;
+  margin-bottom: 3.5rem;
+}
+
+/* ── ABOUT ── */
+#about { background: var(--surface); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+
+.about-photo {
+  aspect-ratio: 3/4; background: var(--muted);
+  position: relative; overflow: hidden;
+}
+.about-photo-inner {
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  background: repeating-linear-gradient(45deg,rgba(255,255,255,.015),rgba(255,255,255,.015) 1px,transparent 1px,transparent 14px);
+  font-family: var(--font-m); font-size: .65rem; color: var(--muted);
+}
+.about-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(12,12,12,.6));
+}
+
+.about-right {}
+.about-bio { font-size: .92rem; color: var(--dim); line-height: 1.9; margin-bottom: 2.5rem; }
+.about-bio strong { color: var(--white); font-weight: 500; }
+
+.about-facts {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+}
+.fact {
+  background: var(--surface); padding: 1.1rem 1.4rem;
+}
+.fact-label { font-family: var(--font-m); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+.fact-val { font-size: .85rem; color: var(--white); }
+
+/* ── EDUCATION ── */
+.edu-list { display:flex; flex-direction:column; }
+.edu-row {
+  display: grid; grid-template-columns: 140px 1fr auto;
+  gap: 2rem; align-items: baseline;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background .2s;
+}
+.edu-row:first-child { border-top: 1px solid var(--border); }
+.edu-year { font-family: var(--font-m); font-size: .65rem; color: var(--muted); }
+.edu-body {}
+.edu-degree { font-family: var(--font-h); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: .3rem; }
+.edu-school { font-size: .82rem; color: var(--dim); }
+.edu-badge {
+  font-family: var(--font-m); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.15); padding: .3rem .8rem;
+  color: var(--white); white-space: nowrap;
+}
+
+/* ── PROJECTS ── */
+#projects { background: var(--surface); }
+.project-list { display: flex; flex-direction: column; }
+.project-row {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: center;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: padding-left .3s cubic-bezier(.16,1,.3,1);
+}
+.project-row:first-child { border-top: 1px solid var(--border); }
+.project-row:hover { padding-left: 1rem; }
+.project-title { font-family: var(--font-h); font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 700; color: var(--white); margin-bottom: .4rem; }
+.project-desc { font-size: .82rem; color: var(--dim); max-width: 560px; line-height: 1.7; margin-bottom: .8rem; }
+.project-stack { display:flex; flex-wrap:wrap; gap:.4rem; }
+.stack-tag { font-family: var(--font-m); font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); background: rgba(255,255,255,.04); padding:.2rem .6rem; }
+.project-arrow { font-size: 1.2rem; color: var(--muted); transition: transform .3s, color .3s; }
+.project-row:hover .project-arrow { transform: translateX(4px); color: var(--white); }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+.skill-group {}
+.skill-group-title { font-family: var(--font-m); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; padding-bottom: .75rem; border-bottom: 1px solid var(--border); }
+.skill-list { display: flex; flex-direction: column; gap: .6rem; }
+.skill-item { display:flex; justify-content:space-between; align-items:center; }
+.skill-name { font-size: .85rem; color: var(--white); }
+.skill-level { font-family: var(--font-m); font-size: .62rem; color: var(--muted); }
+
+/* ── AWARDS ── */
+#awards { background: var(--surface); }
+.awards-list { display: flex; flex-direction: column; }
+.award-row {
+  display: grid; grid-template-columns: 60px 1fr 100px;
+  gap: 2rem; align-items: center;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.award-row:first-child { border-top: 1px solid var(--border); }
+.award-rank { font-family: var(--font-h); font-size: 1.3rem; font-weight: 800; color: var(--muted); }
+.award-title { font-size: .9rem; font-weight: 500; color: var(--white); margin-bottom: .2rem; }
+.award-org { font-size: .78rem; color: var(--muted); }
+.award-year { font-family: var(--font-m); font-size: .65rem; color: var(--muted); text-align: right; }
+
+/* ── CONTACT ── */
+.contact-wrap { max-width: 600px; }
+.contact-heading { font-family: var(--font-h); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+.contact-sub { font-size: .88rem; color: var(--dim); line-height: 1.8; margin-bottom: 2.5rem; }
+.contact-links { display: flex; flex-direction: column; gap: .8rem; }
+.contact-link-row { display: flex; align-items: center; gap: 1.2rem; }
+.cl-label { font-family: var(--font-m); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); min-width: 55px; }
+.cl-val { font-size: .88rem; color: var(--white); text-decoration: none; transition: color .2s; }
+a.cl-val:hover { color: var(--dim); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-family: var(--font-m); font-size: .62rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-family: var(--font-m); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--white); }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal.d1 { transition-delay: .1s; }
+.reveal.d2 { transition-delay: .2s; }
+.reveal.d3 { transition-delay: .3s; }
+.reveal.on { opacity:1; transform:none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1.4rem 1.5rem; }
+  .nav-links { display: none; }
+  section, #hero { padding: 4rem 1.5rem; }
+  #hero { padding-bottom: 3.5rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { max-width: 260px; }
+  .edu-row { grid-template-columns: 1fr; gap: .4rem; }
+  .edu-badge { display:none; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .award-row { grid-template-columns: 40px 1fr; }
+  .award-year { display:none; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  body { cursor: auto; }
+  #cur, #cur-r { display: none; }
+}
+@media (max-width: 600px) {
+  .about-facts { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .hero-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">SWB</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Computer Engineering Student &amp; Developer</div>
+  <h1 class="hero-name">
+    <span>Shan</span>
+    <span>Wesley</span>
+    <span>Bachain</span>
+  </h1>
+  <div class="hero-meta">
+    <p class="hero-desc">AI-driven developer. Consistent top academic performer. Building software that solves real problems.</p>
+    <a href="#contact" class="hero-cta">Get in touch →</a>
+    <a href="#projects" class="hero-cta">View work →</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">01 — About</div>
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <div class="about-photo-inner">[ img/me.jpg ]</div>
+    </div>
+    <div class="reveal d1">
+      <p class="about-bio">
+        Incoming 4th-year <strong>Computer Engineering student</strong> at the University of Rizal System — Antipolo Campus. Passionate about AI and software development, with a track record of academic excellence from elementary through college.
+      </p>
+      <p class="about-bio">
+        I build practical, well-engineered software. Open to <strong>internships, OJT placements, and freelance projects</strong>.
+      </p>
+      <div class="about-facts">
+        <div class="fact">
+          <div class="fact-label">Location</div>
+          <div class="fact-val">Angono, Rizal, PH</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Degree</div>
+          <div class="fact-val">4th Year — CpE</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">University</div>
+          <div class="fact-val">URS — Antipolo Campus</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Email</div>
+          <div class="fact-val">swbachain@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-label">02 — Education</div>
+  <div class="edu-list">
+    <div class="edu-row reveal">
+      <div class="edu-year">2023 — Present</div>
+      <div class="edu-body">
+        <div class="edu-degree">B.S. Computer Engineering</div>
+        <div class="edu-school">University of Rizal System — Antipolo Campus &nbsp;·&nbsp; GPA: 1.47 / 1.36 / 1.44</div>
+      </div>
+      <div class="edu-badge">Top Performer</div>
+    </div>
+    <div class="edu-row reveal d1">
+      <div class="edu-year">2021 — 2023</div>
+      <div class="edu-body">
+        <div class="edu-degree">Senior High School — STEM</div>
+        <div class="edu-school">Sumulong College of Arts and Sciences</div>
+      </div>
+      <div class="edu-badge">Valedictorian</div>
+    </div>
+    <div class="edu-row reveal d2">
+      <div class="edu-year">2017 — 2021</div>
+      <div class="edu-body">
+        <div class="edu-degree">Junior High School</div>
+        <div class="edu-school">Carlos "Botong" Francisco Memorial National High School</div>
+      </div>
+      <div class="edu-badge">Valedictorian</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-label">03 — Projects</div>
+  <div class="project-list">
+    <div class="project-row reveal" onclick="window.open('https://interviewprox.rf.gd/job-interview/public/','_blank')">
+      <div>
+        <div class="project-title">Job Interview Management System</div>
+        <div class="project-desc">Web platform for managing job interviews with multi-role access, scheduling, and evaluation tools.</div>
+        <div class="project-stack">
+          <span class="stack-tag">PHP</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">Firebase</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-row reveal d1" onclick="window.open('https://mamasdeliandpasalubong.freesite.online/home.php','_blank')">
+      <div>
+        <div class="project-title">Mama's Deli &amp; Pasalubong</div>
+        <div class="project-desc">Responsive business website with product showcase and order inquiry functionality.</div>
+        <div class="project-stack">
+          <span class="stack-tag">PHP</span>
+          <span class="stack-tag">HTML / CSS</span>
+          <span class="stack-tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-label">04 — Skills</div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">JavaScript</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">Python</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">PHP</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-item"><span class="skill-name">Java</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-item"><span class="skill-name">C / C++</span><span class="skill-level">Intermediate</span></div>
+      </div>
+    </div>
+    <div class="skill-group reveal d1">
+      <div class="skill-group-title">Web &amp; Frameworks</div>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">HTML / CSS</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">React.js</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-item"><span class="skill-name">Node.js</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-item"><span class="skill-name">Bootstrap</span><span class="skill-level">Advanced</span></div>
+      </div>
+    </div>
+    <div class="skill-group reveal d2">
+      <div class="skill-group-title">Tools &amp; Platforms</div>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">Git / GitHub</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-item"><span class="skill-name">MySQL / MongoDB</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-item"><span class="skill-name">Arduino / RPi</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-item"><span class="skill-name">Docker</span><span class="skill-level">Familiar</span></div>
+        <div class="skill-item"><span class="skill-name">AWS</span><span class="skill-level">Familiar</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="sec-label">05 — Awards</div>
+  <div class="awards-list">
+    <div class="award-row reveal">
+      <div class="award-rank">#1</div>
+      <div>
+        <div class="award-title">Top Performing Student — College of Engineering</div>
+        <div class="award-org">University of Rizal System</div>
+      </div>
+      <div class="award-year">2023 –</div>
+    </div>
+    <div class="award-row reveal d1">
+      <div class="award-rank">#1</div>
+      <div>
+        <div class="award-title">Valedictorian — With Highest Honors</div>
+        <div class="award-org">Sumulong College of Arts and Sciences</div>
+      </div>
+      <div class="award-year">2023</div>
+    </div>
+    <div class="award-row reveal d2">
+      <div class="award-rank">#1</div>
+      <div>
+        <div class="award-title">Valedictorian — With Honors</div>
+        <div class="award-org">Carlos "Botong" Francisco Memorial NHS</div>
+      </div>
+      <div class="award-year">2021</div>
+    </div>
+    <div class="award-row reveal d3">
+      <div class="award-rank">#1</div>
+      <div>
+        <div class="award-title">System Making Champion</div>
+        <div class="award-org">JobInterviewPro — University of Rizal System</div>
+      </div>
+      <div class="award-year">2025</div>
+    </div>
+    <div class="award-row reveal">
+      <div class="award-rank">#3</div>
+      <div>
+        <div class="award-title">Research Congress — 3rd Place</div>
+        <div class="award-org">Sumulong College of Arts and Sciences</div>
+      </div>
+      <div class="award-year">2022</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">06 — Contact</div>
+  <div class="contact-wrap reveal">
+    <div class="contact-heading">Open to<br>opportunities.</div>
+    <p class="contact-sub">Available for internships, OJT, freelance projects, and collaborations. Feel free to reach out directly.</p>
+    <div class="contact-links">
+      <div class="contact-link-row">
+        <span class="cl-label">Email</span>
+        <a href="mailto:swbachain@gmail.com" class="cl-val">swbachain@gmail.com</a>
+      </div>
+      <div class="contact-link-row">
+        <span class="cl-label">LinkedIn</span>
+        <a href="#" class="cl-val">linkedin.com/in/swbachain</a>
+      </div>
+      <div class="contact-link-row">
+        <span class="cl-label">GitHub</span>
+        <a href="#" class="cl-val">github.com/swbachain</a>
+      </div>
+      <div class="contact-link-row">
+        <span class="cl-label">Location</span>
+        <span class="cl-val">Angono, Rizal, Philippines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Shan Wesley Bachain</span>
+  <div class="footer-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Facebook</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cur');
+const curR = document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
