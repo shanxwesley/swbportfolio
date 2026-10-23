@@ -24,6 +24,12 @@
     --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color-scheme: light;
   }
+  :root[data-theme="dark"] {
+    --bg: #1c1b19; --side: #161513; --surface: #262523; --surface-2: #2e2d2a;
+    --text: #f0ede4; --muted: #9c9a92; --accent: #d97757; --accent-hover: #e38a6c;
+    --accent-soft: #3a2b23; --border: #3a3834; --shadow: 0 12px 32px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #1c1b19; --side: #161513; --surface: #262523; --surface-2: #2e2d2a;
@@ -192,7 +198,10 @@
         <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Show sidebar">☰</button>
         <span class="title" id="title">New chat</span>
       </div>
-      <span class="status">Open to internships</span>
+      <div style="display:flex;align-items:center;gap:.4rem;">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
+        <span class="status">Open to internships</span>
+      </div>
     </div>
     <div class="scroll" id="scroll">
       <div class="wrap">
@@ -637,6 +646,36 @@
 
   $("sbClose").onclick = () => sidebar.classList.remove("open");
   $("menuBtn").onclick = () => sidebar.classList.toggle("open");
+
+  // Theme toggle
+  const themeBtn = $("themeBtn");
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      themeBtn.textContent = "☀";
+    } else if (theme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+      themeBtn.textContent = "☾";
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      themeBtn.textContent = "◐";
+    }
+  }
+  // Load saved preference
+  const savedTheme = localStorage.getItem("shan-theme");
+  if (savedTheme) applyTheme(savedTheme);
+  else applyTheme(null); // follow system
+
+  themeBtn.onclick = () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    let next;
+    if (current === "dark") next = "light";
+    else if (current === "light") next = null; // back to system
+    else next = "dark";
+    if (next) localStorage.setItem("shan-theme", next);
+    else localStorage.removeItem("shan-theme");
+    applyTheme(next);
+  };
 
   window.addEventListener("hashchange", () => {
     const name = location.hash.slice(1);
