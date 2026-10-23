@@ -169,6 +169,7 @@
     <a class="nav-item" href="#soft" data-page="soft"><span class="ic">♡</span> Soft Skills</a>
     <a class="nav-item" href="#education" data-page="education"><span class="ic">✎</span> Education</a>
     <a class="nav-item" href="#achievements" data-page="achievements"><span class="ic">★</span> Achievements</a>
+    <a class="nav-item" href="#resume" data-page="resume"><span class="ic">⬇</span> Resume</a>
     <a class="nav-item" href="#contact" data-page="contact"><span class="ic">✉</span> Contact</a>
     <div class="label">Recents</div>
     <div class="hist" id="hist"></div>
@@ -325,6 +326,23 @@
           <div class="award"><div class="yr">2023 — 2027</div><div><h3>SM Foundation Scholar</h3><p>Scholarship recipient.</p></div></div>
           <div class="award"><div class="yr">2023</div><div><h3>Senior High School Valedictorian</h3><p>Sumulong College of Arts and Sciences.</p></div></div>
         </div>
+        <div class="view" id="viewResume" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Curriculum Vitae</div>
+            <h1>Resume</h1>
+            <p>Download a clean, ATS-friendly PDF of my resume. Updated for internship and collaboration opportunities.</p>
+          </div>
+          <div class="stack-card" style="text-align:center;padding:2.2rem 1.5rem;">
+            <div style="font-size:2.4rem;color:var(--accent);margin-bottom:.8rem;">📄</div>
+            <h3 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin-bottom:.5rem;">Shan Wesley Bachain</h3>
+            <p style="color:var(--muted);margin-bottom:1.4rem;font-size:.95rem;">Computer Engineering · AI & Embedded Systems · Open to Internships</p>
+            <a class="btn" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf" style="display:inline-block;text-decoration:none;">Download Resume (PDF)</a>
+            <p style="color:var(--muted);font-size:.82rem;margin-top:1.1rem;">Also available in the Contact section</p>
+          </div>
+          <div class="cta-row" style="margin-top:1.2rem;">
+            <button class="btn" data-ask="Summarize his resume and key strengths">Ask AI about his resume</button>
+          </div>
+        </div>
         <div class="view" id="viewContact" hidden>
           <div class="panel-head">
             <div class="eyebrow">Contact</div>
@@ -334,6 +352,7 @@
           <a class="contact-card" href="mailto:bachainshanwesleyb@gmail.com"><div class="inner"><span class="icon">✉</span><div><div class="lbl">Email</div><div class="val">bachainshanwesleyb@gmail.com</div></div></div><span class="arr">→</span></a>
           <a class="contact-card" href="tel:+639762652310"><div class="inner"><span class="icon">☎</span><div><div class="lbl">Phone</div><div class="val">0976 265 2310</div></div></div><span class="arr">→</span></a>
           <a class="contact-card" href="https://github.com/shanxwesley" target="_blank" rel="noopener"><div class="inner"><span class="icon">⌥</span><div><div class="lbl">GitHub</div><div class="val">github.com/shanxwesley</div></div></div><span class="arr">→</span></a>
+          <a class="contact-card" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf"><div class="inner"><span class="icon">⬇</span><div><div class="lbl">Resume</div><div class="val">Download PDF</div></div></div><span class="arr">→</span></a>
           <div class="contact-card"><div class="inner"><span class="icon">⌖</span><div><div class="lbl">Location</div><div class="val">Angono, Rizal, Philippines</div></div></div></div>
         </div>
       </div>
@@ -368,6 +387,7 @@
     soft: { title: "Soft Skills", view: "viewSoft" },
     education: { title: "Education", view: "viewEducation" },
     achievements: { title: "Achievements", view: "viewAchievements" },
+    resume: { title: "Resume", view: "viewResume" },
     contact: { title: "Contact", view: "viewContact" }
   };
 
