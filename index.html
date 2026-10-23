@@ -198,8 +198,20 @@
         <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Show sidebar">☰</button>
         <span class="title" id="title">New chat</span>
       </div>
-      <div style="display:flex;align-items:center;gap:.4rem;">
-        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
+      <div style="display:flex;align-items:center;gap:.55rem;">
+        <button id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme" style="
+          background:var(--surface);
+          border:1px solid var(--border);
+          border-radius:999px;
+          padding:.35rem .85rem;
+          font-size:.82rem;
+          color:var(--text);
+          cursor:pointer;
+          display:flex;
+          align-items:center;
+          gap:.35rem;
+          transition:border-color .2s, background .2s;
+        ">◐ Theme</button>
         <span class="status">Open to internships</span>
       </div>
     </div>
@@ -652,13 +664,13 @@
   function applyTheme(theme) {
     if (theme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
-      themeBtn.textContent = "☀";
+      themeBtn.innerHTML = "☀ Light";
     } else if (theme === "light") {
       document.documentElement.setAttribute("data-theme", "light");
-      themeBtn.textContent = "☾";
+      themeBtn.innerHTML = "☾ Dark";
     } else {
       document.documentElement.removeAttribute("data-theme");
-      themeBtn.textContent = "◐";
+      themeBtn.innerHTML = "◐ Theme";
     }
   }
   // Load saved preference
