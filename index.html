@@ -182,7 +182,9 @@
     <a class="nav-item" href="#contact" data-page="contact"><span class="ic">✉</span> Contact</a>
     <div class="label">Recents</div>
     <div class="hist" id="hist"></div>
-    <div class="sb-foot"><img src="/profile.jpg" alt="Shan" class="avatar" style="object-fit:cover;width:26px;height:26px;border-radius:50%;"> Shan Bachain</div>
+    <button class="sb-foot" data-page="profile" style="background:none;border:none;cursor:pointer;width:100%;text-align:left;padding:.7rem .5rem 0;display:flex;align-items:center;gap:.55rem;font-size:.85rem;color:var(--muted);">
+      <img src="/profile.jpg" alt="Shan" class="avatar" style="object-fit:cover;width:26px;height:26px;border-radius:50%;"> Shan Bachain
+    </button>
   </aside>
   <div class="main">
     <div class="topbar">
@@ -349,6 +351,53 @@
             <img src="/resume-preview.jpg" alt="Shan Wesley Bachain Resume" style="width:100%;max-width:720px;height:auto;border-radius:8px;box-shadow:var(--shadow);display:block;margin:0 auto;">
           </div>
         </div>
+        <div class="view" id="viewProfile" hidden>
+          <div class="panel-head" style="text-align:center;padding-top:2rem;">
+            <img src="/profile.jpg" alt="Shan Wesley Bachain" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block;box-shadow:0 8px 24px rgba(0,0,0,.12);border:3px solid var(--surface);outline:2px solid var(--accent-soft);">
+            <div class="eyebrow" style="margin-bottom:.35rem;">Computer Engineering</div>
+            <h1 style="margin:0 0 .4rem;font-size:clamp(1.8rem,4vw,2.4rem);">Shan Wesley Bachain</h1>
+            <p style="color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto;">
+              Fourth-year student · Top Performing Student · Open to internships
+            </p>
+          </div>
+
+          <div class="grid" style="margin-top:.5rem;">
+            <div class="stack-card">
+              <h3>About</h3>
+              <p class="skill-note" style="margin:0;">Builds AI-integrated web applications and embedded systems. Enjoys turning ideas into working products, from contest-winning apps to an ESP32 thesis prototype.</p>
+            </div>
+            <div class="stack-card">
+              <h3>Focus</h3>
+              <div class="tags" style="margin-top:.2rem;">
+                <span>AI Integration</span>
+                <span>Full-stack</span>
+                <span>ESP32 / IoT</span>
+                <span>Python</span>
+                <span>JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid" style="margin-top:1rem;">
+            <div class="stack-card">
+              <h3>Education</h3>
+              <p class="skill-note" style="margin:0 0 .4rem;"><strong>B.S. Computer Engineering</strong><br>University of Rizal System · 2023–2027</p>
+              <p class="skill-note" style="margin:0;">Top Performing Student, College of Engineering</p>
+            </div>
+            <div class="stack-card">
+              <h3>Location</h3>
+              <p class="skill-note" style="margin:0 0 .4rem;">Angono, Rizal, Philippines</p>
+              <p class="skill-note" style="margin:0;">Open to internships, collaborations, and freelance projects.</p>
+            </div>
+          </div>
+
+          <div class="cta-row" style="margin-top:1.5rem;justify-content:center;">
+            <a class="btn" href="mailto:bachainshanwesleyb@gmail.com" style="text-decoration:none;">Email</a>
+            <a class="btn" href="https://github.com/shanxwesley" target="_blank" rel="noopener" style="text-decoration:none;">GitHub</a>
+            <a class="btn" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf" style="text-decoration:none;">Resume</a>
+            <button class="btn" data-ask="Tell me about Shan as a person and how he works with others">Ask AI</button>
+          </div>
+        </div>
         <div class="view" id="viewContact" hidden>
           <div class="panel-head">
             <div class="eyebrow">Contact</div>
@@ -394,6 +443,7 @@
     education: { title: "Education", view: "viewEducation" },
     achievements: { title: "Achievements", view: "viewAchievements" },
     resume: { title: "Resume", view: "viewResume" },
+    profile: { title: "Profile", view: "viewProfile" },
     contact: { title: "Contact", view: "viewContact" }
   };
 
@@ -577,6 +627,12 @@
   });
   document.querySelectorAll("[data-ask]").forEach(b => {
     b.addEventListener("click", () => send(b.dataset.ask));
+  });
+  document.querySelectorAll(".sb-foot[data-page]").forEach(a => {
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      showPage(a.dataset.page);
+    });
   });
 
   $("sbClose").onclick = () => sidebar.classList.remove("open");
