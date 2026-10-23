@@ -464,9 +464,9 @@
     scroll.scrollTop = 0;
     sidebar.classList.remove("open");
   }
-  function renderChatHome() {
+  function renderChatHome(forceHero = false) {
     thread.innerHTML = "";
-    if (!messages.length) {
+    if (forceHero || !messages.length) {
       welcome.hidden = false;
       thread.hidden = true;
       chips.innerHTML = "";
@@ -489,7 +489,7 @@
     row.className = "nav-item";
     row.innerHTML = '<span class="ic">•</span><span class="t"></span>';
     row.querySelector(".t").textContent = chatTitle().slice(0, 36);
-    row.onclick = () => { showPage("chat"); renderChatHome(); };
+    row.onclick = () => { showPage("chat"); renderChatHome(false); };
     hist.appendChild(row);
   }
 
@@ -588,10 +588,12 @@
   });
 
   renderHistory();
-  renderChatHome();
+  // Always show hero page on refresh / first load
+  renderChatHome(true);
   const start = location.hash.slice(1);
   if (PAGES[start] && start !== "chat") showPage(start, false);
   else showPage("chat", false);
+  $("title").textContent = "New chat";
 </script>
 </body>
 </html>
