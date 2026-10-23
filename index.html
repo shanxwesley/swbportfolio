@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shan Wesley Bachain | Ask My AI</title>
+<meta name="description" content="Ask Shan's AI assistant about his skills, projects, education, achievements, thesis, soft skills, and availability.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳</text></svg>">
+<style>
+  :root {
+    --bg: #faf9f5; --side: #f5f4ee; --surface: #ffffff; --surface-2: #f0eee6;
+    --text: #141413; --muted: #6b6a68; --accent: #cc785c; --accent-hover: #b9664b;
+    --accent-soft: #f6e9e2; --border: #e6e3d8; --shadow: 0 12px 32px rgba(20,20,19,.07);
+    --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1b19; --side: #161513; --surface: #262523; --surface-2: #2e2d2a;
+      --text: #f0ede4; --muted: #9c9a92; --accent: #d97757; --accent-hover: #e38a6c;
+      --accent-soft: #3a2b23; --border: #3a3834; --shadow: 0 12px 32px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow: hidden; }
+  button, textarea { font: inherit; }
+  a { color: inherit; }
+  .app { display: flex; height: 100vh; height: 100dvh; }
+  .sidebar { width: 260px; background: var(--side); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: .8rem; gap: .2rem; flex-shrink: 0; transition: transform .25s; z-index: 10; }
+  .sb-top { display: flex; justify-content: space-between; align-items: center; padding: .3rem .4rem .8rem; }
+  .brand { display: flex; align-items: center; gap: .5rem; font-family: var(--serif); font-size: 1.1rem; }
+  .spark { color: var(--accent); line-height: 1; }
+  .icon-btn { background: none; border: none; color: var(--muted); cursor: pointer; padding: .35rem .5rem; border-radius: 8px; font-size: 1rem; }
+  .icon-btn:hover { background: var(--surface-2); color: var(--text); }
+  .nav-item { display: flex; align-items: center; gap: .6rem; padding: .5rem .6rem; border-radius: 10px; font-size: .92rem; background: none; border: none; color: var(--text); cursor: pointer; text-align: left; width: 100%; text-decoration: none; }
+  .nav-item:hover { background: var(--surface-2); }
+  .nav-item.active { background: var(--surface-2); }
+  .nav-item.new { background: var(--surface); border: 1px solid var(--border); margin-bottom: .6rem; }
+  .nav-item .ic { width: 16px; color: var(--muted); text-align: center; }
+  .label { font-size: .75rem; color: var(--muted); padding: .9rem .6rem .35rem; }
+  .hist { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
+  .hist .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sb-foot { margin-top: auto; border-top: 1px solid var(--border); padding: .7rem .5rem 0; font-size: .85rem; color: var(--muted); display: flex; align-items: center; gap: .55rem; }
+  .avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: .75rem; font-weight: 600; }
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1.1rem; gap: .5rem; }
+  .topbar .left { display: flex; align-items: center; gap: .4rem; min-width: 0; }
+  .title { font-size: .95rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .status { font-size: .82rem; color: var(--muted); white-space: nowrap; }
+  .scroll { flex: 1; overflow-y: auto; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.2rem 2rem; }
+  .menu-toggle { display: none; }
+  .view[hidden] { display: none; }
+  .welcome { text-align: center; padding-top: 10vh; }
+  .welcome .mark { font-size: 2.2rem; color: var(--accent); display: block; margin-bottom: .6rem; }
+  .welcome h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.2vw, 2.8rem); letter-spacing: -.01em; }
+  .welcome p { color: var(--muted); margin-top: .6rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1.6rem; }
+  .chips button { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: .5rem .95rem; font-size: .86rem; color: var(--text); cursor: pointer; transition: border-color .2s, color .2s; }
+  .chips button:hover { border-color: var(--accent); color: var(--accent); }
+  .thread { display: flex; flex-direction: column; gap: 1.4rem; padding-top: 1.5rem; }
+  .msg-user { align-self: flex-end; background: var(--surface-2); padding: .7rem 1rem; border-radius: 18px; max-width: 80%; white-space: pre-wrap; font-size: .97rem; }
+  .msg-bot { display: flex; gap: .8rem; font-size: .97rem; line-height: 1.75; }
+  .msg-bot .mk { color: var(--accent); margin-top: .15rem; flex-shrink: 0; }
+  .msg-bot .body { min-width: 0; }
+  .msg-bot p { margin-bottom: .6rem; } .msg-bot p:last-child { margin-bottom: 0; }
+  .msg-bot ul { padding-left: 1.2rem; margin: .3rem 0 .6rem; } .msg-bot li { margin-bottom: .25rem; }
+  .msg-bot a { color: var(--accent); }
+  .msg-bot.err { color: var(--muted); font-style: italic; }
+  .msg-bot code { background: var(--surface-2); padding: .1rem .3rem; border-radius: 4px; font-size: .9em; }
+  .dots { display: inline-flex; gap: 4px; padding: .5rem 0; }
+  .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: b 1.2s infinite; }
+  .dots i:nth-child(2) { animation-delay: .15s; } .dots i:nth-child(3) { animation-delay: .3s; }
+  @keyframes b { 0%,80%,100% { opacity: .3; } 40% { opacity: 1; } }
+  .thinking { color: var(--muted); font-size: .85rem; margin-left: .3rem; }
+  .panel-head { padding-top: 3rem; margin-bottom: 2rem; }
+  .panel-head .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; }
+  .panel-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 4.5vw, 3rem); margin-top: .5rem; letter-spacing: -.01em; }
+  .panel-head p { color: var(--muted); margin-top: .6rem; max-width: 560px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.6rem; transition: border-color .2s, transform .2s; }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .num { font-family: var(--serif); font-size: 1.8rem; color: var(--accent-soft); line-height: 1; margin-bottom: .6rem; }
+  .card .kind { font-size: .72rem; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
+  .card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; margin: .4rem 0 .5rem; line-height: 1.2; }
+  .card p { color: var(--muted); font-size: .95rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+  .tags span { font-size: .78rem; background: var(--surface-2); padding: .25rem .65rem; border-radius: 999px; color: var(--muted); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-bottom: 1.2rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem; }
+  .stat b { font-family: var(--serif); font-weight: 400; font-size: 1.9rem; color: var(--accent); display: block; line-height: 1; }
+  .stat span { font-size: .8rem; color: var(--muted); }
+  .stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem; }
+  .stack-card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; margin-bottom: .8rem; }
+  .stack-card .tags { margin-top: 0; }
+  .stack-card .tags span { border: 1px solid var(--border); background: transparent; color: var(--text); }
+  .stack-card.thesis { border-color: var(--accent-soft); }
+  .skill-note { color: var(--muted); font-size: .9rem; margin-bottom: .6rem; }
+  .skill-note strong { color: var(--text); font-weight: 500; }
+  .bar-wrap { margin-top: .9rem; }
+  .bar-meta { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); margin-bottom: .35rem; gap: .5rem; }
+  .bar { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+  .soft-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.2rem; }
+  .soft { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem; }
+  .soft .ico { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: .8rem; }
+  .soft h3 { font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin-bottom: .4rem; }
+  .soft p { color: var(--muted); font-size: .92rem; }
+  .timeline { display: grid; gap: 1rem; }
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1.6rem; display: grid; grid-template-columns: 150px 1fr; gap: 1rem; }
+  .step .yr { font-size: .82rem; color: var(--accent); font-weight: 600; letter-spacing: .04em; padding-top: .3rem; }
+  .step h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; margin-bottom: .3rem; }
+  .step p { color: var(--muted); font-size: .95rem; }
+  .award { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem 1.6rem; display: grid; grid-template-columns: 110px 1fr; gap: 1rem; margin-bottom: .8rem; }
+  .award .yr { font-size: .82rem; color: var(--accent); font-weight: 600; padding-top: .25rem; }
+  .award h3 { font-family: var(--serif); font-weight: 400; font-size: 1.2rem; }
+  .award p { color: var(--muted); font-size: .92rem; }
+  .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; text-decoration: none; margin-bottom: .8rem; transition: border-color .2s; }
+  a.contact-card:hover { border-color: var(--accent); }
+  .contact-card .inner { display: flex; align-items: center; min-width: 0; }
+  .contact-card .icon { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex-shrink: 0; margin-right: .9rem; }
+  .contact-card .lbl { font-size: .78rem; color: var(--muted); }
+  .contact-card .val { font-size: 1.02rem; word-break: break-all; }
+  .contact-card .arr { color: var(--accent); font-size: 1.2rem; flex-shrink: 0; }
+  .cta-row { margin-top: 1.5rem; display: flex; gap: .6rem; flex-wrap: wrap; }
+  .btn { background: var(--text); color: var(--bg); border: none; border-radius: 999px; padding: .6rem 1.1rem; font-size: .9rem; cursor: pointer; }
+  .btn:hover { opacity: .9; }
+  .composer-wrap { padding: .5rem 1.2rem 1rem; }
+  .composer { max-width: 760px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); padding: .85rem 1rem .55rem; transition: border-color .2s; }
+  .composer:focus-within { border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); }
+  .composer textarea { width: 100%; border: none; background: transparent; resize: none; color: var(--text); outline: none; font-size: .98rem; line-height: 1.5; min-height: 28px; max-height: 160px; }
+  .composer textarea::placeholder { color: var(--muted); }
+  .composer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: .5rem; }
+  .model { font-size: .85rem; color: var(--muted); padding: .3rem .55rem; }
+  .model b { font-weight: 500; color: var(--text); }
+  .send { width: 34px; height: 34px; border-radius: 10px; border: none; background: var(--accent); color: #fff; font-size: 1.05rem; cursor: pointer; display: grid; place-items: center; }
+  .send:hover { background: var(--accent-hover); }
+  .send:disabled { opacity: .4; cursor: default; }
+  .disclaimer { text-align: center; font-size: .75rem; color: var(--muted); margin-top: .6rem; }
+  @media (max-width: 800px) {
+    .sidebar { position: absolute; inset: 0 auto 0 0; transform: translateX(-100%); box-shadow: 4px 0 20px rgba(0,0,0,.15); }
+    .sidebar.open { transform: none; }
+    .menu-toggle { display: inline-block; }
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .soft-list { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 1fr; gap: .3rem; }
+    .award { grid-template-columns: 1fr; gap: .3rem; }
+    .msg-user { max-width: 90%; }
+    .welcome { padding-top: 8vh; }
+    .status { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-top">
+      <div class="brand"><span class="spark">✳</span> Shan</div>
+      <button class="icon-btn" id="sbClose" aria-label="Hide sidebar">⟨</button>
+    </div>
+    <button class="nav-item new" data-page="chat"><span class="ic">+</span> New chat</button>
+    <a class="nav-item" href="#projects" data-page="projects"><span class="ic">▤</span> Projects</a>
+    <a class="nav-item" href="#skills" data-page="skills"><span class="ic">◇</span> Skills</a>
+    <a class="nav-item" href="#soft" data-page="soft"><span class="ic">♡</span> Soft Skills</a>
+    <a class="nav-item" href="#education" data-page="education"><span class="ic">✎</span> Education</a>
+    <a class="nav-item" href="#achievements" data-page="achievements"><span class="ic">★</span> Achievements</a>
+    <a class="nav-item" href="#contact" data-page="contact"><span class="ic">✉</span> Contact</a>
+    <div class="label">Recents</div>
+    <div class="hist" id="hist"></div>
+    <div class="sb-foot"><span class="avatar">S</span> Shan Bachain</div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="left">
+        <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Show sidebar">☰</button>
+        <span class="title" id="title">New chat</span>
+      </div>
+      <span class="status">Open to internships</span>
+    </div>
+    <div class="scroll" id="scroll">
+      <div class="wrap">
+        <div class="view" id="viewChat">
+          <div class="welcome" id="welcome">
+            <span class="mark">✳</span>
+            <h1>Hi, I'm Shan. What would you like to know?</h1>
+            <p>Ask about my projects, skills, education, achievements, thesis, or availability.</p>
+            <div class="chips" id="chips"></div>
+          </div>
+          <div class="thread" id="thread" hidden></div>
+        </div>
+        <div class="view" id="viewProjects" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Selected work</div>
+            <h1>Projects</h1>
+            <p>AI-assisted web applications and an embedded thesis prototype, from concept to a working product.</p>
+          </div>
+          <div class="grid">
+            <article class="card">
+              <div class="num">01</div>
+              <div class="kind">Backend Developer · AI-assisted</div>
+              <h3>JobInterviewPro</h3>
+              <p>An API-based web application that helps users practice job interviews and prepare for employment. Integrates the Groq API for AI-assisted interview training, with Firebase and MySQL for backend services and data management.</p>
+              <div class="tags"><span>JavaScript</span><span>HTML/CSS</span><span>Groq API</span><span>Firebase</span><span>MySQL</span></div>
+            </article>
+            <article class="card">
+              <div class="num">02</div>
+              <div class="kind">Web Developer · AI-powered</div>
+              <h3>PolitiScan PH</h3>
+              <p>An AI-powered political transparency platform for Philippine politics. Provides AI-assisted fact-checking, speech analysis, campaign promise tracking, and politician comparisons.</p>
+              <div class="tags"><span>HTML/CSS</span><span>JavaScript</span><span>Groq API (Llama 3)</span><span>GitHub Pages</span></div>
+            </article>
+            <article class="card">
+              <div class="num">03</div>
+              <div class="kind">Thesis · Team project</div>
+              <h3>Eco-Smart Station (RainErgy)</h3>
+              <p>An ESP32-based prototype for rainwater harvesting, filtration, hybrid solar and microturbine power, and coin-operated water and charging access. Submitted for patent or utility model registration.</p>
+              <div class="tags"><span>ESP32</span><span>Renewable energy</span><span>Water filtration</span><span>ADDIE</span></div>
+            </article>
+          </div>
+          <div class="cta-row"><button class="btn" data-ask="Tell me more about his projects">Ask about these projects</button></div>
+        </div>
+        <div class="view" id="viewSkills" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Toolkit</div>
+            <h1>Skills</h1>
+            <p>I build practical software by combining solid programming fundamentals with AI tools, and I connect software to hardware when a project needs it.</p>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>2</b><span>Projects shipped</span></div>
+            <div class="stat"><b>2</b><span>AI-integrated apps</span></div>
+            <div class="stat"><b>2023</b><span>Started coding</span></div>
+            <div class="stat"><b>1</b><span>Contest win (2025)</span></div>
+          </div>
+          <div class="grid">
+            <div class="stack-card">
+              <h3>Programming and Web</h3>
+              <p class="skill-note">Building full web applications with clean front-end and back-end logic.</p>
+              <div class="tags"><span>Python</span><span>PHP</span><span>JavaScript</span><span>HTML</span><span>CSS</span></div>
+              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+            </div>
+            <div class="stack-card">
+              <h3>Databases and Backend</h3>
+              <p class="skill-note">Designing data storage and connecting it to live applications.</p>
+              <div class="tags"><span>MySQL</span><span>NoSQL</span><span>Firebase</span></div>
+              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+            </div>
+            <div class="stack-card">
+              <h3>AI Integration</h3>
+              <p class="skill-note">Using AI APIs and prompt design to add real features to products, from interview coaching to fact-checking.</p>
+              <div class="tags"><span>Groq API</span><span>Llama 3</span><span>AI prompting</span></div>
+              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+            </div>
+            <div class="stack-card">
+              <h3>Hardware and Embedded</h3>
+              <p class="skill-note">Working with microcontrollers and sensors to bring software into physical systems.</p>
+              <div class="tags"><span>Arduino</span><span>ESP32</span><span>Sensors</span></div>
+              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+            </div>
+            <div class="stack-card">
+              <h3>Tools and Workflow</h3>
+              <p class="skill-note">Version control, deployment, and a prompt-driven development workflow.</p>
+              <div class="tags"><span>GitHub</span><span>VS Code</span><span>GitHub Pages</span></div>
+              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+            </div>
+            <div class="stack-card thesis">
+              <h3>Thesis Study</h3>
+              <p class="skill-note"><strong>Eco-Smart Station (RainErgy)</strong>: a prototype that harvests rainwater, filters it, generates hybrid solar and microturbine power, and provides coin-operated water dispensing and device charging, with emergency water access and ESP32-based water-level monitoring.</p>
+              <p class="skill-note">Team thesis, University of Rizal System, March 2027. Built with ADDIE and evaluated by 10 experts and 136 end-users, rated Very Much Acceptable (grand means 4.64 and 4.72). Submitted for patent or utility model registration.</p>
+              <div class="tags"><span>ESP32</span><span>IoT</span><span>Renewable energy</span><span>Water filtration</span><span>ADDIE</span></div>
+            </div>
+          </div>
+          <div class="cta-row"><button class="btn" data-ask="What are his skills in more detail?">Ask about his skills</button></div>
+        </div>
+        <div class="view" id="viewSoft" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Beyond the code</div>
+            <h1>Soft Skills</h1>
+            <p>How I work with people, and how I work on my own.</p>
+          </div>
+          <div class="soft-list">
+            <div class="soft">
+              <div class="ico">✎</div>
+              <h3>Communication</h3>
+              <p>Friendly and clear when explaining technical ideas to classmates, panelists, and non-technical users.</p>
+            </div>
+            <div class="soft">
+              <div class="ico">◎</div>
+              <h3>Teamwork</h3>
+              <p>Comfortable in group work, from sharing tasks on a thesis team to coordinating a shared codebase.</p>
+            </div>
+            <div class="soft">
+              <div class="ico">◐</div>
+              <h3>Independent work</h3>
+              <p>Able to take ownership of a task, research solutions on my own, and deliver without constant supervision.</p>
+            </div>
+          </div>
+          <div class="cta-row"><button class="btn" data-ask="What are his soft skills and teamwork strengths?">Ask about his teamwork</button></div>
+        </div>
+        <div class="view" id="viewEducation" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Journey</div>
+            <h1>Education</h1>
+            <p>Top Performing Student in college, and valedictorian at every level before it.</p>
+          </div>
+          <div class="timeline">
+            <div class="step"><div class="yr">2023 — 2027</div><div><h3>B.S. Computer Engineering</h3><p>University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering. Expected graduation: 2027.</p></div></div>
+            <div class="step"><div class="yr">2021 — 2023</div><div><h3>Senior High School (STEM)</h3><p>Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</p></div></div>
+            <div class="step"><div class="yr">2017 — 2021</div><div><h3>Junior High School</h3><p>Carlos "Botong" Francisco Memorial NHS. Valedictorian, With Honors.</p></div></div>
+          </div>
+        </div>
+        <div class="view" id="viewAchievements" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Recognition</div>
+            <h1>Achievements</h1>
+            <p>Awards, competitions, and training.</p>
+          </div>
+          <div class="award"><div class="yr">2025</div><div><h3>System-Making Contest Winner</h3><p>Winner for JobInterviewPro.</p></div></div>
+          <div class="award"><div class="yr">2023</div><div><h3>Third Place, Provincial Statistics Quiz Bee</h3><p>Provincial competition.</p></div></div>
+          <div class="award"><div class="yr">2025</div><div><h3>BRITE Program Research Seminar</h3><p>University of Rizal System, university-wide training.</p></div></div>
+          <div class="award"><div class="yr">2023 — 2027</div><div><h3>SM Foundation Scholar</h3><p>Scholarship recipient.</p></div></div>
+          <div class="award"><div class="yr">2023</div><div><h3>Senior High School Valedictorian</h3><p>Sumulong College of Arts and Sciences.</p></div></div>
+        </div>
+        <div class="view" id="viewContact" hidden>
+          <div class="panel-head">
+            <div class="eyebrow">Contact</div>
+            <h1>Let's build something real</h1>
+            <p>Based in Angono, Rizal. Open to internships, collaborations, and freelance projects.</p>
+          </div>
+          <a class="contact-card" href="mailto:bachainshanwesleyb@gmail.com"><div class="inner"><span class="icon">✉</span><div><div class="lbl">Email</div><div class="val">bachainshanwesleyb@gmail.com</div></div></div><span class="arr">→</span></a>
+          <a class="contact-card" href="tel:+639762652310"><div class="inner"><span class="icon">☎</span><div><div class="lbl">Phone</div><div class="val">0976 265 2310</div></div></div><span class="arr">→</span></a>
+          <a class="contact-card" href="https://github.com/shanxwesley" target="_blank" rel="noopener"><div class="inner"><span class="icon">⌥</span><div><div class="lbl">GitHub</div><div class="val">github.com/shanxwesley</div></div></div><span class="arr">→</span></a>
+          <div class="contact-card"><div class="inner"><span class="icon">⌖</span><div><div class="lbl">Location</div><div class="val">Angono, Rizal, Philippines</div></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="composer-wrap" id="composerWrap">
+      <form class="composer" id="form">
+        <textarea id="input" rows="1" placeholder="Reply to Shan's assistant..."></textarea>
+        <div class="composer-bottom">
+          <span class="model"><b>Portfolio AI</b> · ask anything</span>
+          <button class="send" id="send" type="submit" aria-label="Send">↑</button>
+        </div>
+      </form>
+      <div class="disclaimer">Answers come from Shan's portfolio. For anything specific, email bachainshanwesleyb@gmail.com.</div>
+    </div>
+  </div>
+</div>
+<script>
+  const STORE_KEY = "shan-chat-history-v2";
+  const MAX_SENT = 10;
+  const MAX_MESSAGE_CHARS = 800;
+
+  const $ = id => document.getElementById(id);
+  const thread = $("thread"), welcome = $("welcome"), form = $("form"), input = $("input");
+  const sendBtn = $("send"), sidebar = $("sidebar"), scroll = $("scroll"), chips = $("chips"), hist = $("hist");
+
+  const SUGGESTIONS = ["How old is Shan?", "What are his skills?", "Tell me about his thesis", "How well does Shan work in a team?"];
+
+  const PAGES = {
+    chat: { title: "New chat", view: "viewChat" },
+    projects: { title: "Projects", view: "viewProjects" },
+    skills: { title: "Skills", view: "viewSkills" },
+    soft: { title: "Soft Skills", view: "viewSoft" },
+    education: { title: "Education", view: "viewEducation" },
+    achievements: { title: "Achievements", view: "viewAchievements" },
+    contact: { title: "Contact", view: "viewContact" }
+  };
+
+  let messages = loadMessages().slice(-MAX_SENT);
+  let busy = false;
+  let currentPage = "chat";
+
+  function loadMessages() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; }
+  }
+  function saveMessages() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(messages.slice(-MAX_SENT))); } catch {}
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+  function inline(s) {
+    return s
+      .replace(/`(.+?)`/g, "<code>$1</code>")
+      .replace(/([\w.+-]+@[\w-]+\.[\w.]+)/g, '<a href="mailto:$1">$1</a>');
+  }
+  function renderMarkdown(text) {
+    let html = "", inList = false;
+    for (const raw of escapeHtml(text).split("\n")) {
+      let line = raw.trim();
+      if (/^\|.*\|$/.test(line) || /^[-*_]{3,}$/.test(line)) continue;
+      line = line.replace(/^#{1,6}\s*/, "").replace(/\*\*(.+?)\*\*/g, "$1");
+      const bullet = line.match(/^[-•*]\s+(.*)$/);
+      if (bullet) {
+        if (!inList) { html += "<ul>"; inList = true; }
+        html += "<li>" + inline(bullet[1]) + "</li>";
+      } else {
+        if (inList) { html += "</ul>"; inList = false; }
+        if (line) html += "<p>" + inline(line) + "</p>";
+      }
+    }
+    if (inList) html += "</ul>";
+    return html;
+  }
+  function addRow(role, content, isErr) {
+    const d = document.createElement("div");
+    if (role === "user") {
+      d.className = "msg-user";
+      d.textContent = content;
+    } else {
+      d.className = "msg-bot" + (isErr ? " err" : "");
+      d.innerHTML = '<span class="mk">✳</span><div class="body"></div>';
+      d.querySelector(".body").innerHTML = isErr ? escapeHtml(content) : renderMarkdown(content);
+    }
+    thread.appendChild(d);
+    scroll.scrollTop = scroll.scrollHeight;
+    return d;
+  }
+  function chatTitle() {
+    const first = messages.find(m => m.role === "user");
+    return first ? first.content.slice(0, 40) : "New chat";
+  }
+  function showPage(name, push = true) {
+    const page = PAGES[name] || PAGES.chat;
+    currentPage = name in PAGES ? name : "chat";
+    Object.values(PAGES).forEach(p => $(p.view).hidden = true);
+    $(page.view).hidden = false;
+    document.querySelectorAll(".nav-item[data-page]").forEach(a => {
+      a.classList.toggle("active", a.dataset.page === currentPage);
+    });
+    $("title").textContent = currentPage === "chat" ? chatTitle() : page.title;
+    if (push) history.replaceState(null, "", currentPage === "chat" ? location.pathname : "#" + currentPage);
+    scroll.scrollTop = 0;
+    sidebar.classList.remove("open");
+  }
+  function renderChatHome() {
+    thread.innerHTML = "";
+    if (!messages.length) {
+      welcome.hidden = false;
+      thread.hidden = true;
+      chips.innerHTML = "";
+      SUGGESTIONS.forEach(s => {
+        const b = document.createElement("button");
+        b.textContent = s;
+        b.onclick = () => send(s);
+        chips.appendChild(b);
+      });
+    } else {
+      welcome.hidden = true;
+      thread.hidden = false;
+      messages.forEach(m => addRow(m.role, m.content));
+    }
+  }
+  function renderHistory() {
+    hist.innerHTML = "";
+    if (!messages.some(m => m.role === "user")) return;
+    const row = document.createElement("button");
+    row.className = "nav-item";
+    row.innerHTML = '<span class="ic">•</span><span class="t"></span>';
+    row.querySelector(".t").textContent = chatTitle().slice(0, 36);
+    row.onclick = () => { showPage("chat"); renderChatHome(); };
+    hist.appendChild(row);
+  }
+
+  async function send(text) {
+    text = (text || input.value).trim().slice(0, MAX_MESSAGE_CHARS);
+    if (!text || busy) return;
+
+    busy = true;
+    sendBtn.disabled = true;
+    input.value = "";
+    autoResize();
+    showPage("chat");
+    welcome.hidden = true;
+    thread.hidden = false;
+
+    messages.push({ role: "user", content: text });
+    saveMessages();
+    addRow("user", text);
+
+    const wait = document.createElement("div");
+    wait.className = "msg-bot";
+    wait.innerHTML = '<span class="mk">✳</span><span class="dots"><i></i><i></i><i></i></span><span class="thinking"> Thinking</span>';
+    thread.appendChild(wait);
+    scroll.scrollTop = scroll.scrollHeight;
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: messages.slice(-MAX_SENT) })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Request failed");
+
+      const reply = data.reply || "";
+      if (!reply) throw new Error("Empty reply");
+
+      wait.remove();
+      messages.push({ role: "assistant", content: reply });
+      saveMessages();
+      addRow("assistant", reply);
+    } catch {
+      wait.remove();
+      messages.pop();
+      saveMessages();
+      addRow("assistant", "Sorry, I couldn't get an answer right now. Please try again, or email bachainshanwesleyb@gmail.com.", true);
+    } finally {
+      busy = false;
+      sendBtn.disabled = false;
+      renderHistory();
+      $("title").textContent = chatTitle();
+      input.focus();
+    }
+  }
+
+  function autoResize() {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 160) + "px";
+  }
+
+  input.addEventListener("input", autoResize);
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  form.addEventListener("submit", e => { e.preventDefault(); send(); });
+
+  document.querySelectorAll(".nav-item[data-page]").forEach(a => {
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      const name = a.dataset.page;
+      showPage(name);
+      if (name === "chat") renderChatHome();
+    });
+  });
+  document.querySelectorAll("[data-ask]").forEach(b => {
+    b.addEventListener("click", () => send(b.dataset.ask));
+  });
+
+  $("sbClose").onclick = () => sidebar.classList.remove("open");
+  $("menuBtn").onclick = () => sidebar.classList.toggle("open");
+
+  window.addEventListener("hashchange", () => {
+    const name = location.hash.slice(1);
+    if (PAGES[name]) showPage(name, false);
+  });
+
+  renderHistory();
+  renderChatHome();
+  const start = location.hash.slice(1);
+  if (PAGES[start] && start !== "chat") showPage(start, false);
+  else showPage("chat", false);
+</script>
+</body>
+</html>
