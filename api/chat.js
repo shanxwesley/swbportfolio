@@ -1,4 +1,4 @@
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = "openai/gpt-oss-20b";
 const MAX_HISTORY = 10;
 const MAX_MESSAGE_CHARS = 800;
 
