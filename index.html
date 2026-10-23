@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shan Wesley Bachain | Ask My AI</title>
 <meta name="description" content="Ask Shan's AI assistant about his skills, projects, education, achievements, thesis, soft skills, and availability.">
+<meta property="og:title" content="Shan Wesley Bachain | Computer Engineering Portfolio">
+<meta property="og:description" content="Fourth-year Computer Engineering student. AI apps, embedded systems, and open to internships. Ask my AI anything.">
+<meta property="og:image" content="https://swbportfolio.vercel.app/profile.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swbportfolio.vercel.app">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shan Wesley Bachain | Computer Engineering Portfolio">
+<meta name="twitter:description" content="Fourth-year Computer Engineering student. AI apps, embedded systems, and open to internships.">
+<meta name="twitter:image" content="https://swbportfolio.vercel.app/profile.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳</text></svg>">
 <style>
   :root {
@@ -173,7 +182,7 @@
     <a class="nav-item" href="#contact" data-page="contact"><span class="ic">✉</span> Contact</a>
     <div class="label">Recents</div>
     <div class="hist" id="hist"></div>
-    <div class="sb-foot"><span class="avatar">S</span> Shan Bachain</div>
+    <div class="sb-foot"><img src="/profile.jpg" alt="Shan" class="avatar" style="object-fit:cover;width:26px;height:26px;border-radius:50%;"> Shan Bachain</div>
   </aside>
   <div class="main">
     <div class="topbar">
@@ -552,6 +561,16 @@
     a.addEventListener("click", e => {
       e.preventDefault();
       const name = a.dataset.page;
+      if (name === "chat" && a.classList.contains("new")) {
+        // New chat = clear history and show hero
+        messages = [];
+        saveMessages();
+        renderHistory();
+        renderChatHome();
+        showPage("chat");
+        $("title").textContent = "New chat";
+        return;
+      }
       showPage(name);
       if (name === "chat") renderChatHome();
     });
