@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+va<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -14,27 +14,27 @@
 <meta name="twitter:title" content="Shan Wesley Bachain | Computer Engineering Portfolio">
 <meta name="twitter:description" content="Fourth-year Computer Engineering student. AI apps, embedded systems, and open to internships.">
 <meta name="twitter:image" content="https://swbportfolio.vercel.app/profile.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><g fill='none' stroke='%238db9e6' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'><path d='M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25'/><path d='M24 13L28.5 35L32 21L35.5 35L40 13'/></g></svg>">
 <style>
   :root {
-    --bg: #faf9f5; --side: #f5f4ee; --surface: #ffffff; --surface-2: #f0eee6;
-    --text: #141413; --muted: #6b6a68; --accent: #cc785c; --accent-hover: #b9664b;
-    --accent-soft: #f6e9e2; --border: #e6e3d8; --shadow: 0 12px 32px rgba(20,20,19,.07);
+    --bg: #f8fbff; --side: #eff6fc; --surface: #ffffff; --surface-2: #e7f1fb;
+    --text: #1f2f3d; --muted: #6b7d8e; --accent: #8db9e6; --accent-hover: #74a7dc;
+    --accent-soft: #e1eefa; --border: #d9e6f2; --shadow: 0 12px 32px rgba(31,47,61,.08);
     --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color-scheme: light;
   }
   :root[data-theme="dark"] {
-    --bg: #1c1b19; --side: #161513; --surface: #262523; --surface-2: #2e2d2a;
-    --text: #f0ede4; --muted: #9c9a92; --accent: #d97757; --accent-hover: #e38a6c;
-    --accent-soft: #3a2b23; --border: #3a3834; --shadow: 0 12px 32px rgba(0,0,0,.35);
+    --bg: #1a1f26; --side: #151a21; --surface: #232a33; --surface-2: #2b3440;
+    --text: #e8eff6; --muted: #98a6b5; --accent: #a7cdf2; --accent-hover: #bcdcf8;
+    --accent-soft: #253344; --border: #343f4d; --shadow: 0 12px 32px rgba(0,0,0,.35);
     color-scheme: dark;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #1c1b19; --side: #161513; --surface: #262523; --surface-2: #2e2d2a;
-      --text: #f0ede4; --muted: #9c9a92; --accent: #d97757; --accent-hover: #e38a6c;
-      --accent-soft: #3a2b23; --border: #3a3834; --shadow: 0 12px 32px rgba(0,0,0,.35);
+      --bg: #1a1f26; --side: #151a21; --surface: #232a33; --surface-2: #2b3440;
+      --text: #e8eff6; --muted: #98a6b5; --accent: #a7cdf2; --accent-hover: #bcdcf8;
+      --accent-soft: #253344; --border: #343f4d; --shadow: 0 12px 32px rgba(0,0,0,.35);
       color-scheme: dark;
     }
   }
@@ -47,7 +47,8 @@
   .sidebar { width: 260px; background: var(--side); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: .8rem; gap: .2rem; flex-shrink: 0; transition: transform .25s; z-index: 10; }
   .sb-top { display: flex; justify-content: space-between; align-items: center; padding: .3rem .4rem .8rem; }
   .brand { display: flex; align-items: center; gap: .5rem; font-family: var(--serif); font-size: 1.1rem; }
-  .spark { color: var(--accent); line-height: 1; }
+  .logo { display: inline-block; width: 24px; height: 24px; flex-shrink: 0; }
+  .logo svg, .mark svg { width: 100%; height: 100%; display: block; }
   .icon-btn { background: none; border: none; color: var(--muted); cursor: pointer; padding: .35rem .5rem; border-radius: 8px; font-size: 1rem; }
   .icon-btn:hover { background: var(--surface-2); color: var(--text); }
   .nav-item { display: flex; align-items: center; gap: .6rem; padding: .5rem .6rem; border-radius: 10px; font-size: .92rem; background: none; border: none; color: var(--text); cursor: pointer; text-align: left; width: 100%; text-decoration: none; }
@@ -70,7 +71,7 @@
   .menu-toggle { display: none; }
   .view[hidden] { display: none; }
   .welcome { text-align: center; padding-top: 10vh; }
-  .welcome .mark { font-size: 2.2rem; color: var(--accent); display: block; margin-bottom: .6rem; }
+  .welcome .mark { display: block; width: 60px; height: 60px; margin: 0 auto .8rem; }
   .welcome h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.2vw, 2.8rem); letter-spacing: -.01em; }
   .welcome p { color: var(--muted); margin-top: .6rem; }
   .chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1.6rem; }
@@ -79,7 +80,7 @@
   .thread { display: flex; flex-direction: column; gap: 1.4rem; padding-top: 1.5rem; }
   .msg-user { align-self: flex-end; background: var(--surface-2); padding: .7rem 1rem; border-radius: 18px; max-width: 80%; white-space: pre-wrap; font-size: .97rem; }
   .msg-bot { display: flex; gap: .8rem; font-size: .97rem; line-height: 1.75; }
-  .msg-bot .mk { color: var(--accent); margin-top: .15rem; flex-shrink: 0; }
+  .msg-bot .mk { margin-top: .2rem; flex-shrink: 0; width: 22px; height: 22px; }
   .msg-bot .body { min-width: 0; }
   .msg-bot p { margin-bottom: .6rem; } .msg-bot p:last-child { margin-bottom: 0; }
   .msg-bot ul { padding-left: 1.2rem; margin: .3rem 0 .6rem; } .msg-bot li { margin-bottom: .25rem; }
@@ -151,7 +152,7 @@
   .composer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: .5rem; }
   .model { font-size: .85rem; color: var(--muted); padding: .3rem .55rem; }
   .model b { font-weight: 500; color: var(--text); }
-  .send { width: 34px; height: 34px; border-radius: 10px; border: none; background: var(--accent); color: #fff; font-size: 1.05rem; cursor: pointer; display: grid; place-items: center; }
+  .send { width: 34px; height: 34px; border-radius: 10px; border: none; background: var(--accent); color: var(--bg); font-size: 1.05rem; cursor: pointer; display: grid; place-items: center; }
   .send:hover { background: var(--accent-hover); }
   .send:disabled { opacity: .4; cursor: default; }
   .disclaimer { text-align: center; font-size: .75rem; color: var(--muted); margin-top: .6rem; }
@@ -175,7 +176,7 @@
 <div class="app">
   <aside class="sidebar" id="sidebar">
     <div class="sb-top">
-      <div class="brand"><span class="spark">✳</span> Shan</div>
+      <div class="brand"><span class="logo"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span> Shan</div>
       <button class="icon-btn" id="sbClose" aria-label="Hide sidebar">⟨</button>
     </div>
     <button class="nav-item new" data-page="chat"><span class="ic">+</span> New chat</button>
@@ -211,7 +212,7 @@
           align-items:center;
           gap:.35rem;
           transition:border-color .2s, background .2s;
-        ">◐ Theme</button>
+        ">☾ Dark</button>
         <span class="status">Open to internships</span>
       </div>
     </div>
@@ -219,7 +220,7 @@
       <div class="wrap">
         <div class="view" id="viewChat">
           <div class="welcome" id="welcome">
-            <span class="mark">✳</span>
+            <span class="mark"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span>
             <h1>Hi, I'm Shan. What would you like to know?</h1>
             <p>Ask about my projects, skills, education, achievements, thesis, or availability.</p>
             <div class="chips" id="chips"></div>
@@ -511,7 +512,7 @@
       d.textContent = content;
     } else {
       d.className = "msg-bot" + (isErr ? " err" : "");
-      d.innerHTML = '<span class="mk">✳</span><div class="body"></div>';
+      d.innerHTML = '<span class="mk"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span><div class="body"></div>';
       d.querySelector(".body").innerHTML = isErr ? escapeHtml(content) : renderMarkdown(content);
     }
     thread.appendChild(d);
@@ -582,7 +583,7 @@
 
     const wait = document.createElement("div");
     wait.className = "msg-bot";
-    wait.innerHTML = '<span class="mk">✳</span><span class="dots"><i></i><i></i><i></i></span><span class="thinking"> Thinking</span>';
+    wait.innerHTML = '<span class="mk"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span><span class="dots"><i></i><i></i><i></i></span><span class="thinking"> Thinking</span>';
     thread.appendChild(wait);
     scroll.scrollTop = scroll.scrollHeight;
 
@@ -658,34 +659,28 @@
 
   $("sbClose").onclick = () => sidebar.classList.remove("open");
   $("menuBtn").onclick = () => sidebar.classList.toggle("open");
+  // Close the mobile sidebar when tapping anywhere outside it
+  document.addEventListener("click", e => {
+    if (!sidebar.classList.contains("open")) return;
+    if (sidebar.contains(e.target) || $("menuBtn").contains(e.target)) return;
+    sidebar.classList.remove("open");
+  });
 
-  // Theme toggle
+  // Theme toggle: one click flips between light and dark
   const themeBtn = $("themeBtn");
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-      themeBtn.innerHTML = "☀ Light";
-    } else if (theme === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-      themeBtn.innerHTML = "☾ Dark";
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-      themeBtn.innerHTML = "◐ Theme";
-    }
+  function currentTheme() {
+    const attr = document.documentElement.getAttribute("data-theme");
+    if (attr) return attr;
+    return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
-  // Load saved preference
-  const savedTheme = localStorage.getItem("shan-theme");
-  if (savedTheme) applyTheme(savedTheme);
-  else applyTheme(null); // follow system
-
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    themeBtn.innerHTML = theme === "dark" ? "☀ Light" : "☾ Dark";
+  }
+  applyTheme(localStorage.getItem("shan-theme") || currentTheme());
   themeBtn.onclick = () => {
-    const current = document.documentElement.getAttribute("data-theme");
-    let next;
-    if (current === "dark") next = "light";
-    else if (current === "light") next = null; // back to system
-    else next = "dark";
-    if (next) localStorage.setItem("shan-theme", next);
-    else localStorage.removeItem("shan-theme");
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    localStorage.setItem("shan-theme", next);
     applyTheme(next);
   };
 
