@@ -85,13 +85,15 @@ PROJECTS
    API for AI-assisted interview training, with Firebase and MySQL for backend
    services. Winner of the 2025 System-Making Contest. Technologies: JavaScript,
    HTML, CSS, Groq API, Firebase, MySQL.
-2. PolitiScan PH (Web Developer): an AI-powered political transparency web app for
-   Philippine politics. Offers AI-assisted fact-checking, speech analysis, campaign
-   promise tracking, and politician comparisons. Built with HTML, CSS, JavaScript,
-   Groq API (Llama 3), and GitHub Pages.
+2. DevKit (Web App): an AI-powered document and code toolkit for students and
+   developers. Formats JSON, edits Markdown, generates READMEs, explains errors,
+   and more. Live at https://devkit-five-livid.vercel.app/
 3. Eco-Smart Station / RainErgy (Thesis, team project): an ESP32-based prototype for
    rainwater harvesting, filtration, hybrid solar and microturbine power, and
    coin-operated water and charging access. See the THESIS section for results.
+4. Aether (Interactive web): a living digital interface where the visitor's words
+   become memory and their thoughts reshape a responsive field.
+   Live at https://aether-nine-dun.vercel.app/
 
 SKILLS (intermediate level, using since 2023)
 - Programming and Web: Python, PHP, JavaScript, HTML, CSS
@@ -167,6 +169,16 @@ function cleanReply(text) {
     .trim();
 }
 
+const hits = new Map();
+function rateLimited(ip) {
+  const now = Date.now(), win = 60_000, max = 12;
+  const list = (hits.get(ip) || []).filter(t => now - t < win);
+  list.push(now);
+  hits.set(ip, list);
+  if (hits.size > 500) for (const [k, v] of hits) if (!v.some(t => now - t < win)) hits.delete(k);
+  return list.length > max;
+}
+
 async function callModel(messages) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return null;
@@ -174,8 +186,9 @@ async function callModel(messages) {
   const body = JSON.stringify({
     model: MODEL,
     messages: [{ role: "system", content: buildSystemPrompt() }, ...messages],
-    max_tokens: 300,
-    temperature: 0.2
+    max_tokens: 500,
+    temperature: 0.2,
+    reasoning_effort: "low"
   });
 
   for (let attempt = 1; attempt <= 2; attempt++) {
@@ -217,6 +230,11 @@ export default async function handler(req, res) {
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
+  if (rateLimited(ip)) {
+    return res.status(429).json({ error: "Too many messages. Please wait a minute." });
   }
 
   try {
