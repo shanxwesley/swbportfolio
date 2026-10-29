@@ -14,6 +14,8 @@
 <meta name="twitter:title" content="Shan Wesley Bachain | Computer Engineering Portfolio">
 <meta name="twitter:description" content="Fourth-year Computer Engineering student. AI apps, embedded systems, and open to internships.">
 <meta name="twitter:image" content="https://swbportfolio.vercel.app/profile.jpg">
+<meta name="theme-color" content="#8db9e6">
+<script>try{var t=localStorage.getItem("shan-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><g fill='none' stroke='%238db9e6' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'><path d='M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25'/><path d='M24 13L28.5 35L32 21L35.5 35L40 13'/></g></svg>">
 <style>
   :root {
@@ -160,6 +162,21 @@
   .send:hover { background: var(--accent-hover); }
   .send:disabled { opacity: .4; cursor: default; }
   .disclaimer { text-align: center; font-size: .72rem; color: var(--muted); margin-top: .35rem; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+  .skip { position: absolute; left: -999px; top: .5rem; background: var(--text); color: var(--bg); padding: .5rem .9rem; border-radius: 8px; z-index: 50; text-decoration: none; }
+  .skip:focus { left: .5rem; }
+  .sb-foot { background: none; border: none; cursor: pointer; width: 100%; text-align: left; }
+  .sb-foot img { object-fit: cover; }
+  .level { display: inline-block; margin-top: .8rem; font-size: .78rem; color: var(--accent); background: var(--accent-soft); padding: .2rem .65rem; border-radius: 999px; }
+  .msg-bot .body a { word-break: break-all; }
+  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 9; opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .backdrop.show { opacity: 1; pointer-events: auto; }
+  .view:not([hidden]) { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .card { display: flex; flex-direction: column; }
+  .card .card-links { margin-top: auto; padding-top: .9rem; }
+  .card .num { color: var(--border); }
   @media (max-width: 800px) {
     .sidebar { position: absolute; inset: 0 auto 0 0; transform: translateX(-100%); box-shadow: 4px 0 20px rgba(0,0,0,.15); }
     .sidebar.open { transform: none; }
@@ -177,8 +194,10 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#scroll">Skip to content</a>
+<div class="backdrop" id="backdrop"></div>
 <div class="app">
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar" aria-label="Site navigation">
     <div class="sb-top">
       <div class="brand"><span class="logo"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span> Shan</div>
       <button class="icon-btn" id="sbClose" aria-label="Hide sidebar">⟨</button>
@@ -193,8 +212,8 @@
     <a class="nav-item" href="#contact" data-page="contact"><span class="ic">✉</span> Contact</a>
     <div class="label">Recents</div>
     <div class="hist" id="hist"></div>
-    <button class="sb-foot" data-page="profile" style="background:none;border:none;cursor:pointer;width:100%;text-align:left;padding:.7rem .5rem 0;display:flex;align-items:center;gap:.55rem;font-size:.85rem;color:var(--muted);">
-      <img src="/profile.jpg" alt="Shan" class="avatar" style="object-fit:cover;width:26px;height:26px;border-radius:50%;"> Shan Bachain
+    <button class="sb-foot" data-page="profile">
+      <img src="/profile.jpg" alt="" class="avatar"> Shan Bachain
     </button>
   </aside>
   <div class="main">
@@ -217,10 +236,10 @@
           gap:.35rem;
           transition:border-color .2s, background .2s;
         ">☾ Dark</button>
-        <span class="status">Open to internships</span>
+        <span class="status">● Open to internships</span>
       </div>
     </div>
-    <div class="scroll" id="scroll">
+    <main class="scroll" id="scroll" tabindex="-1">
       <div class="wrap">
         <div class="view" id="viewChat">
           <div class="welcome" id="welcome">
@@ -229,7 +248,7 @@
             <p>Ask about my projects, skills, education, achievements, thesis, or availability.</p>
             <div class="chips" id="chips"></div>
           </div>
-          <div class="thread" id="thread" hidden></div>
+          <div class="thread" id="thread" aria-live="polite" hidden></div>
         </div>
         <div class="view" id="viewProjects" hidden>
           <div class="panel-head">
@@ -248,10 +267,11 @@
             </article>
             <article class="card">
               <div class="num">02</div>
-              <div class="kind">Web Developer · AI-powered</div>
-              <h3>PolitiScan PH</h3>
-              <p>An AI-powered political transparency platform for Philippine politics. Provides AI-assisted fact-checking, speech analysis, campaign promise tracking, and politician comparisons.</p>
-              <div class="tags"><span>HTML/CSS</span><span>JavaScript</span><span>Groq API (Llama 3)</span><span>GitHub Pages</span></div>
+              <div class="kind">Web App · AI-powered</div>
+              <h3>DevKit</h3>
+              <p>An AI-powered document and code toolkit for students and developers. Format JSON, edit Markdown, generate READMEs, explain errors, and more, all in one place.</p>
+              <div class="tags"><span>JavaScript</span><span>HTML/CSS</span><span>AI-assisted</span><span>Vercel</span></div>
+              <div class="card-links"><a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener">View live ↗</a></div>
             </article>
             <article class="card">
               <div class="num">03</div>
@@ -287,31 +307,31 @@
               <h3>Programming and Web</h3>
               <p class="skill-note">Building full web applications with clean front-end and back-end logic.</p>
               <div class="tags"><span>Python</span><span>PHP</span><span>JavaScript</span><span>HTML</span><span>CSS</span></div>
-              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+              <span class="level">Intermediate · since 2023</span>
             </div>
             <div class="stack-card">
               <h3>Databases and Backend</h3>
               <p class="skill-note">Designing data storage and connecting it to live applications.</p>
               <div class="tags"><span>MySQL</span><span>NoSQL</span><span>Firebase</span></div>
-              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+              <span class="level">Intermediate · since 2023</span>
             </div>
             <div class="stack-card">
               <h3>AI Integration</h3>
               <p class="skill-note">Using AI APIs and prompt design to add real features to products, from interview coaching to fact-checking.</p>
               <div class="tags"><span>Groq API</span><span>Llama 3</span><span>AI prompting</span></div>
-              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+              <span class="level">Intermediate · since 2023</span>
             </div>
             <div class="stack-card">
               <h3>Hardware and Embedded</h3>
               <p class="skill-note">Working with microcontrollers and sensors to bring software into physical systems.</p>
               <div class="tags"><span>Arduino</span><span>ESP32</span><span>Sensors</span></div>
-              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+              <span class="level">Intermediate · since 2023</span>
             </div>
             <div class="stack-card">
               <h3>Tools and Workflow</h3>
               <p class="skill-note">Version control, deployment, and a prompt-driven development workflow.</p>
               <div class="tags"><span>GitHub</span><span>VS Code</span><span>GitHub Pages</span></div>
-              <div class="bar-wrap"><div class="bar-meta"><span>Level</span><span>Intermediate · since 2023</span></div><div class="bar"><i style="width:60%"></i></div></div>
+              <span class="level">Intermediate · since 2023</span>
             </div>
             <div class="stack-card thesis">
               <h3>Thesis Study</h3>
@@ -445,10 +465,10 @@
           <div class="contact-card"><div class="inner"><span class="icon">⌖</span><div><div class="lbl">Location</div><div class="val">Angono, Rizal, Philippines</div></div></div></div>
         </div>
       </div>
-    </div>
+    </main>
     <div class="composer-wrap" id="composerWrap">
       <form class="composer" id="form">
-        <textarea id="input" rows="1" placeholder="Reply to Shan's assistant..."></textarea>
+        <textarea id="input" rows="1" aria-label="Message" maxlength="800" placeholder="Reply to Shan's assistant..."></textarea>
         <div class="composer-bottom">
           <span class="model"><b>Portfolio AI</b> · ask anything</span>
           <button class="send" id="send" type="submit" aria-label="Send">↑</button>
@@ -467,7 +487,7 @@
   const thread = $("thread"), welcome = $("welcome"), form = $("form"), input = $("input");
   const sendBtn = $("send"), sidebar = $("sidebar"), scroll = $("scroll"), chips = $("chips"), hist = $("hist");
 
-  const SUGGESTIONS = ["How old is Shan?", "What are his skills?", "Tell me about his thesis", "How well does Shan work in a team?"];
+  const SUGGESTIONS = ["What has Shan built?", "What are his skills?", "Tell me about his thesis", "Is he open to internships?"];
 
   const PAGES = {
     chat: { title: "New chat", view: "viewChat" },
@@ -497,7 +517,8 @@
   function inline(s) {
     return s
       .replace(/`(.+?)`/g, "<code>$1</code>")
-      .replace(/([\w.+-]+@[\w-]+\.[\w.]+)/g, '<a href="mailto:$1">$1</a>');
+      .replace(/(https?:\/\/[^\s<)]+[^\s<).,;:!?])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+      .replace(/(^|[\s(])([\w.+-]+@[\w-]+\.[\w.]+)/g, '$1<a href="mailto:$2">$2</a>');
   }
   function renderMarkdown(text) {
     let html = "", inList = false;
@@ -541,12 +562,15 @@
     Object.values(PAGES).forEach(p => $(p.view).hidden = true);
     $(page.view).hidden = false;
     document.querySelectorAll(".nav-item[data-page]").forEach(a => {
-      a.classList.toggle("active", a.dataset.page === currentPage);
+      const on = a.dataset.page === currentPage;
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     $("title").textContent = currentPage === "chat" ? chatTitle() : page.title;
     if (push) history.replaceState(null, "", currentPage === "chat" ? location.pathname : "#" + currentPage);
     scroll.scrollTop = 0;
     sidebar.classList.remove("open");
+    $("backdrop").classList.remove("show");
   }
   function renderChatHome(forceHero = false) {
     thread.innerHTML = "";
@@ -669,8 +693,12 @@
     });
   });
 
-  $("sbClose").onclick = () => sidebar.classList.remove("open");
-  $("menuBtn").onclick = () => sidebar.classList.toggle("open");
+  const backdrop = $("backdrop");
+  const setSidebar = open => { sidebar.classList.toggle("open", open); backdrop.classList.toggle("show", open); };
+  $("sbClose").onclick = () => setSidebar(false);
+  $("menuBtn").onclick = e => { e.stopPropagation(); setSidebar(!sidebar.classList.contains("open")); };
+  backdrop.onclick = () => setSidebar(false);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") setSidebar(false); });
   // Close the mobile sidebar when tapping anywhere outside it
   document.addEventListener("click", e => {
     if (!sidebar.classList.contains("open")) return;
