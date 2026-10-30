@@ -1,5 +1,5 @@
-/* Shan Wesley Bachain, portfolio behavior: footer year and the "Ask my AI" chat.
- * No inline scripts (CSP is script-src 'self'), no third-party code.
+/* Shan Wesley Bachain: chat-first app shell, portfolio view, and AI chat.
+ * No inline scripts (CSP is script-src 'self').
  */
 (function () {
   "use strict";
@@ -15,16 +15,15 @@
     "What are his main technical skills?"
   ];
 
-  var dialog = document.getElementById("chat");
-  var body = document.getElementById("chatBody");
+  var chatView = document.getElementById("viewChat");
+  var portfolioView = document.getElementById("viewPortfolio");
+  var scroller = document.getElementById("chatScroll");
+  var welcome = document.getElementById("welcome");
   var thread = document.getElementById("thread");
-  var empty = document.getElementById("chatEmpty");
   var chips = document.getElementById("chips");
   var form = document.getElementById("chatForm");
   var input = document.getElementById("chatInput");
   var sendBtn = document.getElementById("chatSend");
-  var clearBtn = document.getElementById("chatClear");
-  var closeBtn = document.getElementById("chatClose");
   var yearEl = document.getElementById("year");
 
   var history = [];
@@ -59,8 +58,8 @@
   }
 
   function formatBotReply(text) {
-    var blocks = String(text).split(/\n\s*\n/);
-    return blocks
+    return String(text)
+      .split(/\n\s*\n/)
       .map(function (block) {
         var lines = block.split("\n").filter(function (l) {
           return l.trim() !== "";
@@ -81,7 +80,6 @@
             "</ul>"
           );
         }
-
         return (
           "<p>" +
           lines
@@ -96,7 +94,7 @@
   }
 
   function scrollToEnd() {
-    body.scrollTop = body.scrollHeight;
+    if (scroller) scroller.scrollTop = scroller.scrollHeight;
   }
 
   function addUserMessage(text) {
@@ -125,19 +123,18 @@
     var el = document.createElement("div");
     el.className = "msg-wait";
     el.innerHTML =
-      '<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>' +
-      "<span>Typing...</span>";
+      '<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Thinking</span>';
     thread.appendChild(el);
     return el;
   }
 
-  function updateChrome() {
+  function updateWelcome() {
     var hasMessages = thread.children.length > 0;
-    empty.hidden = hasMessages;
-    clearBtn.hidden = !hasMessages;
+    if (welcome) welcome.hidden = hasMessages;
   }
 
   function renderChips() {
+    if (!chips) return;
     chips.innerHTML = "";
     SUGGESTIONS.forEach(function (q) {
       var b = document.createElement("button");
@@ -150,24 +147,37 @@
     });
   }
 
-  /* ---------- Dialog ---------- */
+  /* ---------- View switching ---------- */
 
-  function openChat() {
-    if (!dialog) return;
-    if (typeof dialog.showModal === "function") {
-      if (!dialog.open) dialog.showModal();
-    } else {
-      dialog.setAttribute("open", "");
-    }
-    setTimeout(function () {
-      if (input) input.focus();
-    }, 50);
+  function setActiveNav(view, target) {
+    document.querySelectorAll(".side-btn[data-view]").forEach(function (btn) {
+      var isActive;
+      if (view === "chat") {
+        isActive = btn.getAttribute("data-view") === "chat";
+      } else {
+        // Highlight the portfolio entry, and the specific section entry when one is targeted.
+        isActive = btn.getAttribute("data-view") === "portfolio" &&
+          (!target ? btn.classList.contains("side-btn") && !btn.classList.contains("side-sub") : btn.getAttribute("data-target") === target);
+      }
+      btn.setAttribute("aria-current", isActive ? "true" : "false");
+    });
   }
 
-  function closeChat() {
-    if (!dialog) return;
-    if (typeof dialog.close === "function") dialog.close();
-    else dialog.removeAttribute("open");
+  function showView(view, target) {
+    var toChat = view === "chat";
+    chatView.hidden = !toChat;
+    portfolioView.hidden = toChat;
+    setActiveNav(view, target);
+
+    if (toChat) {
+      if (input) setTimeout(function () { input.focus(); }, 30);
+    } else {
+      var scrollTarget = target ? document.getElementById(target) : null;
+      portfolioView.scrollTop = 0;
+      if (scrollTarget) {
+        scrollTarget.scrollIntoView({ block: "start" });
+      }
+    }
   }
 
   /* ---------- Sending ---------- */
@@ -176,13 +186,15 @@
     var text = String(rawText || "").trim().slice(0, MAX_INPUT);
     if (!text || busy) return;
 
+    showView("chat");
+
     busy = true;
     sendBtn.disabled = true;
 
     addUserMessage(text);
     history.push({ role: "user", content: text });
     history = history.slice(-MAX_HISTORY);
-    updateChrome();
+    updateWelcome();
     scrollToEnd();
 
     var waiting = showWaiting();
@@ -209,11 +221,8 @@
         history.push({ role: "assistant", content: data.reply });
         history = history.slice(-MAX_HISTORY);
       } else {
-        // Drop the unanswered question from history so a retry sends a clean state.
         history.pop();
-        addError(
-          data.error || "The assistant is unavailable right now. Please try again, or email Shan directly."
-        );
+        addError(data.error || "The assistant is unavailable right now. Please try again, or email Shan directly.");
       }
     } catch (err) {
       waiting.remove();
@@ -222,18 +231,17 @@
     } finally {
       busy = false;
       sendBtn.disabled = false;
-      updateChrome();
       scrollToEnd();
       if (input) input.focus();
     }
   }
 
-  /* ---------- Input handling ---------- */
-
   function autoGrow() {
     input.style.height = "auto";
-    input.style.height = Math.min(input.scrollHeight, 120) + "px";
+    input.style.height = Math.min(input.scrollHeight, 160) + "px";
   }
+
+  /* ---------- Input and controls ---------- */
 
   if (form) {
     form.addEventListener("submit", function (e) {
@@ -258,42 +266,37 @@
     });
   }
 
-  if (clearBtn) {
-    clearBtn.addEventListener("click", function () {
+  // Delegated handlers for navigation, new chat, and "Ask" buttons.
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+
+    var newChat = t.closest("[data-new-chat]");
+    if (newChat) {
+      e.preventDefault();
+      if (busy) return;
       history = [];
       thread.innerHTML = "";
-      updateChrome();
-      if (input) input.focus();
-    });
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeChat);
-  }
-
-  // Click on the dark backdrop closes the dialog (the dialog box itself is the click target only on its edges).
-  if (dialog) {
-    dialog.addEventListener("click", function (e) {
-      if (e.target === dialog) closeChat();
-    });
-  }
-
-  // Delegated handlers: "Ask my AI" buttons and "Ask the AI about this project" buttons.
-  document.addEventListener("click", function (e) {
-    var openEl = e.target.closest ? e.target.closest("[data-open-chat]") : null;
-    if (openEl) {
-      e.preventDefault();
-      openChat();
+      updateWelcome();
+      showView("chat");
       return;
     }
-    var askEl = e.target.closest ? e.target.closest("[data-ask]") : null;
+
+    var askEl = t.closest("[data-ask]");
     if (askEl) {
       e.preventDefault();
-      openChat();
       ask(askEl.getAttribute("data-ask"));
+      return;
+    }
+
+    var navEl = t.closest("[data-view]");
+    if (navEl) {
+      e.preventDefault();
+      showView(navEl.getAttribute("data-view"), navEl.getAttribute("data-target"));
     }
   });
 
   renderChips();
-  updateChrome();
+  updateWelcome();
+  showView("chat");
 })();
