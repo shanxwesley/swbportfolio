@@ -1,4 +1,4 @@
-/* Shan Wesley Bachain: chat-first app shell, portfolio view, and AI chat.
+/* Shan Wesley Bachain: portfolio (default), Claude-style chat, and recent chats.
  * No inline scripts (CSP is script-src 'self').
  */
 (function () {
@@ -7,6 +7,7 @@
   var API_URL = "/api/chat";
   var MAX_HISTORY = 10;
   var MAX_INPUT = 800;
+  var MAX_RECENTS = 20;
 
   var SUGGESTIONS = [
     "What projects has Shan built?",
@@ -15,23 +16,28 @@
     "What are his main technical skills?"
   ];
 
-  var chatView = document.getElementById("viewChat");
-  var portfolioView = document.getElementById("viewPortfolio");
-  var scroller = document.getElementById("chatScroll");
+  var viewPortfolio = document.getElementById("viewPortfolio");
+  var viewChat = document.getElementById("viewChat");
+  var pfScroll = document.getElementById("pfScroll");
+  var chatScroll = document.getElementById("chatScroll");
   var welcome = document.getElementById("welcome");
   var thread = document.getElementById("thread");
   var chips = document.getElementById("chips");
+  var recentsEl = document.getElementById("recents");
   var form = document.getElementById("chatForm");
   var input = document.getElementById("chatInput");
   var sendBtn = document.getElementById("chatSend");
   var yearEl = document.getElementById("year");
 
-  var history = [];
+  // Each recent chat keeps its title, its rendered thread, and its history for the API.
+  var chats = [];
+  var currentId = null;
+  var nextId = 1;
   var busy = false;
 
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- Rendering helpers ---------- */
+  /* ---------- Formatting ---------- */
 
   function escapeHtml(s) {
     return s
@@ -65,7 +71,6 @@
           return l.trim() !== "";
         });
         if (!lines.length) return "";
-
         var isList = lines.every(function (l) {
           return /^\s*[-*]\s+/.test(l);
         });
@@ -93,8 +98,10 @@
       .join("");
   }
 
-  function scrollToEnd() {
-    if (scroller) scroller.scrollTop = scroller.scrollHeight;
+  /* ---------- Thread rendering ---------- */
+
+  function scrollChatToEnd() {
+    if (chatScroll) chatScroll.scrollTop = chatScroll.scrollHeight;
   }
 
   function addUserMessage(text) {
@@ -128,13 +135,7 @@
     return el;
   }
 
-  function updateWelcome() {
-    var hasMessages = thread.children.length > 0;
-    if (welcome) welcome.hidden = hasMessages;
-  }
-
   function renderChips() {
-    if (!chips) return;
     chips.innerHTML = "";
     SUGGESTIONS.forEach(function (q) {
       var b = document.createElement("button");
@@ -147,46 +148,125 @@
     });
   }
 
-  /* ---------- View switching ---------- */
+  function updateWelcome() {
+    welcome.hidden = thread.children.length > 0;
+  }
 
-  function setActiveNav(view, target) {
-    document.querySelectorAll(".side-btn[data-view]").forEach(function (btn) {
-      var isActive;
-      if (view === "chat") {
-        isActive = btn.getAttribute("data-view") === "chat";
-      } else {
-        // Highlight the portfolio entry, and the specific section entry when one is targeted.
-        isActive = btn.getAttribute("data-view") === "portfolio" &&
-          (!target ? btn.classList.contains("side-btn") && !btn.classList.contains("side-sub") : btn.getAttribute("data-target") === target);
-      }
-      btn.setAttribute("aria-current", isActive ? "true" : "false");
+  /* ---------- Recent chats ---------- */
+
+  function findChat(id) {
+    for (var i = 0; i < chats.length; i++) {
+      if (chats[i].id === id) return chats[i];
+    }
+    return null;
+  }
+
+  // Saves the visible thread into the current chat record so it can be restored later.
+  function saveCurrent() {
+    var rec = findChat(currentId);
+    if (rec) {
+      rec.html = thread.innerHTML;
+    }
+  }
+
+  function renderRecents() {
+    recentsEl.innerHTML = "";
+    if (!chats.length) {
+      var none = document.createElement("p");
+      none.className = "recents-empty";
+      none.textContent = "No chats yet";
+      recentsEl.appendChild(none);
+      return;
+    }
+    chats.forEach(function (rec) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "recent";
+      b.textContent = rec.title;
+      b.title = rec.title;
+      b.setAttribute("data-recent", String(rec.id));
+      b.setAttribute("aria-current", rec.id === currentId ? "true" : "false");
+      recentsEl.appendChild(b);
     });
   }
 
-  function showView(view, target) {
+  function openChat(id) {
+    var rec = findChat(id);
+    if (!rec) return;
+    saveCurrent();
+    currentId = id;
+    thread.innerHTML = rec.html || "";
+    updateWelcome();
+    renderRecents();
+    showView("chat");
+    scrollChatToEnd();
+  }
+
+  function startNewChat() {
+    if (busy) return;
+    saveCurrent();
+    currentId = null;
+    thread.innerHTML = "";
+    history = [];
+    updateWelcome();
+    renderRecents();
+    showView("chat");
+    if (input) input.focus();
+  }
+
+  // Keeps the first question as the chat title.
+  function titleFrom(text) {
+    var t = text.replace(/\s+/g, " ").trim();
+    return t.length > 42 ? t.slice(0, 40).trim() + "…" : t;
+  }
+
+  /* ---------- Views and navigation ---------- */
+
+  function setNavCurrent(view) {
+    document.querySelectorAll(".nav-item[data-view]").forEach(function (btn) {
+      btn.setAttribute("aria-current", btn.getAttribute("data-view") === view ? "true" : "false");
+    });
+  }
+
+  function showView(view, anchor) {
     var toChat = view === "chat";
-    chatView.hidden = !toChat;
-    portfolioView.hidden = toChat;
-    setActiveNav(view, target);
+    viewChat.hidden = !toChat;
+    viewPortfolio.hidden = toChat;
+    setNavCurrent(toChat ? "chat" : "portfolio");
 
     if (toChat) {
-      if (input) setTimeout(function () { input.focus(); }, 30);
+      setTimeout(function () {
+        if (input) input.focus();
+      }, 30);
     } else {
-      var scrollTarget = target ? document.getElementById(target) : null;
-      portfolioView.scrollTop = 0;
-      if (scrollTarget) {
-        scrollTarget.scrollIntoView({ block: "start" });
+      if (anchor) {
+        var el = document.getElementById(anchor);
+        if (el) {
+          el.scrollIntoView({ block: "start" });
+          return;
+        }
       }
+      pfScroll.scrollTop = 0;
     }
   }
 
   /* ---------- Sending ---------- */
+
+  var history = [];
 
   async function ask(rawText) {
     var text = String(rawText || "").trim().slice(0, MAX_INPUT);
     if (!text || busy) return;
 
     showView("chat");
+
+    // First message in a new chat creates a recent entry.
+    if (currentId === null) {
+      currentId = nextId++;
+      chats.unshift({ id: currentId, title: titleFrom(text), html: "" });
+      if (chats.length > MAX_RECENTS) chats.length = MAX_RECENTS;
+      renderRecents();
+    }
 
     busy = true;
     sendBtn.disabled = true;
@@ -195,10 +275,10 @@
     history.push({ role: "user", content: text });
     history = history.slice(-MAX_HISTORY);
     updateWelcome();
-    scrollToEnd();
+    scrollChatToEnd();
 
     var waiting = showWaiting();
-    scrollToEnd();
+    scrollChatToEnd();
 
     try {
       var res = await fetch(API_URL, {
@@ -231,54 +311,52 @@
     } finally {
       busy = false;
       sendBtn.disabled = false;
-      scrollToEnd();
+      saveCurrent();
+      scrollChatToEnd();
       if (input) input.focus();
     }
   }
 
   function autoGrow() {
     input.style.height = "auto";
-    input.style.height = Math.min(input.scrollHeight, 160) + "px";
+    input.style.height = Math.min(input.scrollHeight, 180) + "px";
   }
 
-  /* ---------- Input and controls ---------- */
+  /* ---------- Events ---------- */
 
-  if (form) {
-    form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var value = input.value;
+    input.value = "";
+    autoGrow();
+    ask(value);
+  });
+
+  input.addEventListener("input", autoGrow);
+  input.addEventListener("keydown", function (e) {
+    // Enter sends, Shift+Enter adds a new line.
+    if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
       e.preventDefault();
-      if (busy) return;
-      var value = input.value;
-      input.value = "";
-      autoGrow();
-      ask(value);
-    });
-  }
+      if (form.requestSubmit) form.requestSubmit();
+      else form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+    }
+  });
 
-  if (input) {
-    input.addEventListener("input", autoGrow);
-    input.addEventListener("keydown", function (e) {
-      // Enter sends, Shift+Enter adds a new line.
-      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
-        e.preventDefault();
-        if (form.requestSubmit) form.requestSubmit();
-        else form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
-      }
-    });
-  }
-
-  // Delegated handlers for navigation, new chat, and "Ask" buttons.
   document.addEventListener("click", function (e) {
     var t = e.target;
     if (!t || !t.closest) return;
 
-    var newChat = t.closest("[data-new-chat]");
-    if (newChat) {
+    if (t.closest("[data-new-chat]")) {
       e.preventDefault();
-      if (busy) return;
-      history = [];
-      thread.innerHTML = "";
-      updateWelcome();
-      showView("chat");
+      startNewChat();
+      return;
+    }
+
+    var recent = t.closest("[data-recent]");
+    if (recent) {
+      e.preventDefault();
+      if (!busy) openChat(Number(recent.getAttribute("data-recent")));
       return;
     }
 
@@ -292,11 +370,19 @@
     var navEl = t.closest("[data-view]");
     if (navEl) {
       e.preventDefault();
-      showView(navEl.getAttribute("data-view"), navEl.getAttribute("data-target"));
+      showView(navEl.getAttribute("data-view"));
+      return;
+    }
+
+    var anchorEl = t.closest('a[href^="#"]');
+    if (anchorEl) {
+      e.preventDefault();
+      showView("portfolio", anchorEl.getAttribute("href").slice(1));
     }
   });
 
   renderChips();
+  renderRecents();
   updateWelcome();
-  showView("chat");
+  showView("portfolio");
 })();
