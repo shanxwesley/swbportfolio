@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shan Wesley Bachain | Computer Engineering Student, Full-Stack &amp; IoT Developer</title>
-<meta name="description" content="Portfolio of Shan Wesley Bachain, a Computer Engineering student at the University of Rizal System building full-stack web applications, AI-powered tools, and ESP32-based IoT systems. Open to internships.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shan Wesley Bachain | Ask My AI</title>
+<meta name="description" content="Chat with the AI assistant for Shan Wesley Bachain, a Computer Engineering student building full-stack web apps, AI-powered tools, and ESP32 IoT systems. Open to internships.">
 <meta name="author" content="Shan Wesley Bachain">
 <link rel="canonical" href="https://swbportfolio.vercel.app/">
 <meta name="theme-color" content="#f8fbff" media="(prefers-color-scheme: light)">
@@ -12,31 +12,25 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shan Wesley Bachain">
-<meta property="og:title" content="Shan Wesley Bachain | Computer Engineering Student, Full-Stack &amp; IoT Developer">
-<meta property="og:description" content="Full-stack web applications, AI-powered tools, and ESP32-based IoT systems. Open to software and Computer Engineering internships.">
+<meta property="og:title" content="Shan Wesley Bachain | Ask My AI">
+<meta property="og:description" content="Chat with the AI assistant for Shan's projects, skills, and availability for internships.">
 <meta property="og:url" content="https://swbportfolio.vercel.app/">
 <meta property="og:image" content="https://swbportfolio.vercel.app/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Shan Wesley Bachain, Computer Engineering Student, Full-Stack and IoT Developer">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Shan Wesley Bachain | Computer Engineering Student">
-<meta name="twitter:description" content="Full-stack web applications, AI-powered tools, and ESP32-based IoT systems. Open to internships.">
-<meta name="twitter:image" content="https://swbportfolio.vercel.app/og-image.jpg">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script src="/assets/theme.js"></script>
 <style>
-/* Shan Wesley Bachain, portfolio styles. No build step. */
+/* Shan Wesley Bachain. Chat-first layout with a portfolio view. No build step. */
 :root {
   --bg: #f8fbff;
   --surface: #ffffff;
   --surface-2: #eef5fc;
   --text: #1f2f3d;
   --muted: #526576;
-  --accent: #8db9e6;          /* decorative only (borders, logo) */
-  --link: #1d5c9a;            /* text-safe accent */
+  --accent: #8db9e6;
+  --link: #1d5c9a;
   --btn-bg: #1d5c9a;
   --btn-text: #ffffff;
   --border: #d9e6f2;
@@ -45,7 +39,6 @@
   --shadow: 0 12px 32px rgba(31, 47, 61, .10);
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --maxw: 1560px;
   color-scheme: light;
 }
 :root[data-theme="dark"] {
@@ -65,492 +58,341 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--sans); background: var(--bg); color: var(--text);
   line-height: 1.6; font-size: 1rem; -webkit-font-smoothing: antialiased;
+  height: 100dvh; overflow: hidden;
+  display: grid; grid-template-columns: 260px 1fr;
 }
 img { max-width: 100%; height: auto; display: block; }
-button, textarea { font: inherit; color: inherit; }
+button, textarea, input { font: inherit; color: inherit; }
 a { color: var(--link); text-underline-offset: .18em; }
-a:hover { text-decoration-thickness: 2px; }
 ul, ol { padding: 0; list-style: none; }
 h1, h2, h3, h4 { line-height: 1.2; font-weight: 400; }
-:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 4px; }
-main:focus { outline: none; }
-
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 6px; }
+[hidden] { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.skip { position: absolute; left: -999px; top: .5rem; z-index: 100; background: var(--text); color: var(--bg); padding: .5rem .9rem; border-radius: 8px; text-decoration: none; }
-.skip:focus { left: .5rem; }
 
-/* Header */
-.site-header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-.bar { max-width: var(--maxw); margin: 0 auto; padding: .65rem 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-.brand { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--serif); font-size: 1.1rem; color: var(--text); text-decoration: none; margin-right: auto; }
-.logo { width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; }
-.nav { display: flex; gap: .2rem; }
-.nav a { color: var(--muted); text-decoration: none; font-size: .92rem; padding: .35rem .65rem; border-radius: 8px; }
-.nav a:hover { color: var(--text); background: var(--surface-2); }
-.nav a[aria-current="true"] { color: var(--text); background: var(--surface-2); }
-.bar-actions { display: flex; gap: .5rem; }
-.chip-btn { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; padding: .32rem .85rem; font-size: .85rem; cursor: pointer; transition: border-color .2s, background .2s; }
-.chip-btn:hover { border-color: var(--link); }
-.chip-btn--ai { color: var(--link); }
+/* ---------- Sidebar ---------- */
+.side {
+  background: var(--surface); border-right: 1px solid var(--border);
+  padding: 1rem .75rem; display: flex; flex-direction: column; gap: .2rem; min-height: 0; overflow-y: auto;
+}
+.brand { display: flex; align-items: center; gap: .6rem; padding: .35rem .5rem .9rem; font-family: var(--serif); font-size: 1.1rem; }
+.brand-mark { width: 30px; height: 30px; border-radius: 9px; background: var(--btn-bg); color: var(--btn-text); display: grid; place-items: center; font-family: var(--sans); font-size: .7rem; font-weight: 700; letter-spacing: .02em; }
+.side-btn {
+  display: flex; align-items: center; gap: .6rem; width: 100%; padding: .55rem .6rem; border: none; background: none;
+  border-radius: 10px; color: var(--muted); text-decoration: none; cursor: pointer; text-align: left; font-size: .93rem;
+}
+.side-btn:hover { background: var(--surface-2); color: var(--text); }
+.side-btn[aria-current="true"] { background: var(--surface-2); color: var(--text); font-weight: 600; }
+.side-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+.side-btn--new { border: 1px solid var(--border-strong); margin-bottom: .6rem; }
+.side-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 1rem .6rem .35rem; }
+.side-sub { padding-left: 1.7rem; font-size: .9rem; }
+.side-foot { margin-top: auto; display: flex; flex-direction: column; gap: .2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
 
-/* Layout */
-main > section { max-width: var(--maxw); margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3.5rem); padding-right: clamp(1.25rem, 4vw, 3.5rem); }
-.section { padding-top: 4.5rem; }
-.section-head { margin-bottom: 1.6rem; }
-.section-head h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2rem); letter-spacing: -.01em; }
-.section-head p { color: var(--muted); margin-top: .4rem; max-width: 62ch; }
+/* ---------- Main area ---------- */
+.main { min-width: 0; min-height: 0; height: 100dvh; overflow: hidden; position: relative; }
+.view { height: 100%; }
+.view-chat { display: flex; flex-direction: column; }
+.view-portfolio { overflow-y: auto; height: 100%; }
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: .55rem 1.05rem; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .92rem; font-weight: 500; transition: border-color .2s, background .2s; }
-.btn:hover { border-color: var(--link); text-decoration: none; }
-.btn--primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-text); }
-.btn--primary:hover { filter: brightness(1.08); }
-.text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: inherit; }
-.text-btn:hover { text-decoration-thickness: 2px; }
-.icon-btn { background: none; border: none; color: var(--muted); cursor: pointer; padding: .4rem; border-radius: 8px; display: grid; place-items: center; }
-.icon-btn:hover { background: var(--surface-2); color: var(--text); }
-
-/* Hero */
-.hero { display: grid; grid-template-columns: 1fr minmax(260px, 340px); gap: 4rem; align-items: center; padding-top: 4.5rem; }
-.hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.1rem); letter-spacing: -.015em; }
-.role { color: var(--link); font-weight: 600; margin-top: .6rem; font-size: 1.02rem; }
-.lead { margin-top: 1.1rem; max-width: 60ch; font-size: 1.06rem; color: var(--text); }
-.facts { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: 1.1rem; color: var(--muted); font-size: .92rem; }
-.facts .open { color: var(--ok); font-weight: 600; }
-.facts .open::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; margin-right: .45rem; vertical-align: .05em; }
-.actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
-.ai-hint { margin-top: 1rem; font-size: .9rem; color: var(--muted); }
-.hero-photo img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center top; border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-
-/* Projects */
-.project { border-top: 1px solid var(--border-strong); padding: 1.6rem 0 2rem; }
-.project-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; }
-.project-head h3 { font-family: var(--serif); font-size: 1.5rem; }
-.aka { color: var(--muted); font-size: 1.1rem; }
-.tags-inline { display: flex; flex-wrap: wrap; gap: .25rem .9rem; font-size: .85rem; color: var(--muted); }
-.tags-inline li + li::before { content: "·"; margin-right: .9rem; color: var(--border-strong); }
-.status { color: var(--ok); font-weight: 600; }
-.status--neutral { color: var(--link); }
-.project-desc { margin-top: .6rem; max-width: 70ch; }
-.facts-list { margin-top: 1rem; display: grid; gap: .45rem; }
-.facts-list > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: .8rem; font-size: .94rem; }
-.facts-list dt { color: var(--muted); }
-.project-links { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 1.1rem; font-size: .94rem; font-weight: 500; }
-.project-links a { text-decoration: none; }
-.project-links a:hover { text-decoration: underline; }
-
-.status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.4rem; padding: 1.2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
-.status-grid h4 { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--link); margin-bottom: .55rem; }
-.status-grid .aside { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--muted); }
-.status-grid li { font-size: .9rem; padding-left: 1rem; position: relative; margin-bottom: .35rem; }
-.status-grid li::before { content: ""; position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
-.note { margin-top: .9rem; font-size: .88rem; color: var(--muted); font-style: italic; max-width: 70ch; }
-
-.project-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
-.project--compact .facts-list > div { grid-template-columns: 5.5rem 1fr; }
-
-/* Skills */
-.skills { border-top: 1px solid var(--border-strong); }
-.skills > div { display: grid; grid-template-columns: 13rem 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--border); }
-.skills dt { font-weight: 600; }
-.skills dd { color: var(--text); }
-
-/* Education */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-.sub { font-family: var(--serif); font-size: 1.2rem; margin-bottom: .9rem; }
-.timeline li { display: grid; gap: .1rem; padding: 0 0 1.1rem 1rem; border-left: 2px solid var(--border-strong); margin-left: .2rem; position: relative; }
-.timeline li::before { content: ""; position: absolute; left: -6px; top: .35rem; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--link); }
-.when { font-size: .8rem; color: var(--link); font-weight: 600; letter-spacing: .02em; }
-.timeline span:last-child { color: var(--muted); font-size: .94rem; }
-.awards li { display: grid; grid-template-columns: 6.2rem 1fr; gap: .8rem; padding: .65rem 0; border-bottom: 1px solid var(--border); font-size: .95rem; }
-.awards li:first-child { padding-top: 0; }
-.awards .when { padding-top: .1rem; }
-
-/* Contact */
-.contact { display: grid; grid-template-columns: 1fr 190px; gap: 2.5rem; align-items: start; }
-.contact-list li { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--border); }
-.contact-list li:first-child { border-top: 1px solid var(--border-strong); }
-.contact-list .k { color: var(--muted); font-size: .9rem; }
-.contact-list a { word-break: break-word; }
-.resume-thumb img { border: 1px solid var(--border-strong); border-radius: 6px; box-shadow: var(--shadow); transition: transform .2s; }
-.resume-thumb:hover img { transform: translateY(-2px); }
-
-.site-footer { max-width: var(--maxw); margin: 4.5rem auto 0; padding: 1.5rem 1.25rem 5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
-
-/* Chat launcher + dialog (Claude-style interface, same palette) */
-.launcher { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 30; display: inline-flex; align-items: center; gap: .55rem; padding: .8rem 1.25rem; border-radius: 999px; border: none; background: var(--btn-bg); color: var(--btn-text); font-weight: 600; font-size: .95rem; cursor: pointer; box-shadow: var(--shadow); transition: transform .2s; }
-.launcher:hover { transform: translateY(-2px); }
-.launcher:focus-visible { outline-color: var(--text); }
-.ask-pill { display: inline-flex; align-items: center; gap: .5rem; margin-left: .25rem; padding: .3rem .95rem .3rem .75rem; border-radius: 999px; border: 1px solid var(--link); background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); font: inherit; font-weight: 600; cursor: pointer; }
-.ask-pill:hover { background: color-mix(in srgb, var(--link) 22%, transparent); }
-.ask-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent); }
-
-.chat { position: fixed; inset: auto 1.5rem 1.5rem auto; margin: 0; padding: 0; width: min(480px, calc(100vw - 3rem)); max-width: none; max-height: none; height: min(740px, calc(100dvh - 3rem)); background: var(--bg); color: var(--text); border: 1px solid var(--border-strong); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
-.chat[open] { display: flex; flex-direction: column; }
-.chat::backdrop { background: rgba(10, 16, 22, .45); }
-.chat-head { display: flex; justify-content: space-between; align-items: center; gap: .75rem; padding: .85rem 1.1rem; border-bottom: 1px solid var(--border); background: var(--surface); }
-.chat-head h2 { font-family: var(--sans); font-size: .98rem; font-weight: 600; display: flex; align-items: center; gap: .5rem; }
-.chat-head h2::before { content: "SW"; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .62rem; font-weight: 700; display: inline-grid; place-items: center; letter-spacing: .02em; }
-.chat-head p { color: var(--muted); font-size: .76rem; margin-top: .1rem; }
-.chat-head-actions { white-space: nowrap; display: flex; align-items: center; gap: .5rem; font-size: .82rem; }
-.chat-body { flex: 1; overflow-y: auto; padding: 1.25rem 1.1rem; display: flex; flex-direction: column; gap: 1.1rem; overscroll-behavior: contain; }
-.chat-empty { padding: 1rem .25rem 0; }
-.chat-empty p { font-family: var(--serif); font-size: 1.25rem; line-height: 1.4; color: var(--text); }
-.chat-empty[hidden] { display: none; }
-.chips { display: grid; grid-template-columns: 1fr; gap: .5rem; margin-top: 1.1rem; }
-.chips button { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 14px; padding: .7rem .9rem; font-size: .9rem; cursor: pointer; text-align: left; color: var(--text); transition: border-color .2s, background .2s; }
+/* ---------- Chat (Claude-style) ---------- */
+.chat-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
+.chat-col { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 1rem; display: flex; flex-direction: column; gap: 1.4rem; min-height: 100%; }
+.welcome { margin: auto 0; padding: 2rem 0 1rem; }
+.welcome .eyebrow { display: inline-flex; align-items: center; gap: .5rem; color: var(--muted); font-size: .9rem; }
+.welcome h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3.6vw, 2.5rem); letter-spacing: -.01em; margin-top: .6rem; }
+.welcome p.sub { color: var(--muted); margin-top: .5rem; max-width: 56ch; }
+.chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-top: 1.6rem; }
+.chips button {
+  background: var(--surface); border: 1px solid var(--border-strong); border-radius: 14px; padding: .8rem .95rem;
+  font-size: .92rem; cursor: pointer; text-align: left; line-height: 1.4; transition: border-color .2s, background .2s;
+}
 .chips button:hover { border-color: var(--link); background: var(--surface-2); }
-.thread { display: flex; flex-direction: column; gap: 1.1rem; }
-.msg-user { align-self: flex-end; max-width: 82%; background: var(--surface-2); border: 1px solid var(--border); padding: .6rem .95rem; border-radius: 18px 18px 4px 18px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .94rem; line-height: 1.55; }
-.msg-bot { position: relative; align-self: stretch; padding-left: 2.1rem; font-size: .95rem; line-height: 1.7; overflow-wrap: anywhere; }
-.msg-bot::before { content: "SW"; position: absolute; left: 0; top: .1rem; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .62rem; font-weight: 700; display: grid; place-items: center; }
+.thread { display: flex; flex-direction: column; gap: 1.4rem; }
+.msg-user { align-self: flex-end; max-width: 80%; background: var(--surface-2); border: 1px solid var(--border); padding: .65rem 1rem; border-radius: 18px 18px 4px 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg-bot { position: relative; padding-left: 2.2rem; line-height: 1.7; overflow-wrap: anywhere; }
+.msg-bot::before { content: "SW"; position: absolute; left: 0; top: .15rem; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .6rem; font-weight: 700; display: grid; place-items: center; }
 .msg-bot p { margin-bottom: .6rem; }
 .msg-bot p:last-child { margin-bottom: 0; }
 .msg-bot ul { list-style: disc; padding-left: 1.2rem; margin: .3rem 0 .6rem; }
 .msg-bot li { margin-bottom: .25rem; }
-.msg-bot code { background: var(--surface-2); padding: .05rem .3rem; border-radius: 4px; font-size: .9em; }
-.msg-bot strong { font-weight: 600; color: var(--text); background: color-mix(in srgb, var(--link) 16%, transparent); padding: .02rem .32rem; border-radius: 6px; }
+.msg-bot strong { font-weight: 600; background: color-mix(in srgb, var(--link) 16%, transparent); padding: .02rem .32rem; border-radius: 6px; }
 .msg-bot a { word-break: break-word; }
-.msg-error { align-self: stretch; border: 1px solid var(--border-strong); border-left: 3px solid #b3402f; background: var(--surface); border-radius: 10px; padding: .65rem .8rem; font-size: .88rem; }
-.msg-wait { position: relative; align-self: flex-start; display: inline-flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .88rem; padding-left: 2.1rem; }
-.msg-wait::before { content: "SW"; position: absolute; left: 0; top: -.1rem; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .62rem; font-weight: 700; display: grid; place-items: center; }
+.msg-wait { position: relative; padding-left: 2.2rem; display: inline-flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .9rem; min-height: 26px; }
+.msg-wait::before { content: "SW"; position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .6rem; font-weight: 700; display: grid; place-items: center; }
+.msg-error { border: 1px solid var(--border-strong); border-left: 3px solid #b3402f; background: var(--surface); border-radius: 10px; padding: .65rem .8rem; font-size: .9rem; }
 .dots { display: inline-flex; gap: 4px; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
 .dots i:nth-child(2) { animation-delay: .15s; }
 .dots i:nth-child(3) { animation-delay: .3s; }
 @keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
 
-.composer { display: flex; align-items: flex-end; gap: .5rem; margin: 0 1rem; padding: .6rem .6rem .6rem .95rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-.composer:focus-within { border-color: var(--link); }
-.composer textarea { flex: 1; border: none; background: transparent; resize: none; outline: none; font-size: .95rem; line-height: 1.5; max-height: 120px; padding: .3rem 0; }
-.composer textarea::placeholder { color: var(--muted); }
-.send { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; border: none; background: var(--btn-bg); color: var(--btn-text); cursor: pointer; display: grid; place-items: center; }
-.send:disabled { opacity: .4; cursor: default; }
-.chat-note { text-align: center; font-size: .72rem; color: var(--muted); padding: .6rem 1rem .8rem; }
-
-/* Responsive */
-@media (max-width: 860px) {
-  .hero { grid-template-columns: 1fr; gap: 1.8rem; padding-top: 2.5rem; }
-  .hero-photo { order: -1; }
-  .hero-photo img { width: 132px; }
-  .status-grid { grid-template-columns: 1fr; }
-  .two-col { grid-template-columns: 1fr; gap: 2.2rem; }
-  .project-pair { grid-template-columns: 1fr; gap: 0; }
-  .contact { grid-template-columns: 1fr; }
-  .resume-thumb { max-width: 190px; }
+.composer-wrap { padding: .5rem 1.5rem 0; }
+.composer {
+  max-width: 760px; margin: 0 auto; display: flex; align-items: flex-end; gap: .5rem;
+  padding: .6rem .6rem .6rem 1rem; background: var(--surface); border: 1px solid var(--border-strong);
+  border-radius: 18px; box-shadow: var(--shadow);
 }
-@media (max-width: 640px) {
-  .nav { order: 3; width: 100%; overflow-x: auto; margin: 0 -.25rem; }
-  .section { padding-top: 3.2rem; }
-  .facts-list > div, .project--compact .facts-list > div { grid-template-columns: 1fr; gap: 0; }
-  .skills > div { grid-template-columns: 1fr; gap: .15rem; }
-  .contact-list li { grid-template-columns: 1fr; gap: .1rem; }
-  .actions .btn { flex: 1 1 calc(50% - .6rem); }
-  .launcher span { display: none; }
-  .launcher { padding: .8rem; }
-  .chat { inset: 0; width: 100%; height: 100dvh; max-height: none; border-radius: 0; border: none; }
-  .hero { gap: 1.8rem; }
+.composer:focus-within { border-color: var(--link); }
+.composer textarea { flex: 1; border: none; background: transparent; resize: none; outline: none; font-size: .97rem; line-height: 1.5; max-height: 160px; padding: .35rem 0; }
+.composer textarea::placeholder { color: var(--muted); }
+.send { flex-shrink: 0; width: 38px; height: 38px; border-radius: 11px; border: none; background: var(--btn-bg); color: var(--btn-text); cursor: pointer; display: grid; place-items: center; }
+.send:disabled { opacity: .4; cursor: default; }
+.chat-note { text-align: center; font-size: .74rem; color: var(--muted); padding: .6rem 1rem .9rem; }
+
+/* ---------- Portfolio view ---------- */
+.pf { max-width: 1040px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+.pf section { padding-top: 3.2rem; }
+.pf h2 { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 1rem; }
+.hero { display: grid; grid-template-columns: 1fr 240px; gap: 3rem; align-items: center; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 4.6vw, 3.2rem); letter-spacing: -.015em; }
+.role { color: var(--link); font-weight: 600; margin-top: .5rem; }
+.lead { margin-top: 1rem; max-width: 58ch; color: var(--muted); }
+.meta { margin-top: .9rem; color: var(--muted); font-size: .92rem; }
+.open { color: var(--ok); font-weight: 600; }
+.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+.btn { display: inline-flex; align-items: center; padding: .55rem 1.05rem; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .92rem; font-weight: 500; cursor: pointer; }
+.btn:hover { border-color: var(--link); }
+.btn--primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-text); }
+.hero-photo img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center top; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.ask-row { margin-top: 1.4rem; }
+.ask-pill { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem 1rem .4rem .8rem; border-radius: 999px; border: 1px solid var(--link); background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); font-weight: 600; cursor: pointer; font-size: .92rem; }
+.ask-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem 1.25rem; display: flex; flex-direction: column; gap: .55rem; }
+.card h3 { font-family: var(--serif); font-size: 1.25rem; }
+.card .tag { font-size: .78rem; color: var(--muted); }
+.card .tag b { color: var(--ok); font-weight: 600; }
+.card p { font-size: .93rem; color: var(--text); }
+.card .role-line { font-size: .9rem; color: var(--muted); }
+.card .links { margin-top: auto; display: flex; gap: .9rem; align-items: center; flex-wrap: wrap; font-size: .9rem; padding-top: .3rem; }
+.text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .9rem; }
+.skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem 2rem; }
+.skill-grid dt { font-size: .85rem; color: var(--muted); margin-bottom: .2rem; }
+.skill-grid dd { font-size: .95rem; }
+.edu { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.edu div { border-left: 2px solid var(--border-strong); padding: .1rem 0 .1rem 1rem; }
+.edu .when { font-size: .8rem; color: var(--link); font-weight: 600; }
+.edu strong { display: block; font-weight: 600; }
+.edu span.note { color: var(--muted); font-size: .92rem; }
+.contact-list { display: grid; gap: .5rem; font-size: .97rem; }
+.contact-list span { color: var(--muted); display: inline-block; width: 5.5rem; }
+
+.pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .side { flex-direction: row; align-items: center; overflow-x: auto; overflow-y: hidden; padding: .5rem .75rem; gap: .3rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .brand { padding: 0 .5rem 0 0; flex-shrink: 0; font-size: .95rem; }
+  .brand span { display: none; }
+  .side-btn { width: auto; white-space: nowrap; padding: .45rem .7rem; }
+  .side-btn--new, .side-label, .side-sub { display: none; }
+  .side-foot { flex-direction: row; align-items: center; border: none; padding: 0; margin: 0 0 0 auto; gap: .2rem; flex-shrink: 0; }
+  .side-foot .side-btn span:not(.sr-only) { display: none; }
+  .main { height: auto; }
+  .view-chat, .view-portfolio { height: calc(100dvh - 58px); }
+  .hero { grid-template-columns: 1fr; gap: 1.8rem; }
+  .hero-photo { order: -1; }
+  .hero-photo img { width: 140px; }
+  .cards, .skill-grid, .edu { grid-template-columns: 1fr; }
+  .pf { padding: 2rem 1.25rem 4rem; }
+  .chips { grid-template-columns: 1fr; }
+  .chat-col { padding: 1.5rem 1rem 1rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 </style>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Shan Wesley Bachain",
-  "url": "https://swbportfolio.vercel.app/",
-  "image": "https://swbportfolio.vercel.app/profile.jpg",
-  "jobTitle": "Computer Engineering Student",
-  "email": "mailto:bachainshanwesleyb@gmail.com",
-  "sameAs": ["https://github.com/shanxwesley"],
-  "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Rizal System, Antipolo Campus" },
-  "address": { "@type": "PostalAddress", "addressLocality": "Angono", "addressRegion": "Rizal", "addressCountry": "PH" },
-  "knowsAbout": ["Full-stack web development", "Embedded systems", "IoT", "PHP", "JavaScript", "MySQL", "ESP32"]
-}
-</script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="sr-only" href="#chatInput">Skip to chat</a>
 
-<header class="site-header">
-  <div class="bar">
-    <a class="brand" href="#top" aria-label="Shan Wesley Bachain, back to top">
-      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg>
-      <span>Shan Bachain</span>
+<nav class="side" aria-label="Primary">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">SW</span>
+    <span>Shan Bachain</span>
+  </div>
+
+  <button type="button" class="side-btn side-btn--new" data-new-chat>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    New chat
+  </button>
+
+  <button type="button" class="side-btn" data-view="chat" aria-current="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+    Ask my AI
+  </button>
+  <button type="button" class="side-btn" data-view="portfolio" aria-current="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+    Portfolio
+  </button>
+
+  <p class="side-label">Portfolio</p>
+  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="projects">Projects</button>
+  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="skills">Skills</button>
+  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="education">Education</button>
+  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="contact">Contact</button>
+
+  <div class="side-foot">
+    <a class="side-btn" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+      Download resume
     </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="bar-actions">
-      <button type="button" class="chip-btn" id="themeBtn" aria-label="Switch to dark theme">Dark</button>
-      <button type="button" class="chip-btn chip-btn--ai" data-open-chat>Ask my AI</button>
+    <a class="side-btn" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5c0-1 .1-1.4-.5-2 2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.7 2.8 5.7 5.5 6-.6.5-.6 1.3-.5 2V21"/></svg>
+      GitHub
+      <span class="sr-only"> (opens in a new tab)</span>
+    </a>
+    <button type="button" class="side-btn" id="themeBtn" aria-label="Switch to dark theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+</nav>
+
+<main class="main" id="main">
+
+  <!-- Chat view (default) -->
+  <div class="view view-chat" id="viewChat">
+    <div class="chat-scroll" id="chatScroll">
+      <div class="chat-col">
+        <div class="welcome" id="welcome">
+          <p class="eyebrow">Shan Wesley Bachain · Computer Engineering</p>
+          <h1>What would you like to know about Shan?</h1>
+          <p class="sub">I can answer questions about his projects, skills, education, thesis, and availability for internships.</p>
+          <div class="chips" id="chips" role="group" aria-label="Suggested questions"></div>
+        </div>
+        <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Conversation"></div>
+      </div>
+    </div>
+
+    <div class="composer-wrap">
+      <form class="composer" id="chatForm">
+        <label class="sr-only" for="chatInput">Your question</label>
+        <textarea id="chatInput" rows="1" maxlength="800" placeholder="Ask about projects, skills, or availability" autocomplete="off"></textarea>
+        <button class="send" id="chatSend" type="submit" aria-label="Send message">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+      </form>
+      <p class="chat-note">AI-generated and can be wrong. For anything important, email bachainshanwesleyb@gmail.com.</p>
     </div>
   </div>
-</header>
 
-<main id="main" tabindex="-1">
-  <div id="top"></div>
+  <!-- Portfolio view (hero + details) -->
+  <div class="view view-portfolio" id="viewPortfolio" hidden>
+    <div class="pf">
 
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-text">
-      <h1 id="hero-title">Shan Wesley Bachain</h1>
-      <p class="role">Computer Engineering Student | Full-Stack &amp; IoT Developer</p>
-      <p class="lead">I build practical software applications and hardware-integrated systems. My work spans full-stack web development, AI-powered applications, IoT, and embedded systems, from an interview management platform to an ESP32-based rainwater and energy station.</p>
-      <ul class="facts">
-        <li>University of Rizal System – Antipolo Campus</li>
-        <li>Fourth-year B.S. Computer Engineering, expected 2027</li>
-        <li>Angono, Rizal, Philippines</li>
-        <li class="open">Open to internships</li>
-      </ul>
-      <div class="actions">
-        <a class="btn btn--primary" href="#projects">View Projects</a>
-        <a class="btn" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download Resume</a>
-        <a class="btn" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
-        <a class="btn" href="#contact">Contact Me</a>
-      </div>
-      <p class="ai-hint">Short on time? <button type="button" class="ask-pill" data-open-chat><span class="ask-dot" aria-hidden="true"></span>Ask my AI assistant about my work</button></p>
-    </div>
-    <figure class="hero-photo">
-      <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
-    </figure>
-  </section>
-
-  <section id="projects" class="section" aria-labelledby="projects-title">
-    <div class="section-head">
-      <h2 id="projects-title">Projects</h2>
-      <p>Two featured projects, followed by two smaller web projects.</p>
-    </div>
-
-    <article class="project">
-      <header class="project-head">
-        <h3>JobInterviewPro</h3>
-        <ul class="tags-inline" aria-label="Project status">
-          <li class="status">Live</li>
-          <li>System-Making Contest winner, 2025</li>
-        </ul>
-      </header>
-      <p class="project-desc">An interview management system featuring interview scheduling, candidate evaluation, and role-based access.</p>
-      <dl class="facts-list">
-        <div><dt>Problem</dt><dd>Keeps interview scheduling and candidate evaluation in one system, with what each user can see and do determined by their role.</dd></div>
-        <div><dt>My role</dt><dd>Backend developer.</dd></div>
-        <div><dt>Built with</dt><dd>PHP, MySQL, JavaScript, HTML, CSS, Firebase</dd></div>
-      </dl>
-      <div class="project-links">
-        <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span><span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
-        <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and what Shan's role was">Ask the AI about this project</button>
-      </div>
-    </article>
-
-    <article class="project">
-      <header class="project-head">
-        <h3>Eco-Smart Station <span class="aka">(RainErgy)</span></h3>
-        <ul class="tags-inline" aria-label="Project status">
-          <li class="status status--neutral">Academic project</li>
-          <li>Team thesis, 5 co-authors</li>
-          <li>Submitted for patent or utility model registration</li>
-        </ul>
-      </header>
-      <p class="project-desc">A Computer Engineering thesis prototype that collects rainwater, filters it, dispenses it, and provides device charging, powered by a hybrid solar and microturbine system and monitored by an ESP32.</p>
-      <dl class="facts-list">
-        <div><dt>Problem</dt><dd>Improving accessibility of water and device charging using harvested rainwater and renewable energy.</dd></div>
-        <div><dt>My role</dt><dd>Co-author on a team of five. I developed the ESP32 hardware–software integration for water-level monitoring and automated chlorine dosing.</dd></div>
-        <div><dt>Built with</dt><dd>ESP32, sensors, pumps, multi-stage filtration, solar and microturbine power, automated controls</dd></div>
-      </dl>
-
-      <div class="status-grid">
-        <section aria-labelledby="eco-impl">
-          <h4 id="eco-impl">Implemented in the prototype</h4>
-          <ul>
-            <li>Rainwater collected into separate storage drums</li>
-            <li>Multi-stage filtration unit</li>
-            <li>Hybrid solar and microturbine power</li>
-            <li>Coin-operated water dispensing and device charging</li>
-            <li>No-cost emergency water access</li>
-            <li>ESP32 water-level monitoring with automated chlorine dosing</li>
-          </ul>
-        </section>
-        <section aria-labelledby="eco-test">
-          <h4 id="eco-test">Tested <span class="aside">(10 trials, controlled setting)</span></h4>
-          <ul>
-            <li>Water filtration: 100%</li>
-            <li>Energy generation consistency: 80%</li>
-            <li>Coin interface, dispensing, charging, chlorine dosing, water-level monitoring, emergency access: 90% each</li>
-            <li>Rated “Very Much Acceptable” by 10 experts and 136 end-users (grand means 4.64 and 4.72)</li>
-          </ul>
-        </section>
-        <section aria-labelledby="eco-plan">
-          <h4 id="eco-plan">Planned (future work)</h4>
-          <ul>
-            <li>Laboratory water-quality testing</li>
-            <li>Outdoor deployment</li>
-            <li>Cashless payment</li>
-          </ul>
-        </section>
-      </div>
-      <p class="note">Laboratory water-quality testing is still listed as future work, so no claim is made that the treated water is safe to drink.</p>
-
-      <div class="project-links">
-        <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, what was tested, and what is still planned">Ask the AI about this project</button>
-      </div>
-    </article>
-
-    <div class="project-pair">
-      <article class="project project--compact">
-        <header class="project-head">
-          <h3>DevKit</h3>
-          <ul class="tags-inline" aria-label="Project status"><li class="status">Live</li></ul>
-        </header>
-        <p class="project-desc">An AI-powered document and code toolkit for students and developers. It can format JSON, edit Markdown, generate READMEs, and explain errors.</p>
-        <dl class="facts-list">
-          <div><dt>My role</dt><dd>Designed and built with a prompt-driven, AI-assisted workflow.</dd></div>
-          <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
-        </dl>
-        <div class="project-links">
-          <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span><span class="sr-only"> of DevKit (opens in a new tab)</span></a>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <h1 id="hero-title">Shan Wesley Bachain</h1>
+          <p class="role">Computer Engineering Student · Full-Stack &amp; IoT Developer</p>
+          <p class="lead">I build practical web applications, AI-powered tools, and ESP32-based hardware systems.</p>
+          <p class="meta">University of Rizal System, Antipolo · Expected 2027 · Angono, Rizal</p>
+          <p class="meta"><span class="open">Open to internships</span></p>
+          <div class="btns">
+            <a class="btn btn--primary" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
+            <a class="btn" href="#contact" data-view="portfolio" data-target="contact">Contact me</a>
+          </div>
+          <div class="ask-row">
+            <button type="button" class="ask-pill" data-view="chat"><span class="ask-dot" aria-hidden="true"></span>Ask my AI about my work</button>
+          </div>
         </div>
-      </article>
+        <figure class="hero-photo">
+          <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+        </figure>
+      </section>
 
-      <article class="project project--compact">
-        <header class="project-head">
-          <h3>Aether</h3>
-          <ul class="tags-inline" aria-label="Project status"><li class="status">Live</li></ul>
-        </header>
-        <p class="project-desc">An interactive web experience: a digital interface where the words you type become memory and reshape a responsive field.</p>
-        <dl class="facts-list">
-          <div><dt>My role</dt><dd>Designed and built with a prompt-driven, AI-assisted workflow.</dd></div>
-          <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
-        </dl>
-        <div class="project-links">
-          <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span><span class="sr-only"> of Aether (opens in a new tab)</span></a>
+      <section id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Projects</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>JobInterviewPro</h3>
+            <p class="tag"><b>Live</b> · System-Making Contest winner, 2025</p>
+            <p>An interview scheduling and candidate evaluation system with role-based access.</p>
+            <p class="role-line">My role: Backend developer · PHP, MySQL, JavaScript, Firebase</p>
+            <div class="links">
+              <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
+              <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Eco-Smart Station <span style="color:var(--muted);font-family:var(--sans);font-size:.95rem">(RainErgy)</span></h3>
+            <p class="tag">Thesis · 5 co-authors · Submitted for patent or utility model registration</p>
+            <p>A rainwater harvesting, filtration, and hybrid solar power prototype with ESP32 monitoring and coin-operated water and charging access.</p>
+            <p class="role-line">My role: ESP32 integration for water-level monitoring and automated chlorine dosing</p>
+            <div class="links">
+              <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>DevKit</h3>
+            <p class="tag"><b>Live</b></p>
+            <p>An AI-assisted toolkit for students and developers: format JSON, edit Markdown, generate READMEs, and explain errors.</p>
+            <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
+            <div class="links">
+              <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of DevKit (opens in a new tab)</span></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Aether</h3>
+            <p class="tag"><b>Live</b></p>
+            <p>An interactive web experience where the words you type become memory and reshape a responsive field.</p>
+            <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
+            <div class="links">
+              <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of Aether (opens in a new tab)</span></a>
+            </div>
+          </article>
         </div>
-      </article>
-    </div>
-  </section>
+      </section>
 
-  <section id="skills" class="section" aria-labelledby="skills-title">
-    <div class="section-head">
-      <h2 id="skills-title">Technical skills</h2>
-      <p>Technologies I have used in the projects above and in my coursework.</p>
-    </div>
-    <dl class="skills">
-      <div><dt>Programming</dt><dd>PHP, JavaScript, Python, HTML, CSS</dd></div>
-      <div><dt>Databases</dt><dd>MySQL, NoSQL, Firebase</dd></div>
-      <div><dt>Embedded systems</dt><dd>ESP32, Arduino, sensors, IoT systems</dd></div>
-      <div><dt>AI-assisted development</dt><dd>Prompt-driven development workflow, Groq API integration (including the assistant on this site)</dd></div>
-      <div><dt>Tools</dt><dd>Git, GitHub, VS Code, Vercel</dd></div>
-      <div><dt>Working style</dt><dd>Clear when explaining technical ideas, comfortable in team projects such as my thesis, and able to take ownership of a task and work independently.</dd></div>
-    </dl>
-  </section>
+      <section id="skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+        <dl class="skill-grid">
+          <div><dt>Languages</dt><dd>PHP, JavaScript, Python, HTML, CSS</dd></div>
+          <div><dt>Data</dt><dd>MySQL, NoSQL, Firebase</dd></div>
+          <div><dt>Embedded</dt><dd>ESP32, Arduino, sensors</dd></div>
+          <div><dt>Tools and AI</dt><dd>Git, GitHub, VS Code, Vercel, Groq API, AI prompting</dd></div>
+        </dl>
+      </section>
 
-  <section id="education" class="section" aria-labelledby="education-title">
-    <div class="section-head">
-      <h2 id="education-title">Education &amp; achievements</h2>
-    </div>
-    <div class="two-col">
-      <div>
-        <h3 class="sub">Education</h3>
-        <ol class="timeline">
-          <li>
-            <span class="when">2023 – 2027 (expected)</span>
+      <section id="education" aria-labelledby="education-title">
+        <h2 id="education-title">Education</h2>
+        <div class="edu">
+          <div>
+            <span class="when">2023 – 2027</span>
             <strong>B.S. Computer Engineering</strong>
-            <span>University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering.</span>
-          </li>
-          <li>
+            <span class="note">University of Rizal System, Antipolo. Top Performing Student, College of Engineering.</span>
+          </div>
+          <div>
             <span class="when">2021 – 2023</span>
             <strong>Senior High School, STEM</strong>
-            <span>Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
-          </li>
-          <li>
-            <span class="when">2017 – 2021</span>
-            <strong>Junior High School</strong>
-            <span>Carlos “Botong” Francisco Memorial National High School. Valedictorian, With Honors.</span>
-          </li>
-        </ol>
-      </div>
-      <div>
-        <h3 class="sub">Achievements</h3>
-        <ul class="awards">
-          <li><span class="when">2025</span><span><strong>System-Making Contest Winner</strong> for JobInterviewPro</span></li>
-          <li><span class="when">2023 – 2027</span><span><strong>SM Foundation Scholar</strong></span></li>
-          <li><span class="when">2023</span><span><strong>Senior High School Valedictorian</strong>, With Highest Honors</span></li>
-          <li><span class="when">2023</span><span><strong>Third Place</strong>, Provincial Statistics Quiz Bee</span></li>
-          <li><span class="when">2025</span><span><strong>Participant</strong>, BRITE Program Research Seminar, University of Rizal System</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
+            <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
+          </div>
+        </div>
+      </section>
 
-  <section id="contact" class="section" aria-labelledby="contact-title">
-    <div class="section-head">
-      <h2 id="contact-title">Contact</h2>
-      <p>I am looking for software development and Computer Engineering internships, and I am open to collaborations. Email is the quickest way to reach me.</p>
+      <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <div class="contact-list">
+          <div><span>Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></div>
+          <div><span>Phone</span><a href="tel:+639762652310">0976 265 2310</a></div>
+          <div><span>GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></div>
+          <div><span>Location</span>Angono, Rizal, Philippines</div>
+        </div>
+      </section>
+
+      <p class="pf-foot">© <span id="year">2026</span> Shan Wesley Bachain</p>
     </div>
-    <div class="contact">
-      <ul class="contact-list">
-        <li><span class="k">Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></li>
-        <li><span class="k">GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><span class="k">Phone</span><a href="tel:+639762652310">0976 265 2310</a></li>
-        <li><span class="k">Location</span><span>Angono, Rizal, Philippines</span></li>
-        <li><span class="k">Resume</span><span><a href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download PDF</a> · <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">View in browser<span class="sr-only"> (opens in a new tab)</span></a></span></li>
-      </ul>
-      <a class="resume-thumb" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-        <img src="/resume-preview.jpg" width="1000" height="1294" loading="lazy" decoding="async" alt="First page of Shan Wesley Bachain's resume. Opens the PDF in a new tab.">
-      </a>
-    </div>
-  </section>
+  </div>
+
 </main>
-
-<footer class="site-footer">
-  <p>© <span id="year">2026</span> Shan Wesley Bachain · Angono, Rizal, Philippines</p>
-</footer>
-
-<button type="button" class="launcher" id="launcher" data-open-chat aria-haspopup="dialog" aria-label="Ask my AI">
-  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
-  <span>Ask my AI</span>
-</button>
-
-<dialog id="chat" class="chat" aria-labelledby="chat-title">
-  <div class="chat-head">
-    <div>
-      <h2 id="chat-title">Ask my AI</h2>
-      <p>Answers come only from the information on this portfolio.</p>
-    </div>
-    <div class="chat-head-actions">
-      <button type="button" class="text-btn" id="chatClear" hidden>Clear chat</button>
-      <button type="button" class="icon-btn" id="chatClose" aria-label="Close chat">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <div class="chat-body" id="chatBody">
-    <div class="chat-empty" id="chatEmpty">
-      <p>Hi, I'm an AI assistant that can answer questions about Shan's projects, skills, education, thesis, and contact details. If something isn't on his portfolio, I'll say so.</p>
-      <div class="chips" id="chips" role="group" aria-label="Suggested questions"></div>
-    </div>
-    <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Conversation"></div>
-  </div>
-
-  <form class="composer" id="chatForm">
-    <label class="sr-only" for="chatInput">Your question</label>
-    <textarea id="chatInput" rows="1" maxlength="800" placeholder="Ask about projects, skills, or availability" autocomplete="off"></textarea>
-    <button class="send" id="chatSend" type="submit" aria-label="Send message">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
-    </button>
-  </form>
-  <p class="chat-note">AI-generated and can be wrong. For anything important, email bachainshanwesleyb@gmail.com.</p>
-</dialog>
 
 <script src="/assets/app.js" defer></script>
 </body>
