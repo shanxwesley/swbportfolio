@@ -3,739 +3,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shan Wesley Bachain | Ask My AI</title>
-<meta name="description" content="Ask Shan's AI assistant about his skills, projects, education, achievements, thesis, soft skills, and availability.">
-<meta property="og:title" content="Shan Wesley Bachain | Computer Engineering Portfolio">
-<meta property="og:description" content="Fourth-year Computer Engineering student. AI apps, embedded systems, and open to internships. Ask my AI anything.">
-<meta property="og:image" content="https://swbportfolio.vercel.app/profile.jpg">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://swbportfolio.vercel.app">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Shan Wesley Bachain | Computer Engineering Portfolio">
-<meta name="twitter:description" content="Fourth-year Computer Engineering student. AI apps, embedded systems, and open to internships.">
-<meta name="twitter:image" content="https://swbportfolio.vercel.app/profile.jpg">
-<meta name="theme-color" content="#8db9e6">
-<script>try{var t=localStorage.getItem("shan-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><g fill='none' stroke='%238db9e6' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'><path d='M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25'/><path d='M24 13L28.5 35L32 21L35.5 35L40 13'/></g></svg>">
-<style>
-  :root {
-    --bg: #f8fbff; --side: #eff6fc; --surface: #ffffff; --surface-2: #e7f1fb;
-    --text: #1f2f3d; --muted: #6b7d8e; --accent: #8db9e6; --accent-hover: #74a7dc;
-    --accent-soft: #e1eefa; --border: #d9e6f2; --shadow: 0 12px 32px rgba(31,47,61,.08);
-    --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color-scheme: light;
-  }
-  :root[data-theme="dark"] {
-    --bg: #1a1f26; --side: #151a21; --surface: #232a33; --surface-2: #2b3440;
-    --text: #e8eff6; --muted: #98a6b5; --accent: #a7cdf2; --accent-hover: #bcdcf8;
-    --accent-soft: #253344; --border: #343f4d; --shadow: 0 12px 32px rgba(0,0,0,.35);
-    color-scheme: dark;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #1a1f26; --side: #151a21; --surface: #232a33; --surface-2: #2b3440;
-      --text: #e8eff6; --muted: #98a6b5; --accent: #a7cdf2; --accent-hover: #bcdcf8;
-      --accent-soft: #253344; --border: #343f4d; --shadow: 0 12px 32px rgba(0,0,0,.35);
-      color-scheme: dark;
-    }
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow: hidden; }
-  button, textarea { font: inherit; }
-  a { color: inherit; }
-  .app { display: flex; height: 100vh; height: 100dvh; }
-  .sidebar { width: 260px; background: var(--side); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: .8rem; gap: .2rem; flex-shrink: 0; transition: transform .25s; z-index: 10; }
-  .sb-top { display: flex; justify-content: space-between; align-items: center; padding: .3rem .4rem .8rem; }
-  .brand { display: flex; align-items: center; gap: .5rem; font-family: var(--serif); font-size: 1.1rem; }
-  .logo { display: inline-block; width: 24px; height: 24px; flex-shrink: 0; }
-  .logo svg, .mark svg { width: 100%; height: 100%; display: block; }
-  .icon-btn { background: none; border: none; color: var(--muted); cursor: pointer; padding: .35rem .5rem; border-radius: 8px; font-size: 1rem; }
-  .icon-btn:hover { background: var(--surface-2); color: var(--text); }
-  .nav-item { display: flex; align-items: center; gap: .6rem; padding: .5rem .6rem; border-radius: 10px; font-size: .92rem; background: none; border: none; color: var(--text); cursor: pointer; text-align: left; width: 100%; text-decoration: none; }
-  .nav-item:hover { background: var(--surface-2); }
-  .nav-item.active { background: var(--surface-2); }
-  .nav-item.new { background: var(--surface); border: 1px solid var(--border); margin-bottom: .6rem; }
-  .nav-item .ic { width: 16px; color: var(--muted); text-align: center; }
-  .label { font-size: .75rem; color: var(--muted); padding: .9rem .6rem .35rem; }
-  .hist { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
-  .hist .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .sb-foot { margin-top: auto; border-top: 1px solid var(--border); padding: .7rem .5rem 0; font-size: .85rem; color: var(--muted); display: flex; align-items: center; gap: .55rem; }
-  .avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: .75rem; font-weight: 600; }
-  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1.1rem; gap: .5rem; }
-  .topbar .left { display: flex; align-items: center; gap: .4rem; min-width: 0; }
-  .title { font-size: .95rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .topbar .title { display: none; }
-  .status { font-size: .82rem; color: var(--muted); white-space: nowrap; }
-  .scroll { flex: 1; overflow-y: auto; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.2rem 1rem; }
-  .menu-toggle { display: none; }
-  .view[hidden] { display: none; }
-  .welcome { text-align: center; padding-top: 10vh; }
-  .welcome .mark { display: block; width: 60px; height: 60px; margin: 0 auto .8rem; }
-  .welcome h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.2vw, 2.8rem); letter-spacing: -.01em; }
-  .welcome p { color: var(--muted); margin-top: .6rem; }
-  .chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1.6rem; }
-  .chips button { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: .5rem .95rem; font-size: .86rem; color: var(--text); cursor: pointer; transition: border-color .2s, color .2s; }
-  .chips button:hover { border-color: var(--accent); color: var(--accent); }
-  .thread { display: flex; flex-direction: column; gap: 1.4rem; padding-top: 1.5rem; }
-  .msg-user { align-self: flex-end; background: var(--surface-2); padding: .7rem 1rem; border-radius: 18px; max-width: 80%; white-space: pre-wrap; font-size: .97rem; }
-  .msg-bot { display: flex; gap: .8rem; font-size: .97rem; line-height: 1.75; }
-  .msg-bot .mk { margin-top: .2rem; flex-shrink: 0; width: 22px; height: 22px; }
-  .msg-bot .body { min-width: 0; }
-  .msg-bot p { margin-bottom: .6rem; } .msg-bot p:last-child { margin-bottom: 0; }
-  .msg-bot ul { padding-left: 1.2rem; margin: .3rem 0 .6rem; } .msg-bot li { margin-bottom: .25rem; }
-  .msg-bot a { color: var(--accent); }
-  .msg-bot.err { color: var(--muted); font-style: italic; }
-  .msg-bot code { background: var(--surface-2); padding: .1rem .3rem; border-radius: 4px; font-size: .9em; }
-  .dots { display: inline-flex; gap: 4px; padding: .5rem 0; }
-  .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: b 1.2s infinite; }
-  .dots i:nth-child(2) { animation-delay: .15s; } .dots i:nth-child(3) { animation-delay: .3s; }
-  @keyframes b { 0%,80%,100% { opacity: .3; } 40% { opacity: 1; } }
-  .thinking { color: var(--muted); font-size: .85rem; margin-left: .3rem; }
-  .panel-head { padding-top: 1.2rem; margin-bottom: 1.1rem; }
-  .panel-head .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; }
-  .panel-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 3.6vw, 2.4rem); margin-top: .3rem; letter-spacing: -.01em; }
-  .panel-head p { color: var(--muted); margin-top: .6rem; max-width: 560px; }
-  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.2rem; transition: border-color .2s, transform .2s; }
-  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .card .num { font-family: var(--serif); font-size: 1.8rem; color: var(--accent-soft); line-height: 1; margin-bottom: .6rem; }
-  .card .kind { font-size: .72rem; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
-  .card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; margin: .4rem 0 .5rem; line-height: 1.2; }
-  .card p { color: var(--muted); font-size: .95rem; }
-  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
-  .card-links { margin-top: .9rem; display: flex; gap: .8rem; flex-wrap: wrap; }
-  .card-links a { font-size: .88rem; color: var(--accent); text-decoration: none; font-weight: 500; }
-  .card-links a:hover { text-decoration: underline; }
-  .tags span { font-size: .78rem; background: var(--surface-2); padding: .25rem .65rem; border-radius: 999px; color: var(--muted); }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin-bottom: .75rem; }
-  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: .8rem .9rem; }
-  .stat b { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; color: var(--accent); display: block; line-height: 1; }
-  .stat span { font-size: .8rem; color: var(--muted); }
-  .stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.1rem 1.2rem; }
-  .stack-card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin-bottom: .5rem; }
-  .stack-card .tags { margin-top: 0; }
-  .stack-card .tags span { border: 1px solid var(--border); background: transparent; color: var(--text); }
-  .stack-card.thesis { border-color: var(--accent-soft); }
-  .skill-note { color: var(--muted); font-size: .88rem; margin-bottom: .4rem; }
-  .skill-note strong { color: var(--text); font-weight: 500; }
-  .bar-wrap { margin-top: .6rem; }
-  .bar-meta { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); margin-bottom: .35rem; gap: .5rem; }
-  .bar { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
-  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
-  .soft-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.2rem; }
-  .soft { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem; }
-  .soft .ico { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: .8rem; }
-  .soft h3 { font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin-bottom: .4rem; }
-  .soft p { color: var(--muted); font-size: .92rem; }
-  .timeline { display: grid; gap: 1rem; }
-  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1.6rem; display: grid; grid-template-columns: 150px 1fr; gap: 1rem; }
-  .step .yr { font-size: .82rem; color: var(--accent); font-weight: 600; letter-spacing: .04em; padding-top: .3rem; }
-  .step h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; margin-bottom: .3rem; }
-  .step p { color: var(--muted); font-size: .95rem; }
-  .award { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem 1.6rem; display: grid; grid-template-columns: 110px 1fr; gap: 1rem; margin-bottom: .8rem; }
-  .award .yr { font-size: .82rem; color: var(--accent); font-weight: 600; padding-top: .25rem; }
-  .award h3 { font-family: var(--serif); font-weight: 400; font-size: 1.2rem; }
-  .award p { color: var(--muted); font-size: .92rem; }
-  .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; text-decoration: none; margin-bottom: .8rem; transition: border-color .2s; }
-  a.contact-card:hover { border-color: var(--accent); }
-  .contact-card .inner { display: flex; align-items: center; min-width: 0; }
-  .contact-card .icon { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex-shrink: 0; margin-right: .9rem; }
-  .contact-card .lbl { font-size: .78rem; color: var(--muted); }
-  .contact-card .val { font-size: 1.02rem; word-break: break-all; }
-  .contact-card .arr { color: var(--accent); font-size: 1.2rem; flex-shrink: 0; }
-  .cta-row { margin-top: .9rem; display: flex; gap: .6rem; flex-wrap: wrap; }
-  .btn { background: var(--text); color: var(--bg); border: none; border-radius: 999px; padding: .6rem 1.1rem; font-size: .9rem; cursor: pointer; }
-  .btn:hover { opacity: .9; }
-  .composer-wrap { padding: .4rem 1.2rem .6rem; }
-  .composer { max-width: 760px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); padding: .85rem 1rem .55rem; transition: border-color .2s; }
-  .composer:focus-within { border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); }
-  .composer textarea { width: 100%; border: none; background: transparent; resize: none; color: var(--text); outline: none; font-size: .98rem; line-height: 1.5; min-height: 28px; max-height: 160px; }
-  .composer textarea::placeholder { color: var(--muted); }
-  .composer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: .5rem; }
-  .model { font-size: .85rem; color: var(--muted); padding: .3rem .55rem; }
-  .model b { font-weight: 500; color: var(--text); }
-  .send { width: 34px; height: 34px; border-radius: 10px; border: none; background: var(--accent); color: var(--bg); font-size: 1.05rem; cursor: pointer; display: grid; place-items: center; }
-  .send:hover { background: var(--accent-hover); }
-  .send:disabled { opacity: .4; cursor: default; }
-  .disclaimer { text-align: center; font-size: .72rem; color: var(--muted); margin-top: .35rem; }
+<title>Shan Wesley Bachain | Computer Engineering Student, Full-Stack &amp; IoT Developer</title>
+<meta name="description" content="Portfolio of Shan Wesley Bachain, a Computer Engineering student at the University of Rizal System building full-stack web applications, AI-powered tools, and ESP32-based IoT systems. Open to internships.">
+<meta name="author" content="Shan Wesley Bachain">
+<link rel="canonical" href="https://swbportfolio.vercel.app/">
+<meta name="theme-color" content="#f8fbff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14181e" media="(prefers-color-scheme: dark)">
 
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
-  .skip { position: absolute; left: -999px; top: .5rem; background: var(--text); color: var(--bg); padding: .5rem .9rem; border-radius: 8px; z-index: 50; text-decoration: none; }
-  .skip:focus { left: .5rem; }
-  .sb-foot { background: none; border: none; cursor: pointer; width: 100%; text-align: left; }
-  .sb-foot img { object-fit: cover; }
-  .level { display: inline-block; margin-top: .8rem; font-size: .78rem; color: var(--accent); background: var(--accent-soft); padding: .2rem .65rem; border-radius: 999px; }
-  .msg-bot .body a { word-break: break-all; }
-  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 9; opacity: 0; pointer-events: none; transition: opacity .25s; }
-  .backdrop.show { opacity: 1; pointer-events: auto; }
-  .view:not([hidden]) { animation: fade .25s ease; }
-  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .card { display: flex; flex-direction: column; }
-  .card .card-links { margin-top: auto; padding-top: .9rem; }
-  .card .num { color: var(--border); }
-  @media (max-width: 800px) {
-    .sidebar { position: absolute; inset: 0 auto 0 0; transform: translateX(-100%); box-shadow: 4px 0 20px rgba(0,0,0,.15); }
-    .sidebar.open { transform: none; }
-    .menu-toggle { display: inline-block; }
-    .grid { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .soft-list { grid-template-columns: 1fr; }
-    .step { grid-template-columns: 1fr; gap: .3rem; }
-    .award { grid-template-columns: 1fr; gap: .3rem; }
-    .msg-user { max-width: 90%; }
-    .welcome { padding-top: 8vh; }
-    .status { display: none; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shan Wesley Bachain">
+<meta property="og:title" content="Shan Wesley Bachain | Computer Engineering Student, Full-Stack &amp; IoT Developer">
+<meta property="og:description" content="Full-stack web applications, AI-powered tools, and ESP32-based IoT systems. Open to software and Computer Engineering internships.">
+<meta property="og:url" content="https://swbportfolio.vercel.app/">
+<meta property="og:image" content="https://swbportfolio.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Shan Wesley Bachain, Computer Engineering Student, Full-Stack and IoT Developer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shan Wesley Bachain | Computer Engineering Student">
+<meta name="twitter:description" content="Full-stack web applications, AI-powered tools, and ESP32-based IoT systems. Open to internships.">
+<meta name="twitter:image" content="https://swbportfolio.vercel.app/og-image.jpg">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Shan Wesley Bachain",
+  "url": "https://swbportfolio.vercel.app/",
+  "image": "https://swbportfolio.vercel.app/profile.jpg",
+  "jobTitle": "Computer Engineering Student",
+  "email": "mailto:bachainshanwesleyb@gmail.com",
+  "sameAs": ["https://github.com/shanxwesley"],
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Rizal System, Antipolo Campus" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Angono", "addressRegion": "Rizal", "addressCountry": "PH" },
+  "knowsAbout": ["Full-stack web development", "Embedded systems", "IoT", "PHP", "JavaScript", "MySQL", "ESP32"]
+}
+</script>
 </head>
 <body>
-<a class="skip" href="#scroll">Skip to content</a>
-<div class="backdrop" id="backdrop"></div>
-<div class="app">
-  <aside class="sidebar" id="sidebar" aria-label="Site navigation">
-    <div class="sb-top">
-      <div class="brand"><span class="logo"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span> Shan</div>
-      <button class="icon-btn" id="sbClose" aria-label="Hide sidebar">⟨</button>
-    </div>
-    <button class="nav-item new" data-page="chat"><span class="ic">+</span> New chat</button>
-    <a class="nav-item" href="#projects" data-page="projects"><span class="ic">▤</span> Projects</a>
-    <a class="nav-item" href="#skills" data-page="skills"><span class="ic">◇</span> Skills</a>
-    <a class="nav-item" href="#soft" data-page="soft"><span class="ic">♡</span> Soft Skills</a>
-    <a class="nav-item" href="#education" data-page="education"><span class="ic">✎</span> Education</a>
-    <a class="nav-item" href="#achievements" data-page="achievements"><span class="ic">★</span> Achievements</a>
-    <a class="nav-item" href="#resume" data-page="resume"><span class="ic">⬇</span> Resume</a>
-    <a class="nav-item" href="#contact" data-page="contact"><span class="ic">✉</span> Contact</a>
-    <div class="label">Recents</div>
-    <div class="hist" id="hist"></div>
-    <button class="sb-foot" data-page="profile">
-      <img src="/profile.jpg" alt="" class="avatar"> Shan Bachain
-    </button>
-  </aside>
-  <div class="main">
-    <div class="topbar">
-      <div class="left">
-        <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Show sidebar">☰</button>
-        <span class="title" id="title">New chat</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:.55rem;">
-        <button id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme" style="
-          background:var(--surface);
-          border:1px solid var(--border);
-          border-radius:999px;
-          padding:.35rem .85rem;
-          font-size:.82rem;
-          color:var(--text);
-          cursor:pointer;
-          display:flex;
-          align-items:center;
-          gap:.35rem;
-          transition:border-color .2s, background .2s;
-        ">☾ Dark</button>
-        <span class="status">● Open to internships</span>
-      </div>
-    </div>
-    <main class="scroll" id="scroll" tabindex="-1">
-      <div class="wrap">
-        <div class="view" id="viewChat">
-          <div class="welcome" id="welcome">
-            <span class="mark"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span>
-            <h1>Hi, I'm Shan. What would you like to know?</h1>
-            <p>Ask about my projects, skills, education, achievements, thesis, or availability.</p>
-            <div class="chips" id="chips"></div>
-          </div>
-          <div class="thread" id="thread" aria-live="polite" hidden></div>
-        </div>
-        <div class="view" id="viewProjects" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Selected work</div>
-            <h1>Projects</h1>
-            <p>AI-assisted web applications and an embedded thesis prototype, from concept to a working product.</p>
-          </div>
-          <div class="grid">
-            <article class="card">
-              <div class="num">01</div>
-              <div class="kind">Backend Developer · AI-assisted</div>
-              <h3>JobInterviewPro</h3>
-              <p>An API-based web application that helps users practice job interviews and prepare for employment. Integrates the Groq API for AI-assisted interview training, with Firebase and MySQL for backend services and data management.</p>
-              <div class="tags"><span>JavaScript</span><span>HTML/CSS</span><span>Groq API</span><span>Firebase</span><span>MySQL</span></div>
-              <div class="card-links"><a href="https://jobinterviewpro.thsite.top/" target="_blank" rel="noopener">View live ↗</a></div>
-            </article>
-            <article class="card">
-              <div class="num">02</div>
-              <div class="kind">Web App · AI-powered</div>
-              <h3>DevKit</h3>
-              <p>An AI-powered document and code toolkit for students and developers. Format JSON, edit Markdown, generate READMEs, explain errors, and more, all in one place.</p>
-              <div class="tags"><span>JavaScript</span><span>HTML/CSS</span><span>AI-assisted</span><span>Vercel</span></div>
-              <div class="card-links"><a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener">View live ↗</a></div>
-            </article>
-            <article class="card">
-              <div class="num">03</div>
-              <div class="kind">Thesis · Team project</div>
-              <h3>Eco-Smart Station (RainErgy)</h3>
-              <p>An ESP32-based prototype for rainwater harvesting, filtration, hybrid solar and microturbine power, and coin-operated water and charging access. Submitted for patent or utility model registration.</p>
-              <div class="tags"><span>ESP32</span><span>Renewable energy</span><span>Water filtration</span><span>ADDIE</span></div>
-            </article>
-            <article class="card">
-              <div class="num">04</div>
-              <div class="kind">Interactive · Web</div>
-              <h3>Aether</h3>
-              <p>A living digital interface where your words become memory and your thoughts reshape a responsive field.</p>
-              <div class="card-links"><a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener">View live ↗</a></div>
-            </article>
-          </div>
-          <div class="cta-row"><button class="btn" data-ask="Tell me more about his projects">Ask about these projects</button></div>
-        </div>
-        <div class="view" id="viewSkills" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Toolkit</div>
-            <h1>Skills</h1>
-            <p>I build practical software by combining solid programming fundamentals with AI tools, and I connect software to hardware when a project needs it.</p>
-          </div>
-          <div class="stats">
-            <div class="stat"><b>3</b><span>Live projects</span></div>
-            <div class="stat"><b>2</b><span>AI-powered apps</span></div>
-            <div class="stat"><b>2023</b><span>Started coding</span></div>
-            <div class="stat"><b>1</b><span>Contest win (2025)</span></div>
-          </div>
-          <div class="grid">
-            <div class="stack-card">
-              <h3>Programming and Web</h3>
-              <p class="skill-note">Building full web applications with clean front-end and back-end logic.</p>
-              <div class="tags"><span>Python</span><span>PHP</span><span>JavaScript</span><span>HTML</span><span>CSS</span></div>
-              <span class="level">Intermediate · since 2023</span>
-            </div>
-            <div class="stack-card">
-              <h3>Databases and Backend</h3>
-              <p class="skill-note">Designing data storage and connecting it to live applications.</p>
-              <div class="tags"><span>MySQL</span><span>NoSQL</span><span>Firebase</span></div>
-              <span class="level">Intermediate · since 2023</span>
-            </div>
-            <div class="stack-card">
-              <h3>AI Integration</h3>
-              <p class="skill-note">Using AI APIs and prompt design to add real features to products, from interview coaching to fact-checking.</p>
-              <div class="tags"><span>Groq API</span><span>Llama 3</span><span>AI prompting</span></div>
-              <span class="level">Intermediate · since 2023</span>
-            </div>
-            <div class="stack-card">
-              <h3>Hardware and Embedded</h3>
-              <p class="skill-note">Working with microcontrollers and sensors to bring software into physical systems.</p>
-              <div class="tags"><span>Arduino</span><span>ESP32</span><span>Sensors</span></div>
-              <span class="level">Intermediate · since 2023</span>
-            </div>
-            <div class="stack-card">
-              <h3>Tools and Workflow</h3>
-              <p class="skill-note">Version control, deployment, and a prompt-driven development workflow.</p>
-              <div class="tags"><span>GitHub</span><span>VS Code</span><span>GitHub Pages</span></div>
-              <span class="level">Intermediate · since 2023</span>
-            </div>
-            <div class="stack-card thesis">
-              <h3>Thesis Study</h3>
-              <p class="skill-note"><strong>Eco-Smart Station (RainErgy)</strong>: a prototype that harvests rainwater, filters it, generates hybrid solar and microturbine power, and provides coin-operated water dispensing and device charging, with emergency water access and ESP32-based water-level monitoring.</p>
-              <p class="skill-note">Team thesis, University of Rizal System, March 2027. Built with ADDIE and evaluated by 10 experts and 136 end-users, rated Very Much Acceptable (grand means 4.64 and 4.72). Submitted for patent or utility model registration.</p>
-              <div class="tags"><span>ESP32</span><span>IoT</span><span>Renewable energy</span><span>Water filtration</span><span>ADDIE</span></div>
-            </div>
-          </div>
-          <div class="cta-row"><button class="btn" data-ask="What are his skills in more detail?">Ask about his skills</button></div>
-        </div>
-        <div class="view" id="viewSoft" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Beyond the code</div>
-            <h1>Soft Skills</h1>
-            <p>How I work with people, and how I work on my own.</p>
-          </div>
-          <div class="soft-list">
-            <div class="soft">
-              <div class="ico">✎</div>
-              <h3>Communication</h3>
-              <p>Friendly and clear when explaining technical ideas to classmates, panelists, and non-technical users.</p>
-            </div>
-            <div class="soft">
-              <div class="ico">◎</div>
-              <h3>Teamwork</h3>
-              <p>Comfortable in group work, from sharing tasks on a thesis team to coordinating a shared codebase.</p>
-            </div>
-            <div class="soft">
-              <div class="ico">◐</div>
-              <h3>Independent work</h3>
-              <p>Able to take ownership of a task, research solutions on my own, and deliver without constant supervision.</p>
-            </div>
-          </div>
-          <div class="cta-row"><button class="btn" data-ask="What are his soft skills and teamwork strengths?">Ask about his teamwork</button></div>
-        </div>
-        <div class="view" id="viewEducation" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Journey</div>
-            <h1>Education</h1>
-            <p>Top Performing Student in college, and valedictorian at every level before it.</p>
-          </div>
-          <div class="timeline">
-            <div class="step"><div class="yr">2023 — 2027</div><div><h3>B.S. Computer Engineering</h3><p>University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering. Expected graduation: 2027.</p></div></div>
-            <div class="step"><div class="yr">2021 — 2023</div><div><h3>Senior High School (STEM)</h3><p>Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</p></div></div>
-            <div class="step"><div class="yr">2017 — 2021</div><div><h3>Junior High School</h3><p>Carlos "Botong" Francisco Memorial NHS. Valedictorian, With Honors.</p></div></div>
-          </div>
-        </div>
-        <div class="view" id="viewAchievements" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Recognition</div>
-            <h1>Achievements</h1>
-            <p>Awards, competitions, and training.</p>
-          </div>
-          <div class="award"><div class="yr">2025</div><div><h3>System-Making Contest Winner</h3><p>Winner for JobInterviewPro.</p></div></div>
-          <div class="award"><div class="yr">2023</div><div><h3>Third Place, Provincial Statistics Quiz Bee</h3><p>Provincial competition.</p></div></div>
-          <div class="award"><div class="yr">2025</div><div><h3>BRITE Program Research Seminar</h3><p>University of Rizal System, university-wide training.</p></div></div>
-          <div class="award"><div class="yr">2023 — 2027</div><div><h3>SM Foundation Scholar</h3><p>Scholarship recipient.</p></div></div>
-          <div class="award"><div class="yr">2023</div><div><h3>Senior High School Valedictorian</h3><p>Sumulong College of Arts and Sciences.</p></div></div>
-        </div>
-        <div class="view" id="viewResume" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Curriculum Vitae</div>
-            <h1>Resume</h1>
-            <p>View or download my ATS-friendly resume. Updated for internship and collaboration opportunities.</p>
-          </div>
-          <div class="cta-row" style="margin-bottom:1.2rem;">
-            <a class="btn" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf" style="text-decoration:none;">Download PDF</a>
-            <button class="btn" data-ask="Summarize his resume and key strengths">Ask AI about his resume</button>
-          </div>
-          <div class="stack-card" style="padding:1rem;text-align:center;">
-            <img src="/resume-preview.jpg" alt="Shan Wesley Bachain Resume" style="width:100%;max-width:720px;height:auto;border-radius:8px;box-shadow:var(--shadow);display:block;margin:0 auto;">
-          </div>
-        </div>
-        <div class="view" id="viewProfile" hidden>
-          <div class="panel-head" style="text-align:center;padding-top:2rem;">
-            <img src="/profile.jpg" alt="Shan Wesley Bachain" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block;box-shadow:0 8px 24px rgba(0,0,0,.12);border:3px solid var(--surface);outline:2px solid var(--accent-soft);">
-            <div class="eyebrow" style="margin-bottom:.35rem;">Computer Engineering</div>
-            <h1 style="margin:0 0 .4rem;font-size:clamp(1.8rem,4vw,2.4rem);">Shan Wesley Bachain</h1>
-            <p style="color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto;">
-              Fourth-year student · Top Performing Student · Open to internships
-            </p>
-          </div>
+<a class="skip" href="#main">Skip to content</a>
 
-          <div class="grid" style="margin-top:.5rem;">
-            <div class="stack-card">
-              <h3>About</h3>
-              <p class="skill-note" style="margin:0;">Builds AI-integrated web applications and embedded systems. Enjoys turning ideas into working products, from contest-winning apps to an ESP32 thesis prototype.</p>
-            </div>
-            <div class="stack-card">
-              <h3>Focus</h3>
-              <div class="tags" style="margin-top:.2rem;">
-                <span>AI Integration</span>
-                <span>Full-stack</span>
-                <span>ESP32 / IoT</span>
-                <span>Python</span>
-                <span>JavaScript</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid" style="margin-top:1rem;">
-            <div class="stack-card">
-              <h3>Education</h3>
-              <p class="skill-note" style="margin:0 0 .4rem;"><strong>B.S. Computer Engineering</strong><br>University of Rizal System · 2023–2027</p>
-              <p class="skill-note" style="margin:0;">Top Performing Student, College of Engineering</p>
-            </div>
-            <div class="stack-card">
-              <h3>Location</h3>
-              <p class="skill-note" style="margin:0 0 .4rem;">Angono, Rizal, Philippines</p>
-              <p class="skill-note" style="margin:0;">Open to internships, collaborations, and freelance projects.</p>
-            </div>
-          </div>
-
-          <div class="cta-row" style="margin-top:1.5rem;justify-content:center;">
-            <a class="btn" href="mailto:bachainshanwesleyb@gmail.com" style="text-decoration:none;">Email</a>
-            <a class="btn" href="https://github.com/shanxwesley" target="_blank" rel="noopener" style="text-decoration:none;">GitHub</a>
-            <a class="btn" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf" style="text-decoration:none;">Resume</a>
-            <button class="btn" data-ask="Tell me about Shan as a person and how he works with others">Ask AI</button>
-          </div>
-        </div>
-        <div class="view" id="viewContact" hidden>
-          <div class="panel-head">
-            <div class="eyebrow">Contact</div>
-            <h1>Let's build something real</h1>
-            <p>Based in Angono, Rizal. Open to internships, collaborations, and freelance projects.</p>
-          </div>
-          <a class="contact-card" href="mailto:bachainshanwesleyb@gmail.com"><div class="inner"><span class="icon">✉</span><div><div class="lbl">Email</div><div class="val">bachainshanwesleyb@gmail.com</div></div></div><span class="arr">→</span></a>
-          <a class="contact-card" href="tel:+639762652310"><div class="inner"><span class="icon">☎</span><div><div class="lbl">Phone</div><div class="val">0976 265 2310</div></div></div><span class="arr">→</span></a>
-          <a class="contact-card" href="https://github.com/shanxwesley" target="_blank" rel="noopener"><div class="inner"><span class="icon">⌥</span><div><div class="lbl">GitHub</div><div class="val">github.com/shanxwesley</div></div></div><span class="arr">→</span></a>
-          <a class="contact-card" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf"><div class="inner"><span class="icon">⬇</span><div><div class="lbl">Resume</div><div class="val">Download PDF</div></div></div><span class="arr">→</span></a>
-          <div class="contact-card"><div class="inner"><span class="icon">⌖</span><div><div class="lbl">Location</div><div class="val">Angono, Rizal, Philippines</div></div></div></div>
-        </div>
-      </div>
-    </main>
-    <div class="composer-wrap" id="composerWrap">
-      <form class="composer" id="form">
-        <textarea id="input" rows="1" aria-label="Message" maxlength="800" placeholder="Reply to Shan's assistant..."></textarea>
-        <div class="composer-bottom">
-          <span class="model"><b>Portfolio AI</b> · ask anything</span>
-          <button class="send" id="send" type="submit" aria-label="Send">↑</button>
-        </div>
-      </form>
-      <div class="disclaimer">Answers come from Shan's portfolio. For anything specific, email bachainshanwesleyb@gmail.com.</div>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Shan Wesley Bachain, back to top">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg>
+      <span>Shan Bachain</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="bar-actions">
+      <button type="button" class="chip-btn" id="themeBtn" aria-label="Switch to dark theme">Dark</button>
+      <button type="button" class="chip-btn chip-btn--ai" data-open-chat>Ask my AI</button>
     </div>
   </div>
-</div>
-<script>
-  const STORE_KEY = "shan-chat-history-v2";
-  const MAX_SENT = 10;
-  const MAX_MESSAGE_CHARS = 800;
+</header>
 
-  const $ = id => document.getElementById(id);
-  const thread = $("thread"), welcome = $("welcome"), form = $("form"), input = $("input");
-  const sendBtn = $("send"), sidebar = $("sidebar"), scroll = $("scroll"), chips = $("chips"), hist = $("hist");
+<main id="main" tabindex="-1">
+  <div id="top"></div>
 
-  const SUGGESTIONS = ["What has Shan built?", "What are his skills?", "Tell me about his thesis", "Is he open to internships?"];
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-text">
+      <h1 id="hero-title">Shan Wesley Bachain</h1>
+      <p class="role">Computer Engineering Student | Full-Stack &amp; IoT Developer</p>
+      <p class="lead">I build practical software applications and hardware-integrated systems. My work spans full-stack web development, AI-powered applications, IoT, and embedded systems, from an interview management platform to an ESP32-based rainwater and energy station.</p>
+      <ul class="facts">
+        <li>University of Rizal System – Antipolo Campus</li>
+        <li>Fourth-year B.S. Computer Engineering, expected 2027</li>
+        <li>Angono, Rizal, Philippines</li>
+        <li class="open">Open to internships</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn--primary" href="#projects">View Projects</a>
+        <a class="btn" href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf">Download Resume</a>
+        <a class="btn" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+        <a class="btn" href="#contact">Contact Me</a>
+      </div>
+      <p class="ai-hint">Short on time? <button type="button" class="text-btn" data-open-chat>Ask my AI assistant about my work</button></p>
+    </div>
+    <figure class="hero-photo">
+      <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+    </figure>
+  </section>
 
-  const PAGES = {
-    chat: { title: "New chat", view: "viewChat" },
-    projects: { title: "Projects", view: "viewProjects" },
-    skills: { title: "Skills", view: "viewSkills" },
-    soft: { title: "Soft Skills", view: "viewSoft" },
-    education: { title: "Education", view: "viewEducation" },
-    achievements: { title: "Achievements", view: "viewAchievements" },
-    resume: { title: "Resume", view: "viewResume" },
-    profile: { title: "Profile", view: "viewProfile" },
-    contact: { title: "Contact", view: "viewContact" }
-  };
+  <section id="projects" class="section" aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 id="projects-title">Projects</h2>
+      <p>Two featured projects, followed by two smaller web projects.</p>
+    </div>
 
-  let messages = loadMessages().slice(-MAX_SENT);
-  let busy = false;
-  let currentPage = "chat";
+    <article class="project">
+      <header class="project-head">
+        <h3>JobInterviewPro</h3>
+        <ul class="tags-inline" aria-label="Project status">
+          <li class="status">Live</li>
+          <li>System-Making Contest winner, 2025</li>
+        </ul>
+      </header>
+      <p class="project-desc">An interview management system featuring interview scheduling, candidate evaluation, and role-based access.</p>
+      <dl class="facts-list">
+        <div><dt>Problem</dt><dd>Keeps interview scheduling and candidate evaluation in one system, with what each user can see and do determined by their role.</dd></div>
+        <div><dt>My role</dt><dd>Backend developer.</dd></div>
+        <div><dt>Built with</dt><dd>PHP, MySQL, JavaScript, HTML, CSS, Firebase</dd></div>
+      </dl>
+      <div class="project-links">
+        <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span><span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
+        <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and what Shan's role was">Ask the AI about this project</button>
+      </div>
+    </article>
 
-  function loadMessages() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; }
-  }
-  function saveMessages() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(messages.slice(-MAX_SENT))); } catch {}
-  }
-  function escapeHtml(s) {
-    return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
-  function inline(s) {
-    return s
-      .replace(/`(.+?)`/g, "<code>$1</code>")
-      .replace(/(https?:\/\/[^\s<)]+[^\s<).,;:!?])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
-      .replace(/(^|[\s(])([\w.+-]+@[\w-]+\.[\w.]+)/g, '$1<a href="mailto:$2">$2</a>');
-  }
-  function renderMarkdown(text) {
-    let html = "", inList = false;
-    for (const raw of escapeHtml(text).split("\n")) {
-      let line = raw.trim();
-      if (/^\|.*\|$/.test(line) || /^[-*_]{3,}$/.test(line)) continue;
-      line = line.replace(/^#{1,6}\s*/, "").replace(/\*\*(.+?)\*\*/g, "$1");
-      const bullet = line.match(/^[-•*]\s+(.*)$/);
-      if (bullet) {
-        if (!inList) { html += "<ul>"; inList = true; }
-        html += "<li>" + inline(bullet[1]) + "</li>";
-      } else {
-        if (inList) { html += "</ul>"; inList = false; }
-        if (line) html += "<p>" + inline(line) + "</p>";
-      }
-    }
-    if (inList) html += "</ul>";
-    return html;
-  }
-  function addRow(role, content, isErr) {
-    const d = document.createElement("div");
-    if (role === "user") {
-      d.className = "msg-user";
-      d.textContent = content;
-    } else {
-      d.className = "msg-bot" + (isErr ? " err" : "");
-      d.innerHTML = '<span class="mk"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span><div class="body"></div>';
-      d.querySelector(".body").innerHTML = isErr ? escapeHtml(content) : renderMarkdown(content);
-    }
-    thread.appendChild(d);
-    scroll.scrollTop = scroll.scrollHeight;
-    return d;
-  }
-  function chatTitle() {
-    const first = messages.find(m => m.role === "user");
-    return first ? first.content.slice(0, 40) : "New chat";
-  }
-  function showPage(name, push = true) {
-    const page = PAGES[name] || PAGES.chat;
-    currentPage = name in PAGES ? name : "chat";
-    Object.values(PAGES).forEach(p => $(p.view).hidden = true);
-    $(page.view).hidden = false;
-    document.querySelectorAll(".nav-item[data-page]").forEach(a => {
-      const on = a.dataset.page === currentPage;
-      a.classList.toggle("active", on);
-      if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
-    });
-    $("title").textContent = currentPage === "chat" ? chatTitle() : page.title;
-    if (push) history.replaceState(null, "", currentPage === "chat" ? location.pathname : "#" + currentPage);
-    scroll.scrollTop = 0;
-    sidebar.classList.remove("open");
-    $("backdrop").classList.remove("show");
-  }
-  function renderChatHome(forceHero = false) {
-    thread.innerHTML = "";
-    if (forceHero || !messages.length) {
-      welcome.hidden = false;
-      thread.hidden = true;
-      chips.innerHTML = "";
-      SUGGESTIONS.forEach(s => {
-        const b = document.createElement("button");
-        b.textContent = s;
-        b.onclick = () => send(s);
-        chips.appendChild(b);
-      });
-    } else {
-      welcome.hidden = true;
-      thread.hidden = false;
-      messages.forEach(m => addRow(m.role, m.content));
-    }
-  }
-  function renderHistory() {
-    hist.innerHTML = "";
-    if (!messages.some(m => m.role === "user")) return;
-    const row = document.createElement("button");
-    row.className = "nav-item";
-    row.innerHTML = '<span class="ic">•</span><span class="t"></span>';
-    row.querySelector(".t").textContent = chatTitle().slice(0, 36);
-    row.onclick = () => { showPage("chat"); renderChatHome(false); };
-    hist.appendChild(row);
-  }
+    <article class="project">
+      <header class="project-head">
+        <h3>Eco-Smart Station <span class="aka">(RainErgy)</span></h3>
+        <ul class="tags-inline" aria-label="Project status">
+          <li class="status status--neutral">Academic project</li>
+          <li>Team thesis, 5 co-authors</li>
+          <li>Submitted for patent or utility model registration</li>
+        </ul>
+      </header>
+      <p class="project-desc">A Computer Engineering thesis prototype that collects rainwater, filters it, dispenses it, and provides device charging, powered by a hybrid solar and microturbine system and monitored by an ESP32.</p>
+      <dl class="facts-list">
+        <div><dt>Problem</dt><dd>Improving accessibility of water and device charging using harvested rainwater and renewable energy.</dd></div>
+        <div><dt>My role</dt><dd>Co-author on a team of five. I developed the ESP32 hardware–software integration for water-level monitoring and automated chlorine dosing.</dd></div>
+        <div><dt>Built with</dt><dd>ESP32, sensors, pumps, multi-stage filtration, solar and microturbine power, automated controls</dd></div>
+      </dl>
 
-  async function send(text) {
-    text = (text || input.value).trim().slice(0, MAX_MESSAGE_CHARS);
-    if (!text || busy) return;
+      <div class="status-grid">
+        <section aria-labelledby="eco-impl">
+          <h4 id="eco-impl">Implemented in the prototype</h4>
+          <ul>
+            <li>Rainwater collected into separate storage drums</li>
+            <li>Multi-stage filtration unit</li>
+            <li>Hybrid solar and microturbine power</li>
+            <li>Coin-operated water dispensing and device charging</li>
+            <li>No-cost emergency water access</li>
+            <li>ESP32 water-level monitoring with automated chlorine dosing</li>
+          </ul>
+        </section>
+        <section aria-labelledby="eco-test">
+          <h4 id="eco-test">Tested <span class="aside">(10 trials, controlled setting)</span></h4>
+          <ul>
+            <li>Water filtration: 100%</li>
+            <li>Energy generation consistency: 80%</li>
+            <li>Coin interface, dispensing, charging, chlorine dosing, water-level monitoring, emergency access: 90% each</li>
+            <li>Rated “Very Much Acceptable” by 10 experts and 136 end-users (grand means 4.64 and 4.72)</li>
+          </ul>
+        </section>
+        <section aria-labelledby="eco-plan">
+          <h4 id="eco-plan">Planned (future work)</h4>
+          <ul>
+            <li>Laboratory water-quality testing</li>
+            <li>Outdoor deployment</li>
+            <li>Cashless payment</li>
+          </ul>
+        </section>
+      </div>
+      <p class="note">Laboratory water-quality testing is still listed as future work, so no claim is made that the treated water is safe to drink.</p>
 
-    busy = true;
-    sendBtn.disabled = true;
-    input.value = "";
-    autoResize();
-    showPage("chat");
-    welcome.hidden = true;
-    thread.hidden = false;
+      <div class="project-links">
+        <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, what was tested, and what is still planned">Ask the AI about this project</button>
+      </div>
+    </article>
 
-    messages.push({ role: "user", content: text });
-    saveMessages();
-    addRow("user", text);
+    <div class="project-pair">
+      <article class="project project--compact">
+        <header class="project-head">
+          <h3>DevKit</h3>
+          <ul class="tags-inline" aria-label="Project status"><li class="status">Live</li></ul>
+        </header>
+        <p class="project-desc">An AI-powered document and code toolkit for students and developers. It can format JSON, edit Markdown, generate READMEs, and explain errors.</p>
+        <dl class="facts-list">
+          <div><dt>My role</dt><dd>Designed and built with a prompt-driven, AI-assisted workflow.</dd></div>
+          <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
+        </dl>
+        <div class="project-links">
+          <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span><span class="sr-only"> of DevKit (opens in a new tab)</span></a>
+        </div>
+      </article>
 
-    const wait = document.createElement("div");
-    wait.className = "msg-bot";
-    wait.innerHTML = '<span class="mk"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--accent)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17C19 14.5 16.5 13 14.5 13C12 13 10 14.2 10 16.5C10 19 12.5 19.8 14.5 20.5C16.5 21.2 19 22 19 24.5C19 27 17 28.5 14.5 28.5C12.3 28.5 10.2 27.5 10 25"/><path d="M24 13L28.5 35L32 21L35.5 35L40 13"/></g></svg></span><span class="dots"><i></i><i></i><i></i></span><span class="thinking"> Thinking</span>';
-    thread.appendChild(wait);
-    scroll.scrollTop = scroll.scrollHeight;
+      <article class="project project--compact">
+        <header class="project-head">
+          <h3>Aether</h3>
+          <ul class="tags-inline" aria-label="Project status"><li class="status">Live</li></ul>
+        </header>
+        <p class="project-desc">An interactive web experience: a digital interface where the words you type become memory and reshape a responsive field.</p>
+        <dl class="facts-list">
+          <div><dt>My role</dt><dd>Designed and built with a prompt-driven, AI-assisted workflow.</dd></div>
+          <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
+        </dl>
+        <div class="project-links">
+          <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span><span class="sr-only"> of Aether (opens in a new tab)</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: messages.slice(-MAX_SENT) })
-      });
+  <section id="skills" class="section" aria-labelledby="skills-title">
+    <div class="section-head">
+      <h2 id="skills-title">Technical skills</h2>
+      <p>Technologies I have used in the projects above and in my coursework.</p>
+    </div>
+    <dl class="skills">
+      <div><dt>Programming</dt><dd>PHP, JavaScript, Python, HTML, CSS</dd></div>
+      <div><dt>Databases</dt><dd>MySQL, NoSQL, Firebase</dd></div>
+      <div><dt>Embedded systems</dt><dd>ESP32, Arduino, sensors, IoT systems</dd></div>
+      <div><dt>AI-assisted development</dt><dd>Prompt-driven development workflow, Groq API integration (including the assistant on this site)</dd></div>
+      <div><dt>Tools</dt><dd>Git, GitHub, VS Code, Vercel</dd></div>
+      <div><dt>Working style</dt><dd>Clear when explaining technical ideas, comfortable in team projects such as my thesis, and able to take ownership of a task and work independently.</dd></div>
+    </dl>
+  </section>
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Request failed");
+  <section id="education" class="section" aria-labelledby="education-title">
+    <div class="section-head">
+      <h2 id="education-title">Education &amp; achievements</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3 class="sub">Education</h3>
+        <ol class="timeline">
+          <li>
+            <span class="when">2023 – 2027 (expected)</span>
+            <strong>B.S. Computer Engineering</strong>
+            <span>University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering.</span>
+          </li>
+          <li>
+            <span class="when">2021 – 2023</span>
+            <strong>Senior High School, STEM</strong>
+            <span>Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
+          </li>
+          <li>
+            <span class="when">2017 – 2021</span>
+            <strong>Junior High School</strong>
+            <span>Carlos “Botong” Francisco Memorial National High School. Valedictorian, With Honors.</span>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h3 class="sub">Achievements</h3>
+        <ul class="awards">
+          <li><span class="when">2025</span><span><strong>System-Making Contest Winner</strong> for JobInterviewPro</span></li>
+          <li><span class="when">2023 – 2027</span><span><strong>SM Foundation Scholar</strong></span></li>
+          <li><span class="when">2023</span><span><strong>Senior High School Valedictorian</strong>, With Highest Honors</span></li>
+          <li><span class="when">2023</span><span><strong>Third Place</strong>, Provincial Statistics Quiz Bee</span></li>
+          <li><span class="when">2025</span><span><strong>Participant</strong>, BRITE Program Research Seminar, University of Rizal System</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      const reply = data.reply || "";
-      if (!reply) throw new Error("Empty reply");
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <div class="section-head">
+      <h2 id="contact-title">Contact</h2>
+      <p>I am looking for software development and Computer Engineering internships, and I am open to collaborations. Email is the quickest way to reach me.</p>
+    </div>
+    <div class="contact">
+      <ul class="contact-list">
+        <li><span class="k">Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></li>
+        <li><span class="k">GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><span class="k">Phone</span><a href="tel:+639762652310">0976 265 2310</a></li>
+        <li><span class="k">Location</span><span>Angono, Rizal, Philippines</span></li>
+        <li><span class="k">Resume</span><span><a href="/resume.pdf" download="Shan_Wesley_Bachain_Resume.pdf">Download PDF</a> · <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">View in browser<span class="sr-only"> (opens in a new tab)</span></a></span></li>
+      </ul>
+      <a class="resume-thumb" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+        <img src="/resume-preview.jpg" width="1000" height="1294" loading="lazy" decoding="async" alt="First page of Shan Wesley Bachain's resume. Opens the PDF in a new tab.">
+      </a>
+    </div>
+  </section>
+</main>
 
-      wait.remove();
-      messages.push({ role: "assistant", content: reply });
-      saveMessages();
-      addRow("assistant", reply);
-    } catch {
-      wait.remove();
-      messages.pop();
-      saveMessages();
-      addRow("assistant", "Sorry, I couldn't get an answer right now. Please try again, or email bachainshanwesleyb@gmail.com.", true);
-    } finally {
-      busy = false;
-      sendBtn.disabled = false;
-      renderHistory();
-      $("title").textContent = chatTitle();
-      input.focus();
-    }
-  }
+<footer class="site-footer">
+  <p>© <span id="year">2026</span> Shan Wesley Bachain · Angono, Rizal, Philippines</p>
+</footer>
 
-  function autoResize() {
-    input.style.height = "auto";
-    input.style.height = Math.min(input.scrollHeight, 160) + "px";
-  }
+<button type="button" class="launcher" id="launcher" data-open-chat aria-haspopup="dialog" aria-label="Ask my AI">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+  <span>Ask my AI</span>
+</button>
 
-  input.addEventListener("input", autoResize);
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
-  });
-  form.addEventListener("submit", e => { e.preventDefault(); send(); });
+<dialog id="chat" class="chat" aria-labelledby="chat-title">
+  <div class="chat-head">
+    <div>
+      <h2 id="chat-title">Ask my AI</h2>
+      <p>Answers come only from the information on this portfolio.</p>
+    </div>
+    <div class="chat-head-actions">
+      <button type="button" class="text-btn" id="chatClear" hidden>Clear chat</button>
+      <button type="button" class="icon-btn" id="chatClose" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
 
-  document.querySelectorAll(".nav-item[data-page]").forEach(a => {
-    a.addEventListener("click", e => {
-      e.preventDefault();
-      const name = a.dataset.page;
-      if (name === "chat" && a.classList.contains("new")) {
-        // New chat = clear history and show hero
-        messages = [];
-        saveMessages();
-        renderHistory();
-        renderChatHome();
-        showPage("chat");
-        $("title").textContent = "New chat";
-        return;
-      }
-      showPage(name);
-      if (name === "chat") renderChatHome();
-    });
-  });
-  document.querySelectorAll("[data-ask]").forEach(b => {
-    b.addEventListener("click", () => send(b.dataset.ask));
-  });
-  document.querySelectorAll(".sb-foot[data-page]").forEach(a => {
-    a.addEventListener("click", e => {
-      e.preventDefault();
-      showPage(a.dataset.page);
-    });
-  });
+  <div class="chat-body" id="chatBody">
+    <div class="chat-empty" id="chatEmpty">
+      <p>Hi, I'm an AI assistant that can answer questions about Shan's projects, skills, education, thesis, and contact details. If something isn't on his portfolio, I'll say so.</p>
+      <div class="chips" id="chips" role="group" aria-label="Suggested questions"></div>
+    </div>
+    <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Conversation"></div>
+  </div>
 
-  const backdrop = $("backdrop");
-  const setSidebar = open => { sidebar.classList.toggle("open", open); backdrop.classList.toggle("show", open); };
-  $("sbClose").onclick = () => setSidebar(false);
-  $("menuBtn").onclick = e => { e.stopPropagation(); setSidebar(!sidebar.classList.contains("open")); };
-  backdrop.onclick = () => setSidebar(false);
-  document.addEventListener("keydown", e => { if (e.key === "Escape") setSidebar(false); });
-  // Close the mobile sidebar when tapping anywhere outside it
-  document.addEventListener("click", e => {
-    if (!sidebar.classList.contains("open")) return;
-    if (sidebar.contains(e.target) || $("menuBtn").contains(e.target)) return;
-    sidebar.classList.remove("open");
-  });
+  <form class="composer" id="chatForm">
+    <label class="sr-only" for="chatInput">Your question</label>
+    <textarea id="chatInput" rows="1" maxlength="800" placeholder="Ask about projects, skills, or availability" autocomplete="off"></textarea>
+    <button class="send" id="chatSend" type="submit" aria-label="Send message">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+  </form>
+  <p class="chat-note">AI-generated and can be wrong. For anything important, email bachainshanwesleyb@gmail.com.</p>
+</dialog>
 
-  // Theme toggle: one click flips between light and dark
-  const themeBtn = $("themeBtn");
-  function currentTheme() {
-    const attr = document.documentElement.getAttribute("data-theme");
-    if (attr) return attr;
-    return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    themeBtn.innerHTML = theme === "dark" ? "☀ Light" : "☾ Dark";
-  }
-  applyTheme(localStorage.getItem("shan-theme") || currentTheme());
-  themeBtn.onclick = () => {
-    const next = currentTheme() === "dark" ? "light" : "dark";
-    localStorage.setItem("shan-theme", next);
-    applyTheme(next);
-  };
-
-  window.addEventListener("hashchange", () => {
-    const name = location.hash.slice(1);
-    if (PAGES[name]) showPage(name, false);
-  });
-
-  renderHistory();
-  // Always show hero page on refresh / first load
-  renderChatHome(true);
-  const start = location.hash.slice(1);
-  if (PAGES[start] && start !== "chat") showPage(start, false);
-  else showPage("chat", false);
-  $("title").textContent = "New chat";
-</script>
+<script src="/assets/app.js" defer></script>
 </body>
 </html>
