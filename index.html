@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shan Wesley Bachain">
 <meta property="og:title" content="Shan Wesley Bachain | Portfolio and AI Assistant">
-<meta property="og:description" content="Projects, skills, and an AI assistant that answers questions about Shan's work.">
+<meta property="og:description" content="Projects, skills, thesis, and an AI assistant that answers questions about Shan's work.">
 <meta property="og:url" content="https://swbportfolio.vercel.app/">
 <meta property="og:image" content="https://swbportfolio.vercel.app/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script src="/assets/theme.js"></script>
 <style>
-/* Shan Wesley Bachain. Claude-style layout with portfolio. No build step. */
+/* Shan Wesley Bachain. Claude-style layout with portfolio tabs. No build step. */
 :root {
   --bg: #f8fbff;
   --surface: #ffffff;
@@ -74,19 +74,23 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 [hidden] { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* ---------- Sidebar (Claude style) ---------- */
+/* ---------- Sidebar ---------- */
 .side {
   background: var(--side); border-right: 1px solid var(--border);
   display: flex; flex-direction: column; min-height: 0; padding: .75rem .6rem;
 }
-.side-top { display: flex; align-items: center; gap: .6rem; padding: .3rem .5rem .8rem; }
+.side-top { display: flex; align-items: center; gap: .6rem; padding: .3rem .5rem .9rem; }
+/* Face crop: the photo is 300% of the circle, centred on the face. */
 .avatar {
-  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-  background: url("/profile.jpg") no-repeat; background-size: 300%; background-position: 59% 15%;
-  border: 1px solid var(--border-strong);
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+  background-color: var(--surface-2);
+  background-image: url("/profile.jpg");
+  background-repeat: no-repeat;
+  background-size: 300% auto;
+  background-position: 50% 21%;
+  border: 2px solid var(--border-strong);
 }
-.side-name { font-family: var(--serif); font-size: 1.02rem; line-height: 1.2; }
-.side-name small { display: block; font-family: var(--sans); font-size: .75rem; color: var(--muted); }
+.side-name { font-family: var(--serif); font-size: 1.08rem; line-height: 1.2; }
 .nav-item {
   display: flex; align-items: center; gap: .65rem; width: 100%; padding: .5rem .6rem; border: none; background: none;
   border-radius: 10px; color: var(--text); text-decoration: none; cursor: pointer; text-align: left; font-size: .94rem;
@@ -95,25 +99,26 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .nav-item[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); font-weight: 600; }
 .nav-item svg { width: 17px; height: 17px; flex-shrink: 0; color: var(--muted); }
 .nav-item--new { border: 1px solid var(--border-strong); background: var(--surface); margin-bottom: .5rem; }
-.side-label { font-size: .74rem; color: var(--muted); padding: 1rem .6rem .4rem; }
-.recents { display: flex; flex-direction: column; gap: .1rem; overflow-y: auto; min-height: 0; flex: 1; }
+.side-label { font-size: .74rem; color: var(--muted); padding: .9rem .6rem .35rem; }
+.tabs { display: flex; flex-direction: column; gap: .05rem; }
+.tabs .nav-item { padding: .42rem .6rem; font-size: .92rem; }
+.recents-wrap { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.recents { display: flex; flex-direction: column; gap: .1rem; overflow-y: auto; min-height: 0; }
 .recent {
-  display: block; width: 100%; padding: .45rem .6rem; border: none; background: none; border-radius: 8px;
-  text-align: left; cursor: pointer; color: var(--text); font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: block; width: 100%; padding: .42rem .6rem; border: none; background: none; border-radius: 8px;
+  text-align: left; cursor: pointer; color: var(--text); font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .recent:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
 .recent[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); }
-.recents-empty { font-size: .85rem; color: var(--muted); padding: .3rem .6rem; }
-.side-foot { border-top: 1px solid var(--border); margin-top: .6rem; padding-top: .6rem; display: flex; flex-direction: column; gap: .05rem; }
+.recents-empty { font-size: .84rem; color: var(--muted); padding: .2rem .6rem; }
+.side-foot { border-top: 1px solid var(--border); margin-top: .5rem; padding-top: .5rem; display: flex; flex-direction: column; gap: .05rem; }
 
 /* ---------- Main ---------- */
 .main { min-width: 0; height: 100%; position: relative; overflow: hidden; background: var(--bg); }
 .view { height: 100%; }
 .view-chat { display: flex; flex-direction: column; }
-.topbar {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 52px; padding: 0 1.25rem; flex-shrink: 0;
-}
-.topbar-title { font-size: .95rem; font-weight: 600; color: var(--text); }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 52px; padding: 0 1.25rem; flex-shrink: 0; }
+.topbar-title { font-size: .95rem; font-weight: 600; }
 .topbar-title span { color: var(--muted); font-weight: 400; }
 .text-link { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .9rem; padding: .3rem .5rem; border-radius: 8px; }
 .text-link:hover { color: var(--text); background: color-mix(in srgb, var(--text) 6%, transparent); }
@@ -125,10 +130,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .welcome h1 { font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.2rem); }
 .welcome p { color: var(--muted); margin-top: .5rem; font-size: .97rem; }
 .chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-top: 2rem; }
-.chips button {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: .8rem .9rem;
-  font-size: .9rem; cursor: pointer; text-align: left; line-height: 1.4; color: var(--text);
-}
+.chips button { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: .8rem .9rem; font-size: .9rem; cursor: pointer; text-align: left; line-height: 1.4; color: var(--text); }
 .chips button:hover { background: var(--surface-2); }
 .thread { display: flex; flex-direction: column; gap: 1.6rem; }
 .msg-user { align-self: flex-end; max-width: 78%; background: var(--surface-2); padding: .65rem 1rem; border-radius: 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -140,68 +142,91 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .msg-bot strong { font-weight: 600; }
 .msg-bot a { word-break: break-word; }
 .msg-wait { display: inline-flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .9rem; }
-.msg-error { border: 1px solid var(--border-strong); border-radius: 12px; padding: .7rem .9rem; font-size: .9rem; color: var(--text); background: var(--surface); }
+.msg-error { border: 1px solid var(--border-strong); border-radius: 12px; padding: .7rem .9rem; font-size: .9rem; background: var(--surface); }
 .dots { display: inline-flex; gap: 4px; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
 .dots i:nth-child(2) { animation-delay: .15s; }
 .dots i:nth-child(3) { animation-delay: .3s; }
 @keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
-
 .composer-wrap { padding: .5rem 1.25rem 0; flex-shrink: 0; }
-.composer {
-  max-width: 768px; margin: 0 auto; display: flex; flex-direction: column; gap: .4rem;
-  padding: .85rem .9rem .6rem 1.1rem; background: var(--surface); border: 1px solid var(--border-strong);
-  border-radius: 22px; box-shadow: var(--shadow);
-}
+.composer { max-width: 768px; margin: 0 auto; display: flex; flex-direction: column; gap: .4rem; padding: .85rem .9rem .6rem 1.1rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 22px; box-shadow: var(--shadow); }
 .composer:focus-within { border-color: var(--link); }
 .composer textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; font-size: 1rem; line-height: 1.5; max-height: 180px; min-height: 28px; padding: .2rem 0; }
 .composer textarea::placeholder { color: var(--muted); }
-.composer-foot { display: flex; align-items: center; justify-content: flex-end; }
+.composer-foot { display: flex; justify-content: flex-end; }
 .send { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--btn-bg); color: var(--btn-text); cursor: pointer; display: grid; place-items: center; }
 .send:disabled { opacity: .35; cursor: default; }
 .chat-note { text-align: center; font-size: .75rem; color: var(--muted); padding: .65rem 1rem .8rem; }
 
-/* ---------- Portfolio (default) ---------- */
+/* ---------- Portfolio panels ---------- */
 .pf-scroll { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
-.pf { max-width: 1320px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 3vw, 3rem) 4rem; }
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 440px); gap: 3.5rem; align-items: center; padding-top: 1.5rem; }
-.hero h1 { font-family: var(--serif); font-size: clamp(2.6rem, 5.4vw, 4.2rem); letter-spacing: -.02em; line-height: 1.05; }
+.pf { max-width: 1200px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 3vw, 3rem) 4rem; }
+.panel[hidden] { display: none; }
+.panel-head { margin-bottom: 1.6rem; }
+.panel-head p.eyebrow { font-size: .8rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.panel-head h2 { font-family: var(--serif); font-size: clamp(1.9rem, 3.4vw, 2.6rem); letter-spacing: -.01em; margin-top: .25rem; }
+.panel-head p.intro { color: var(--muted); margin-top: .6rem; max-width: 62ch; }
+.panel h3 { font-family: var(--serif); font-size: 1.35rem; margin-bottom: .4rem; }
+.prose p { max-width: 68ch; margin-bottom: 1rem; }
+.prose p:last-child { margin-bottom: 0; }
+.block { margin-top: 2.2rem; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 3rem; align-items: center; padding-top: 1rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 3.8rem); letter-spacing: -.02em; line-height: 1.05; }
 .role { color: var(--link); font-weight: 600; margin-top: .8rem; font-size: 1.05rem; }
 .lead { margin-top: 1rem; max-width: 56ch; color: var(--muted); font-size: 1.05rem; }
-.meta { margin-top: .8rem; color: var(--muted); }
+.meta { margin-top: .6rem; color: var(--muted); }
 .open { color: var(--ok); font-weight: 600; }
-.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.7rem; }
+.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
 .btn { display: inline-flex; align-items: center; padding: .6rem 1.1rem; border: 1px solid var(--border-strong); border-radius: 11px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .95rem; font-weight: 500; cursor: pointer; }
 .btn:hover { border-color: var(--link); }
 .btn--primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-text); }
-.ask-pill {
-  display: inline-flex; align-items: center; gap: .55rem; margin-top: 1.1rem; padding: .5rem 1.05rem; border-radius: 999px;
-  border: 1px solid var(--link); background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); font-weight: 600; cursor: pointer; font-size: .95rem;
-}
+.ask-pill { display: inline-flex; align-items: center; gap: .55rem; margin-top: 1.1rem; padding: .5rem 1.05rem; border-radius: 999px; border: 1px solid var(--link); background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); font-weight: 600; cursor: pointer; font-size: .95rem; }
 .ask-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
-.hero-photo img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center top; border-radius: 22px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-.pf section { margin-top: 3.5rem; }
-.pf h2 { font-family: var(--serif); font-size: 1.7rem; margin-bottom: 1.1rem; }
+.hero-photo img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center top; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+
+/* Cards */
 .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .55rem; }
-.card h3 { font-family: var(--serif); font-size: 1.35rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
 .card h3 small { font-family: var(--sans); font-size: .9rem; color: var(--muted); }
 .card .tag { font-size: .82rem; color: var(--muted); }
 .card .tag b { color: var(--ok); font-weight: 600; }
-.card p { color: var(--text); }
 .card .role-line { font-size: .9rem; color: var(--muted); }
-.card .links { margin-top: auto; padding-top: .4rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
+.card dl { display: grid; gap: .45rem; margin-top: .4rem; font-size: .93rem; }
+.card dl div { display: grid; grid-template-columns: 7rem 1fr; gap: .8rem; }
+.card dt { color: var(--muted); }
+.card .links { margin-top: auto; padding-top: .5rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
 .text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .92rem; }
-.skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 2.5rem; }
-.skill-grid dt { font-size: .85rem; color: var(--muted); margin-bottom: .15rem; }
-.skill-grid dd { font-size: .98rem; }
-.edu { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-.edu div { border-left: 2px solid var(--border-strong); padding: .15rem 0 .15rem 1rem; }
-.edu .when { font-size: .82rem; color: var(--link); font-weight: 600; }
-.edu strong { display: block; font-weight: 600; }
-.edu .note { color: var(--muted); font-size: .94rem; }
-.contact-list { display: grid; gap: .6rem; }
-.contact-list div { display: flex; gap: 1rem; }
+
+/* Thesis facts */
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.fact { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; }
+.fact b { display: block; font-family: var(--serif); font-size: 1.7rem; font-weight: 400; color: var(--link); }
+.fact span { font-size: .88rem; color: var(--muted); }
+.bullets { list-style: disc; padding-left: 1.3rem; display: grid; gap: .45rem; max-width: 70ch; }
+
+/* Skills */
+.skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.skill-grid > div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.25rem; }
+.skill-grid dt { font-weight: 600; margin-bottom: .35rem; }
+.skill-grid dd { color: var(--muted); font-size: .95rem; }
+.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+.pill { font-size: .85rem; padding: .25rem .7rem; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface-2); }
+
+/* Education */
+.timeline { display: grid; gap: 1.1rem; }
+.timeline div { border-left: 2px solid var(--border-strong); padding: .1rem 0 .1rem 1.1rem; }
+.timeline .when { font-size: .82rem; color: var(--link); font-weight: 600; }
+.timeline strong { display: block; font-weight: 600; font-size: 1.02rem; }
+.timeline .note { color: var(--muted); }
+.awards { display: grid; gap: .6rem; }
+.awards div { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; padding: .65rem 0; border-bottom: 1px solid var(--border); }
+.awards span:first-child { color: var(--muted); font-size: .9rem; }
+
+/* Contact */
+.contact-list { display: grid; gap: .6rem; max-width: 640px; }
+.contact-list div { display: flex; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--border); }
 .contact-list span { color: var(--muted); width: 6rem; flex-shrink: 0; }
 .pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
 
@@ -209,15 +234,18 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 @media (max-width: 900px) {
   body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .side { flex-direction: row; align-items: center; gap: .3rem; padding: .5rem .6rem; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; }
-  .side-top { padding: 0 .4rem 0 0; flex-shrink: 0; }
-  .side-name, .side-label, .recents, .side-foot .label-desktop { display: none; }
-  .nav-item { width: auto; white-space: nowrap; padding: .45rem .65rem; }
+  .side-top, .side-label, .recents-wrap, .side-foot .label-desktop, .side-name { display: none; }
+  .side-top { display: flex; padding: 0 .3rem 0 0; flex-shrink: 0; }
+  .avatar { width: 34px; height: 34px; }
+  .tabs { flex-direction: row; }
+  .tabs .nav-item, .nav-item { width: auto; white-space: nowrap; padding: .45rem .65rem; }
   .nav-item--new { margin: 0; }
   .side-foot { border: none; margin: 0 0 0 auto; padding: 0; flex-direction: row; flex-shrink: 0; }
   .hero { grid-template-columns: 1fr; gap: 2rem; }
-  .hero-photo { order: -1; max-width: 320px; }
-  .cards, .skill-grid, .edu { grid-template-columns: 1fr; }
+  .hero-photo { order: -1; max-width: 260px; }
+  .cards, .skill-grid, .facts { grid-template-columns: 1fr; }
   .chips { grid-template-columns: 1fr; }
+  .card dl div { grid-template-columns: 1fr; gap: .1rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -229,7 +257,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 <nav class="side" aria-label="Primary">
   <div class="side-top">
     <div class="avatar" role="img" aria-label="Shan Wesley Bachain"></div>
-    <div class="side-name">Shan Bachain<small>Portfolio and AI assistant</small></div>
+    <div class="side-name">Shan Wesley Bachain</div>
   </div>
 
   <button type="button" class="nav-item nav-item--new" data-new-chat>
@@ -240,13 +268,22 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
     Ask my AI
   </button>
-  <button type="button" class="nav-item" data-view="portfolio" aria-current="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
-    Portfolio
-  </button>
 
-  <p class="side-label">Recents</p>
-  <div class="recents" id="recents" aria-label="Recent chats"></div>
+  <p class="side-label">Portfolio</p>
+  <nav class="tabs" aria-label="Portfolio sections">
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="home" aria-current="true">Home</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="about" aria-current="false">About me</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="projects" aria-current="false">Projects</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="thesis" aria-current="false">Thesis</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="skills" aria-current="false">Skills</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="education" aria-current="false">Education</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="contact" aria-current="false">Contact</button>
+  </nav>
+
+  <div class="recents-wrap">
+    <p class="side-label">Recents</p>
+    <div class="recents" id="recents" aria-label="Recent chats"></div>
+  </div>
 
   <div class="side-foot">
     <a class="nav-item" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">
@@ -266,37 +303,66 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 
 <main class="main" id="main">
 
-  <!-- Portfolio (default view) -->
+  <!-- Portfolio panels (default view) -->
   <div class="view" id="viewPortfolio">
     <div class="pf-scroll" id="pfScroll">
       <div class="pf">
 
-        <section class="hero" aria-labelledby="hero-title" style="margin-top:0">
-          <div>
-            <h1 id="hero-title">Shan Wesley Bachain</h1>
-            <p class="role">Computer Engineering Student · Full-Stack &amp; IoT Developer</p>
-            <p class="lead">I build practical web applications, AI-powered tools, and ESP32-based hardware systems.</p>
-            <p class="meta">University of Rizal System, Antipolo · Expected 2027 · Angono, Rizal</p>
-            <p class="meta"><span class="open">Open to internships</span></p>
-            <div class="btns">
-              <a class="btn btn--primary" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
-              <a class="btn" href="#contact">Contact me</a>
+        <!-- Home -->
+        <section class="panel" id="home" data-panel="home" aria-labelledby="hero-title">
+          <div class="hero">
+            <div>
+              <h1 id="hero-title">Shan Wesley Bachain</h1>
+              <p class="role">Computer Engineering Student · Full-Stack &amp; IoT Developer</p>
+              <p class="lead">I build practical web applications, AI-powered tools, and ESP32-based hardware systems, with a focus on AI and human-centered software.</p>
+              <p class="meta">University of Rizal System, Antipolo Campus · Expected 2027 · Angono, Rizal</p>
+              <p class="meta"><span class="open">Open to internships, collaborations, and freelance projects</span></p>
+              <div class="btns">
+                <a class="btn btn--primary" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
+                <button type="button" class="btn" data-view="portfolio" data-panel="contact">Contact me</button>
+              </div>
+              <button type="button" class="ask-pill" data-view="chat"><span class="ask-dot" aria-hidden="true"></span>Ask my AI about my work</button>
             </div>
-            <button type="button" class="ask-pill" data-view="chat"><span class="ask-dot" aria-hidden="true"></span>Ask my AI about my work</button>
+            <figure class="hero-photo">
+              <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+            </figure>
           </div>
-          <figure class="hero-photo">
-            <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
-          </figure>
         </section>
 
-        <section id="projects" aria-labelledby="projects-title">
-          <h2 id="projects-title">Projects</h2>
+        <!-- About -->
+        <section class="panel" id="about" data-panel="about" hidden aria-labelledby="about-title">
+          <div class="panel-head">
+            <p class="eyebrow">About me</p>
+            <h2 id="about-title">Who I am and how I work</h2>
+          </div>
+          <div class="prose">
+            <p>I am a fourth-year B.S. Computer Engineering student at the University of Rizal System, Antipolo Campus, expected to graduate in 2027. I am based in Angono, Rizal, Philippines.</p>
+            <p>My focus is AI and human-centered software. I enjoy coding and building practical projects, and I use AI prompting as part of how I build. My interests are software development, embedded systems, and innovative technology solutions.</p>
+            <p>I work across the stack. On the web side I use JavaScript, HTML, CSS, PHP, and MySQL, with Firebase for backend services. For AI features I have integrated the Groq API. For hardware I use ESP32, Arduino, and sensors to build IoT systems.</p>
+            <p>I take ownership of tasks, research solutions on my own, and deliver without constant supervision. I am good at explaining technical ideas to classmates, panelists, and non-technical users, and I work well in team settings, including my thesis team and shared codebases.</p>
+          </div>
+          <div class="block">
+            <h3>Recognition</h3>
+            <p class="meta">Top Performing Student, College of Engineering. SM Foundation Scholar, 2023 to 2027. Winner of the 2025 System-Making Contest.</p>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="panel" id="projects" data-panel="projects" hidden aria-labelledby="projects-title">
+          <div class="panel-head">
+            <p class="eyebrow">Projects</p>
+            <h2 id="projects-title">What I have built</h2>
+            <p class="intro">Four projects, from a backend-heavy interview platform to a hardware thesis prototype.</p>
+          </div>
           <div class="cards">
             <article class="card">
               <h3>JobInterviewPro</h3>
-              <p class="tag"><b>Live</b> · System-Making Contest winner, 2025</p>
-              <p>An interview scheduling and candidate evaluation system with role-based access.</p>
-              <p class="role-line">My role: Backend developer · PHP, MySQL, JavaScript, Firebase</p>
+              <p class="tag"><b>Live</b> · Winner, 2025 System-Making Contest</p>
+              <p>An API-based web application that helps users practice job interviews and prepare for employment. It uses the Groq API for AI-assisted interview training, with Firebase and MySQL for backend services.</p>
+              <dl>
+                <div><dt>My role</dt><dd>Backend developer</dd></div>
+                <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Groq API, Firebase, MySQL</dd></div>
+              </dl>
               <div class="links">
                 <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
                 <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
@@ -305,19 +371,25 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 
             <article class="card">
               <h3>Eco-Smart Station <small>(RainErgy)</small></h3>
-              <p class="tag">Thesis · 5 co-authors · Submitted for patent or utility model registration</p>
-              <p>A rainwater harvesting, filtration, and hybrid solar power prototype with ESP32 monitoring and coin-operated water and charging access.</p>
-              <p class="role-line">My role: ESP32 integration for water-level monitoring and automated chlorine dosing</p>
+              <p class="tag">Thesis project · Team of five · Submitted for patent or utility model registration</p>
+              <p>An ESP32-based prototype for rainwater harvesting, filtration, hybrid solar and microturbine power, and coin-operated water and charging access. Details are in the Thesis tab.</p>
+              <dl>
+                <div><dt>Role</dt><dd>Co-author on the team thesis</dd></div>
+                <div><dt>Built with</dt><dd>ESP32, sensors, multi-stage filtration, solar and microturbine power</dd></div>
+              </dl>
               <div class="links">
+                <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the thesis summary</button>
                 <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
               </div>
             </article>
 
             <article class="card">
               <h3>DevKit</h3>
-              <p class="tag"><b>Live</b></p>
-              <p>An AI-assisted toolkit for students and developers: format JSON, edit Markdown, generate READMEs, and explain errors.</p>
-              <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
+              <p class="tag"><b>Live</b> · AI-powered toolkit</p>
+              <p>A document and code toolkit for students and developers. It formats JSON, edits Markdown, generates READMEs, and explains errors.</p>
+              <dl>
+                <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
+              </dl>
               <div class="links">
                 <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of DevKit (opens in a new tab)</span></a>
               </div>
@@ -325,9 +397,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 
             <article class="card">
               <h3>Aether</h3>
-              <p class="tag"><b>Live</b></p>
-              <p>An interactive web experience where the words you type become memory and reshape a responsive field.</p>
-              <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
+              <p class="tag"><b>Live</b> · Interactive web</p>
+              <p>A living digital interface where the visitor's words become memory and their thoughts reshape a responsive field.</p>
+              <dl>
+                <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
+              </dl>
               <div class="links">
                 <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of Aether (opens in a new tab)</span></a>
               </div>
@@ -335,39 +409,129 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
           </div>
         </section>
 
-        <section id="skills" aria-labelledby="skills-title">
-          <h2 id="skills-title">Skills</h2>
+        <!-- Thesis -->
+        <section class="panel" id="thesis" data-panel="thesis" hidden aria-labelledby="thesis-title">
+          <div class="panel-head">
+            <p class="eyebrow">Thesis</p>
+            <h2 id="thesis-title">Eco-Smart Station (RainErgy)</h2>
+            <p class="intro">Development and Implementation of Eco-Smart Station: Rainwater Harvesting and Hybrid Energy Solutions for Water and Charging Accessibility. University of Rizal System, College of Engineering, Antipolo City, March 2027.</p>
+          </div>
+
+          <div class="facts">
+            <div class="fact"><b>100%</b><span>Water filtration accuracy (10 trials)</span></div>
+            <div class="fact"><b>4.64 / 4.72</b><span>Expert and end-user grand means, both "Very Much Acceptable"</span></div>
+            <div class="fact"><b>146</b><span>Evaluators: 10 experts and 136 end-users</span></div>
+          </div>
+
+          <div class="block prose">
+            <h3>What it is</h3>
+            <p>An integrated prototype that harvests rainwater into separate storage drums and filters it through a multi-stage unit. It generates hybrid solar and microturbine power, offers coin-operated water dispensing and device charging, and provides no-cost emergency water access. An ESP32 monitors the water level and performs automated chlorine dosing.</p>
+          </div>
+
+          <div class="block">
+            <h3>Method and results</h3>
+            <p class="meta" style="margin-bottom:.8rem">Developmental Research Design, guided by the ADDIE model, with iterative build, test, and refine phases.</p>
+            <ul class="bullets">
+              <li>Water filtration: 100% accuracy.</li>
+              <li>Energy generation consistency: 80%.</li>
+              <li>Coin interface, water dispensing, device charging, chlorine dosing, water-level monitoring, and emergency water access: 90% each.</li>
+              <li>The results come from 10 trials in a controlled setting.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Limits and next steps</h3>
+            <p class="meta" style="margin-bottom:.8rem">The researchers note a controlled setting and a small expert sample. Planned future work includes laboratory water-quality testing, outdoor deployment, and cashless payment. No claim is made that the treated water is safe to drink until those tests are done.</p>
+          </div>
+
+          <div class="block">
+            <h3>Team</h3>
+            <p class="meta">Five co-authors: John Marlon Amador Aungon, Althea Lizette Rodriguez Palustre, Daron Miguel Sigua, Shan Wesley Bachain, and Vincent Bryant Lovedioro Yuson. For details on individual contributions, please contact Shan.</p>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="panel" id="skills" data-panel="skills" hidden aria-labelledby="skills-title">
+          <div class="panel-head">
+            <p class="eyebrow">Skills</p>
+            <h2 id="skills-title">Technical and soft skills</h2>
+            <p class="intro">Intermediate level, using these tools since 2023.</p>
+          </div>
           <dl class="skill-grid">
-            <div><dt>Languages</dt><dd>PHP, JavaScript, Python, HTML, CSS</dd></div>
-            <div><dt>Data</dt><dd>MySQL, NoSQL, Firebase</dd></div>
-            <div><dt>Embedded</dt><dd>ESP32, Arduino, sensors</dd></div>
-            <div><dt>Tools and AI</dt><dd>Git, GitHub, VS Code, Vercel, Groq API, AI prompting</dd></div>
+            <div>
+              <dt>Programming and web</dt>
+              <dd><div class="pill-row"><span class="pill">Python</span><span class="pill">PHP</span><span class="pill">JavaScript</span><span class="pill">HTML</span><span class="pill">CSS</span></div></dd>
+            </div>
+            <div>
+              <dt>Databases</dt>
+              <dd><div class="pill-row"><span class="pill">MySQL</span><span class="pill">NoSQL</span><span class="pill">Firebase</span></div></dd>
+            </div>
+            <div>
+              <dt>Hardware and embedded</dt>
+              <dd><div class="pill-row"><span class="pill">Arduino</span><span class="pill">ESP32</span><span class="pill">Sensors</span></div></dd>
+            </div>
+            <div>
+              <dt>Tools and AI</dt>
+              <dd><div class="pill-row"><span class="pill">GitHub</span><span class="pill">VS Code</span><span class="pill">Groq API</span><span class="pill">AI prompting</span></div></dd>
+            </div>
+            <div style="grid-column: 1 / -1;">
+              <dt>Soft skills</dt>
+              <dd>Friendly and clear communication, especially when explaining technical ideas to classmates, panelists, and non-technical users. Works well in group settings, including the thesis team and shared codebases. Takes ownership of tasks, researches solutions independently, and delivers without constant supervision.</dd>
+            </div>
           </dl>
         </section>
 
-        <section id="education" aria-labelledby="education-title">
-          <h2 id="education-title">Education</h2>
-          <div class="edu">
+        <!-- Education -->
+        <section class="panel" id="education" data-panel="education" hidden aria-labelledby="education-title">
+          <div class="panel-head">
+            <p class="eyebrow">Education</p>
+            <h2 id="education-title">Education and achievements</h2>
+          </div>
+          <div class="timeline">
             <div>
-              <span class="when">2023 – 2027</span>
+              <span class="when">2023 – 2027 (expected)</span>
               <strong>B.S. Computer Engineering</strong>
-              <span class="note">University of Rizal System, Antipolo. Top Performing Student, College of Engineering.</span>
+              <span class="note">University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering. Currently in 4th year.</span>
             </div>
             <div>
               <span class="when">2021 – 2023</span>
               <strong>Senior High School, STEM</strong>
               <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
             </div>
+            <div>
+              <span class="when">2017 – 2021</span>
+              <strong>Junior High School</strong>
+              <span class="note">Carlos "Botong" Francisco Memorial National High School. Valedictorian, With Honors.</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Achievements</h3>
+            <div class="awards">
+              <div><span>2025</span><span>Winner, System-Making Contest, for JobInterviewPro</span></div>
+              <div><span>2025</span><span>Research Seminar, BRITE Program, University of Rizal System</span></div>
+              <div><span>2023 – 2027</span><span>SM Foundation Scholar</span></div>
+              <div><span>2023</span><span>Third Place, Provincial Statistics Quiz Bee</span></div>
+              <div><span>2023</span><span>Senior High School Valedictorian, With Highest Honors</span></div>
+            </div>
           </div>
         </section>
 
-        <section id="contact" aria-labelledby="contact-title">
-          <h2 id="contact-title">Contact</h2>
+        <!-- Contact -->
+        <section class="panel" id="contact" data-panel="contact" hidden aria-labelledby="contact-title">
+          <div class="panel-head">
+            <p class="eyebrow">Contact</p>
+            <h2 id="contact-title">Let's talk</h2>
+            <p class="intro">I am looking for internships, collaborations, and freelance projects. Email is the quickest way to reach me.</p>
+          </div>
           <div class="contact-list">
             <div><span>Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></div>
             <div><span>Phone</span><a href="tel:+639762652310">0976 265 2310</a></div>
             <div><span>GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></div>
             <div><span>Location</span>Angono, Rizal, Philippines</div>
+          </div>
+          <div class="btns">
+            <a class="btn btn--primary" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
           </div>
         </section>
 
@@ -380,7 +544,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   <div class="view view-chat" id="viewChat" hidden>
     <div class="topbar">
       <div class="topbar-title">Ask my AI <span>· Shan's assistant</span></div>
-      <button type="button" class="text-link" data-view="portfolio">Back to portfolio</button>
+      <button type="button" class="text-link" data-view="portfolio" data-panel="home">Back to portfolio</button>
     </div>
 
     <div class="chat-scroll" id="chatScroll">
