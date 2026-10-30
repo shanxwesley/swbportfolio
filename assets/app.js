@@ -1,4 +1,4 @@
-/* Shan Wesley Bachain: portfolio (default), Claude-style chat, and recent chats.
+/* Shan Wesley Bachain: portfolio panels, Claude-style chat, and recent chats.
  * No inline scripts (CSP is script-src 'self').
  */
 (function () {
@@ -29,10 +29,10 @@
   var sendBtn = document.getElementById("chatSend");
   var yearEl = document.getElementById("year");
 
-  // Each recent chat keeps its title, its rendered thread, and its history for the API.
-  var chats = [];
+  var chats = [];          // { id, title, html, history }
   var currentId = null;
   var nextId = 1;
+  var history = [];        // history for the active chat
   var busy = false;
 
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -161,11 +161,12 @@
     return null;
   }
 
-  // Saves the visible thread into the current chat record so it can be restored later.
+  // Stores the visible thread and history into the active chat record.
   function saveCurrent() {
     var rec = findChat(currentId);
     if (rec) {
       rec.html = thread.innerHTML;
+      rec.history = history.slice();
     }
   }
 
@@ -195,6 +196,7 @@
     if (!rec) return;
     saveCurrent();
     currentId = id;
+    history = (rec.history || []).slice();
     thread.innerHTML = rec.html || "";
     updateWelcome();
     renderRecents();
@@ -206,53 +208,64 @@
     if (busy) return;
     saveCurrent();
     currentId = null;
-    thread.innerHTML = "";
     history = [];
+    thread.innerHTML = "";
     updateWelcome();
     renderRecents();
     showView("chat");
-    if (input) input.focus();
+    setTimeout(function () {
+      input.focus();
+    }, 30);
   }
 
-  // Keeps the first question as the chat title.
+  // The first question becomes the title of the chat in Recents.
   function titleFrom(text) {
     var t = text.replace(/\s+/g, " ").trim();
     return t.length > 42 ? t.slice(0, 40).trim() + "…" : t;
   }
 
-  /* ---------- Views and navigation ---------- */
+  /* ---------- Views and panels ---------- */
 
-  function setNavCurrent(view) {
+  var PANELS = ["home", "about", "projects", "thesis", "skills", "education", "contact"];
+
+  function setNavCurrent(view, panel) {
     document.querySelectorAll(".nav-item[data-view]").forEach(function (btn) {
-      btn.setAttribute("aria-current", btn.getAttribute("data-view") === view ? "true" : "false");
+      var bView = btn.getAttribute("data-view");
+      var bPanel = btn.getAttribute("data-panel") || "home";
+      var active =
+        view === "chat"
+          ? bView === "chat"
+          : bView === "portfolio" && bPanel === panel;
+      btn.setAttribute("aria-current", active ? "true" : "false");
     });
   }
 
-  function showView(view, anchor) {
+  function showPanel(name) {
+    if (PANELS.indexOf(name) === -1) name = "home";
+    PANELS.forEach(function (p) {
+      var el = document.getElementById(p);
+      if (el) el.hidden = p !== name;
+    });
+    // Scroll only the panel area, never the whole page.
+    pfScroll.scrollTop = 0;
+  }
+
+  function showView(view, panel) {
     var toChat = view === "chat";
     viewChat.hidden = !toChat;
     viewPortfolio.hidden = toChat;
-    setNavCurrent(toChat ? "chat" : "portfolio");
-
-    if (toChat) {
-      setTimeout(function () {
-        if (input) input.focus();
-      }, 30);
+    if (!toChat) {
+      showPanel(panel || "home");
+      setNavCurrent("portfolio", panel || "home");
     } else {
-      if (anchor) {
-        var el = document.getElementById(anchor);
-        if (el) {
-          el.scrollIntoView({ block: "start" });
-          return;
-        }
-      }
-      pfScroll.scrollTop = 0;
+      setNavCurrent("chat");
+      setTimeout(function () {
+        input.focus();
+      }, 30);
     }
   }
 
   /* ---------- Sending ---------- */
-
-  var history = [];
 
   async function ask(rawText) {
     var text = String(rawText || "").trim().slice(0, MAX_INPUT);
@@ -260,10 +273,10 @@
 
     showView("chat");
 
-    // First message in a new chat creates a recent entry.
+    // The first message in a new chat creates its entry in Recents.
     if (currentId === null) {
       currentId = nextId++;
-      chats.unshift({ id: currentId, title: titleFrom(text), html: "" });
+      chats.unshift({ id: currentId, title: titleFrom(text), html: "", history: [] });
       if (chats.length > MAX_RECENTS) chats.length = MAX_RECENTS;
       renderRecents();
     }
@@ -313,7 +326,7 @@
       sendBtn.disabled = false;
       saveCurrent();
       scrollChatToEnd();
-      if (input) input.focus();
+      input.focus();
     }
   }
 
@@ -370,19 +383,13 @@
     var navEl = t.closest("[data-view]");
     if (navEl) {
       e.preventDefault();
-      showView(navEl.getAttribute("data-view"));
+      showView(navEl.getAttribute("data-view"), navEl.getAttribute("data-panel"));
       return;
-    }
-
-    var anchorEl = t.closest('a[href^="#"]');
-    if (anchorEl) {
-      e.preventDefault();
-      showView("portfolio", anchorEl.getAttribute("href").slice(1));
     }
   });
 
   renderChips();
   renderRecents();
   updateWelcome();
-  showView("portfolio");
+  showView("portfolio", "home");
 })();
