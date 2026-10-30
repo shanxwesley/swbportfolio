@@ -241,10 +241,34 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .awards span:last-child { font-size: .93rem; color: var(--text); }
 
 /* Contact */
-.contact-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 720px; }
-.contact-list div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.15rem; display: grid; gap: .3rem; }
-.contact-list span { color: var(--muted); font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; }
-.contact-list a { font-size: 1.02rem; word-break: break-all; }
+.contact-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 1.5rem; align-items: start; max-width: 920px; }
+.contact-primary {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem 1.7rem;
+  display: flex; flex-direction: column; gap: 1.1rem;
+}
+.contact-primary .status-pill {
+  display: inline-flex; align-items: center; gap: .45rem; font-size: .82rem; font-weight: 600;
+  color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent);
+  border-radius: 999px; padding: .3rem .75rem; width: fit-content;
+}
+.contact-primary .status-pill i {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--ok); display: inline-block;
+}
+.contact-primary h3 { font-family: var(--serif); font-size: 1.35rem; margin: 0; }
+.contact-primary p { color: var(--muted); font-size: .95rem; margin: 0; max-width: 42ch; }
+.contact-primary .btn-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: .3rem; }
+.contact-primary .btn { text-decoration: none; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+.contact-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 1.05rem 1.15rem; display: flex; flex-direction: column; gap: .35rem;
+  transition: border-color .15s, background .15s;
+}
+.contact-card:hover { border-color: var(--border-strong); background: var(--surface-2); }
+.contact-card .label { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.contact-card a, .contact-card .value { font-size: 1rem; color: var(--text); text-decoration: none; word-break: break-word; }
+.contact-card a:hover { color: var(--link); }
+.contact-card .icon { width: 18px; height: 18px; color: var(--muted); margin-bottom: .15rem; }
 .pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
 
 /* ---------- Responsive ---------- */
@@ -258,7 +282,8 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   .skill-stats { grid-template-columns: 1fr 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
   .awards { grid-template-columns: 1fr; }
-  .contact-list { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
   .hero-ask .composer { border-radius: 22px; }
   .tabs { flex-direction: row; }
   .tabs .nav-item, .nav-item { width: auto; white-space: nowrap; padding: .45rem .65rem; }
@@ -647,14 +672,42 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
           <div class="panel-head">
             <p class="eyebrow">Contact</p>
             <h2 id="contact-title">Let's talk</h2>
-            <p class="intro">I am looking for internships, collaborations, and freelance projects. Email is the quickest way to reach me.</p>
+            <p class="intro">Open to internships, collaborations, and freelance work. I usually reply within a day.</p>
           </div>
-          <div class="contact-list">
-            <div><span>Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></div>
-            <div><span>Phone</span><a href="tel:+639762652310">0976 265 2310</a></div>
-            <div><span>GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></div>
-            <div><span>Location</span>Angono, Rizal, Philippines</div>
-            <div><span>Resume</span><a href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download PDF</a></div>
+
+          <div class="contact-layout">
+            <div class="contact-primary">
+              <span class="status-pill"><i aria-hidden="true"></i> Available for opportunities</span>
+              <h3>Prefer email</h3>
+              <p>Best for internship inquiries, project collaborations, or freelance briefs. Include a bit about the role or idea and your timeline.</p>
+              <div class="btn-row">
+                <a class="btn btn--primary" href="mailto:bachainshanwesleyb@gmail.com">Email me</a>
+                <a class="btn" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
+              </div>
+            </div>
+
+            <div class="contact-grid">
+              <div class="contact-card">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+                <span class="label">Email</span>
+                <a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a>
+              </div>
+              <div class="contact-card">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.8 2z"/></svg>
+                <span class="label">Phone</span>
+                <a href="tel:+639762652310">0976 265 2310</a>
+              </div>
+              <div class="contact-card">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3.3-.4 6.8-1.6 6.8-7.2 0-1.6-.6-2.9-1.5-3.9.1-.4.7-1.9-.1-3.9 0 0-1.2-.4-4 1.5a13.8 13.8 0 0 0-7.2 0C5.9 1.4 4.7 1.8 4.7 1.8c-.8 2-.2 3.5-.1 3.9-.9 1-1.5 2.3-1.5 3.9 0 5.6 3.5 6.8 6.8 7.2A4.7 4.7 0 0 0 9 18.2V22"/><path d="M9 18c-4.5 1.5-4.5-2.2-6.5-2.5"/></svg>
+                <span class="label">GitHub</span>
+                <a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a>
+              </div>
+              <div class="contact-card">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                <span class="label">Location</span>
+                <span class="value">Angono, Rizal, Philippines</span>
+              </div>
+            </div>
           </div>
         </section>
 
