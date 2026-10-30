@@ -10,10 +10,10 @@
   var MAX_RECENTS = 20;
 
   var SUGGESTIONS = [
-    "What projects has Shan built?",
+    "Why should I hire Shan?",
+    "What projects has he built?",
     "What was his role in the thesis?",
-    "Is he open to internships?",
-    "What are his main technical skills?"
+    "Is he open to internships?"
   ];
 
   var viewPortfolio = document.getElementById("viewPortfolio");
