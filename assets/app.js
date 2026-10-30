@@ -226,7 +226,7 @@
 
   /* ---------- Views and panels ---------- */
 
-  var PANELS = ["home", "about", "projects", "thesis", "skills", "education", "contact"];
+  var PANELS = ["home", "projects", "thesis", "skills", "about", "contact"];
 
   function setNavCurrent(view, panel) {
     document.querySelectorAll(".nav-item[data-view]").forEach(function (btn) {
@@ -336,6 +336,23 @@
   }
 
   /* ---------- Events ---------- */
+
+  var heroForm = document.getElementById("heroAsk");
+  var heroInput = document.getElementById("heroInput");
+  if (heroForm && heroInput) {
+    heroForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = heroInput.value;
+      heroInput.value = "";
+      ask(v);
+    });
+    heroInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+        e.preventDefault();
+        heroForm.requestSubmit ? heroForm.requestSubmit() : heroForm.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+      }
+    });
+  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
