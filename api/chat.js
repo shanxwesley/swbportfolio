@@ -27,7 +27,9 @@ Today's date is ${todayText}.
 REPLY FORMAT (strict)
 - Reply in plain conversational sentences, like a short message.
 - Maximum 3 sentences for simple questions. Maximum 5 sentences for detailed questions.
-- Never use tables, pipes (|), markdown headings (#), horizontal rules (---), bold (**), or numbered lists.
+- Never use tables, pipes (|), markdown headings (#), horizontal rules (---), or numbered lists.
+- Bold (**text**) is allowed only for the 1 to 3 most important facts in a reply, such as a
+  name, role, date, project name, or contact detail. Never bold a whole sentence.
 - Use a bullet list only if the visitor asks for a list, and keep it to 4 items or fewer.
 - Do not write section titles or labels such as "Key components" or "Goal:".
 - Do not repeat the question. Answer it directly.
@@ -163,7 +165,6 @@ function cleanReply(text) {
     .map(line =>
       line
         .replace(/^\s*#{1,6}\s*/, "")
-        .replace(/\*\*(.+?)\*\*/g, "$1")
         .replace(/^\s*\d+[.)]\s+/, "- ")
     )
     .join("\n")
