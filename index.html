@@ -195,7 +195,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .card .tag { font-size: .82rem; color: var(--muted); }
 .card .tag b { color: var(--ok); font-weight: 600; }
 .card .result { font-size: .93rem; color: var(--text); background: var(--surface-2); border-radius: 10px; padding: .5rem .75rem; }
-.skill-grid .used { margin-top: .6rem; font-size: .85rem; color: var(--muted); }
 .cards--3 { grid-template-columns: repeat(2, 1fr); }
 .card .role-line { font-size: .9rem; color: var(--muted); }
 .card dl { display: grid; gap: .45rem; margin-top: .4rem; font-size: .93rem; }
@@ -212,27 +211,40 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .bullets { list-style: disc; padding-left: 1.3rem; display: grid; gap: .45rem; max-width: 70ch; }
 
 /* Skills */
+.skill-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.skill-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.15rem 1.2rem; }
+.skill-stat b { display: block; font-family: var(--serif); font-size: 1.65rem; font-weight: 400; color: var(--link); line-height: 1.15; }
+.skill-stat span { display: block; font-size: .86rem; color: var(--muted); margin-top: .3rem; }
 .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-.skill-grid > div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.25rem; }
-.skill-grid dt { font-weight: 600; margin-bottom: .35rem; }
+.skill-grid > div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.15rem 1.3rem; display: flex; flex-direction: column; gap: .35rem; }
+.skill-grid dt { font-weight: 600; font-size: 1.02rem; }
 .skill-grid dd { color: var(--muted); font-size: .95rem; }
-.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+.skill-grid .used { margin-top: .45rem; font-size: .84rem; color: var(--muted); }
+.skill-grid .impact { margin-top: .55rem; font-size: .88rem; color: var(--text); background: var(--surface-2); border-radius: 8px; padding: .45rem .7rem; }
+.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .25rem; }
 .pill { font-size: .85rem; padding: .25rem .7rem; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface-2); }
+.skill-soft { margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.4rem; }
+.skill-soft h3 { margin-bottom: .5rem; }
+.skill-soft p { color: var(--muted); max-width: 75ch; }
 
-/* Education */
-.timeline { display: grid; gap: 1.1rem; }
-.timeline div { border-left: 2px solid var(--border-strong); padding: .1rem 0 .1rem 1.1rem; }
+/* Education / About denser layout */
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: start; }
+.about-grid .prose { margin: 0; }
+.timeline { display: grid; gap: 1.15rem; }
+.timeline div { border-left: 2px solid var(--border-strong); padding: .15rem 0 .15rem 1.15rem; }
 .timeline .when { font-size: .82rem; color: var(--link); font-weight: 600; }
 .timeline strong { display: block; font-weight: 600; font-size: 1.02rem; }
-.timeline .note { color: var(--muted); }
-.awards { display: grid; gap: .6rem; }
-.awards div { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; padding: .65rem 0; border-bottom: 1px solid var(--border); }
-.awards span:first-child { color: var(--muted); font-size: .9rem; }
+.timeline .note { color: var(--muted); font-size: .94rem; }
+.awards { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.awards div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: .85rem 1rem; display: grid; gap: .25rem; }
+.awards span:first-child { color: var(--link); font-size: .82rem; font-weight: 600; }
+.awards span:last-child { font-size: .93rem; color: var(--text); }
 
 /* Contact */
-.contact-list { display: grid; gap: .6rem; max-width: 640px; }
-.contact-list div { display: flex; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--border); }
-.contact-list span { color: var(--muted); width: 6rem; flex-shrink: 0; }
+.contact-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 720px; }
+.contact-list div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.15rem; display: grid; gap: .3rem; }
+.contact-list span { color: var(--muted); font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; }
+.contact-list a { font-size: 1.02rem; word-break: break-all; }
 .pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
 
 /* ---------- Responsive ---------- */
@@ -243,6 +255,10 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   .side-top { display: flex; padding: 0 .3rem 0 0; flex-shrink: 0; }
   .avatar { width: 34px; height: 34px; }
   .stats { grid-template-columns: 1fr 1fr; }
+  .skill-stats { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  .awards { grid-template-columns: 1fr; }
+  .contact-list { grid-template-columns: 1fr; }
   .hero-ask .composer { border-radius: 22px; }
   .tabs { flex-direction: row; }
   .tabs .nav-item, .nav-item { width: auto; white-space: nowrap; padding: .45rem .65rem; }
@@ -479,35 +495,90 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
         <section class="panel" id="skills" data-panel="skills" hidden aria-labelledby="skills-title">
           <div class="panel-head">
             <p class="eyebrow">Skills</p>
-            <h2 id="skills-title">Technical skills</h2>
-            <p class="intro">Intermediate level, using these tools since 2023.</p>
+            <h2 id="skills-title">Technical skills &amp; impact</h2>
+            <p class="intro">Tools I use in real projects, plus the results they delivered for users and stakeholders.</p>
           </div>
+
+          <div class="skill-stats" role="list">
+            <div class="skill-stat" role="listitem">
+              <b>4</b>
+              <span>Production deliverables shipped (web + hardware)</span>
+            </div>
+            <div class="skill-stat" role="listitem">
+              <b>146</b>
+              <span>Users &amp; experts validated Eco-Smart Station</span>
+            </div>
+            <div class="skill-stat" role="listitem">
+              <b>100%</b>
+              <span>Filtration accuracy across 10 formal trials</span>
+            </div>
+            <div class="skill-stat" role="listitem">
+              <b>1st</b>
+              <span>Place — 2025 System-Making Contest</span>
+            </div>
+          </div>
+
           <dl class="skill-grid">
             <div>
-              <dt>Programming and web</dt>
-              <dd><div class="pill-row"><span class="pill">Python</span><span class="pill">PHP</span><span class="pill">JavaScript</span><span class="pill">HTML</span><span class="pill">CSS</span></div>
-              <p class="used">Used in JobInterviewPro, DevKit, Aether</p></dd>
+              <dt>Programming &amp; web</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">Python</span>
+                  <span class="pill">PHP</span>
+                  <span class="pill">JavaScript</span>
+                  <span class="pill">HTML</span>
+                  <span class="pill">CSS</span>
+                </div>
+                <p class="used">JobInterviewPro · DevKit · Aether</p>
+                <p class="impact">Delivered 3 live web apps used by students and job seekers for practice and tooling.</p>
+              </dd>
             </div>
             <div>
-              <dt>Databases</dt>
-              <dd><div class="pill-row"><span class="pill">MySQL</span><span class="pill">NoSQL</span><span class="pill">Firebase</span></div>
-              <p class="used">Used in JobInterviewPro</p></dd>
+              <dt>Databases &amp; backend</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">MySQL</span>
+                  <span class="pill">Firebase</span>
+                  <span class="pill">NoSQL</span>
+                  <span class="pill">REST APIs</span>
+                </div>
+                <p class="used">JobInterviewPro backend</p>
+                <p class="impact">Built auth, data storage, and AI response pipelines that power real interview practice sessions.</p>
+              </dd>
             </div>
             <div>
-              <dt>Hardware and embedded</dt>
-              <dd><div class="pill-row"><span class="pill">Arduino</span><span class="pill">ESP32</span><span class="pill">Sensors</span></div>
-              <p class="used">Used in Eco-Smart Station</p></dd>
+              <dt>Hardware &amp; embedded</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">ESP32</span>
+                  <span class="pill">Arduino</span>
+                  <span class="pill">Sensors</span>
+                  <span class="pill">IoT</span>
+                </div>
+                <p class="used">Eco-Smart Station (thesis)</p>
+                <p class="impact">100% filtration accuracy; coin-operated water &amp; charging serving community accessibility goals.</p>
+              </dd>
             </div>
             <div>
-              <dt>Tools and AI</dt>
-              <dd><div class="pill-row"><span class="pill">GitHub</span><span class="pill">VS Code</span><span class="pill">Groq API</span><span class="pill">AI prompting</span></div>
-              <p class="used">Groq API used in JobInterviewPro</p></dd>
-            </div>
-            <div style="grid-column: 1 / -1;">
-              <dt>How I work</dt>
-              <dd>I take ownership of tasks, research solutions independently, and deliver without constant supervision. I explain technical ideas clearly to classmates, panelists, and non-technical users, and I work well in teams, including my thesis group and shared codebases.</dd>
+              <dt>AI &amp; tooling</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">Groq API</span>
+                  <span class="pill">AI prompting</span>
+                  <span class="pill">GitHub</span>
+                  <span class="pill">VS Code</span>
+                  <span class="pill">Vercel</span>
+                </div>
+                <p class="used">JobInterviewPro · DevKit · this portfolio</p>
+                <p class="impact">Integrated LLMs for interview coaching; shipped AI-assisted developer tools that reduce friction for students.</p>
+              </dd>
             </div>
           </dl>
+
+          <div class="skill-soft">
+            <h3>How I work</h3>
+            <p>I take ownership of tasks, research solutions independently, and deliver without constant supervision. I explain technical ideas clearly to classmates, panelists, and non-technical users. I collaborate well in teams (thesis group of five, shared codebases) and focus on measurable outcomes: contest wins, validated prototypes, and tools people can actually use.</p>
+          </div>
         </section>
 
         <!-- About & education -->
@@ -515,40 +586,58 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
           <div class="panel-head">
             <p class="eyebrow">About &amp; education</p>
             <h2 id="about-title">Who I am</h2>
-          </div>
-          <div class="prose">
-            <p>I am a fourth-year B.S. Computer Engineering student at the University of Rizal System, Antipolo Campus, graduating in 2027. I am based in Angono, Rizal, Philippines.</p>
-            <p>My interests are software development, embedded systems, and innovative technology solutions, with a focus on AI and human-centered software. I enjoy building practical projects and use AI prompting as part of how I build.</p>
+            <p class="intro">Fourth-year Computer Engineering student building practical AI, web, and embedded systems. Based in Angono, Rizal, Philippines. Graduating 2027.</p>
           </div>
 
-          <div class="block">
-            <h3>Education</h3>
-            <div class="timeline">
-              <div>
-                <span class="when">2023 – 2027 (expected)</span>
-                <strong>B.S. Computer Engineering</strong>
-                <span class="note">University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering.</span>
+          <div class="about-grid">
+            <div>
+              <div class="prose">
+                <p>I am a fourth-year B.S. Computer Engineering student at the University of Rizal System, Antipolo Campus. My work sits at the intersection of software, hardware, and AI — from full-stack web apps to ESP32 prototypes that solve real accessibility problems.</p>
+                <p>I focus on human-centered solutions: interview practice tools that help job seekers, developer utilities that remove friction, and community-facing hardware that delivers clean water and power. I use AI prompting as a core part of how I design and ship.</p>
               </div>
-              <div>
-                <span class="when">2021 – 2023</span>
-                <strong>Senior High School, STEM</strong>
-                <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
-              </div>
-              <div>
-                <span class="when">2017 – 2021</span>
-                <strong>Junior High School</strong>
-                <span class="note">Carlos "Botong" Francisco Memorial National High School. Valedictorian, With Honors.</span>
+
+              <div class="block">
+                <h3>Education</h3>
+                <div class="timeline">
+                  <div>
+                    <span class="when">2023 – 2027 (expected)</span>
+                    <strong>B.S. Computer Engineering</strong>
+                    <span class="note">University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering.</span>
+                  </div>
+                  <div>
+                    <span class="when">2021 – 2023</span>
+                    <strong>Senior High School, STEM</strong>
+                    <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
+                  </div>
+                  <div>
+                    <span class="when">2017 – 2021</span>
+                    <strong>Junior High School</strong>
+                    <span class="note">Carlos "Botong" Francisco Memorial National High School. Valedictorian, With Honors.</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="block">
-            <h3>Achievements</h3>
-            <div class="awards">
-              <div><span>2025</span><span>Winner, System-Making Contest, for JobInterviewPro</span></div>
-              <div><span>2025</span><span>Research Seminar, BRITE Program, University of Rizal System</span></div>
-              <div><span>2023 – 2027</span><span>SM Foundation Scholar</span></div>
-              <div><span>2023</span><span>Third Place, Provincial Statistics Quiz Bee</span></div>
+            <div>
+              <h3>Achievements</h3>
+              <div class="awards">
+                <div>
+                  <span>2025</span>
+                  <span>Winner, System-Making Contest — JobInterviewPro</span>
+                </div>
+                <div>
+                  <span>2025</span>
+                  <span>Research Seminar, BRITE Program, University of Rizal System</span>
+                </div>
+                <div>
+                  <span>2023 – 2027</span>
+                  <span>SM Foundation Scholar</span>
+                </div>
+                <div>
+                  <span>2023</span>
+                  <span>Third Place, Provincial Statistics Quiz Bee</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
