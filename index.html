@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Shan Wesley Bachain | Ask My AI</title>
-<meta name="description" content="Chat with the AI assistant for Shan Wesley Bachain, a Computer Engineering student building full-stack web apps, AI-powered tools, and ESP32 IoT systems. Open to internships.">
+<title>Shan Wesley Bachain | Portfolio and AI Assistant</title>
+<meta name="description" content="Portfolio of Shan Wesley Bachain, a Computer Engineering student building full-stack web apps, AI-powered tools, and ESP32 IoT systems. Chat with his AI assistant. Open to internships.">
 <meta name="author" content="Shan Wesley Bachain">
 <link rel="canonical" href="https://swbportfolio.vercel.app/">
 <meta name="theme-color" content="#f8fbff" media="(prefers-color-scheme: light)">
@@ -12,8 +12,8 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shan Wesley Bachain">
-<meta property="og:title" content="Shan Wesley Bachain | Ask My AI">
-<meta property="og:description" content="Chat with the AI assistant for Shan's projects, skills, and availability for internships.">
+<meta property="og:title" content="Shan Wesley Bachain | Portfolio and AI Assistant">
+<meta property="og:description" content="Projects, skills, and an AI assistant that answers questions about Shan's work.">
 <meta property="og:url" content="https://swbportfolio.vercel.app/">
 <meta property="og:image" content="https://swbportfolio.vercel.app/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,11 +22,12 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script src="/assets/theme.js"></script>
 <style>
-/* Shan Wesley Bachain. Chat-first layout with a portfolio view. No build step. */
+/* Shan Wesley Bachain. Claude-style layout with portfolio. No build step. */
 :root {
   --bg: #f8fbff;
   --surface: #ffffff;
   --surface-2: #eef5fc;
+  --side: #f1f6fb;
   --text: #1f2f3d;
   --muted: #526576;
   --accent: #8db9e6;
@@ -42,14 +43,14 @@
   color-scheme: light;
 }
 :root[data-theme="dark"] {
-  --bg: #14181e; --surface: #1b2129; --surface-2: #232b35; --text: #e8eff6; --muted: #a2b2c2;
+  --bg: #14181e; --surface: #1b2129; --surface-2: #232b35; --side: #181d24; --text: #e8eff6; --muted: #a2b2c2;
   --accent: #a7cdf2; --link: #a7cdf2; --btn-bg: #a7cdf2; --btn-text: #10202f;
   --border: #2d3743; --border-strong: #425061; --ok: #7fd1a3; --shadow: 0 12px 32px rgba(0, 0, 0, .45);
   color-scheme: dark;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #14181e; --surface: #1b2129; --surface-2: #232b35; --text: #e8eff6; --muted: #a2b2c2;
+    --bg: #14181e; --surface: #1b2129; --surface-2: #232b35; --side: #181d24; --text: #e8eff6; --muted: #a2b2c2;
     --accent: #a7cdf2; --link: #a7cdf2; --btn-bg: #a7cdf2; --btn-text: #10202f;
     --border: #2d3743; --border-strong: #425061; --ok: #7fd1a3; --shadow: 0 12px 32px rgba(0, 0, 0, .45);
     color-scheme: dark;
@@ -58,150 +59,165 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
+html, body { height: 100%; }
 body {
   font-family: var(--sans); background: var(--bg); color: var(--text);
-  line-height: 1.6; font-size: 1rem; -webkit-font-smoothing: antialiased;
-  height: 100dvh; overflow: hidden;
-  display: grid; grid-template-columns: 260px 1fr;
+  font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  overflow: hidden; display: grid; grid-template-columns: 268px 1fr;
 }
-img { max-width: 100%; height: auto; display: block; }
-button, textarea, input { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+button, textarea { font: inherit; color: inherit; }
 a { color: var(--link); text-underline-offset: .18em; }
-ul, ol { padding: 0; list-style: none; }
-h1, h2, h3, h4 { line-height: 1.2; font-weight: 400; }
+ul, ol, dl { padding: 0; list-style: none; }
+h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 6px; }
 [hidden] { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* ---------- Sidebar ---------- */
+/* ---------- Sidebar (Claude style) ---------- */
 .side {
-  background: var(--surface); border-right: 1px solid var(--border);
-  padding: 1rem .75rem; display: flex; flex-direction: column; gap: .2rem; min-height: 0; overflow-y: auto;
+  background: var(--side); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; min-height: 0; padding: .75rem .6rem;
 }
-.brand { display: flex; align-items: center; gap: .6rem; padding: .35rem .5rem .9rem; font-family: var(--serif); font-size: 1.1rem; }
-.brand-mark { width: 30px; height: 30px; border-radius: 9px; background: var(--btn-bg); color: var(--btn-text); display: grid; place-items: center; font-family: var(--sans); font-size: .7rem; font-weight: 700; letter-spacing: .02em; }
-.side-btn {
-  display: flex; align-items: center; gap: .6rem; width: 100%; padding: .55rem .6rem; border: none; background: none;
-  border-radius: 10px; color: var(--muted); text-decoration: none; cursor: pointer; text-align: left; font-size: .93rem;
+.side-top { display: flex; align-items: center; gap: .6rem; padding: .3rem .5rem .8rem; }
+.avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: url("/profile.jpg") no-repeat; background-size: 300%; background-position: 59% 15%;
+  border: 1px solid var(--border-strong);
 }
-.side-btn:hover { background: var(--surface-2); color: var(--text); }
-.side-btn[aria-current="true"] { background: var(--surface-2); color: var(--text); font-weight: 600; }
-.side-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
-.side-btn--new { border: 1px solid var(--border-strong); margin-bottom: .6rem; }
-.side-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 1rem .6rem .35rem; }
-.side-sub { padding-left: 1.7rem; font-size: .9rem; }
-.side-foot { margin-top: auto; display: flex; flex-direction: column; gap: .2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.side-name { font-family: var(--serif); font-size: 1.02rem; line-height: 1.2; }
+.side-name small { display: block; font-family: var(--sans); font-size: .75rem; color: var(--muted); }
+.nav-item {
+  display: flex; align-items: center; gap: .65rem; width: 100%; padding: .5rem .6rem; border: none; background: none;
+  border-radius: 10px; color: var(--text); text-decoration: none; cursor: pointer; text-align: left; font-size: .94rem;
+}
+.nav-item:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.nav-item[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); font-weight: 600; }
+.nav-item svg { width: 17px; height: 17px; flex-shrink: 0; color: var(--muted); }
+.nav-item--new { border: 1px solid var(--border-strong); background: var(--surface); margin-bottom: .5rem; }
+.side-label { font-size: .74rem; color: var(--muted); padding: 1rem .6rem .4rem; }
+.recents { display: flex; flex-direction: column; gap: .1rem; overflow-y: auto; min-height: 0; flex: 1; }
+.recent {
+  display: block; width: 100%; padding: .45rem .6rem; border: none; background: none; border-radius: 8px;
+  text-align: left; cursor: pointer; color: var(--text); font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.recent:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.recent[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); }
+.recents-empty { font-size: .85rem; color: var(--muted); padding: .3rem .6rem; }
+.side-foot { border-top: 1px solid var(--border); margin-top: .6rem; padding-top: .6rem; display: flex; flex-direction: column; gap: .05rem; }
 
-/* ---------- Main area ---------- */
-.main { min-width: 0; min-height: 0; height: 100dvh; overflow: hidden; position: relative; }
+/* ---------- Main ---------- */
+.main { min-width: 0; height: 100%; position: relative; overflow: hidden; background: var(--bg); }
 .view { height: 100%; }
 .view-chat { display: flex; flex-direction: column; }
-.view-portfolio { overflow-y: auto; height: 100%; }
-
-/* ---------- Chat (Claude-style) ---------- */
-.chat-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
-.chat-col { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 1rem; display: flex; flex-direction: column; gap: 1.4rem; min-height: 100%; }
-.welcome { margin: auto 0; padding: 2rem 0 1rem; }
-.welcome .eyebrow { display: inline-flex; align-items: center; gap: .5rem; color: var(--muted); font-size: .9rem; }
-.welcome h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3.6vw, 2.5rem); letter-spacing: -.01em; margin-top: .6rem; }
-.welcome p.sub { color: var(--muted); margin-top: .5rem; max-width: 56ch; }
-.chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-top: 1.6rem; }
-.chips button {
-  background: var(--surface); border: 1px solid var(--border-strong); border-radius: 14px; padding: .8rem .95rem;
-  font-size: .92rem; cursor: pointer; text-align: left; line-height: 1.4; transition: border-color .2s, background .2s;
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 52px; padding: 0 1.25rem; flex-shrink: 0;
 }
-.chips button:hover { border-color: var(--link); background: var(--surface-2); }
-.thread { display: flex; flex-direction: column; gap: 1.4rem; }
-.msg-user { align-self: flex-end; max-width: 80%; background: var(--surface-2); border: 1px solid var(--border); padding: .65rem 1rem; border-radius: 18px 18px 4px 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
-.msg-bot { position: relative; padding-left: 2.2rem; line-height: 1.7; overflow-wrap: anywhere; }
-.msg-bot::before { content: "SW"; position: absolute; left: 0; top: .15rem; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .6rem; font-weight: 700; display: grid; place-items: center; }
-.msg-bot p { margin-bottom: .6rem; }
+.topbar-title { font-size: .95rem; font-weight: 600; color: var(--text); }
+.topbar-title span { color: var(--muted); font-weight: 400; }
+.text-link { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .9rem; padding: .3rem .5rem; border-radius: 8px; }
+.text-link:hover { color: var(--text); background: color-mix(in srgb, var(--text) 6%, transparent); }
+
+/* ---------- Chat ---------- */
+.chat-scroll { flex: 1; overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
+.chat-col { max-width: 768px; margin: 0 auto; padding: 1.5rem 1.25rem 1rem; display: flex; flex-direction: column; gap: 1.6rem; min-height: 100%; }
+.welcome { margin: auto 0; text-align: center; padding: 3rem 0 1rem; }
+.welcome h1 { font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.2rem); }
+.welcome p { color: var(--muted); margin-top: .5rem; font-size: .97rem; }
+.chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-top: 2rem; }
+.chips button {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: .8rem .9rem;
+  font-size: .9rem; cursor: pointer; text-align: left; line-height: 1.4; color: var(--text);
+}
+.chips button:hover { background: var(--surface-2); }
+.thread { display: flex; flex-direction: column; gap: 1.6rem; }
+.msg-user { align-self: flex-end; max-width: 78%; background: var(--surface-2); padding: .65rem 1rem; border-radius: 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg-bot { line-height: 1.75; overflow-wrap: anywhere; padding-right: .5rem; }
+.msg-bot p { margin-bottom: .75rem; }
 .msg-bot p:last-child { margin-bottom: 0; }
-.msg-bot ul { list-style: disc; padding-left: 1.2rem; margin: .3rem 0 .6rem; }
-.msg-bot li { margin-bottom: .25rem; }
-.msg-bot strong { font-weight: 600; background: color-mix(in srgb, var(--link) 16%, transparent); padding: .02rem .32rem; border-radius: 6px; }
+.msg-bot ul { list-style: disc; padding-left: 1.3rem; margin: .3rem 0 .75rem; }
+.msg-bot li { margin-bottom: .3rem; }
+.msg-bot strong { font-weight: 600; }
 .msg-bot a { word-break: break-word; }
-.msg-wait { position: relative; padding-left: 2.2rem; display: inline-flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .9rem; min-height: 26px; }
-.msg-wait::before { content: "SW"; position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 8px; background: var(--btn-bg); color: var(--btn-text); font-size: .6rem; font-weight: 700; display: grid; place-items: center; }
-.msg-error { border: 1px solid var(--border-strong); border-left: 3px solid #b3402f; background: var(--surface); border-radius: 10px; padding: .65rem .8rem; font-size: .9rem; }
+.msg-wait { display: inline-flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .9rem; }
+.msg-error { border: 1px solid var(--border-strong); border-radius: 12px; padding: .7rem .9rem; font-size: .9rem; color: var(--text); background: var(--surface); }
 .dots { display: inline-flex; gap: 4px; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
 .dots i:nth-child(2) { animation-delay: .15s; }
 .dots i:nth-child(3) { animation-delay: .3s; }
 @keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
 
-.composer-wrap { padding: .5rem 1.5rem 0; }
+.composer-wrap { padding: .5rem 1.25rem 0; flex-shrink: 0; }
 .composer {
-  max-width: 760px; margin: 0 auto; display: flex; align-items: flex-end; gap: .5rem;
-  padding: .6rem .6rem .6rem 1rem; background: var(--surface); border: 1px solid var(--border-strong);
-  border-radius: 18px; box-shadow: var(--shadow);
+  max-width: 768px; margin: 0 auto; display: flex; flex-direction: column; gap: .4rem;
+  padding: .85rem .9rem .6rem 1.1rem; background: var(--surface); border: 1px solid var(--border-strong);
+  border-radius: 22px; box-shadow: var(--shadow);
 }
 .composer:focus-within { border-color: var(--link); }
-.composer textarea { flex: 1; border: none; background: transparent; resize: none; outline: none; font-size: .97rem; line-height: 1.5; max-height: 160px; padding: .35rem 0; }
+.composer textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; font-size: 1rem; line-height: 1.5; max-height: 180px; min-height: 28px; padding: .2rem 0; }
 .composer textarea::placeholder { color: var(--muted); }
-.send { flex-shrink: 0; width: 38px; height: 38px; border-radius: 11px; border: none; background: var(--btn-bg); color: var(--btn-text); cursor: pointer; display: grid; place-items: center; }
-.send:disabled { opacity: .4; cursor: default; }
-.chat-note { text-align: center; font-size: .74rem; color: var(--muted); padding: .6rem 1rem .9rem; }
+.composer-foot { display: flex; align-items: center; justify-content: flex-end; }
+.send { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--btn-bg); color: var(--btn-text); cursor: pointer; display: grid; place-items: center; }
+.send:disabled { opacity: .35; cursor: default; }
+.chat-note { text-align: center; font-size: .75rem; color: var(--muted); padding: .65rem 1rem .8rem; }
 
-/* ---------- Portfolio view ---------- */
-.pf { max-width: 1040px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-.pf section { padding-top: 3.2rem; }
-.pf h2 { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 1rem; }
-.hero { display: grid; grid-template-columns: 1fr 240px; gap: 3rem; align-items: center; }
-.hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 4.6vw, 3.2rem); letter-spacing: -.015em; }
-.role { color: var(--link); font-weight: 600; margin-top: .5rem; }
-.lead { margin-top: 1rem; max-width: 58ch; color: var(--muted); }
-.meta { margin-top: .9rem; color: var(--muted); font-size: .92rem; }
+/* ---------- Portfolio (default) ---------- */
+.pf-scroll { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+.pf { max-width: 1320px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 3vw, 3rem) 4rem; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 440px); gap: 3.5rem; align-items: center; padding-top: 1.5rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2.6rem, 5.4vw, 4.2rem); letter-spacing: -.02em; line-height: 1.05; }
+.role { color: var(--link); font-weight: 600; margin-top: .8rem; font-size: 1.05rem; }
+.lead { margin-top: 1rem; max-width: 56ch; color: var(--muted); font-size: 1.05rem; }
+.meta { margin-top: .8rem; color: var(--muted); }
 .open { color: var(--ok); font-weight: 600; }
-.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
-.btn { display: inline-flex; align-items: center; padding: .55rem 1.05rem; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .92rem; font-weight: 500; cursor: pointer; }
+.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.7rem; }
+.btn { display: inline-flex; align-items: center; padding: .6rem 1.1rem; border: 1px solid var(--border-strong); border-radius: 11px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .95rem; font-weight: 500; cursor: pointer; }
 .btn:hover { border-color: var(--link); }
 .btn--primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-text); }
-.hero-photo img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center top; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-.ask-row { margin-top: 1.4rem; }
-.ask-pill { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem 1rem .4rem .8rem; border-radius: 999px; border: 1px solid var(--link); background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); font-weight: 600; cursor: pointer; font-size: .92rem; }
+.ask-pill {
+  display: inline-flex; align-items: center; gap: .55rem; margin-top: 1.1rem; padding: .5rem 1.05rem; border-radius: 999px;
+  border: 1px solid var(--link); background: color-mix(in srgb, var(--link) 12%, transparent); color: var(--link); font-weight: 600; cursor: pointer; font-size: .95rem;
+}
 .ask-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
-.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem 1.25rem; display: flex; flex-direction: column; gap: .55rem; }
-.card h3 { font-family: var(--serif); font-size: 1.25rem; }
-.card .tag { font-size: .78rem; color: var(--muted); }
+.hero-photo img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center top; border-radius: 22px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.pf section { margin-top: 3.5rem; }
+.pf h2 { font-family: var(--serif); font-size: 1.7rem; margin-bottom: 1.1rem; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .55rem; }
+.card h3 { font-family: var(--serif); font-size: 1.35rem; }
+.card h3 small { font-family: var(--sans); font-size: .9rem; color: var(--muted); }
+.card .tag { font-size: .82rem; color: var(--muted); }
 .card .tag b { color: var(--ok); font-weight: 600; }
-.card p { font-size: .93rem; color: var(--text); }
+.card p { color: var(--text); }
 .card .role-line { font-size: .9rem; color: var(--muted); }
-.card .links { margin-top: auto; display: flex; gap: .9rem; align-items: center; flex-wrap: wrap; font-size: .9rem; padding-top: .3rem; }
-.text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .9rem; }
-.skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem 2rem; }
-.skill-grid dt { font-size: .85rem; color: var(--muted); margin-bottom: .2rem; }
-.skill-grid dd { font-size: .95rem; }
-.edu { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.edu div { border-left: 2px solid var(--border-strong); padding: .1rem 0 .1rem 1rem; }
-.edu .when { font-size: .8rem; color: var(--link); font-weight: 600; }
+.card .links { margin-top: auto; padding-top: .4rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
+.text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .92rem; }
+.skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 2.5rem; }
+.skill-grid dt { font-size: .85rem; color: var(--muted); margin-bottom: .15rem; }
+.skill-grid dd { font-size: .98rem; }
+.edu { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.edu div { border-left: 2px solid var(--border-strong); padding: .15rem 0 .15rem 1rem; }
+.edu .when { font-size: .82rem; color: var(--link); font-weight: 600; }
 .edu strong { display: block; font-weight: 600; }
-.edu span.note { color: var(--muted); font-size: .92rem; }
-.contact-list { display: grid; gap: .5rem; font-size: .97rem; }
-.contact-list span { color: var(--muted); display: inline-block; width: 5.5rem; }
-
+.edu .note { color: var(--muted); font-size: .94rem; }
+.contact-list { display: grid; gap: .6rem; }
+.contact-list div { display: flex; gap: 1rem; }
+.contact-list span { color: var(--muted); width: 6rem; flex-shrink: 0; }
 .pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-  .side { flex-direction: row; align-items: center; overflow-x: auto; overflow-y: hidden; padding: .5rem .75rem; gap: .3rem; border-right: none; border-bottom: 1px solid var(--border); }
-  .brand { padding: 0 .5rem 0 0; flex-shrink: 0; font-size: .95rem; }
-  .brand span { display: none; }
-  .side-btn { width: auto; white-space: nowrap; padding: .45rem .7rem; }
-  .side-btn--new, .side-label, .side-sub { display: none; }
-  .side-foot { flex-direction: row; align-items: center; border: none; padding: 0; margin: 0 0 0 auto; gap: .2rem; flex-shrink: 0; }
-  .side-foot .side-btn span:not(.sr-only) { display: none; }
-  .main { height: auto; }
-  .view-chat, .view-portfolio { height: calc(100dvh - 58px); }
-  .hero { grid-template-columns: 1fr; gap: 1.8rem; }
-  .hero-photo { order: -1; }
-  .hero-photo img { width: 140px; }
+  .side { flex-direction: row; align-items: center; gap: .3rem; padding: .5rem .6rem; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .side-top { padding: 0 .4rem 0 0; flex-shrink: 0; }
+  .side-name, .side-label, .recents, .side-foot .label-desktop { display: none; }
+  .nav-item { width: auto; white-space: nowrap; padding: .45rem .65rem; }
+  .nav-item--new { margin: 0; }
+  .side-foot { border: none; margin: 0 0 0 auto; padding: 0; flex-direction: row; flex-shrink: 0; }
+  .hero { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-photo { order: -1; max-width: 320px; }
   .cards, .skill-grid, .edu { grid-template-columns: 1fr; }
-  .pf { padding: 2rem 1.25rem 4rem; }
   .chips { grid-template-columns: 1fr; }
-  .chat-col { padding: 1.5rem 1rem 1rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -209,61 +225,169 @@ h1, h2, h3, h4 { line-height: 1.2; font-weight: 400; }
 </style>
 </head>
 <body>
-<a class="sr-only" href="#chatInput">Skip to chat</a>
 
 <nav class="side" aria-label="Primary">
-  <div class="brand">
-    <span class="brand-mark" aria-hidden="true">SW</span>
-    <span>Shan Bachain</span>
+  <div class="side-top">
+    <div class="avatar" role="img" aria-label="Shan Wesley Bachain"></div>
+    <div class="side-name">Shan Bachain<small>Portfolio and AI assistant</small></div>
   </div>
 
-  <button type="button" class="side-btn side-btn--new" data-new-chat>
+  <button type="button" class="nav-item nav-item--new" data-new-chat>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
     New chat
   </button>
-
-  <button type="button" class="side-btn" data-view="chat" aria-current="true">
+  <button type="button" class="nav-item" data-view="chat" aria-current="false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
     Ask my AI
   </button>
-  <button type="button" class="side-btn" data-view="portfolio" aria-current="false">
+  <button type="button" class="nav-item" data-view="portfolio" aria-current="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
     Portfolio
   </button>
 
-  <p class="side-label">Portfolio</p>
-  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="projects">Projects</button>
-  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="skills">Skills</button>
-  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="education">Education</button>
-  <button type="button" class="side-btn side-sub" data-view="portfolio" data-target="contact">Contact</button>
+  <p class="side-label">Recents</p>
+  <div class="recents" id="recents" aria-label="Recent chats"></div>
 
   <div class="side-foot">
-    <a class="side-btn" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">
+    <a class="nav-item" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
-      Download resume
+      <span class="label-desktop">Download resume</span>
     </a>
-    <a class="side-btn" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">
+    <a class="nav-item" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5c0-1 .1-1.4-.5-2 2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.7 2.8 5.7 5.5 6-.6.5-.6 1.3-.5 2V21"/></svg>
-      GitHub
-      <span class="sr-only"> (opens in a new tab)</span>
+      <span class="label-desktop">GitHub</span><span class="sr-only"> (opens in a new tab)</span>
     </a>
-    <button type="button" class="side-btn" id="themeBtn" aria-label="Switch to dark theme">
+    <button type="button" class="nav-item" id="themeBtn" aria-label="Switch to dark theme">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      <span id="themeLabel">Dark</span>
+      <span class="label-desktop" id="themeLabel">Dark</span>
     </button>
   </div>
 </nav>
 
 <main class="main" id="main">
 
-  <!-- Chat view (default) -->
-  <div class="view view-chat" id="viewChat">
+  <!-- Portfolio (default view) -->
+  <div class="view" id="viewPortfolio">
+    <div class="pf-scroll" id="pfScroll">
+      <div class="pf">
+
+        <section class="hero" aria-labelledby="hero-title" style="margin-top:0">
+          <div>
+            <h1 id="hero-title">Shan Wesley Bachain</h1>
+            <p class="role">Computer Engineering Student · Full-Stack &amp; IoT Developer</p>
+            <p class="lead">I build practical web applications, AI-powered tools, and ESP32-based hardware systems.</p>
+            <p class="meta">University of Rizal System, Antipolo · Expected 2027 · Angono, Rizal</p>
+            <p class="meta"><span class="open">Open to internships</span></p>
+            <div class="btns">
+              <a class="btn btn--primary" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
+              <a class="btn" href="#contact">Contact me</a>
+            </div>
+            <button type="button" class="ask-pill" data-view="chat"><span class="ask-dot" aria-hidden="true"></span>Ask my AI about my work</button>
+          </div>
+          <figure class="hero-photo">
+            <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+          </figure>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+          <h2 id="projects-title">Projects</h2>
+          <div class="cards">
+            <article class="card">
+              <h3>JobInterviewPro</h3>
+              <p class="tag"><b>Live</b> · System-Making Contest winner, 2025</p>
+              <p>An interview scheduling and candidate evaluation system with role-based access.</p>
+              <p class="role-line">My role: Backend developer · PHP, MySQL, JavaScript, Firebase</p>
+              <div class="links">
+                <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
+                <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>Eco-Smart Station <small>(RainErgy)</small></h3>
+              <p class="tag">Thesis · 5 co-authors · Submitted for patent or utility model registration</p>
+              <p>A rainwater harvesting, filtration, and hybrid solar power prototype with ESP32 monitoring and coin-operated water and charging access.</p>
+              <p class="role-line">My role: ESP32 integration for water-level monitoring and automated chlorine dosing</p>
+              <div class="links">
+                <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>DevKit</h3>
+              <p class="tag"><b>Live</b></p>
+              <p>An AI-assisted toolkit for students and developers: format JSON, edit Markdown, generate READMEs, and explain errors.</p>
+              <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
+              <div class="links">
+                <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of DevKit (opens in a new tab)</span></a>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>Aether</h3>
+              <p class="tag"><b>Live</b></p>
+              <p>An interactive web experience where the words you type become memory and reshape a responsive field.</p>
+              <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
+              <div class="links">
+                <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of Aether (opens in a new tab)</span></a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-title">
+          <h2 id="skills-title">Skills</h2>
+          <dl class="skill-grid">
+            <div><dt>Languages</dt><dd>PHP, JavaScript, Python, HTML, CSS</dd></div>
+            <div><dt>Data</dt><dd>MySQL, NoSQL, Firebase</dd></div>
+            <div><dt>Embedded</dt><dd>ESP32, Arduino, sensors</dd></div>
+            <div><dt>Tools and AI</dt><dd>Git, GitHub, VS Code, Vercel, Groq API, AI prompting</dd></div>
+          </dl>
+        </section>
+
+        <section id="education" aria-labelledby="education-title">
+          <h2 id="education-title">Education</h2>
+          <div class="edu">
+            <div>
+              <span class="when">2023 – 2027</span>
+              <strong>B.S. Computer Engineering</strong>
+              <span class="note">University of Rizal System, Antipolo. Top Performing Student, College of Engineering.</span>
+            </div>
+            <div>
+              <span class="when">2021 – 2023</span>
+              <strong>Senior High School, STEM</strong>
+              <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <h2 id="contact-title">Contact</h2>
+          <div class="contact-list">
+            <div><span>Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></div>
+            <div><span>Phone</span><a href="tel:+639762652310">0976 265 2310</a></div>
+            <div><span>GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></div>
+            <div><span>Location</span>Angono, Rizal, Philippines</div>
+          </div>
+        </section>
+
+        <p class="pf-foot">© <span id="year">2026</span> Shan Wesley Bachain</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat (Claude-style) -->
+  <div class="view view-chat" id="viewChat" hidden>
+    <div class="topbar">
+      <div class="topbar-title">Ask my AI <span>· Shan's assistant</span></div>
+      <button type="button" class="text-link" data-view="portfolio">Back to portfolio</button>
+    </div>
+
     <div class="chat-scroll" id="chatScroll">
       <div class="chat-col">
         <div class="welcome" id="welcome">
-          <p class="eyebrow">Shan Wesley Bachain · Computer Engineering</p>
           <h1>What would you like to know about Shan?</h1>
-          <p class="sub">I can answer questions about his projects, skills, education, thesis, and availability for internships.</p>
+          <p>Ask about projects, skills, education, the thesis, or availability.</p>
           <div class="chips" id="chips" role="group" aria-label="Suggested questions"></div>
         </div>
         <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Conversation"></div>
@@ -273,122 +397,14 @@ h1, h2, h3, h4 { line-height: 1.2; font-weight: 400; }
     <div class="composer-wrap">
       <form class="composer" id="chatForm">
         <label class="sr-only" for="chatInput">Your question</label>
-        <textarea id="chatInput" rows="1" maxlength="800" placeholder="Ask about projects, skills, or availability" autocomplete="off"></textarea>
-        <button class="send" id="chatSend" type="submit" aria-label="Send message">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
-        </button>
+        <textarea id="chatInput" rows="1" maxlength="800" placeholder="Ask about Shan's projects, skills, or availability" autocomplete="off"></textarea>
+        <div class="composer-foot">
+          <button class="send" id="chatSend" type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </button>
+        </div>
       </form>
       <p class="chat-note">AI-generated and can be wrong. For anything important, email bachainshanwesleyb@gmail.com.</p>
-    </div>
-  </div>
-
-  <!-- Portfolio view (hero + details) -->
-  <div class="view view-portfolio" id="viewPortfolio" hidden>
-    <div class="pf">
-
-      <section class="hero" aria-labelledby="hero-title">
-        <div>
-          <h1 id="hero-title">Shan Wesley Bachain</h1>
-          <p class="role">Computer Engineering Student · Full-Stack &amp; IoT Developer</p>
-          <p class="lead">I build practical web applications, AI-powered tools, and ESP32-based hardware systems.</p>
-          <p class="meta">University of Rizal System, Antipolo · Expected 2027 · Angono, Rizal</p>
-          <p class="meta"><span class="open">Open to internships</span></p>
-          <div class="btns">
-            <a class="btn btn--primary" href="/resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
-            <a class="btn" href="#contact" data-view="portfolio" data-target="contact">Contact me</a>
-          </div>
-          <div class="ask-row">
-            <button type="button" class="ask-pill" data-view="chat"><span class="ask-dot" aria-hidden="true"></span>Ask my AI about my work</button>
-          </div>
-        </div>
-        <figure class="hero-photo">
-          <img src="/profile.jpg" width="640" height="748" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
-        </figure>
-      </section>
-
-      <section id="projects" aria-labelledby="projects-title">
-        <h2 id="projects-title">Projects</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>JobInterviewPro</h3>
-            <p class="tag"><b>Live</b> · System-Making Contest winner, 2025</p>
-            <p>An interview scheduling and candidate evaluation system with role-based access.</p>
-            <p class="role-line">My role: Backend developer · PHP, MySQL, JavaScript, Firebase</p>
-            <div class="links">
-              <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
-              <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Eco-Smart Station <span style="color:var(--muted);font-family:var(--sans);font-size:.95rem">(RainErgy)</span></h3>
-            <p class="tag">Thesis · 5 co-authors · Submitted for patent or utility model registration</p>
-            <p>A rainwater harvesting, filtration, and hybrid solar power prototype with ESP32 monitoring and coin-operated water and charging access.</p>
-            <p class="role-line">My role: ESP32 integration for water-level monitoring and automated chlorine dosing</p>
-            <div class="links">
-              <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>DevKit</h3>
-            <p class="tag"><b>Live</b></p>
-            <p>An AI-assisted toolkit for students and developers: format JSON, edit Markdown, generate READMEs, and explain errors.</p>
-            <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
-            <div class="links">
-              <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of DevKit (opens in a new tab)</span></a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Aether</h3>
-            <p class="tag"><b>Live</b></p>
-            <p>An interactive web experience where the words you type become memory and reshape a responsive field.</p>
-            <p class="role-line">JavaScript, HTML, CSS, Vercel</p>
-            <div class="links">
-              <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of Aether (opens in a new tab)</span></a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="skills" aria-labelledby="skills-title">
-        <h2 id="skills-title">Skills</h2>
-        <dl class="skill-grid">
-          <div><dt>Languages</dt><dd>PHP, JavaScript, Python, HTML, CSS</dd></div>
-          <div><dt>Data</dt><dd>MySQL, NoSQL, Firebase</dd></div>
-          <div><dt>Embedded</dt><dd>ESP32, Arduino, sensors</dd></div>
-          <div><dt>Tools and AI</dt><dd>Git, GitHub, VS Code, Vercel, Groq API, AI prompting</dd></div>
-        </dl>
-      </section>
-
-      <section id="education" aria-labelledby="education-title">
-        <h2 id="education-title">Education</h2>
-        <div class="edu">
-          <div>
-            <span class="when">2023 – 2027</span>
-            <strong>B.S. Computer Engineering</strong>
-            <span class="note">University of Rizal System, Antipolo. Top Performing Student, College of Engineering.</span>
-          </div>
-          <div>
-            <span class="when">2021 – 2023</span>
-            <strong>Senior High School, STEM</strong>
-            <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <div class="contact-list">
-          <div><span>Email</span><a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></div>
-          <div><span>Phone</span><a href="tel:+639762652310">0976 265 2310</a></div>
-          <div><span>GitHub</span><a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a></div>
-          <div><span>Location</span>Angono, Rizal, Philippines</div>
-        </div>
-      </section>
-
-      <p class="pf-foot">© <span id="year">2026</span> Shan Wesley Bachain</p>
     </div>
   </div>
 
