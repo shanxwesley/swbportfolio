@@ -36,10 +36,9 @@
     var dark = isDark();
 
     var btn = document.getElementById("themeBtn");
-    if (btn) {
-      btn.textContent = dark ? "Light" : "Dark";
-      btn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
-    }
+    var label = document.getElementById("themeLabel");
+    if (label) label.textContent = dark ? "Light" : "Dark";
+    if (btn) btn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
 
     var metas = document.querySelectorAll('meta[name="theme-color"]');
     for (var i = 0; i < metas.length; i++) {
