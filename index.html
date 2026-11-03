@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shan Wesley Bachain | Portfolio and AI Assistant</title>
+<meta name="description" content="Portfolio of Shan Wesley Bachain, a Computer Engineering student building full-stack web apps, AI-powered tools, and ESP32 IoT systems. Chat with his AI assistant. Open to internships.">
+<meta name="author" content="Shan Wesley Bachain">
+<link rel="canonical" href="https://swbportfolio.vercel.app/">
+<meta name="theme-color" content="#f8fbff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14181e" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shan Wesley Bachain">
+<meta property="og:title" content="Shan Wesley Bachain | Portfolio and AI Assistant">
+<meta property="og:description" content="Projects, skills, thesis, and an AI assistant that answers questions about Shan's work.">
+<meta property="og:url" content="https://swbportfolio.vercel.app/">
+<meta property="og:image" content="https://swbportfolio.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Shan Wesley Bachain, Computer Engineering student and developer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shan Wesley Bachain | Portfolio and AI Assistant">
+<meta name="twitter:description" content="Projects, skills, thesis, and an AI assistant that answers questions about Shan's work.">
+<meta name="twitter:image" content="https://swbportfolio.vercel.app/og-image.jpg">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="profile.jpg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="assets/theme.js"></script>
+<style>
+/* Shan Wesley Bachain. Claude-style layout with portfolio tabs. No build step. */
+:root {
+  --bg: #f8fbff;
+  --surface: #ffffff;
+  --surface-2: #eef5fc;
+  --side: #f1f6fb;
+  --text: #1f2f3d;
+  --muted: #526576;
+  --accent: #8db9e6;
+  --link: #1d5c9a;
+  --btn-bg: #1d5c9a;
+  --btn-text: #ffffff;
+  --border: #d9e6f2;
+  --border-strong: #b7cbde;
+  --ok: #1d6b44;
+  --shadow: 0 12px 32px rgba(31, 47, 61, .10);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #14181e; --surface: #1b2129; --surface-2: #232b35; --side: #181d24; --text: #e8eff6; --muted: #a2b2c2;
+  --accent: #a7cdf2; --link: #a7cdf2; --btn-bg: #a7cdf2; --btn-text: #10202f;
+  --border: #2d3743; --border-strong: #425061; --ok: #7fd1a3; --shadow: 0 12px 32px rgba(0, 0, 0, .45);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14181e; --surface: #1b2129; --surface-2: #232b35; --side: #181d24; --text: #e8eff6; --muted: #a2b2c2;
+    --accent: #a7cdf2; --link: #a7cdf2; --btn-bg: #a7cdf2; --btn-text: #10202f;
+    --border: #2d3743; --border-strong: #425061; --ok: #7fd1a3; --shadow: 0 12px 32px rgba(0, 0, 0, .45);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--sans); background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  overflow: hidden; display: grid; grid-template-columns: 268px 1fr;
+  height: 100vh; height: 100dvh; /* dvh keeps the layout correct under mobile browser toolbars */
+}
+img { max-width: 100%; display: block; }
+button, textarea { font: inherit; color: inherit; }
+a { color: var(--link); text-underline-offset: .18em; }
+ul, ol, dl { padding: 0; list-style: none; }
+h1, h2, h3 { line-height: 1.2; font-weight: 400; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 6px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- Sidebar ---------- */
+.side {
+  background: var(--side); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; min-height: 0; padding: .75rem .6rem;
+}
+.side-top { display: flex; align-items: center; gap: .6rem; padding: .3rem .5rem .9rem; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; object-fit: cover; border: 2px solid var(--border-strong); background: var(--surface-2); }
+.side-name { font-family: var(--serif); font-size: 1.08rem; line-height: 1.2; }
+.nav-item {
+  display: flex; align-items: center; gap: .65rem; width: 100%; padding: .5rem .6rem; border: none; background: none;
+  border-radius: 10px; color: var(--text); text-decoration: none; cursor: pointer; text-align: left; font-size: .94rem;
+}
+.nav-item:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.nav-item[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); font-weight: 600; }
+.nav-item svg { width: 17px; height: 17px; flex-shrink: 0; color: var(--muted); }
+.nav-item--new { border: 1px solid var(--border-strong); background: var(--surface); margin-bottom: .5rem; }
+.side-label { font-size: .74rem; color: var(--muted); padding: .9rem .6rem .35rem; }
+.tabs { display: flex; flex-direction: column; gap: .05rem; }
+.tabs .nav-item { padding: .42rem .6rem; font-size: .92rem; }
+.recents-wrap { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.recents { display: flex; flex-direction: column; gap: .1rem; overflow-y: auto; min-height: 0; }
+.recent {
+  display: block; width: 100%; padding: .42rem .6rem; border: none; background: none; border-radius: 8px;
+  text-align: left; cursor: pointer; color: var(--text); font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.recent:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.recent[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); }
+.recents-empty { font-size: .84rem; color: var(--muted); padding: .2rem .6rem; }
+.side-foot { border-top: 1px solid var(--border); margin-top: .5rem; padding-top: .5rem; display: flex; flex-direction: column; gap: .05rem; }
+
+/* ---------- Main ---------- */
+.main { min-width: 0; height: 100%; position: relative; overflow: hidden; background: var(--bg); }
+.view { height: 100%; }
+.view-chat { display: flex; flex-direction: column; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 52px; padding: 0 1.25rem; flex-shrink: 0; }
+.topbar-title { font-size: .95rem; font-weight: 600; }
+.topbar-title span { color: var(--muted); font-weight: 400; }
+.text-link { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .9rem; padding: .3rem .5rem; border-radius: 8px; }
+.text-link:hover { color: var(--text); background: color-mix(in srgb, var(--text) 6%, transparent); }
+
+/* ---------- Chat ---------- */
+.chat-scroll { flex: 1; overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
+.chat-col { max-width: 768px; margin: 0 auto; padding: 1.5rem 1.25rem 1rem; display: flex; flex-direction: column; gap: 1.6rem; min-height: 100%; }
+.welcome { margin: auto 0; text-align: center; padding: 3rem 0 1rem; }
+.welcome h1 { font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.2rem); }
+.welcome p { color: var(--muted); margin-top: .5rem; font-size: .97rem; }
+.chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-top: 2rem; }
+.chips button { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: .8rem .9rem; font-size: .9rem; cursor: pointer; text-align: left; line-height: 1.4; color: var(--text); }
+.chips button:hover { background: var(--surface-2); }
+.thread { display: flex; flex-direction: column; gap: 1.6rem; }
+.msg-user { align-self: flex-end; max-width: 78%; background: var(--surface-2); padding: .65rem 1rem; border-radius: 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg-bot { line-height: 1.75; overflow-wrap: anywhere; padding-right: .5rem; }
+.msg-bot p { margin-bottom: .75rem; }
+.msg-bot p:last-child { margin-bottom: 0; }
+.msg-bot ul { list-style: disc; padding-left: 1.3rem; margin: .3rem 0 .75rem; }
+.msg-bot li { margin-bottom: .3rem; }
+.msg-bot strong { font-weight: 600; }
+.msg-bot a { word-break: break-word; }
+.msg-note { margin-top: .6rem !important; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: .5rem; }
+.msg-wait { display: inline-flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .9rem; }
+.msg-error { border: 1px solid var(--border-strong); border-radius: 12px; padding: .7rem .9rem; font-size: .9rem; background: var(--surface); }
+.dots { display: inline-flex; gap: 4px; }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
+.dots i:nth-child(2) { animation-delay: .15s; }
+.dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
+.composer-wrap { padding: .5rem 1.25rem 0; flex-shrink: 0; }
+.composer { max-width: 768px; margin: 0 auto; display: flex; flex-direction: column; gap: .4rem; padding: .85rem .9rem .6rem 1.1rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 22px; box-shadow: var(--shadow); }
+.composer:focus-within { border-color: var(--link); }
+.composer textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; font-size: 1rem; line-height: 1.5; max-height: 180px; min-height: 28px; padding: .2rem 0; }
+.composer textarea::placeholder { color: var(--muted); }
+.composer-foot { display: flex; justify-content: flex-end; }
+.send { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--btn-bg); color: var(--btn-text); cursor: pointer; display: grid; place-items: center; }
+.send:disabled { opacity: .35; cursor: default; }
+.chat-note { text-align: center; font-size: .75rem; color: var(--muted); padding: .65rem 1rem .8rem; }
+
+/* ---------- Portfolio panels ---------- */
+.pf-scroll { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+.pf { max-width: 1200px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 3vw, 3rem) 4rem; }
+.panel[hidden] { display: none; }
+.panel-head { margin-bottom: 1.6rem; }
+.panel-head p.eyebrow { font-size: .8rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.panel-head h2 { font-family: var(--serif); font-size: clamp(1.9rem, 3.4vw, 2.6rem); letter-spacing: -.01em; margin-top: .25rem; }
+.panel-head p.intro { color: var(--muted); margin-top: .6rem; max-width: 62ch; }
+.panel h3 { font-family: var(--serif); font-size: 1.35rem; margin-bottom: .4rem; }
+.prose p { max-width: 68ch; margin-bottom: 1rem; }
+.prose p:last-child { margin-bottom: 0; }
+.block { margin-top: 2.2rem; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 3rem; align-items: center; padding-top: .5rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2.3rem, 4.4vw, 3.3rem); letter-spacing: -.02em; line-height: 1.05; }
+.role { color: var(--link); font-weight: 600; margin-top: .7rem; font-size: 1.05rem; }
+.lead { margin-top: .9rem; max-width: 54ch; color: var(--muted); font-size: 1.03rem; }
+.status { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.1rem; font-size: .88rem; color: var(--ok); font-weight: 600; }
+.status i { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent); }
+.meta { margin-top: .6rem; color: var(--muted); }
+.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.3rem; }
+.btn { display: inline-flex; align-items: center; padding: .6rem 1.1rem; border: 1px solid var(--border-strong); border-radius: 11px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .95rem; font-weight: 500; cursor: pointer; }
+.btn:hover { border-color: var(--link); }
+.btn--primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-text); }
+.hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: 22px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.hero-ask { margin-top: 2.2rem; max-width: 640px; }
+.hero-ask .composer { padding: .55rem .6rem .55rem 1.1rem; flex-direction: row; align-items: center; gap: .6rem; border-radius: 999px; }
+.hero-ask textarea { min-height: 24px; height: 24px; padding: 0; font-size: .98rem; }
+.mini-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .7rem; }
+.mini-chips button { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: .3rem .8rem; font-size: .84rem; color: var(--muted); cursor: pointer; }
+.mini-chips button:hover { color: var(--text); border-color: var(--border-strong); }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.6rem; padding: 1.2rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stats b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.05rem; line-height: 1.3; }
+.stats span { font-size: .84rem; color: var(--muted); }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; margin: 2.4rem 0 1rem; }
+.sec-head h2 { font-family: var(--serif); font-size: 1.5rem; }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
+.card h3 small { font-family: var(--sans); font-size: .9rem; color: var(--muted); }
+.card .tag { font-size: .82rem; color: var(--muted); }
+.card .tag b { color: var(--ok); font-weight: 600; }
+.card .result { font-size: .93rem; color: var(--text); background: var(--surface-2); border-radius: 10px; padding: .5rem .75rem; }
+.cards--3 { grid-template-columns: repeat(2, 1fr); }
+.card .role-line { font-size: .9rem; color: var(--muted); }
+.card dl { display: grid; gap: .45rem; margin-top: .4rem; font-size: .93rem; }
+.card dl div { display: grid; grid-template-columns: 7rem 1fr; gap: .8rem; }
+.card dt { color: var(--muted); }
+.card .links { align-items: center; margin-top: auto; padding-top: .5rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
+.text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .92rem; }
+
+/* Thesis facts */
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.fact { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; }
+.fact b { display: block; font-family: var(--serif); font-size: 1.7rem; font-weight: 400; color: var(--link); }
+.fact span { font-size: .88rem; color: var(--muted); }
+.bullets { list-style: disc; padding-left: 1.3rem; display: grid; gap: .45rem; max-width: 70ch; }
+
+/* Skills */
+.skill-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.skill-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.15rem 1.2rem; }
+.skill-stat b { display: block; font-family: var(--serif); font-size: 1.65rem; font-weight: 400; color: var(--link); line-height: 1.15; }
+.skill-stat span { display: block; font-size: .86rem; color: var(--muted); margin-top: .3rem; }
+.skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.skill-grid > div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.15rem 1.3rem; display: flex; flex-direction: column; gap: .35rem; }
+.skill-grid dt { font-weight: 600; font-size: 1.02rem; }
+.skill-grid dd { color: var(--muted); font-size: .95rem; }
+.skill-grid .used { margin-top: .45rem; font-size: .84rem; color: var(--muted); }
+.skill-grid .impact { margin-top: .55rem; font-size: .88rem; color: var(--text); background: var(--surface-2); border-radius: 8px; padding: .45rem .7rem; }
+.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .25rem; }
+.pill { font-size: .85rem; padding: .25rem .7rem; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface-2); }
+.skill-soft { margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.4rem; }
+.skill-soft h3 { margin-bottom: .5rem; }
+.skill-soft p { color: var(--muted); max-width: 75ch; }
+
+/* Education / About denser layout */
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: start; }
+.about-grid .prose { margin: 0; }
+.timeline { display: grid; gap: 1.15rem; }
+.timeline div { border-left: 2px solid var(--border-strong); padding: .15rem 0 .15rem 1.15rem; }
+.timeline .when { font-size: .82rem; color: var(--link); font-weight: 600; }
+.timeline strong { display: block; font-weight: 600; font-size: 1.02rem; }
+.timeline .note { color: var(--muted); font-size: .94rem; }
+.awards { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.awards div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: .85rem 1rem; display: grid; gap: .25rem; }
+.awards span:first-child { color: var(--link); font-size: .82rem; font-weight: 600; }
+.awards span:last-child { font-size: .93rem; color: var(--text); }
+
+/* Contact */
+.contact-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 1.5rem; align-items: start; max-width: 1000px; }
+.contact-primary {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem 1.7rem;
+  display: flex; flex-direction: column; gap: 1.1rem;
+}
+.contact-primary .status-pill {
+  display: inline-flex; align-items: center; gap: .45rem; font-size: .82rem; font-weight: 600;
+  color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent);
+  border-radius: 999px; padding: .3rem .75rem; width: fit-content;
+}
+.contact-primary .status-pill i {
+  flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); display: inline-block;
+}
+.contact-primary h3 { font-family: var(--serif); font-size: 1.35rem; margin: 0; }
+.contact-primary p { color: var(--muted); font-size: .95rem; margin: 0; max-width: 42ch; }
+.contact-primary .btn-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: .3rem; }
+.contact-primary .btn { text-decoration: none; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+.contact-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 1.05rem 1.15rem; display: flex; flex-direction: column; gap: .35rem;
+  transition: border-color .15s, background .15s;
+}
+.contact-card--wide { grid-column: 1 / -1; }
+.contact-card:hover { border-color: var(--border-strong); background: var(--surface-2); }
+.contact-card .label { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.contact-card a, .contact-card .value { font-size: 1rem; color: var(--text); text-decoration: none; word-break: break-word; }
+.contact-card a:hover { color: var(--link); }
+.contact-card .icon { width: 18px; height: 18px; color: var(--muted); margin-bottom: .15rem; }
+.resume-block .resume-card { display: flex; gap: 1.5rem; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem 1.4rem; max-width: 1000px; }
+.resume-thumb { flex-shrink: 0; width: 150px; border: 1px solid var(--border-strong); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); background: #fff; line-height: 0; }
+.resume-thumb:hover { border-color: var(--link); }
+.resume-thumb img { width: 100%; height: auto; }
+.resume-info p { color: var(--muted); max-width: 44ch; }
+.resume-info .btn-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .9rem; }
+.pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .side { flex-direction: row; align-items: center; gap: .3rem; padding: .5rem .6rem; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .side::-webkit-scrollbar { display: none; }
+  /* Keep GitHub + theme reachable without scrolling: they come right after the avatar. */
+  .side-top { order: 0; }
+  .side-foot { order: 1; }
+  .nav-item--new { order: 2; }
+  .tabs { order: 3; }
+  .side-top, .side-label, .recents-wrap, .side-foot .label-desktop, .side-name { display: none; }
+  .side-top { display: flex; padding: 0 .3rem 0 0; flex-shrink: 0; }
+  .avatar { width: 34px; height: 34px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .skill-stats { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  .awards { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .hero-ask .composer { border-radius: 22px; }
+  .tabs { flex-direction: row; }
+  .tabs .nav-item, .nav-item { width: auto; white-space: nowrap; padding: .45rem .65rem; }
+  .nav-item--new { margin: 0; }
+  .side-foot { border: none; margin: 0; padding: 0; flex-direction: row; flex-shrink: 0; }
+  .side-foot .nav-item { padding: .45rem .55rem; }
+  .hero { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-photo { order: -1; max-width: 200px; }
+  .cards, .skill-grid, .facts, .cards--3 { grid-template-columns: 1fr; }
+  .chips { grid-template-columns: 1fr; }
+  .card dl div { grid-template-columns: 1fr; gap: .1rem; }
+  .resume-block .resume-card { flex-direction: column; align-items: flex-start; }
+  .resume-thumb { width: 130px; }
+}
+@media (max-width: 520px) {
+  .pf { padding-top: 1.5rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .composer-wrap { padding: .4rem .75rem 0; }
+  .chat-col { padding: 1rem .9rem .5rem; }
+  .msg-user { max-width: 90%; }
+  .btns .btn { flex: 1 1 auto; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="side" aria-label="Primary">
+  <div class="side-top">
+    <img class="avatar" src="avatar.jpg" width="44" height="44" alt="Shan Wesley Bachain">
+    <div class="side-name">Shan Wesley Bachain</div>
+  </div>
+
+  <button type="button" class="nav-item nav-item--new" data-new-chat>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    Ask my AI
+  </button>
+
+  <p class="side-label">Portfolio</p>
+  <div class="tabs" role="group" aria-label="Portfolio sections">
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="home" aria-current="true">Home</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="projects" aria-current="false">Projects</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="thesis" aria-current="false">Thesis</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="skills" aria-current="false">Skills</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="about" aria-current="false">About &amp; education</button>
+    <button type="button" class="nav-item" data-view="portfolio" data-panel="contact" aria-current="false">Contact</button>
+  </div>
+
+  <div class="recents-wrap">
+    <p class="side-label">Recent chats</p>
+    <div class="recents" id="recents" aria-label="Recent chats"></div>
+  </div>
+
+  <div class="side-foot">
+    <a class="nav-item" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5c0-1 .1-1.4-.5-2 2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.7 2.8 5.7 5.5 6-.6.5-.6 1.3-.5 2V21"/></svg>
+      <span class="label-desktop">GitHub</span><span class="sr-only"> (opens in a new tab)</span>
+    </a>
+    <button type="button" class="nav-item" id="themeBtn" aria-label="Switch to dark theme" aria-pressed="false">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <span class="label-desktop" id="themeLabel">Dark</span>
+    </button>
+  </div>
+</nav>
+
+<noscript><p style="position:fixed;inset:auto 0 0 0;z-index:10;margin:0;padding:.6rem 1rem;background:#fff4d6;color:#4a3b00;text-align:center;font-size:.9rem">JavaScript is needed for the tabs and the AI chat. Email: <a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></p></noscript>
+<main class="main" id="main">
+  <div class="view" id="viewPortfolio">
+    <div class="pf-scroll" id="pfScroll">
+      <div class="pf">
+
+        <!-- Home -->
+        <section class="panel" id="home" data-panel="home" aria-labelledby="hero-title">
+          <div class="hero">
+            <div>
+              <h1 id="hero-title">Shan Wesley Bachain</h1>
+              <p class="role">Computer Engineering Student · Full-Stack, AI &amp; IoT Developer</p>
+              <p class="lead">I build practical web applications, AI-powered tools, and ESP32 hardware systems. My focus is AI and human-centered software.</p>
+              <p class="status"><i aria-hidden="true"></i>Open to internships, collaborations, and freelance work · Graduating 2027</p>
+              <div class="btns">
+                <a class="btn btn--primary" href="resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
+                <button type="button" class="btn" data-view="portfolio" data-panel="projects">View projects</button>
+                <button type="button" class="btn" data-view="portfolio" data-panel="contact">Contact</button>
+              </div>
+            </div>
+            <figure class="hero-photo">
+              <img src="profile.jpg" width="520" height="650" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+            </figure>
+          </div>
+
+          <div class="hero-ask">
+            <form class="composer" id="heroAsk">
+              <label class="sr-only" for="heroInput">Ask my AI assistant</label>
+              <textarea id="heroInput" rows="1" maxlength="800" placeholder="Ask my AI about Shan's work"></textarea>
+              <button class="send" type="submit" aria-label="Ask">
+                <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+              </button>
+            </form>
+            <div class="mini-chips" role="group" aria-label="Suggested questions">
+              <button type="button" data-ask="Why should I hire Shan?">Why hire him?</button>
+              <button type="button" data-ask="What projects has Shan built?">What has he built?</button>
+              <button type="button" data-ask="What was his role in the thesis?">His thesis role</button>
+              <button type="button" data-ask="Is he open to internships?">Internship availability</button>
+            </div>
+          </div>
+
+          <div class="stats" role="list">
+            <div role="listitem"><b>Contest winner</b><span>2025 System-Making Contest</span></div>
+            <div role="listitem"><b>Top Performing Student</b><span>College of Engineering, URS</span></div>
+            <div role="listitem"><b>SM Foundation Scholar</b><span>2023 to 2027</span></div>
+            <div role="listitem"><b>Patent / utility model</b><span>Thesis submitted for registration</span></div>
+          </div>
+
+          <div class="sec-head">
+            <h2>Selected work</h2>
+            <button type="button" class="text-btn" data-view="portfolio" data-panel="projects">All projects</button>
+          </div>
+          <div class="cards">
+            <article class="card">
+              <h3>JobInterviewPro</h3>
+              <p class="tag"><b>Live</b> · Winner, 2025 System-Making Contest</p>
+              <p>AI-assisted interview practice platform. I was the backend developer, working with the Groq API, Firebase, and MySQL.</p>
+              <div class="links">
+                <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
+                <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
+              </div>
+            </article>
+            <article class="card">
+              <h3>Eco-Smart Station</h3>
+              <p class="tag">Thesis · Team of five · 100% filtration accuracy in 10 trials</p>
+              <p>ESP32-based rainwater harvesting and hybrid solar/microturbine station with coin-operated water and charging.</p>
+              <div class="links">
+                <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the case study</button>
+                <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="panel" id="projects" data-panel="projects" hidden aria-labelledby="projects-title">
+          <div class="panel-head">
+            <p class="eyebrow">Projects</p>
+            <h2 id="projects-title">What I have built</h2>
+            <p class="intro">From a backend-heavy interview platform to a hardware thesis prototype.</p>
+          </div>
+          <div class="cards">
+            <article class="card">
+              <h3>JobInterviewPro</h3>
+              <p class="tag"><b>Live</b> · API-based web application</p>
+              <p>Helps users practice job interviews and prepare for employment, using the Groq API for AI-assisted training.</p>
+              <p class="result">Winner, 2025 System-Making Contest</p>
+              <dl>
+                <div><dt>My role</dt><dd>Backend developer</dd></div>
+                <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Groq API, Firebase, MySQL</dd></div>
+              </dl>
+              <div class="links">
+                <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
+                <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>Eco-Smart Station <small>(RainErgy)</small></h3>
+              <p class="tag">Thesis project · Team of five</p>
+              <p>ESP32 prototype for rainwater harvesting, filtration, hybrid solar and microturbine power, and coin-operated water and charging.</p>
+              <p class="result">Submitted for patent or utility model registration</p>
+              <dl>
+                <div><dt>My role</dt><dd>Co-author on the team thesis</dd></div>
+                <div><dt>Built with</dt><dd>ESP32, sensors, multi-stage filtration, solar and microturbine power</dd></div>
+              </dl>
+              <div class="links">
+                <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the case study</button>
+                <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>DevKit</h3>
+              <p class="tag"><b>Live</b> · AI-powered toolkit</p>
+              <p>A document and code toolkit for students and developers. It formats JSON, edits Markdown, generates READMEs, and explains errors.</p>
+              <dl>
+                <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
+              </dl>
+              <div class="links">
+                <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of DevKit (opens in a new tab)</span></a>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>Aether</h3>
+              <p class="tag"><b>Live</b> · Interactive web</p>
+              <p>A living digital interface where the visitor's words become memory and their thoughts reshape a responsive field.</p>
+              <dl>
+                <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
+              </dl>
+              <div class="links">
+                <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of Aether (opens in a new tab)</span></a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Thesis -->
+        <section class="panel" id="thesis" data-panel="thesis" hidden aria-labelledby="thesis-title">
+          <div class="panel-head">
+            <p class="eyebrow">Thesis case study</p>
+            <h2 id="thesis-title">Eco-Smart Station (RainErgy)</h2>
+            <p class="intro">Development and Implementation of Eco-Smart Station: Rainwater Harvesting and Hybrid Energy Solutions for Water and Charging Accessibility. University of Rizal System, College of Engineering, Antipolo City, March 2027.</p>
+          </div>
+
+          <div class="facts">
+            <div class="fact"><b>100%</b><span>Water filtration accuracy (10 trials)</span></div>
+            <div class="fact"><b>4.64 / 4.72</b><span>Expert and end-user grand means, both "Very Much Acceptable"</span></div>
+            <div class="fact"><b>146</b><span>Evaluators: 10 experts and 136 end-users</span></div>
+          </div>
+
+          <div class="block prose">
+            <h3>What it is</h3>
+            <p>An integrated prototype that harvests rainwater into separate storage drums and filters it through a multi-stage unit. It generates hybrid solar and microturbine power, offers coin-operated water dispensing and device charging, and provides no-cost emergency water access. An ESP32 monitors the water level and performs automated chlorine dosing.</p>
+          </div>
+
+          <div class="block">
+            <h3>Method and results</h3>
+            <p class="meta" style="margin-bottom:.8rem">Developmental Research Design guided by the ADDIE model, with iterative build, test, and refine phases. Results come from 10 trials in a controlled setting.</p>
+            <ul class="bullets">
+              <li>Energy generation consistency: 80%.</li>
+              <li>Coin interface, water dispensing, device charging, chlorine dosing, water-level monitoring, and emergency water access: 90% each.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Limits and next steps</h3>
+            <p class="meta">The researchers note a controlled setting and a small expert sample. Planned future work includes laboratory water-quality testing, outdoor deployment, and cashless payment. No claim is made that the treated water is safe to drink until those tests are done.</p>
+          </div>
+
+          <div class="block">
+            <h3>Team</h3>
+            <p class="meta">Five co-authors: John Marlon Amador Aungon, Althea Lizette Rodriguez Palustre, Daron Miguel Sigua, Shan Wesley Bachain, and Vincent Bryant Lovedioro Yuson. For details on individual contributions, please contact Shan or ask the AI.</p>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="panel" id="skills" data-panel="skills" hidden aria-labelledby="skills-title">
+          <div class="panel-head">
+            <p class="eyebrow">Skills</p>
+            <h2 id="skills-title">Technical skills &amp; impact</h2>
+            <p class="intro">Tools I use in real projects, plus the results they delivered for users and stakeholders.</p>
+          </div>
+
+          <div class="skill-stats" role="list">
+            <div class="skill-stat" role="listitem">
+              <b>4</b>
+              <span>Projects built across web and hardware</span>
+            </div>
+            <div class="skill-stat" role="listitem">
+              <b>146</b>
+              <span>Experts and end-users who evaluated Eco-Smart Station</span>
+            </div>
+            <div class="skill-stat" role="listitem">
+              <b>100%</b>
+              <span>Filtration accuracy across 10 formal trials</span>
+            </div>
+            <div class="skill-stat" role="listitem">
+              <b>Winner</b>
+              <span>2025 System-Making Contest</span>
+            </div>
+          </div>
+
+          <dl class="skill-grid">
+            <div>
+              <dt>Programming &amp; web</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">Python</span>
+                  <span class="pill">PHP</span>
+                  <span class="pill">JavaScript</span>
+                  <span class="pill">HTML</span>
+                  <span class="pill">CSS</span>
+                </div>
+                <p class="used">JobInterviewPro · DevKit · Aether</p>
+                <p class="impact">Built and deployed 3 live web apps for interview practice, developer tooling, and interactive design.</p>
+              </dd>
+            </div>
+            <div>
+              <dt>Databases &amp; backend</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">MySQL</span>
+                  <span class="pill">Firebase</span>
+                  <span class="pill">NoSQL</span>
+                  <span class="pill">REST APIs</span>
+                </div>
+                <p class="used">JobInterviewPro backend</p>
+                <p class="impact">Built JobInterviewPro's backend: user data and session management with Firebase and MySQL, plus Groq-powered interview coaching.</p>
+              </dd>
+            </div>
+            <div>
+              <dt>Hardware &amp; embedded</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">ESP32</span>
+                  <span class="pill">Arduino</span>
+                  <span class="pill">Sensors</span>
+                  <span class="pill">IoT</span>
+                </div>
+                <p class="used">Eco-Smart Station (thesis)</p>
+                <p class="impact">100% filtration accuracy; coin-operated water &amp; charging serving community accessibility goals.</p>
+              </dd>
+            </div>
+            <div>
+              <dt>AI &amp; tooling</dt>
+              <dd>
+                <div class="pill-row">
+                  <span class="pill">Groq API</span>
+                  <span class="pill">AI prompting</span>
+                  <span class="pill">GitHub</span>
+                  <span class="pill">VS Code</span>
+                  <span class="pill">Vercel</span>
+                </div>
+                <p class="used">JobInterviewPro · DevKit · this portfolio</p>
+                <p class="impact">Integrated the Groq API for interview coaching and built DevKit, an AI-assisted toolkit for students and developers.</p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="skill-soft">
+            <h3>How I work</h3>
+            <p>I take ownership of tasks, research solutions independently, and deliver without constant supervision. I explain technical ideas clearly to classmates, panelists, and non-technical users. I collaborate well in teams (thesis group of five, shared codebases) and focus on measurable outcomes: a contest win, a validated prototype, and tools people can actually use.</p>
+          </div>
+        </section>
+
+        <!-- About & education -->
+        <section class="panel" id="about" data-panel="about" hidden aria-labelledby="about-title">
+          <div class="panel-head">
+            <p class="eyebrow">About &amp; education</p>
+            <h2 id="about-title">Who I am</h2>
+            <p class="intro">Fourth-year Computer Engineering student building practical AI, web, and embedded systems. Based in Angono, Rizal, Philippines. Graduating 2027.</p>
+          </div>
+
+          <div class="about-grid">
+            <div>
+              <div class="prose">
+                <p>I am a fourth-year B.S. Computer Engineering student at the University of Rizal System, Antipolo Campus. My work sits at the intersection of software, hardware, and AI — from full-stack web apps to ESP32 prototypes that solve real accessibility problems.</p>
+                <p>I focus on human-centered solutions: interview practice tools that help job seekers, developer utilities that remove friction, and community-facing hardware that delivers clean water and power. I use AI prompting as a core part of how I design and ship.</p>
+              </div>
+
+              <div class="block">
+                <h3>Education</h3>
+                <div class="timeline">
+                  <div>
+                    <span class="when">2023 – 2027 (expected)</span>
+                    <strong>B.S. Computer Engineering</strong>
+                    <span class="note">University of Rizal System, Antipolo Campus. Top Performing Student, College of Engineering.</span>
+                  </div>
+                  <div>
+                    <span class="when">2021 – 2023</span>
+                    <strong>Senior High School, STEM</strong>
+                    <span class="note">Sumulong College of Arts and Sciences. Valedictorian, With Highest Honors.</span>
+                  </div>
+                  <div>
+                    <span class="when">2017 – 2021</span>
+                    <strong>Junior High School</strong>
+                    <span class="note">Carlos "Botong" Francisco Memorial National High School. Valedictorian, With Honors.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3>Achievements</h3>
+              <div class="awards">
+                <div>
+                  <span>2025</span>
+                  <span>Winner, System-Making Contest — JobInterviewPro</span>
+                </div>
+                <div>
+                  <span>2025</span>
+                  <span>Research Seminar, BRITE Program, University of Rizal System</span>
+                </div>
+                <div>
+                  <span>2023 – 2027</span>
+                  <span>SM Foundation Scholar</span>
+                </div>
+                <div>
+                  <span>2023</span>
+                  <span>Third Place, Provincial Statistics Quiz Bee</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="panel" id="contact" data-panel="contact" hidden aria-labelledby="contact-title">
+          <div class="panel-head">
+            <p class="eyebrow">Contact</p>
+            <h2 id="contact-title">Let's talk</h2>
+            <p class="intro">Open to internships, collaborations, and freelance work. I usually reply within a day.</p>
+          </div>
+
+          <div class="contact-layout">
+            <div class="contact-primary">
+              <span class="status-pill"><i aria-hidden="true"></i> Available for opportunities</span>
+              <h3>Prefer email</h3>
+              <p>Best for internship inquiries, project collaborations, or freelance briefs. Include a bit about the role or idea and your timeline.</p>
+              <div class="btn-row">
+                <a class="btn btn--primary" href="mailto:bachainshanwesleyb@gmail.com">Email me</a>
+                <a class="btn" href="resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
+              </div>
+            </div>
+
+            <div class="contact-grid">
+              <div class="contact-card contact-card--wide">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+                <span class="label">Email</span>
+                <a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a>
+              </div>
+              <div class="contact-card">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.8 2z"/></svg>
+                <span class="label">Phone</span>
+                <a href="tel:+639762652310">0976 265 2310</a>
+              </div>
+              <div class="contact-card">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                <span class="label">Location</span>
+                <span class="value">Angono, Rizal, Philippines</span>
+              </div>
+              <div class="contact-card contact-card--wide">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3.3-.4 6.8-1.6 6.8-7.2 0-1.6-.6-2.9-1.5-3.9.1-.4.7-1.9-.1-3.9 0 0-1.2-.4-4 1.5a13.8 13.8 0 0 0-7.2 0C5.9 1.4 4.7 1.8 4.7 1.8c-.8 2-.2 3.5-.1 3.9-.9 1-1.5 2.3-1.5 3.9 0 5.6 3.5 6.8 6.8 7.2A4.7 4.7 0 0 0 9 18.2V22"/><path d="M9 18c-4.5 1.5-4.5-2.2-6.5-2.5"/></svg>
+                <span class="label">GitHub</span>
+                <a href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">github.com/shanxwesley<span class="sr-only"> (opens in a new tab)</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="block resume-block">
+            <h3>Resume</h3>
+            <div class="resume-card">
+              <a class="resume-thumb" href="resume.pdf" target="_blank" rel="noopener noreferrer">
+                <img src="resume-preview.jpg" width="1545" height="2000" loading="lazy" alt="Preview of Shan's one-page resume: summary, education, projects, skills, and honors">
+                <span class="sr-only">Open the resume PDF (opens in a new tab)</span>
+              </a>
+              <div class="resume-info">
+                <p>One page covering education, projects, technical skills, and honors.</p>
+                <div class="btn-row">
+                  <a class="btn btn--primary" href="resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download PDF</a>
+                  <a class="btn" href="resume.pdf" target="_blank" rel="noopener noreferrer">View in browser<span class="sr-only"> (opens in a new tab)</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p class="pf-foot">© <span id="year">2026</span> Shan Wesley Bachain</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat (Claude-style) -->
+  <div class="view view-chat" id="viewChat" hidden>
+    <div class="topbar">
+      <div class="topbar-title">Ask my AI <span>· Shan's assistant</span></div>
+      <button type="button" class="text-link" data-view="portfolio" data-panel="home">Back to portfolio</button>
+    </div>
+
+    <div class="chat-scroll" id="chatScroll">
+      <div class="chat-col">
+        <div class="welcome" id="welcome">
+          <h1>What would you like to know about Shan?</h1>
+          <p>Ask about projects, skills, education, the thesis, or availability.</p>
+          <div class="chips" id="chips" role="group" aria-label="Suggested questions"></div>
+        </div>
+        <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Conversation"></div>
+      </div>
+    </div>
+
+    <div class="composer-wrap">
+      <form class="composer" id="chatForm">
+        <label class="sr-only" for="chatInput">Your question</label>
+        <textarea id="chatInput" rows="1" maxlength="800" placeholder="Ask about Shan's projects, skills, or availability" autocomplete="off"></textarea>
+        <div class="composer-foot">
+          <button class="send" id="chatSend" type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </button>
+        </div>
+      </form>
+      <p class="chat-note">AI-generated and can be wrong. For anything important, email bachainshanwesleyb@gmail.com.</p>
+    </div>
+  </div>
+
+</main>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>

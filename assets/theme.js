@@ -1,0 +1,89 @@
+/* Shan Wesley Bachain: light/dark theme.
+ * Loaded synchronously in <head> so the saved theme is applied before first paint
+ * (no flash). No inline scripts: the CSP is script-src 'self'.
+ */
+(function () {
+  "use strict";
+
+  var KEY = "swb-theme";
+  var root = document.documentElement;
+  var COLORS = { light: "#f8fbff", dark: "#14181e" };
+  var MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+  var SUN =
+    '<circle cx="12" cy="12" r="4"/>' +
+    '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+
+  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+  function readSaved() {
+    try {
+      var v = localStorage.getItem(KEY);
+      return v === "light" || v === "dark" ? v : null;
+    } catch (e) {
+      return null; // storage blocked (private mode, file://, etc.)
+    }
+  }
+
+  function save(theme) {
+    try {
+      localStorage.setItem(KEY, theme);
+    } catch (e) {}
+  }
+
+  function effective() {
+    var attr = root.getAttribute("data-theme");
+    if (attr === "light" || attr === "dark") return attr;
+    return mq && mq.matches ? "dark" : "light";
+  }
+
+  // Apply a saved choice immediately (this script runs before the body is parsed).
+  var saved = readSaved();
+  if (saved) root.setAttribute("data-theme", saved);
+
+  function syncUi() {
+    var theme = effective();
+    var next = theme === "dark" ? "light" : "dark";
+
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < metas.length; i++) metas[i].setAttribute("content", COLORS[theme]);
+
+    var btn = document.getElementById("themeBtn");
+    if (!btn) return;
+    btn.setAttribute("aria-label", "Switch to " + next + " theme");
+    btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+
+    var label = document.getElementById("themeLabel");
+    if (label) label.textContent = next === "dark" ? "Dark" : "Light";
+
+    var icon = document.getElementById("themeIcon");
+    if (icon) icon.innerHTML = theme === "dark" ? SUN : MOON;
+  }
+
+  function toggle() {
+    var next = effective() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    save(next);
+    syncUi();
+  }
+
+  function init() {
+    var btn = document.getElementById("themeBtn");
+    if (btn) btn.addEventListener("click", toggle);
+    syncUi();
+  }
+
+  // Follow the OS setting live, unless the visitor has chosen a theme.
+  if (mq) {
+    var onChange = function () {
+      if (!readSaved()) {
+        root.removeAttribute("data-theme");
+        syncUi();
+      }
+    };
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
