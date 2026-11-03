@@ -24,7 +24,11 @@
 <meta name="twitter:description" content="Projects, skills, thesis, and an AI assistant that answers questions about Shan's work.">
 <meta name="twitter:image" content="https://swbportfolio.vercel.app/og-image.jpg">
 
+<meta name="application-name" content="Shan Wesley Bachain">
+<meta name="apple-mobile-web-app-title" content="Shan Wesley Bachain">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="apple-touch-icon.png" type="image/png" sizes="180x180">
+<link rel="shortcut icon" href="favicon.svg">
 <link rel="preload" as="image" href="profile.jpg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="assets/theme.js"></script>
@@ -95,7 +99,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   border-radius: 10px; color: var(--text); text-decoration: none; cursor: pointer; text-align: left; font-size: .94rem;
 }
 .nav-item:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
-.nav-item[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); font-weight: 600; box-shadow: inset 3px 0 0 var(--link); }
+.nav-item[aria-current="true"] { background: color-mix(in srgb, var(--text) 9%, transparent); font-weight: 600; }
 .nav-item svg { width: 17px; height: 17px; flex-shrink: 0; color: var(--muted); }
 .nav-item--new { border: 1px solid var(--border-strong); background: var(--surface); margin-bottom: .5rem; }
 .side-label { font-size: .74rem; color: var(--muted); padding: .9rem .6rem .35rem; }
@@ -296,6 +300,33 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .btn { transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
 .btn:hover { transform: translateY(-1px); }
 .btn--primary:hover { box-shadow: 0 8px 22px color-mix(in srgb, var(--link) 38%, transparent); }
+
+/* Refresh: frosted sidebar, tinted surfaces, rounder controls */
+.side {
+  background: color-mix(in srgb, var(--side) 84%, transparent);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.nav-item[aria-current="true"] {
+  background: color-mix(in srgb, var(--accent) 24%, transparent); color: var(--link);
+}
+.nav-item { border-radius: 12px; }
+.card, .skill-grid > div, .awards div, .contact-card { position: relative; overflow: hidden; }
+.card::before, .skill-grid > div::before, .contact-card::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--link));
+}
+.stats { border: none; padding: 0; gap: .9rem; }
+.stats > div {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid var(--border); border-radius: 16px; padding: 1rem 1.15rem;
+}
+.fact, .skill-stat {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
+.btn { border-radius: 999px; padding: .6rem 1.3rem; }
+.hero-photo img { border-radius: 28px; }
+.mini-chips button { border-radius: 999px; }
+.chips button { border-radius: 18px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
