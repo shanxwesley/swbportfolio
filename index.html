@@ -310,11 +310,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   background: color-mix(in srgb, var(--accent) 24%, transparent); color: var(--link);
 }
 .nav-item { border-radius: 12px; }
-.card, .skill-grid > div, .awards div, .contact-card { position: relative; overflow: hidden; }
-.card::before, .skill-grid > div::before, .contact-card::before {
-  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--link));
-}
 .stats { border: none; padding: 0; gap: .9rem; }
 .stats > div {
   background: color-mix(in srgb, var(--accent) 12%, var(--surface));
@@ -327,6 +322,22 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .hero-photo img { border-radius: 28px; }
 .mini-chips button { border-radius: 999px; }
 .chips button { border-radius: 18px; }
+
+/* More personality: tinted cards, icon badges, soft entrance */
+.card, .skill-grid > div, .contact-card, .awards div {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 12%, var(--surface)) 0%, var(--surface) 65%);
+  border-radius: 18px;
+}
+.contact-card .icon {
+  width: 36px; height: 36px; padding: 9px; box-sizing: border-box; border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 26%, transparent); color: var(--link);
+}
+.contact-card:hover { box-shadow: var(--shadow); }
+.pill { background: color-mix(in srgb, var(--accent) 16%, var(--surface-2)); }
+.panel:not([hidden]) { animation: rise .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.pf { position: relative; }
+.hero-ask .composer { background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
