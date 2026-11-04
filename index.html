@@ -379,6 +379,17 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .contact-card { min-height: 128px; padding: 1.25rem 1.35rem; justify-content: flex-start; }
 .contact-card:hover { transform: none !important; }
 @media (max-width: 520px) { .contact-grid, .awards { grid-template-columns: 1fr; } }
+/* ---------- About: fill the width, flat achievements list, flat contact rows ---------- */
+.about-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 4.5rem; align-items: start; }
+.about-grid .prose { max-width: none; }
+.about-grid > div:last-child > h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; padding-bottom: .7rem; border-bottom: 1px solid var(--border-strong); margin-bottom: .2rem; }
+.awards { display: grid; grid-template-columns: 1fr; gap: 0; }
+.awards div { background: none !important; border: none; border-bottom: 1px solid var(--border); border-radius: 0; padding: 1rem 0; min-height: 0; display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: baseline; box-shadow: none !important; transform: none !important; }
+.awards span:last-child { font-size: 1rem; color: var(--text); }
+.contact-card { background: var(--surface) !important; min-height: 96px; box-shadow: none !important; transform: none !important; }
+.contact-card:hover { border-color: var(--link); background: var(--surface) !important; }
+@media (max-width: 900px) { .about-grid { gap: 2.4rem; } .awards div { grid-template-columns: 4.5rem 1fr; } }
+@media (max-width: 520px) { .awards div { grid-template-columns: 1fr; gap: .2rem; } }
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
