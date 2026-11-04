@@ -129,11 +129,11 @@
     },
     {
       re: /thesis|eco[- ]?smart|rainergy|rainwater|esp32|filtrat/i,
-      a: "The thesis is **Eco-Smart Station (RainErgy)**, built by a team of five, with Shan as a co-author. It is an ESP32-based rainwater harvesting station with multi-stage filtration, hybrid solar and microturbine power, and coin-operated water and device charging.\n\nIn 10 trials it reached **100% filtration accuracy**. 10 experts and 136 end-users rated it \"Very Much Acceptable\" (grand means 4.64 and 4.72). It has been submitted for patent or utility model registration. For details on Shan's individual contribution, email bachainshanwesleyb@gmail.com."
+      a: "The thesis is **Eco-Smart Station (RainErgy)**, built by a team of five, with Shan as a co-author. It is an ESP32-based rainwater harvesting station with multi-stage filtration, hybrid solar and microturbine power, and coin-operated water and device charging.\n\nShan developed the automatic chlorine doser as a local app that reads input from the water level sensor. The thesis followed the ADDIE model, from analysis through evaluation. For more on the team split, email bachainshanwesleyb@gmail.com."
     },
     {
       re: /hire|hiring|convince|recruit|candidate|why\s+(should|choose|pick)|worth/i,
-      a: "Shan is a fourth-year Computer Engineering student who ships real work. He was the backend developer on **JobInterviewPro**, winner of the 2025 System-Making Contest, and his ESP32 thesis reached **100% filtration accuracy** with 146 evaluators rating it \"Very Much Acceptable\".\n\nHe is a Top Performing Student in the College of Engineering, a SM Foundation Scholar, and a former valedictorian. Teammates and panelists would describe him as a clear communicator who takes ownership.\n\nResume and contact details are on the Contact tab: bachainshanwesleyb@gmail.com"
+      a: "Shan is a fourth-year Computer Engineering student who ships real work. He was the backend developer on **JobInterviewPro**, winner of the 2025 System-Making Contest, and he developed the automatic chlorine doser app for his ESP32 thesis.\n\nHe is a Top Performing Student in the College of Engineering, a SM Foundation Scholar, and a former valedictorian. Teammates and panelists would describe him as a clear communicator who takes ownership.\n\nResume and contact details are on the Contact tab: bachainshanwesleyb@gmail.com"
     },
     {
       re: /intern|available|availab|open\s+to|freelance|collab|job|opportunit|work\s+for|when\s+can/i,
