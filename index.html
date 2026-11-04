@@ -215,15 +215,54 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .card .links { align-items: center; margin-top: auto; padding-top: .5rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
 .text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .92rem; }
 
-/* Project galleries */
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .5rem; margin-top: .75rem; }
-.gallery img { width: 100%; height: 86px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); }
-.gallery--wide { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-.gallery--wide img { height: 110px; }
-@media (max-width: 640px) {
-  .gallery { grid-template-columns: repeat(3, 1fr); }
-  .gallery img { height: 72px; }
+/* Project galleries - horizontal scroll showcase */
+.gallery {
+  display: flex;
+  gap: .7rem;
+  margin-top: .9rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .55rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
+.gallery::-webkit-scrollbar { height: 6px; }
+.gallery::-webkit-scrollbar-track { background: transparent; }
+.gallery::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+.gallery img {
+  flex: 0 0 auto;
+  width: 210px;
+  height: 140px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  scroll-snap-align: start;
+  box-shadow: 0 4px 14px rgba(31, 47, 61, .08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.gallery img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(31, 47, 61, .14);
+}
+.gallery--wide img {
+  width: 260px;
+  height: 170px;
+}
+@media (max-width: 640px) {
+  .gallery img { width: 170px; height: 115px; }
+  .gallery--wide img { width: 200px; height: 135px; }
+}
+
+/* Make project cards stack better with large galleries */
+.cards { grid-template-columns: 1fr; gap: 1.4rem; }
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+.card { padding: 1.5rem 1.6rem 1.4rem; }
+.card .gallery { margin-top: 1rem; }
 
 /* Thesis facts */
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
@@ -539,11 +578,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
         <section class="panel" id="home" data-panel="home" aria-labelledby="hero-title">
           <div class="hero">
             <div>
-              <p class="eyebrow-hi">Hi, I'm Shan</p>
+              <p class="eyebrow-hi">Hi, I&apos;m Shan</p>
               <h1 id="hero-title">Shan Wesley Bachain</h1>
-              <p class="role">Computer Engineering Student · Full-Stack, AI &amp; IoT Developer</p>
-              <p class="lead">I build practical web applications, AI-powered tools, and ESP32 hardware systems. My focus is AI and human-centered software.</p>
-              <p class="status"><i aria-hidden="true"></i>Open to internships, collaborations, and freelance work · Graduating 2027</p>
+              <p class="role">4th-year Computer Engineering Student · Full-Stack, AI &amp; IoT</p>
+              <p class="lead">I build practical web apps, AI-powered tools, and ESP32 hardware systems that solve real problems. Contest winner. SM Foundation Scholar. Open to internships and collaborations.</p>
+              <p class="status"><i aria-hidden="true"></i>Open to internships · Graduating 2027 · Based in Rizal, Philippines</p>
               <div class="btns">
                 <a class="btn btn--primary" href="resume.pdf" download="Bachain, Shan Wesley B. (Resume).pdf">Download resume</a>
                 <button type="button" class="btn" data-view="portfolio" data-panel="projects">View projects</button>
