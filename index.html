@@ -215,6 +215,16 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .card .links { align-items: center; margin-top: auto; padding-top: .5rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
 .text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .92rem; }
 
+/* Project galleries */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .5rem; margin-top: .75rem; }
+.gallery img { width: 100%; height: 86px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); }
+.gallery--wide { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.gallery--wide img { height: 110px; }
+@media (max-width: 640px) {
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+  .gallery img { height: 72px; }
+}
+
 /* Thesis facts */
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .fact { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; }
@@ -611,6 +621,16 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
                 <div><dt>My role</dt><dd>Backend developer</dd></div>
                 <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Groq API, Firebase, MySQL</dd></div>
               </dl>
+              <div class="gallery" aria-label="JobInterviewPro screenshots">
+                <img src="assets/projects/jobinterview/1.png" alt="JobInterviewPro main screen" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/2.png" alt="JobInterviewPro interview practice" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/3.png" alt="JobInterviewPro AI feedback" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/4.png" alt="JobInterviewPro dashboard" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/5.png" alt="JobInterviewPro question view" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/6.png" alt="JobInterviewPro results" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/7.png" alt="JobInterviewPro settings" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/8.png" alt="JobInterviewPro additional view" loading="lazy" width="320" height="200">
+              </div>
               <div class="links">
                 <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
                 <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
@@ -626,6 +646,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
                 <div><dt>My role</dt><dd>Co-author; developed the chlorine doser app</dd></div>
                 <div><dt>Built with</dt><dd>ESP32, sensors, multi-stage filtration, solar and microturbine power</dd></div>
               </dl>
+              <div class="gallery" aria-label="Eco-Smart Station screenshots">
+                <img src="assets/projects/thesis/1.png" alt="Eco-Smart Station prototype overview" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/2.png" alt="Eco-Smart Station hardware detail" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/3.png" alt="Eco-Smart Station filtration and sensors" loading="lazy" width="320" height="200">
+              </div>
               <div class="links">
                 <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the case study</button>
                 <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
@@ -639,6 +664,16 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               <dl>
                 <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
               </dl>
+              <div class="gallery" aria-label="DevKit screenshots">
+                <img src="assets/projects/devkit/1.png" alt="DevKit main interface" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/2.png" alt="DevKit JSON formatter" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/3.png" alt="DevKit Markdown editor" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/4.png" alt="DevKit README generator" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/5.png" alt="DevKit error explainer" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/6.png" alt="DevKit code tools" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/7.png" alt="DevKit additional view" loading="lazy" width="320" height="200">
+                <img src="assets/projects/devkit/8.png" alt="DevKit interface detail" loading="lazy" width="320" height="200">
+              </div>
               <div class="links">
                 <a href="https://devkit-five-livid.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of DevKit (opens in a new tab)</span></a>
               </div>
@@ -651,6 +686,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               <dl>
                 <div><dt>Built with</dt><dd>JavaScript, HTML, CSS, Vercel</dd></div>
               </dl>
+              <div class="gallery" aria-label="Aether screenshots">
+                <img src="assets/projects/aether/1.png" alt="Aether interactive field" loading="lazy" width="320" height="200">
+                <img src="assets/projects/aether/2.png" alt="Aether memory interface" loading="lazy" width="320" height="200">
+                <img src="assets/projects/aether/3.png" alt="Aether responsive view" loading="lazy" width="320" height="200">
+              </div>
               <div class="links">
                 <a href="https://aether-nine-dun.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of Aether (opens in a new tab)</span></a>
               </div>
@@ -681,6 +721,19 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
           <div class="block prose">
             <h3>What it is</h3>
             <p>An ESP32-based prototype that harvests rainwater, filters it through a multi-stage unit, and generates hybrid solar and microturbine power. It also offers coin-operated water dispensing, device charging, and emergency water access for the community.</p>
+          </div>
+
+          <div class="block">
+            <h3>Prototype photos</h3>
+            <div class="gallery gallery--wide" aria-label="Thesis prototype photos">
+              <img src="assets/projects/thesis/1.png" alt="Eco-Smart Station full prototype" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/2.png" alt="Station hardware assembly" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/3.png" alt="Filtration and sensor modules" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/4.png" alt="Power and control components" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/5.png" alt="Chlorine doser and water system" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/6.png" alt="Integrated station view" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/7.png" alt="Prototype detail and labeling" loading="lazy" width="400" height="280">
+            </div>
           </div>
 
           <div class="block">
