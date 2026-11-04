@@ -354,6 +354,31 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 @media (max-width: 900px) {
   .steps { grid-template-columns: 1fr; }
 }
+/* ---------- Personal brand touches (theme colors only) ---------- */
+.eyebrow-hi { display: inline-flex; align-items: center; gap: .6rem; font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; color: var(--link); font-weight: 600; margin-bottom: .9rem; }
+.eyebrow-hi::before { content: ""; width: 28px; height: 2px; background: var(--link); border-radius: 2px; }
+.panel-head h2 { position: relative; padding-bottom: .8rem; }
+.panel-head h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 44px; height: 3px; border-radius: 3px; background: var(--link); }
+.pull { font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.5; color: var(--text); border-left: 3px solid var(--link); padding: .2rem 0 .2rem 1.1rem; margin: 0 0 1.6rem; max-width: 48ch; }
+.signature { font-family: var(--serif); font-style: italic; color: var(--muted); margin-top: 1.2rem; font-size: 1rem; }
+.hero-photo img { border-radius: 26px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.role-callout { border-left: 4px solid var(--link); }
+.steps .n { background: var(--link); }
+@media (max-width: 900px) { .eyebrow-hi { justify-content: center; } .eyebrow-hi::before { display: none; } .pull { margin-inline: auto; text-align: center; border-left: none; } .panel-head h2::after { left: 50%; transform: translateX(-50%); } }
+/* ---------- Layout balance: About and Contact ---------- */
+.about-grid { grid-template-columns: 1fr; gap: 2.8rem; }
+.about-grid .prose { max-width: 70ch; }
+.about-grid > div:last-child h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.1rem; }
+.timeline { gap: 1.4rem; }
+.timeline div { padding: .3rem 0 .3rem 1.25rem; }
+.awards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.awards div { padding: 1.25rem 1.35rem; min-height: 120px; align-content: start; }
+.contact-layout { grid-template-columns: 1fr; gap: 1.2rem; }
+.contact-primary { padding: 1.8rem 2rem; }
+.contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.contact-card { min-height: 128px; padding: 1.25rem 1.35rem; justify-content: flex-start; }
+.contact-card:hover { transform: none !important; }
+@media (max-width: 520px) { .contact-grid, .awards { grid-template-columns: 1fr; } }
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
@@ -493,6 +518,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
         <section class="panel" id="home" data-panel="home" aria-labelledby="hero-title">
           <div class="hero">
             <div>
+              <p class="eyebrow-hi">Hi, I'm Shan</p>
               <h1 id="hero-title">Shan Wesley Bachain</h1>
               <p class="role">Computer Engineering Student · Full-Stack, AI &amp; IoT Developer</p>
               <p class="lead">I build practical web applications, AI-powered tools, and ESP32 hardware systems. My focus is AI and human-centered software.</p>
@@ -743,9 +769,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 
           <div class="about-grid">
             <div>
+              <p class="pull">Human-centered solutions that help real people, from job seekers to communities.</p>
               <div class="prose">
                 <p>I am a fourth-year B.S. Computer Engineering student at the University of Rizal System, Antipolo Campus. My work sits at the intersection of software, hardware, and AI — from full-stack web apps to ESP32 prototypes that solve real accessibility problems.</p>
                 <p>I focus on human-centered solutions: interview practice tools that help job seekers, developer utilities that remove friction, and community-facing hardware for water and power access. I use AI prompting as a core part of how I design and ship.</p>
+                <p class="signature">Shan Wesley Bachain · Angono, Rizal</p>
               </div>
 
               <div class="block">
