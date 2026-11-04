@@ -339,6 +339,21 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .pf { position: relative; }
 .hero-ask .composer { background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
 
+
+/* ---------- Thesis and skills detail (matches the site theme) ---------- */
+.hero h1 { font-size: clamp(2.5rem, 5vw, 3.7rem); }
+.facts .fact b { font-size: 1.45rem; }
+.role-callout { border-radius: 16px; padding: 1.4rem 1.5rem; background: var(--surface); border: 1px solid var(--border); }
+.role-callout .kicker { font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.role-callout h3 { margin-top: .3rem; font-size: 1.35rem; }
+.role-callout p:last-child { max-width: 64ch; margin-top: .5rem; }
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .75rem; }
+.steps li { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1rem; font-size: .88rem; color: var(--muted); line-height: 1.5; }
+.steps li b { display: block; color: var(--text); font-family: var(--serif); font-weight: 400; font-size: 1.1rem; margin-bottom: .35rem; }
+.steps .n { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); color: var(--btn-text); font-size: .8rem; font-weight: 600; margin-bottom: .6rem; }
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr; }
+}
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
@@ -513,7 +528,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
             <div role="listitem"><b>Contest winner</b><span>2025 System-Making Contest</span></div>
             <div role="listitem"><b>Top Performing Student</b><span>College of Engineering, URS</span></div>
             <div role="listitem"><b>SM Foundation Scholar</b><span>2023 to 2027</span></div>
-            <div role="listitem"><b>Patent / utility model</b><span>Thesis submitted for registration</span></div>
+            <div role="listitem"><b>Thesis role</b><span>Automatic chlorine doser app</span></div>
           </div>
 
           <div class="sec-head">
@@ -532,8 +547,8 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
             </article>
             <article class="card">
               <h3>Eco-Smart Station</h3>
-              <p class="tag">Thesis · Team of five · 100% filtration accuracy in 10 trials</p>
-              <p>ESP32-based rainwater harvesting and hybrid solar/microturbine station with coin-operated water and charging.</p>
+              <p class="tag">Thesis · Team of five</p>
+              <p>I developed the automatic chlorine doser as a local app that reads water level sensor input.</p>
               <div class="links">
                 <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the case study</button>
                 <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
@@ -568,10 +583,10 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
             <article class="card">
               <h3>Eco-Smart Station <small>(RainErgy)</small></h3>
               <p class="tag">Thesis project · Team of five</p>
-              <p>ESP32 prototype for rainwater harvesting, filtration, hybrid solar and microturbine power, and coin-operated water and charging.</p>
-              <p class="result">Submitted for patent or utility model registration</p>
+              <p>ESP32 prototype for rainwater harvesting, filtration, and hybrid solar and microturbine power, with coin-operated water and charging.</p>
+              <p class="result">My role: automatic chlorine doser local app</p>
               <dl>
-                <div><dt>My role</dt><dd>Co-author on the team thesis</dd></div>
+                <div><dt>My role</dt><dd>Co-author; developed the chlorine doser app</dd></div>
                 <div><dt>Built with</dt><dd>ESP32, sensors, multi-stage filtration, solar and microturbine power</dd></div>
               </dl>
               <div class="links">
@@ -611,37 +626,46 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
           <div class="panel-head">
             <p class="eyebrow">Thesis case study</p>
             <h2 id="thesis-title">Eco-Smart Station (RainErgy)</h2>
-            <p class="intro">Development and Implementation of Eco-Smart Station: Rainwater Harvesting and Hybrid Energy Solutions for Water and Charging Accessibility. University of Rizal System, College of Engineering, Antipolo City, March 2027.</p>
+            <p class="intro">Development and Implementation of Eco-Smart Station: Rainwater Harvesting and Hybrid Energy Solutions for Water and Charging Accessibility. University of Rizal System, College of Engineering, Antipolo City.</p>
           </div>
 
           <div class="facts">
-            <div class="fact"><b>100%</b><span>Water filtration accuracy (10 trials)</span></div>
-            <div class="fact"><b>4.64 / 4.72</b><span>Expert and end-user grand means, both "Very Much Acceptable"</span></div>
-            <div class="fact"><b>146</b><span>Evaluators: 10 experts and 136 end-users</span></div>
+            <div class="fact"><b>Team of 5</b><span>Co-authors who built one integrated system</span></div>
+            <div class="fact"><b>ADDIE</b><span>Developmental research design, from analysis to evaluation</span></div>
+            <div class="fact"><b>My role</b><span>Automatic chlorine doser, local app</span></div>
+          </div>
+
+          <div class="block role-callout">
+            <p class="kicker">My contribution</p>
+            <h3>Automatic chlorine doser (local app)</h3>
+            <p>I developed the local application that reads input from the water level sensor and controls the automatic chlorine dosing. It was my main technical responsibility in the station's monitoring and dosing system.</p>
           </div>
 
           <div class="block prose">
             <h3>What it is</h3>
-            <p>An integrated prototype that harvests rainwater into separate storage drums and filters it through a multi-stage unit. It generates hybrid solar and microturbine power, offers coin-operated water dispensing and device charging, and provides no-cost emergency water access. An ESP32 monitors the water level and performs automated chlorine dosing.</p>
+            <p>An ESP32-based prototype that harvests rainwater, filters it through a multi-stage unit, and generates hybrid solar and microturbine power. It also offers coin-operated water dispensing, device charging, and emergency water access for the community.</p>
           </div>
 
           <div class="block">
-            <h3>Method and results</h3>
-            <p class="meta" style="margin-bottom:.8rem">Developmental Research Design guided by the ADDIE model, with iterative build, test, and refine phases. Results come from 10 trials in a controlled setting.</p>
-            <ul class="bullets">
-              <li>Energy generation consistency: 80%.</li>
-              <li>Coin interface, water dispensing, device charging, chlorine dosing, water-level monitoring, and emergency water access: 90% each.</li>
-            </ul>
-          </div>
-
-          <div class="block">
-            <h3>Limits and next steps</h3>
-            <p class="meta">The researchers note a controlled setting and a small expert sample. Planned future work includes laboratory water-quality testing, outdoor deployment, and cashless payment. No claim is made that the treated water is safe to drink until those tests are done.</p>
+            <h3>How we built it</h3>
+            <p class="meta" style="margin-bottom:1rem">A Developmental Research Design guided by the ADDIE model, with repeated build, test, and refine cycles.</p>
+            <ol class="steps">
+              <li><span class="n">1</span><b>Analysis</b>Identified the need for water and charging access in the community.</li>
+              <li><span class="n">2</span><b>Design</b>Planned the hardware modules and how the control logic connects them.</li>
+              <li><span class="n">3</span><b>Development</b>Built the modules and wrote the local control app for dosing and monitoring.</li>
+              <li><span class="n">4</span><b>Implementation</b>Assembled the modules into one integrated station.</li>
+              <li><span class="n">5</span><b>Evaluation</b>Tested each module, then refined the design through repeated cycles.</li>
+            </ol>
           </div>
 
           <div class="block">
             <h3>Team</h3>
-            <p class="meta">Five co-authors: John Marlon Amador Aungon, Althea Lizette Rodriguez Palustre, Daron Miguel Sigua, Shan Wesley Bachain, and Vincent Bryant Lovedioro Yuson. For details on individual contributions, please contact Shan or ask the AI.</p>
+            <p class="meta">Five co-authors: John Marlon Amador Aungon, Althea Lizette Rodriguez Palustre, Daron Miguel Sigua, Shan Wesley Bachain, and Vincent Bryant Lovedioro Yuson. For more on how the work was split, contact Shan or ask the AI.</p>
+          </div>
+
+          <div class="block">
+            <h3>Next steps</h3>
+            <p class="meta">Future work includes outdoor deployment and cashless payment.</p>
           </div>
         </section>
 
@@ -649,27 +673,15 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
         <section class="panel" id="skills" data-panel="skills" hidden aria-labelledby="skills-title">
           <div class="panel-head">
             <p class="eyebrow">Skills</p>
-            <h2 id="skills-title">Technical skills &amp; impact</h2>
-            <p class="intro">Tools I use in real projects, plus the results they delivered for users and stakeholders.</p>
+            <h2 id="skills-title">Technical skills</h2>
+            <p class="intro">The tools I use in real projects, and how I apply them.</p>
           </div>
 
           <div class="skill-stats" role="list">
-            <div class="skill-stat" role="listitem">
-              <b>4</b>
-              <span>Projects built across web and hardware</span>
-            </div>
-            <div class="skill-stat" role="listitem">
-              <b>146</b>
-              <span>Experts and end-users who evaluated Eco-Smart Station</span>
-            </div>
-            <div class="skill-stat" role="listitem">
-              <b>100%</b>
-              <span>Filtration accuracy across 10 formal trials</span>
-            </div>
-            <div class="skill-stat" role="listitem">
-              <b>Winner</b>
-              <span>2025 System-Making Contest</span>
-            </div>
+            <div class="skill-stat" role="listitem"><b>4</b><span>Projects built across web and hardware</span></div>
+            <div class="skill-stat" role="listitem"><b>3</b><span>Live web apps I have deployed</span></div>
+            <div class="skill-stat" role="listitem"><b>Winner</b><span>2025 System-Making Contest</span></div>
+            <div class="skill-stat" role="listitem"><b>2027</b><span>Expected graduation, B.S. Computer Engineering</span></div>
           </div>
 
           <dl class="skill-grid">
@@ -677,61 +689,47 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               <dt>Programming &amp; web</dt>
               <dd>
                 <div class="pill-row">
-                  <span class="pill">Python</span>
-                  <span class="pill">PHP</span>
-                  <span class="pill">JavaScript</span>
-                  <span class="pill">HTML</span>
-                  <span class="pill">CSS</span>
+                  <span class="pill">Python</span><span class="pill">PHP</span><span class="pill">JavaScript</span><span class="pill">HTML</span><span class="pill">CSS</span>
                 </div>
                 <p class="used">JobInterviewPro · DevKit · Aether</p>
-                <p class="impact">Built and deployed 3 live web apps for interview practice, developer tooling, and interactive design.</p>
+                <p class="impact">Built and deployed three live web apps, from interview practice to developer tools and interactive design.</p>
               </dd>
             </div>
             <div>
               <dt>Databases &amp; backend</dt>
               <dd>
                 <div class="pill-row">
-                  <span class="pill">MySQL</span>
-                  <span class="pill">Firebase</span>
-                  <span class="pill">NoSQL</span>
-                  <span class="pill">REST APIs</span>
+                  <span class="pill">MySQL</span><span class="pill">Firebase</span><span class="pill">NoSQL</span>
                 </div>
                 <p class="used">JobInterviewPro backend</p>
-                <p class="impact">Built JobInterviewPro's backend: user data and session management with Firebase and MySQL, plus Groq-powered interview coaching.</p>
+                <p class="impact">Designed the backend for user data and session management with Firebase and MySQL.</p>
               </dd>
             </div>
             <div>
               <dt>Hardware &amp; embedded</dt>
               <dd>
                 <div class="pill-row">
-                  <span class="pill">ESP32</span>
-                  <span class="pill">Arduino</span>
-                  <span class="pill">Sensors</span>
-                  <span class="pill">IoT</span>
+                  <span class="pill">ESP32</span><span class="pill">Arduino</span><span class="pill">Sensors</span><span class="pill">IoT systems</span>
                 </div>
                 <p class="used">Eco-Smart Station (thesis)</p>
-                <p class="impact">100% filtration accuracy; coin-operated water &amp; charging serving community accessibility goals.</p>
+                <p class="impact">Developed a local app that reads sensor input and controls the automatic chlorine doser.</p>
               </dd>
             </div>
             <div>
-              <dt>AI &amp; tooling</dt>
+              <dt>AI &amp; tools</dt>
               <dd>
                 <div class="pill-row">
-                  <span class="pill">Groq API</span>
-                  <span class="pill">AI prompting</span>
-                  <span class="pill">GitHub</span>
-                  <span class="pill">VS Code</span>
-                  <span class="pill">Vercel</span>
+                  <span class="pill">Groq API</span><span class="pill">Llama models</span><span class="pill">AI prompting</span><span class="pill">GitHub</span><span class="pill">VS Code</span><span class="pill">Vercel</span>
                 </div>
                 <p class="used">JobInterviewPro · DevKit · this portfolio</p>
-                <p class="impact">Integrated the Groq API for interview coaching and built DevKit, an AI-assisted toolkit for students and developers.</p>
+                <p class="impact">Integrated the Groq API for AI coaching and feedback, and use AI prompting as part of how I design and ship.</p>
               </dd>
             </div>
           </dl>
 
           <div class="skill-soft">
             <h3>How I work</h3>
-            <p>I take ownership of tasks, research solutions independently, and deliver without constant supervision. I explain technical ideas clearly to classmates, panelists, and non-technical users. I collaborate well in teams (thesis group of five, shared codebases) and focus on measurable outcomes: a contest win, a validated prototype, and tools people can actually use.</p>
+            <p>I take ownership of tasks, research solutions on my own, and deliver without constant supervision. I explain technical ideas clearly to classmates, panelists, and non-technical users. I collaborate well in teams, from a five-person thesis group to shared codebases.</p>
           </div>
         </section>
 
@@ -747,7 +745,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
             <div>
               <div class="prose">
                 <p>I am a fourth-year B.S. Computer Engineering student at the University of Rizal System, Antipolo Campus. My work sits at the intersection of software, hardware, and AI — from full-stack web apps to ESP32 prototypes that solve real accessibility problems.</p>
-                <p>I focus on human-centered solutions: interview practice tools that help job seekers, developer utilities that remove friction, and community-facing hardware that delivers clean water and power. I use AI prompting as a core part of how I design and ship.</p>
+                <p>I focus on human-centered solutions: interview practice tools that help job seekers, developer utilities that remove friction, and community-facing hardware for water and power access. I use AI prompting as a core part of how I design and ship.</p>
               </div>
 
               <div class="block">
@@ -843,7 +841,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
             <h3>Resume</h3>
             <div class="resume-card">
               <a class="resume-thumb" href="resume.pdf" target="_blank" rel="noopener noreferrer">
-                <img src="resume-preview.jpg" width="1545" height="2000" loading="lazy" alt="Preview of Shan's one-page resume: summary, education, projects, skills, and honors">
+                <img src="resume-preview.jpg" width="1275" height="1650" loading="lazy" alt="Preview of Shan's one-page resume: summary, education, projects, skills, and honors">
                 <span class="sr-only">Open the resume PDF (opens in a new tab)</span>
               </a>
               <div class="resume-info">
