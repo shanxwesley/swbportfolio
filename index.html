@@ -215,54 +215,13 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .card .links { align-items: center; margin-top: auto; padding-top: .5rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: .92rem; }
 .text-btn { background: none; border: none; padding: 0; color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: .18em; font-size: .92rem; }
 
-/* Project galleries - horizontal scroll showcase */
-.gallery {
-  display: flex;
-  gap: .7rem;
-  margin-top: .9rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: .55rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
-}
-.gallery::-webkit-scrollbar { height: 6px; }
-.gallery::-webkit-scrollbar-track { background: transparent; }
-.gallery::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
-.gallery img {
-  flex: 0 0 auto;
-  width: 210px;
-  height: 140px;
-  object-fit: cover;
-  object-position: top center;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface-2);
-  scroll-snap-align: start;
-  box-shadow: 0 4px 14px rgba(31, 47, 61, .08);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.gallery img:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(31, 47, 61, .14);
-}
-.gallery--wide img {
-  width: 260px;
-  height: 170px;
-}
-@media (max-width: 640px) {
-  .gallery img { width: 170px; height: 115px; }
-  .gallery--wide img { width: 200px; height: 135px; }
-}
-
-/* Make project cards stack better with large galleries */
-.cards { grid-template-columns: 1fr; gap: 1.4rem; }
+/* Project cards: grid items must be allowed to shrink so galleries never push them off-screen.
+   The gallery itself is styled by assets/gallery.js (carousel + lightbox). */
+.cards { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; }
 @media (min-width: 900px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-.card { padding: 1.5rem 1.6rem 1.4rem; }
-.card .gallery { margin-top: 1rem; }
+.card { min-width: 0; padding: 1.5rem 1.6rem 1.4rem; }
 
 /* Thesis facts */
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
@@ -1026,5 +985,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 </main>
 
 <script src="assets/app.js" defer></script>
+<script src="assets/gallery.js" defer></script>
 </body>
 </html>
