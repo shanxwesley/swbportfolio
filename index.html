@@ -31,6 +31,9 @@
 <link rel="shortcut icon" href="favicon.svg">
 <link rel="preload" as="image" href="profile-cutout.webp">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="assets/theme.js"></script>
 <style>
 /* Shan Wesley Bachain. Claude-style layout with portfolio tabs. No build step. */
@@ -479,63 +482,94 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 }
 
 
-/* Hero portrait: cut-out popping out of a bold disc, with playful tech stickers around him */
+/* Hero portrait: cut-out on a themed stage (gradient, dot grid, orbit rings, floating tags) */
 .hero-me { position: relative; margin: 0; isolation: isolate; user-select: none; -webkit-user-select: none; }
-.hm-stage { display: none; }
-.hm-disc, .hm-orbit, .hm-deco { display: none; }
-.hm-me { display: block; pointer-events: none; -webkit-user-drag: none; }
-
+.hm-stage { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; border: 1px solid var(--border);
+  background:
+    radial-gradient(90% 55% at 50% 104%, color-mix(in srgb, var(--accent) 60%, transparent), transparent 72%),
+    linear-gradient(165deg, color-mix(in srgb, var(--accent) 40%, var(--surface)), color-mix(in srgb, var(--link) 26%, var(--surface)) 68%, color-mix(in srgb, var(--accent) 12%, var(--surface))); }
+.hm-stage::before { content: ""; position: absolute; inset: 0; opacity: .5;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--text) 30%, transparent) 1.1px, transparent 1.7px); background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(85% 70% at 50% 38%, #000, transparent 88%); mask-image: radial-gradient(85% 70% at 50% 38%, #000, transparent 88%); }
+.hm-ring { position: absolute; left: 50%; top: 40%; width: 92%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%;
+  border: 1.5px dashed color-mix(in srgb, var(--link) 50%, transparent); animation: hm-spin 70s linear infinite; }
+.hm-ring::after { content: ""; position: absolute; inset: 15%; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+.hm-ring::before { content: ""; position: absolute; top: -5px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--link); box-shadow: 0 0 12px var(--link); }
+.hm-me { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 97%; width: auto; max-width: none; pointer-events: none; -webkit-user-drag: none;
+  filter: drop-shadow(0 14px 22px rgba(8, 14, 22, .38)); }
+.hm-chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .4rem; padding: .34rem .7rem; border-radius: 999px; font-size: .72rem; font-weight: 600; letter-spacing: .01em; color: var(--text);
+  background: color-mix(in srgb, var(--surface) 76%, transparent); border: 1px solid var(--border-strong); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(8, 14, 22, .16); animation: hm-float 6s ease-in-out infinite; }
+.hm-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--link); box-shadow: 0 0 8px var(--link); }
+.hm-chip--1 { left: 5%; top: 26%; }
+.hm-chip--2 { right: 5%; top: 40%; animation-delay: -2s; }
+.hm-chip--3 { left: 5%; bottom: 17%; animation-delay: -4s; }
 @keyframes hm-spin { to { rotate: 360deg; } }
-@keyframes hm-bob { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-8px) rotate(calc(var(--r, 0deg) + 4deg)); } }
-@keyframes hm-twinkle { 0%, 100% { opacity: .95; scale: 1; } 50% { opacity: .45; scale: .7; } }
+@keyframes hm-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
+/* Desktop: portrait matches the full height of the text block; head pops above the stage */
 @media (min-width: 901px) {
-  .hero { grid-template-columns: minmax(0, 1fr) 320px; gap: 3.2rem; align-items: end; }
-  .hero-me { --w: 320px; width: var(--w); aspect-ratio: 657 / 971; justify-self: end; margin-right: 2.6rem; --cy: calc(var(--w) * 1.478 - var(--w) / 2); }
-  /* head and shoulders stay free above the disc; below its centre line he is trimmed to the disc's curve */
-  .hm-me { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
-    -webkit-mask-image: linear-gradient(to bottom, #000 var(--cy), transparent var(--cy)), radial-gradient(circle at 50% var(--cy), #000 calc(var(--w) / 2 - 1px), transparent calc(var(--w) / 2));
-            mask-image: linear-gradient(to bottom, #000 var(--cy), transparent var(--cy)), radial-gradient(circle at 50% var(--cy), #000 calc(var(--w) / 2 - 1px), transparent calc(var(--w) / 2));
-    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
-  .hm-disc { display: block; position: absolute; left: 0; bottom: 0; width: 100%; aspect-ratio: 1; border-radius: 50%; z-index: 0;
-    background: radial-gradient(70% 70% at 28% 20%, rgba(255,255,255,.6), transparent 62%), linear-gradient(150deg, #d6e8ff 0%, #bcd4fa 52%, #d3cdf6 100%);
-    box-shadow: 0 20px 40px rgba(125, 160, 225, .28), inset 0 0 0 3px rgba(255,255,255,.55); }
-  .hm-orbit { display: block; position: absolute; left: -3%; bottom: -3%; width: 106%; aspect-ratio: 1; border-radius: 50%; z-index: 0;
-    border: 1.5px dashed color-mix(in srgb, var(--link) 55%, transparent); animation: hm-spin 70s linear infinite; }
-  .hm-orbit::before { content: ""; position: absolute; top: 9%; right: 9%; width: 10px; height: 10px; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 14px #fbbf24; }
-  .hm-deco { display: block; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-  .hm-deco > * { position: absolute; }
-  .hm-b { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: #fff; border: 2px solid rgba(255,255,255,.9);
-    box-shadow: 0 10px 22px rgba(8,14,22,.28); animation: hm-bob 5.5s ease-in-out infinite; }
-  .hm-b svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .hm-b--code  { left: -2%; top: 19%; background: #1e293b; --r: -8deg; }
-  .hm-b--ai    { right: 1%; top: 6%; background: #8b5cf6; --r: 10deg; animation-delay: -1.5s; }
-  .hm-b--chip  { right: -3%; top: 39%; background: #14b8a6; --r: 6deg; animation-delay: -3s; }
-  .hm-b--bolt  { left: 1%; top: 61%; background: #f59e0b; --r: -6deg; animation-delay: -4.2s; }
-  .hm-sp { color: #fbbf24; animation: hm-twinkle 3.2s ease-in-out infinite; }
-  .hm-sp svg { display: block; width: 100%; height: 100%; fill: currentColor; }
-  .hm-sp--1 { left: 13%; top: 6%; width: 20px; height: 20px; }
-  .hm-sp--2 { right: 17%; top: 27%; width: 15px; height: 15px; color: #fff; animation-delay: -1.1s; }
-  .hm-sp--3 { left: 6%; top: 44%; width: 13px; height: 13px; color: #fff; animation-delay: -2.1s; }
-  .hm-sp--4 { right: 9%; top: 75%; width: 18px; height: 18px; animation-delay: -.6s; }
+  .hero { grid-template-columns: minmax(0, 1fr) 300px; gap: 3.5rem; align-items: stretch; }
+  .hero-me { min-height: 400px; clip-path: inset(-30% 0 0 0 round 0 0 28px 28px); }
+  .hm-stage { top: 10%; }
 }
-
-/* Mid-size desktop: smaller portrait so the text column keeps its room */
-@media (min-width: 901px) and (max-width: 1150px) {
-  .hero { grid-template-columns: minmax(0, 1fr) 230px; gap: 1.6rem; }
-  .hero-me { --w: 230px; margin-right: 1rem; }
-  .hm-b { width: 38px; height: 38px; }
-  .hm-b svg { width: 18px; height: 18px; }
-}
-
 /* Tablet / mobile: round badge */
 @media (max-width: 900px) {
   .hero-me { order: -1; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 24%, transparent), var(--shadow); }
-  .hm-stage { display: block; position: absolute; inset: 0; border-radius: 50%;
-    background: radial-gradient(70% 70% at 28% 20%, rgba(255,255,255,.6), transparent 62%), linear-gradient(150deg, #d6e8ff, #bcd4fa 55%, #d3cdf6); }
-  .hm-me { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: auto; height: 104%; max-width: none; }
+  .hm-stage { border-radius: 50%; border: 0; }
+  .hm-ring, .hm-chip { display: none; }
+  .hm-me { height: 104%; }
 }
 @media (max-width: 520px) { .hero-me { width: 130px; height: 130px; } }
+
+/* ---------- Modern display typography (inspired by the reference) ---------- */
+:root {
+  --serif: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+  --sans: "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body { letter-spacing: -0.005em; }
+
+/* Big, heavy, tightly set headlines */
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+/* Hero: solid text instead of the gradient fill */
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(3rem, 7.5vw, 6rem);
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: var(--text);
+  color: var(--text);
+}
+
+.panel-head h2 {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+.panel-head h2::after { height: 4px; width: 56px; }
+
+.welcome h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -0.04em; line-height: 0.95; }
+.sec-head h2, .panel h3, .role-callout h3, .contact-primary h3 { font-weight: 800; letter-spacing: -0.03em; }
+.fact b, .skill-stat b, .stats b, .side-name, .pull, .signature { font-family: var(--serif); font-weight: 800; letter-spacing: -0.02em; }
+.fact b, .skill-stat b { font-size: 2.2rem; }
+
+/* Body text: clean grotesque sans, like the reference's paragraph */
+.lead, .intro, .prose p, .card p, .msg-bot { font-family: var(--sans); font-size: 1.05rem; line-height: 1.55; letter-spacing: -0.005em; }
+.lead { font-size: 1.15rem; }
+
+/* Eyebrows and labels: small, uppercase, tracked */
+.eyebrow, .eyebrow-hi, .side-label, .kicker { font-family: var(--sans); font-weight: 600; letter-spacing: .14em; }
 </style>
 </head>
 <body>
@@ -615,20 +649,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               </div>
             </div>
             <figure class="hero-me">
-              <div class="hm-stage" aria-hidden="true"></div>
-              <span class="hm-disc" aria-hidden="true"></span>
-              <span class="hm-orbit" aria-hidden="true"></span>
+              <div class="hm-stage" aria-hidden="true"><span class="hm-ring"></span></div>
               <img class="hm-me" src="profile-cutout.webp" width="657" height="971" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
-              <div class="hm-deco" aria-hidden="true">
-                <span class="hm-b hm-b--code"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
-                <span class="hm-b hm-b--ai"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span>
-                <span class="hm-b hm-b--chip"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx=".8"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span>
-                <span class="hm-b hm-b--bolt"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
-                <span class="hm-sp hm-sp--1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg></span>
-                <span class="hm-sp hm-sp--2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg></span>
-                <span class="hm-sp hm-sp--3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg></span>
-                <span class="hm-sp hm-sp--4"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></svg></span>
-              </div>
+              <span class="hm-chip hm-chip--1" aria-hidden="true"><i></i>Full-Stack</span>
+              <span class="hm-chip hm-chip--2" aria-hidden="true"><i></i>AI tools</span>
+              <span class="hm-chip hm-chip--3" aria-hidden="true"><i></i>ESP32</span>
             </figure>
           </div>
 
