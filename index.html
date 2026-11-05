@@ -29,7 +29,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="apple-touch-icon.png" type="image/png" sizes="180x180">
 <link rel="shortcut icon" href="favicon.svg">
-<link rel="preload" as="image" href="profile.jpg">
+<link rel="preload" as="image" href="profile-cutout.webp">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="assets/theme.js"></script>
 <style>
@@ -187,7 +187,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .btn { display: inline-flex; align-items: center; padding: .6rem 1.1rem; border: 1px solid var(--border-strong); border-radius: 11px; background: var(--surface); color: var(--text); text-decoration: none; font-size: .95rem; font-weight: 500; cursor: pointer; }
 .btn:hover { border-color: var(--link); }
 .btn--primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-text); box-shadow: 0 6px 18px color-mix(in srgb, var(--link) 28%, transparent); }
-.hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: 22px; border: 1px solid var(--border); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent), var(--shadow); }
 .hero-ask { margin-top: 2.2rem; max-width: 640px; }
 .hero-ask .composer { padding: .55rem .6rem .55rem 1.1rem; flex-direction: row; align-items: center; gap: .6rem; border-radius: 999px; }
 .hero-ask textarea { min-height: 24px; height: 24px; padding: 0; font-size: .98rem; }
@@ -327,7 +326,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   background: color-mix(in srgb, var(--accent) 10%, var(--surface));
 }
 .btn { border-radius: 999px; padding: .6rem 1.3rem; }
-.hero-photo img { border-radius: 28px; }
 .mini-chips button { border-radius: 999px; }
 .chips button { border-radius: 18px; }
 
@@ -369,7 +367,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .panel-head h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 44px; height: 3px; border-radius: 3px; background: var(--link); }
 .pull { font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.5; color: var(--text); border-left: 3px solid var(--link); padding: .2rem 0 .2rem 1.1rem; margin: 0 0 1.6rem; max-width: 48ch; }
 .signature { font-family: var(--serif); font-style: italic; color: var(--muted); margin-top: 1.2rem; font-size: 1rem; }
-.hero-photo img { border-radius: 26px; border: 1px solid var(--border); box-shadow: var(--shadow); }
 .steps .n { background: var(--link); }
 @media (max-width: 900px) { .eyebrow-hi { justify-content: center; } .eyebrow-hi::before { display: none; } .pull { margin-inline: auto; text-align: center; border-left: none; } .panel-head h2::after { left: 50%; transform: translateX(-50%); } }
 /* ---------- Layout balance: About and Contact ---------- */
@@ -423,7 +420,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   .side-foot { border: none; margin: 0; padding: 0; flex-direction: row; flex-shrink: 0; }
   .side-foot .nav-item { padding: .45rem .55rem; }
   .hero { grid-template-columns: 1fr; gap: 2rem; }
-  .hero-photo { order: -1; max-width: 200px; }
   .cards, .skill-grid, .facts, .cards--3 { grid-template-columns: 1fr; }
   .chips { grid-template-columns: 1fr; }
   .card dl div { grid-template-columns: 1fr; gap: .1rem; }
@@ -466,8 +462,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 
   .hero { grid-template-columns: 1fr; gap: 1.6rem; justify-items: center; text-align: center; }
   .hero > div:first-child { display: flex; flex-direction: column; align-items: center; }
-  .hero-photo { order: -1; margin: 0; width: 150px; max-width: 150px; }
-  .hero-photo img { aspect-ratio: 1 / 1; border-radius: 50%; width: 150px; height: 150px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 24%, transparent), var(--shadow); }
   .hero h1 { font-size: clamp(2rem, 9vw, 2.5rem); }
   .hero .lead { font-size: .98rem; max-width: 36ch; margin-inline: auto; }
   .status { justify-content: center; }
@@ -479,11 +473,51 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
   .pf { padding-inline: 1rem; }
 }
 @media (max-width: 520px) {
-  .hero-photo, .hero-photo img { width: 130px; height: 130px; max-width: 130px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+
+/* Hero portrait: cut-out on a themed stage (gradient, dot grid, orbit rings, floating tags) */
+.hero-me { position: relative; margin: 0; isolation: isolate; user-select: none; -webkit-user-select: none; }
+.hm-stage { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; border: 1px solid var(--border);
+  background:
+    radial-gradient(90% 55% at 50% 104%, color-mix(in srgb, var(--accent) 60%, transparent), transparent 72%),
+    linear-gradient(165deg, color-mix(in srgb, var(--accent) 40%, var(--surface)), color-mix(in srgb, var(--link) 26%, var(--surface)) 68%, color-mix(in srgb, var(--accent) 12%, var(--surface))); }
+.hm-stage::before { content: ""; position: absolute; inset: 0; opacity: .5;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--text) 30%, transparent) 1.1px, transparent 1.7px); background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(85% 70% at 50% 38%, #000, transparent 88%); mask-image: radial-gradient(85% 70% at 50% 38%, #000, transparent 88%); }
+.hm-ring { position: absolute; left: 50%; top: 40%; width: 92%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%;
+  border: 1.5px dashed color-mix(in srgb, var(--link) 50%, transparent); animation: hm-spin 70s linear infinite; }
+.hm-ring::after { content: ""; position: absolute; inset: 15%; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+.hm-ring::before { content: ""; position: absolute; top: -5px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--link); box-shadow: 0 0 12px var(--link); }
+.hm-me { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 97%; width: auto; max-width: none; pointer-events: none; -webkit-user-drag: none;
+  filter: drop-shadow(0 14px 22px rgba(8, 14, 22, .38)); }
+.hm-chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .4rem; padding: .34rem .7rem; border-radius: 999px; font-size: .72rem; font-weight: 600; letter-spacing: .01em; color: var(--text);
+  background: color-mix(in srgb, var(--surface) 76%, transparent); border: 1px solid var(--border-strong); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(8, 14, 22, .16); animation: hm-float 6s ease-in-out infinite; }
+.hm-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--link); box-shadow: 0 0 8px var(--link); }
+.hm-chip--1 { left: 5%; top: 26%; }
+.hm-chip--2 { right: 5%; top: 40%; animation-delay: -2s; }
+.hm-chip--3 { left: 5%; bottom: 17%; animation-delay: -4s; }
+@keyframes hm-spin { to { rotate: 360deg; } }
+@keyframes hm-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+/* Desktop: portrait matches the full height of the text block; head pops above the stage */
+@media (min-width: 901px) {
+  .hero { grid-template-columns: minmax(0, 1fr) 300px; gap: 3.5rem; align-items: stretch; }
+  .hero-me { min-height: 400px; clip-path: inset(-30% 0 0 0 round 0 0 28px 28px); }
+  .hm-stage { top: 10%; }
+}
+/* Tablet / mobile: round badge */
+@media (max-width: 900px) {
+  .hero-me { order: -1; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 24%, transparent), var(--shadow); }
+  .hm-stage { border-radius: 50%; border: 0; }
+  .hm-ring, .hm-chip { display: none; }
+  .hm-me { height: 104%; }
+}
+@media (max-width: 520px) { .hero-me { width: 130px; height: 130px; } }
 </style>
 </head>
 <body>
@@ -546,26 +580,29 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
                 <button type="button" class="btn" data-view="portfolio" data-panel="projects">View projects</button>
                 <button type="button" class="btn" data-view="portfolio" data-panel="contact">Contact</button>
               </div>
+              <div class="hero-ask">
+                <form class="composer" id="heroAsk">
+                  <label class="sr-only" for="heroInput">Ask my AI assistant</label>
+                  <textarea id="heroInput" rows="1" maxlength="800" placeholder="Ask my AI about Shan's work"></textarea>
+                  <button class="send" type="submit" aria-label="Ask">
+                    <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
+                  </button>
+                </form>
+                <div class="mini-chips" role="group" aria-label="Suggested questions">
+                  <button type="button" data-ask="Why should I hire Shan?">Why hire him?</button>
+                  <button type="button" data-ask="What projects has Shan built?">What has he built?</button>
+                  <button type="button" data-ask="What was his role in the thesis?">His thesis role</button>
+                  <button type="button" data-ask="Is he open to internships?">Internship availability</button>
+                </div>
+              </div>
             </div>
-            <figure class="hero-photo">
-              <img src="profile.jpg" width="520" height="650" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+            <figure class="hero-me">
+              <div class="hm-stage" aria-hidden="true"><span class="hm-ring"></span></div>
+              <img class="hm-me" src="profile-cutout.webp" width="657" height="971" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
+              <span class="hm-chip hm-chip--1" aria-hidden="true"><i></i>Full-Stack</span>
+              <span class="hm-chip hm-chip--2" aria-hidden="true"><i></i>AI tools</span>
+              <span class="hm-chip hm-chip--3" aria-hidden="true"><i></i>ESP32</span>
             </figure>
-          </div>
-
-          <div class="hero-ask">
-            <form class="composer" id="heroAsk">
-              <label class="sr-only" for="heroInput">Ask my AI assistant</label>
-              <textarea id="heroInput" rows="1" maxlength="800" placeholder="Ask my AI about Shan's work"></textarea>
-              <button class="send" type="submit" aria-label="Ask">
-                <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>
-              </button>
-            </form>
-            <div class="mini-chips" role="group" aria-label="Suggested questions">
-              <button type="button" data-ask="Why should I hire Shan?">Why hire him?</button>
-              <button type="button" data-ask="What projects has Shan built?">What has he built?</button>
-              <button type="button" data-ask="What was his role in the thesis?">His thesis role</button>
-              <button type="button" data-ask="Is he open to internships?">Internship availability</button>
-            </div>
           </div>
 
           <div class="stats" role="list">
