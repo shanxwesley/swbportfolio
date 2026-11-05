@@ -479,43 +479,26 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 }
 
 
-/* Hero portrait: cut-out on a themed stage (gradient, dot grid, orbit rings, floating tags) */
+/* Hero portrait: transparent cut-out standing directly on the page, with a soft glow and a fade at the bottom */
 .hero-me { position: relative; margin: 0; isolation: isolate; user-select: none; -webkit-user-select: none; }
-.hm-stage { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; border: 1px solid var(--border);
-  background:
-    radial-gradient(90% 55% at 50% 104%, color-mix(in srgb, var(--accent) 60%, transparent), transparent 72%),
-    linear-gradient(165deg, color-mix(in srgb, var(--accent) 40%, var(--surface)), color-mix(in srgb, var(--link) 26%, var(--surface)) 68%, color-mix(in srgb, var(--accent) 12%, var(--surface))); }
-.hm-stage::before { content: ""; position: absolute; inset: 0; opacity: .5;
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--text) 30%, transparent) 1.1px, transparent 1.7px); background-size: 18px 18px;
-  -webkit-mask-image: radial-gradient(85% 70% at 50% 38%, #000, transparent 88%); mask-image: radial-gradient(85% 70% at 50% 38%, #000, transparent 88%); }
-.hm-ring { position: absolute; left: 50%; top: 40%; width: 92%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%;
-  border: 1.5px dashed color-mix(in srgb, var(--link) 50%, transparent); animation: hm-spin 70s linear infinite; }
-.hm-ring::after { content: ""; position: absolute; inset: 15%; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
-.hm-ring::before { content: ""; position: absolute; top: -5px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--link); box-shadow: 0 0 12px var(--link); }
-.hm-me { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 97%; width: auto; max-width: none; pointer-events: none; -webkit-user-drag: none;
-  filter: drop-shadow(0 14px 22px rgba(8, 14, 22, .38)); }
-.hm-chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: .4rem; padding: .34rem .7rem; border-radius: 999px; font-size: .72rem; font-weight: 600; letter-spacing: .01em; color: var(--text);
-  background: color-mix(in srgb, var(--surface) 76%, transparent); border: 1px solid var(--border-strong); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 8px 20px rgba(8, 14, 22, .16); animation: hm-float 6s ease-in-out infinite; }
-.hm-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--link); box-shadow: 0 0 8px var(--link); }
-.hm-chip--1 { left: 5%; top: 26%; }
-.hm-chip--2 { right: 5%; top: 40%; animation-delay: -2s; }
-.hm-chip--3 { left: 5%; bottom: 17%; animation-delay: -4s; }
-@keyframes hm-spin { to { rotate: 360deg; } }
-@keyframes hm-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.hm-stage { display: none; }
+.hm-me { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%); mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  filter: drop-shadow(0 10px 24px rgba(8, 14, 22, .28)); }
+.hero-me::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 46%; width: 125%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 38%, transparent), color-mix(in srgb, var(--accent) 12%, transparent) 55%, transparent 100%); filter: blur(10px); }
 
-/* Desktop: portrait matches the full height of the text block; head pops above the stage */
+/* Desktop: portrait sits at the bottom of the text block, level with the question chips */
 @media (min-width: 901px) {
-  .hero { grid-template-columns: minmax(0, 1fr) 300px; gap: 3.5rem; align-items: stretch; }
-  .hero-me { min-height: 400px; clip-path: inset(-30% 0 0 0 round 0 0 28px 28px); }
-  .hm-stage { top: 10%; }
+  .hero { grid-template-columns: minmax(0, 1fr) 320px; gap: 3rem; align-items: end; }
 }
 /* Tablet / mobile: round badge */
 @media (max-width: 900px) {
   .hero-me { order: -1; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 24%, transparent), var(--shadow); }
-  .hm-stage { border-radius: 50%; border: 0; }
-  .hm-ring, .hm-chip { display: none; }
-  .hm-me { height: 104%; }
+  .hero-me::before { display: none; }
+  .hm-stage { display: block; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(90% 55% at 50% 104%, color-mix(in srgb, var(--accent) 60%, transparent), transparent 72%), linear-gradient(165deg, color-mix(in srgb, var(--accent) 40%, var(--surface)), color-mix(in srgb, var(--link) 26%, var(--surface))); }
+  .hm-me { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: auto; height: 104%; max-width: none; -webkit-mask-image: none; mask-image: none; }
 }
 @media (max-width: 520px) { .hero-me { width: 130px; height: 130px; } }
 </style>
@@ -597,11 +580,8 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               </div>
             </div>
             <figure class="hero-me">
-              <div class="hm-stage" aria-hidden="true"><span class="hm-ring"></span></div>
+              <div class="hm-stage" aria-hidden="true"></div>
               <img class="hm-me" src="profile-cutout.webp" width="657" height="971" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
-              <span class="hm-chip hm-chip--1" aria-hidden="true"><i></i>Full-Stack</span>
-              <span class="hm-chip hm-chip--2" aria-hidden="true"><i></i>AI tools</span>
-              <span class="hm-chip hm-chip--3" aria-hidden="true"><i></i>ESP32</span>
             </figure>
           </div>
 
