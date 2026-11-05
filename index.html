@@ -370,7 +370,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
 .pull { font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.5; color: var(--text); border-left: 3px solid var(--link); padding: .2rem 0 .2rem 1.1rem; margin: 0 0 1.6rem; max-width: 48ch; }
 .signature { font-family: var(--serif); font-style: italic; color: var(--muted); margin-top: 1.2rem; font-size: 1rem; }
 .hero-photo img { border-radius: 26px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-.role-callout { border-left: 4px solid var(--link); }
 .steps .n { background: var(--link); }
 @media (max-width: 900px) { .eyebrow-hi { justify-content: center; } .eyebrow-hi::before { display: none; } .pull { margin-inline: auto; text-align: center; border-left: none; } .panel-head h2::after { left: 50%; transform: translateX(-50%); } }
 /* ---------- Layout balance: About and Contact ---------- */
@@ -585,6 +584,13 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               <h3>JobInterviewPro</h3>
               <p class="tag"><b>Live</b> · Winner, 2025 System-Making Contest</p>
               <p>AI-assisted interview practice platform. I was the backend developer, working with the Groq API, Firebase, and MySQL.</p>
+              <div class="gallery gallery--stack" aria-label="JobInterviewPro screenshots">
+                <img src="assets/projects/jobinterview/1.png" alt="JobInterviewPro main screen" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/3.png" alt="JobInterviewPro AI feedback" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/4.png" alt="JobInterviewPro dashboard" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/6.png" alt="JobInterviewPro results" loading="lazy" width="320" height="200">
+                <img src="assets/projects/jobinterview/7.png" alt="JobInterviewPro settings" loading="lazy" width="320" height="200">
+              </div>
               <div class="links">
                 <a href="https://interviewprox.rf.gd/job-interview/public/" target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> of JobInterviewPro (opens in a new tab)</span></a>
                 <button type="button" class="text-btn" data-ask="Tell me about the JobInterviewPro project and Shan's role">Ask AI</button>
@@ -594,6 +600,13 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
               <h3>Eco-Smart Station</h3>
               <p class="tag">Thesis · Team of five</p>
               <p>I developed the automatic chlorine doser as a local app that reads water level sensor input.</p>
+              <div class="gallery gallery--stack" aria-label="EcoSmart web app screenshots">
+                <img src="assets/projects/thesis/1.png" alt="EcoSmart web app landing page" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/4.png" alt="EcoSmart web app: live monitoring dashboard" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/5.png" alt="EcoSmart web app: analytics charts" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/3.png" alt="EcoSmart web app: capabilities" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/6.png" alt="EcoSmart web app: doser manual" loading="lazy" width="320" height="200">
+              </div>
               <div class="links">
                 <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the case study</button>
                 <button type="button" class="text-btn" data-ask="Explain the Eco-Smart Station thesis: what was built, tested, and still planned">Ask AI</button>
@@ -644,10 +657,10 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
                 <div><dt>My role</dt><dd>Co-author; developed the chlorine doser app</dd></div>
                 <div><dt>Built with</dt><dd>ESP32, sensors, multi-stage filtration, solar and microturbine power</dd></div>
               </dl>
-              <div class="gallery" aria-label="Eco-Smart Station screenshots">
-                <img src="assets/projects/thesis/1.png" alt="Eco-Smart Station prototype overview" loading="lazy" width="320" height="200">
-                <img src="assets/projects/thesis/2.png" alt="Eco-Smart Station hardware detail" loading="lazy" width="320" height="200">
-                <img src="assets/projects/thesis/3.png" alt="Eco-Smart Station filtration and sensors" loading="lazy" width="320" height="200">
+              <div class="gallery" aria-label="EcoSmart web app screenshots">
+                <img src="assets/projects/thesis/1.png" alt="EcoSmart web app landing page" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/2.png" alt="EcoSmart web app: how the station works" loading="lazy" width="320" height="200">
+                <img src="assets/projects/thesis/3.png" alt="EcoSmart web app: capabilities" loading="lazy" width="320" height="200">
               </div>
               <div class="links">
                 <button type="button" class="text-btn" data-view="portfolio" data-panel="thesis">Read the case study</button>
@@ -722,15 +735,16 @@ h1, h2, h3 { line-height: 1.2; font-weight: 400; }
           </div>
 
           <div class="block">
-            <h3>Prototype photos</h3>
-            <div class="gallery gallery--wide" aria-label="Thesis prototype photos">
-              <img src="assets/projects/thesis/1.png" alt="Eco-Smart Station full prototype" loading="lazy" width="400" height="280">
-              <img src="assets/projects/thesis/2.png" alt="Station hardware assembly" loading="lazy" width="400" height="280">
-              <img src="assets/projects/thesis/3.png" alt="Filtration and sensor modules" loading="lazy" width="400" height="280">
-              <img src="assets/projects/thesis/4.png" alt="Power and control components" loading="lazy" width="400" height="280">
-              <img src="assets/projects/thesis/5.png" alt="Chlorine doser and water system" loading="lazy" width="400" height="280">
-              <img src="assets/projects/thesis/6.png" alt="Integrated station view" loading="lazy" width="400" height="280">
-              <img src="assets/projects/thesis/7.png" alt="Prototype detail and labeling" loading="lazy" width="400" height="280">
+            <h3>The EcoSmart web app</h3>
+            <p>The web app I built for the thesis: live monitoring, chlorine dosing control, analytics, and a built-in doser manual.</p>
+            <div class="gallery gallery--wide" aria-label="EcoSmart web app screenshots">
+              <img src="assets/projects/thesis/1.png" alt="EcoSmart web app landing page" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/2.png" alt="EcoSmart web app: how the station works" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/3.png" alt="EcoSmart web app: capabilities" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/4.png" alt="EcoSmart web app: live monitoring dashboard" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/5.png" alt="EcoSmart web app: analytics charts" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/6.png" alt="EcoSmart web app: doser manual" loading="lazy" width="400" height="280">
+              <img src="assets/projects/thesis/7.png" alt="EcoSmart web app: settings and configuration" loading="lazy" width="400" height="280">
             </div>
           </div>
 
