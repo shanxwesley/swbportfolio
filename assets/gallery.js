@@ -33,6 +33,20 @@
 .reel-card:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; transform: translateY(-8px) rotate(0deg) scale(1.04); z-index: 2; }
 .reel-card.is-hidden-src { visibility: hidden; }
 
+/* Shuffling stack (home page) */
+.deck { position: relative; aspect-ratio: 2.05 / 1; width: calc(100% - 3.4rem); margin: 2rem 3.4rem 1.6rem 0; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.deck-card { position: absolute; inset: 0; padding: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface-2); cursor: zoom-in; display: block;
+  box-shadow: 0 12px 28px rgba(31,47,61,.18);
+  transform-origin: 20% 100%;
+  transition: transform .7s cubic-bezier(.3,.9,.3,1), opacity .5s ease, box-shadow .5s ease; }
+.deck-card img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; pointer-events: none; -webkit-user-drag: none; }
+.deck-card.is-fly { transition: transform .6s cubic-bezier(.5,0,.8,.4), opacity .6s ease; transform: translate(-70%, -12%) rotate(-16deg) !important; opacity: 0 !important; }
+.deck-card.no-anim { transition: none !important; }
+.deck-card:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+@media (hover: hover) { .deck:hover .deck-card[data-p="0"] { box-shadow: 0 20px 40px rgba(31,47,61,.3); } }
+@media (max-width: 520px) { .deck { width: calc(100% - 2.4rem); margin-right: 2.4rem; } }
+@media (prefers-reduced-motion: reduce) { .deck-card { transition: none; } }
+
 /* Lightbox */
 .lb { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .5rem; padding: calc(3.5rem + env(safe-area-inset-top, 0px)) .75rem calc(1rem + env(safe-area-inset-bottom, 0px)); background: rgba(8,12,17,.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .lb[hidden] { display: none; }
@@ -156,8 +170,95 @@
     if (Math.abs(dx) > 50) lbShow(lbIdx + (dx < 0 ? 1 : -1));
   });
 
+
+  /* ---------- Shuffling stack: top card flicks away, the rest move up ---------- */
+  function buildStack(g) {
+    const imgs = [...g.querySelectorAll('img')];
+    if (imgs.length < 2) return;
+    const items = imgs.map((i) => ({ src: i.currentSrc || i.getAttribute('src'), alt: i.alt || 'Screenshot' }));
+    const n = items.length;
+
+    const root = document.createElement('div');
+    root.className = 'deck';
+    root.setAttribute('role', 'region');
+    root.setAttribute('aria-roledescription', 'carousel');
+    root.setAttribute('aria-label', (g.getAttribute('aria-label') || 'Screenshots') + '. Click an image to enlarge');
+
+    let top = 0, hover = false, focus = false, visible = false, timer = null, busy = false, moved = false;
+    const cards = imgs.map((img, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'deck-card';
+      b.dataset.i = i;
+      img.removeAttribute('width'); img.removeAttribute('height');
+      img.draggable = false;
+      b.appendChild(img);
+      b.addEventListener('click', () => { if (moved) return; lbOpen(items, i, b); });
+      root.appendChild(b);
+      return b;
+    });
+
+    function place() {
+      cards.forEach((c, i) => {
+        const p = (i - top + n) % n, q = Math.min(p, 3);
+        c.dataset.p = p;
+        c.style.zIndex = n - p;
+        c.style.opacity = p > 3 ? 0 : 1;
+        c.style.transform = `translate(${q * 16}px, ${q * -11}px) rotate(${q * 1.7}deg) scale(${1 - q * 0.045})`;
+        c.tabIndex = p === 0 ? 0 : -1;
+        c.setAttribute('aria-hidden', p === 0 ? 'false' : 'true');
+        c.setAttribute('aria-label', p === 0 ? `${i + 1} of ${n}: ${items[i].alt}. Click to enlarge` : '');
+      });
+    }
+
+    function next() {
+      if (busy) return;
+      busy = true;
+      const c = cards[top];
+      if (reduce) { top = (top + 1) % n; place(); busy = false; return; }
+      c.classList.add('is-fly');
+      top = (top + 1) % n;
+      place(); // the others slide up while the top card flies off
+      setTimeout(() => {
+        c.classList.add('no-anim');
+        c.classList.remove('is-fly');
+        void c.offsetWidth;
+        c.classList.remove('no-anim');
+        busy = false;
+      }, 620);
+    }
+
+    function active() { return n > 1 && !reduce && visible && !hover && !focus && !document.hidden && !lightboxOpen; }
+    function schedule() {
+      clearTimeout(timer);
+      if (active()) timer = setTimeout(() => { next(); schedule(); }, 3200);
+    }
+
+    root.addEventListener('mouseenter', () => { hover = true; schedule(); });
+    root.addEventListener('mouseleave', () => { hover = false; schedule(); });
+    root.addEventListener('focusin', () => { focus = true; schedule(); });
+    root.addEventListener('focusout', () => { focus = false; schedule(); });
+    document.addEventListener('visibilitychange', schedule);
+    document.addEventListener('reel-resume', schedule);
+
+    // flick the top card to shuffle
+    let sx = null;
+    root.addEventListener('pointerdown', (e) => { sx = e.clientX; moved = false; });
+    root.addEventListener('pointerup', (e) => {
+      if (sx == null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) { moved = true; setTimeout(() => (moved = false), 350); next(); schedule(); }
+    });
+
+    new IntersectionObserver(([en]) => { visible = en.isIntersecting; schedule(); }, { threshold: 0.3 }).observe(root);
+
+    g.replaceWith(root);
+    place();
+  }
+
   /* ---------- Drifting reel ---------- */
   function build(g) {
+    if (g.classList.contains('gallery--stack')) return buildStack(g);
     const imgs = [...g.querySelectorAll('img')];
     if (!imgs.length) return;
     const wide = g.classList.contains('gallery--wide');
@@ -203,8 +304,8 @@
       if (!cw) return;
       const gap = cw < 520 ? 12 : 18;
       root.style.setProperty('--reel-gap', gap + 'px');
-      cardW = Math.round(Math.max(190, Math.min(cw * (wide ? 0.52 : 0.6), wide ? 560 : 420)));
-      const cardH = Math.round(cardW * (wide ? 9 / 16 : 10 / 16));
+      cardW = Math.round(Math.max(210, Math.min(cw * (wide ? 0.6 : 0.68), wide ? 620 : 480)));
+      const cardH = Math.round(cardW / 2.05);
       setW = n * (cardW + gap);
       const want = Math.max(2, Math.ceil(cw / setW) + 2);
       if (want !== copies || !track.children.length) {
