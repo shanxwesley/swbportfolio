@@ -3,7 +3,7 @@
    - Slides drift on their own, endlessly, like a tilted film reel.
    - Hover (desktop) eases it to a stop and lifts the card; drag/swipe to scrub.
    - Click any card and it grows out of its spot into a full-size viewer.
-   No arrows, dots, captions or buttons on the cards themselves. */
+   No arrows, dots, captions or counters on the cards or in the viewer. Alt text stays for screen readers. */
 (() => {
   const CSS = `
 /* Grid items must be allowed to shrink, otherwise wide content pushes the card off-screen */
@@ -19,18 +19,13 @@
 .reel-track { display: flex; align-items: center; gap: var(--reel-gap, 18px); width: max-content; will-change: transform; }
 
 .reel-card { flex: 0 0 auto; position: relative; padding: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface-2); cursor: zoom-in; display: block;
-  box-shadow: 0 10px 26px rgba(31,47,61,.16), 0 2px 6px rgba(31,47,61,.08);
-  transform: translateY(var(--dy, 0)) rotate(var(--rot, 0deg));
-  transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease; }
+  box-shadow: 0 1px 2px rgba(15,23,42,.06), 0 8px 24px rgba(15,23,42,.08);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease; }
 .reel-card img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; pointer-events: none; -webkit-user-drag: none; }
-.reel-card:nth-child(4n+1) { --dy: -7px; --rot: -1.6deg; }
-.reel-card:nth-child(4n+2) { --dy: 9px;  --rot: 1.3deg; }
-.reel-card:nth-child(4n+3) { --dy: -3px; --rot: 1.8deg; }
-.reel-card:nth-child(4n)   { --dy: 10px; --rot: -1.2deg; }
 @media (hover: hover) {
-  .reel-card:hover { transform: translateY(-12px) rotate(0deg) scale(1.07); box-shadow: 0 22px 44px rgba(31,47,61,.28); z-index: 2; }
+  .reel-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 36px rgba(15,23,42,.18); z-index: 2; }
 }
-.reel-card:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; transform: translateY(-8px) rotate(0deg) scale(1.04); z-index: 2; }
+.reel-card:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; transform: translateY(-6px) scale(1.03); z-index: 2; }
 .reel-card.is-hidden-src { visibility: hidden; }
 
 /* Shuffling stack (home page) */
@@ -52,8 +47,6 @@
 .lb[hidden] { display: none; }
 .lb figure { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: .75rem; max-height: 100%; }
 .lb img { max-width: 100%; max-height: calc(100dvh - 9rem); object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.5); background: #fff; transform-origin: center center; }
-.lb figcaption { color: #e8eff6; font-size: .9rem; text-align: center; }
-.lb figcaption small { color: #a2b2c2; margin-left: .5rem; }
 .lb-x, .lb-nav { border: 0; cursor: pointer; color: #fff; background: rgba(255,255,255,.14); display: grid; place-items: center; border-radius: 50%; transition: background .2s; }
 .lb-x:hover, .lb-nav:hover { background: rgba(255,255,255,.28); }
 .lb-x { position: absolute; top: calc(.9rem + env(safe-area-inset-top, 0px)); right: 1rem; width: 42px; height: 42px; }
@@ -86,12 +79,11 @@
   lb.setAttribute('aria-label', 'Image viewer');
   lb.innerHTML = `<button type="button" class="lb-x" aria-label="Close">${I.close}</button>
     <button type="button" class="lb-nav lb-prev" aria-label="Previous image">${I.prev}</button>
-    <figure><img alt=""><figcaption></figcaption></figure>
+    <figure><img alt=""></figure>
     <button type="button" class="lb-nav lb-next" aria-label="Next image">${I.next}</button>`;
   document.body.appendChild(lb);
 
   const lbImg = lb.querySelector('img');
-  const lbCap = lb.querySelector('figcaption');
   const lbBtns = [...lb.querySelectorAll('button')];
   let lbItems = [], lbIdx = 0, lbOpener = null;
 
@@ -100,10 +92,6 @@
     const it = lbItems[lbIdx];
     lbImg.src = it.src;
     lbImg.alt = it.alt;
-    lbCap.textContent = it.alt;
-    const c = document.createElement('small');
-    c.textContent = `${lbIdx + 1} / ${lbItems.length}`;
-    lbCap.appendChild(c);
     lb.querySelectorAll('.lb-nav').forEach((b) => (b.hidden = lbItems.length < 2));
     [1, -1].forEach((d) => { const p = lbItems[(lbIdx + d + lbItems.length) % lbItems.length]; if (p) new Image().src = p.src; });
   }
