@@ -7,7 +7,7 @@
 
   var KEY = "swb-theme";
   var root = document.documentElement;
-  var COLORS = { light: "#f6f4ef", dark: "#0c100e" };
+  var COLORS = { light: "#f4f7fb", dark: "#0a1019" };
   var MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
   var SUN =
     '<circle cx="12" cy="12" r="4"/>' +
