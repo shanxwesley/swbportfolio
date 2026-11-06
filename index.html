@@ -7,8 +7,8 @@
 <meta name="description" content="Portfolio of Shan Wesley Bachain, a Computer Engineering student building full-stack web apps, AI-powered tools, and ESP32 IoT systems. Chat with his AI assistant. Open to internships.">
 <meta name="author" content="Shan Wesley Bachain">
 <link rel="canonical" href="https://swbportfolio.vercel.app/">
-<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0c100e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f7fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1019" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shan Wesley Bachain">
@@ -33,40 +33,42 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="assets/theme.js"></script>
 <style>
+@font-face { font-family: "Plus Jakarta Sans"; src: url("assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
 /* Shan Wesley Bachain. Calm, editorial theme with a few distinctive motions. No build step. */
 @property --draw { syntax: "<number>"; inherits: false; initial-value: 0; }
 
 :root {
-  --bg: #f6f4ef;
+  --bg: #f4f7fb;
   --surface: #ffffff;
-  --surface-2: #efece4;
-  --side: #fbfaf7;
+  --surface-2: #e9f0f8;
+  --side: #fafcfe;
   --text: #121614;
-  --muted: #5d655f;
-  --accent: #0f766e;
-  --accent-soft: #d7ece8;
-  --link: #0b5f58;
-  --btn-bg: #0f766e;
-  --btn-text: #ffffff;
-  --border: #e3dfd4;
-  --border-strong: #cdc8ba;
+  --muted: #56657a;
+  --accent: #8ec5ee;
+  --accent-soft: #d9ebf9;
+  --link: #2f6a9f;
+  --btn-bg: #8ec5ee;
+  --btn-text: #0c2236;
+  --border: #dde7f2;
+  --border-strong: #c5d3e3;
   --ok: #15803d;
   --shadow: 0 1px 2px rgba(18, 22, 20, .05), 0 16px 36px rgba(18, 22, 20, .07);
-  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --name: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --serif: var(--sans);
   color-scheme: light;
 }
 :root[data-theme="dark"] {
-  --bg: #0c100e; --surface: #131815; --surface-2: #1a211d; --side: #101512; --text: #ecf2ee; --muted: #93a098;
-  --accent: #5eead4; --accent-soft: #15332e; --link: #7ff0dc; --btn-bg: #5eead4; --btn-text: #062520;
-  --border: #223029; --border-strong: #32423a; --ok: #4ade80; --shadow: 0 16px 36px rgba(0, 0, 0, .45);
+  --bg: #0a1019; --surface: #111822; --surface-2: #17202c; --side: #0e1520; --text: #eaf1f9; --muted: #8fa0b5;
+  --accent: #9fd0f2; --accent-soft: #1b3350; --link: #a9d6f7; --btn-bg: #9fd0f2; --btn-text: #0b1d30;
+  --border: #1f2c3d; --border-strong: #2c3d52; --ok: #4ade80; --shadow: 0 16px 36px rgba(0, 0, 0, .45);
   color-scheme: dark;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0c100e; --surface: #131815; --surface-2: #1a211d; --side: #101512; --text: #ecf2ee; --muted: #93a098;
-    --accent: #5eead4; --accent-soft: #15332e; --link: #7ff0dc; --btn-bg: #5eead4; --btn-text: #062520;
-    --border: #223029; --border-strong: #32423a; --ok: #4ade80; --shadow: 0 16px 36px rgba(0, 0, 0, .45);
+    --bg: #0a1019; --surface: #111822; --surface-2: #17202c; --side: #0e1520; --text: #eaf1f9; --muted: #8fa0b5;
+    --accent: #9fd0f2; --accent-soft: #1b3350; --link: #a9d6f7; --btn-bg: #9fd0f2; --btn-text: #0b1d30;
+    --border: #1f2c3d; --border-strong: #2c3d52; --ok: #4ade80; --shadow: 0 16px 36px rgba(0, 0, 0, .45);
     color-scheme: dark;
   }
 }
@@ -205,7 +207,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
 .meta { color: var(--muted); }
 
 /* Hero */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 3.5rem; align-items: center; padding-top: .5rem; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 3.5rem; align-items: center; padding-top: .5rem; }
 .hero > div:first-child > * { animation: focus-in .8s cubic-bezier(.2,.7,.2,1) both; }
 .hero > div:first-child > :nth-child(2) { animation-delay: .05s; }
 .hero > div:first-child > :nth-child(3) { animation-delay: .12s; }
@@ -216,11 +218,11 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
 .eyebrow-hi { display: inline-flex; align-items: center; gap: .6rem; font-size: .86rem; font-weight: 600; color: var(--link); margin-bottom: 1rem; }
 .eyebrow-hi::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
 /* The name rises line by line out of a mask */
-.hero h1 { font-size: clamp(2.8rem, 6vw, 4.6rem); letter-spacing: -.045em; line-height: 1; font-weight: 800; color: var(--text); animation: none; }
+.hero h1 { font-family: var(--name); font-size: clamp(2.8rem, 6vw, 4.6rem); letter-spacing: -.045em; line-height: 1; font-weight: 800; color: var(--text); animation: none; }
 .hero h1 .ln { display: block; overflow: hidden; padding-bottom: .06em; }
 .hero h1 .ln > span { display: inline-block; animation: line-up 1s cubic-bezier(.2,.8,.2,1) both; }
 .hero h1 .ln:nth-child(2) > span { animation-delay: .12s; }
-.hero h1 .ln:nth-child(2) > span { color: var(--accent); }
+.hero h1 .ln:nth-child(2) > span { color: var(--link); }
 .role { font-weight: 600; margin-top: .9rem; font-size: 1.06rem; color: var(--link); }
 .lead { margin-top: .9rem; max-width: 52ch; color: var(--muted); font-size: 1.03rem; }
 .status { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.2rem; padding: .38rem .8rem; border-radius: 999px; font-size: .86rem; font-weight: 600; color: var(--ok); border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent); }
@@ -366,12 +368,43 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
 .resume-info .btn-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .9rem; }
 .pf-foot { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
 
-/* Portrait: circle wipes open, then the figure settles with a slow float */
-.hero-me { position: relative; width: 320px; height: 320px; margin: 0 auto; isolation: isolate; user-select: none; -webkit-user-select: none; }
+/* Portrait: circle wipes open, figure rises out of grayscale, then it reacts to the pointer */
+.hero-me { position: relative; width: 420px; height: 420px; margin: 0 auto; isolation: isolate; user-select: none; -webkit-user-select: none; perspective: 1000px; }
+.hm-stage {
+  position: absolute; inset: 0; transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
 .hm-disc {
-  position: absolute; inset: 0; border-radius: 50%; background: var(--accent-soft);
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: var(--accent-soft);
   animation: wipe-in 1.3s cubic-bezier(.2,.8,.2,1) both;
 }
+.hm-disc::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(255,255,255,.55) 0%, transparent 45%);
+  opacity: var(--spot, 0); transition: opacity .4s ease;
+}
+.hm-orbit {
+  position: absolute; inset: -9%; border-radius: 50%; pointer-events: none;
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: orbit 28s linear infinite;
+}
+.hm-orbit i {
+  position: absolute; top: -6px; left: 50%; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.hero-me:hover .hm-orbit { animation-duration: 10s; }
+.hm-chip {
+  position: absolute; z-index: 3; padding: .38rem .75rem; border-radius: 999px; font-size: .8rem; font-weight: 600; white-space: nowrap;
+  background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--text);
+  border: 1px solid var(--border-strong); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow); animation: float 6s ease-in-out infinite;
+  transform: translateZ(40px);
+}
+.hm-chip b { color: var(--link); font-weight: 700; margin-right: .3rem; }
+.hm-c1 { top: 8%; left: 0; }
+.hm-c2 { top: 50%; right: -2%; animation-delay: -2s; }
+.hm-c3 { bottom: 6%; left: 2%; animation-delay: -4s; }
 .hm-me {
   position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
   height: 125%; width: auto; max-width: none; pointer-events: none; -webkit-user-drag: none;
@@ -386,7 +419,9 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
   animation: hm-rise 1.1s .25s cubic-bezier(.2,.8,.2,1) both, hm-bob 7s 1.4s ease-in-out infinite;
 }
 @keyframes hm-rise { from { opacity: 0; filter: grayscale(1); } to { opacity: 1; filter: none; } }
-@keyframes hm-bob { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-4px); } }
+@keyframes hm-bob { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-5px); } }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
@@ -408,7 +443,7 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
   .pf-scroll { padding-bottom: 1rem; }
   .hero { grid-template-columns: 1fr; gap: 1.6rem; justify-items: center; text-align: center; }
   .hero > div:first-child { display: flex; flex-direction: column; align-items: center; }
-  .hero h1 { font-size: clamp(2.4rem, 11vw, 3rem); }
+  .hero h1 { font-size: clamp(2.6rem, 11vw, 3.2rem); }
   .hero .lead { font-size: .98rem; max-width: 36ch; margin-inline: auto; }
   .status { justify-content: center; }
   .btns { justify-content: center; margin-top: 1.1rem; }
@@ -428,12 +463,13 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
   .resume-block .resume-card { flex-direction: column; align-items: flex-start; }
   .resume-thumb { width: 130px; }
   .pf { padding-inline: 1rem; }
-  .hero-me { order: -1; width: 230px; height: 230px; }
+  .hero-me { order: -1; width: 290px; height: 290px; }
+  .hm-chip { font-size: .74rem; padding: .3rem .6rem; }
   .composer-wrap { padding: .4rem .75rem 0; }
   .chat-col { padding: 1rem .9rem .5rem; }
   .msg-user { max-width: 90%; }
 }
-@media (max-width: 520px) { .hero-me { width: 200px; height: 200px; } }
+@media (max-width: 520px) { .hero-me { width: 260px; height: 260px; } .hm-c2 { right: -2%; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
@@ -518,10 +554,15 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
             </div>
 
             <figure class="hero-me">
+              <div class="hm-stage">
               <span class="hm-disc" aria-hidden="true"></span>
               <img class="hm-me" src="profile-cutout.webp" width="657" height="971" alt="Portrait of Shan Wesley Bachain" fetchpriority="high">
-
-              </figure>
+                <span class="hm-orbit" aria-hidden="true"><i></i></span>
+                <span class="hm-chip hm-c1" aria-hidden="true"><b>ESP32</b>IoT</span>
+                <span class="hm-chip hm-c2" aria-hidden="true"><b>Full-Stack</b>web</span>
+                <span class="hm-chip hm-c3" aria-hidden="true"><b>AI</b>Groq</span>
+              </div>
+            </figure>
           </div>
 
           <div class="stats" role="list">
@@ -956,5 +997,6 @@ h1, h2, h3 { line-height: 1.2; font-weight: 650; letter-spacing: -.02em; }
 
 <script src="assets/app.js" defer></script>
 <script src="assets/gallery.js" defer></script>
+<script src="assets/motion.js" defer></script>
 </body>
 </html>
