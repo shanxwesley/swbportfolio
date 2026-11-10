@@ -36,43 +36,34 @@
 </head>
 <body>
 
-<aside class="side" aria-label="Primary">
-  <button type="button" class="brand" data-view="portfolio" data-panel="home" aria-label="Shan Wesley Bachain, back to home">
-    <img class="avatar" src="avatar.jpg" width="36" height="36" alt="">
-    <span class="side-name">Shan Wesley Bachain</span>
-  </button>
-
-  <button type="button" class="nav-item nav-item--new" data-new-chat>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-    Ask my AI
-  </button>
-
-  <p class="side-label">Portfolio</p>
-  <nav class="tabs" aria-label="Portfolio sections">
-    <button type="button" class="nav-item" data-view="portfolio" data-panel="home" aria-current="true">Home</button>
-    <button type="button" class="nav-item" data-view="portfolio" data-panel="projects" aria-current="false">Projects</button>
-    <button type="button" class="nav-item" data-view="portfolio" data-panel="thesis" aria-current="false">Thesis</button>
-    <button type="button" class="nav-item" data-view="portfolio" data-panel="skills" aria-current="false">Skills</button>
-    <button type="button" class="nav-item" data-view="portfolio" data-panel="about" aria-current="false">About</button>
-    <button type="button" class="nav-item" data-view="portfolio" data-panel="contact" aria-current="false">Contact</button>
-  </nav>
-
-  <div class="recents-wrap">
-    <p class="side-label">Recent chats</p>
-    <div class="recents" id="recents" aria-label="Recent chats"></div>
-  </div>
-
-  <div class="side-foot">
-    <a class="nav-item" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5c0-1 .1-1.4-.5-2 2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.7 2.8 5.7 5.5 6-.6.5-.6 1.3-.5 2V21"/></svg>
-      <span class="lbl">GitHub</span><span class="sr-only"> (opens in a new tab)</span>
-    </a>
-    <button type="button" class="nav-item" id="themeBtn" aria-label="Switch to dark theme" aria-pressed="false">
-      <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      <span class="lbl" id="themeLabel">Dark</span>
+<header class="site-nav">
+  <div class="nav-inner">
+    <button type="button" class="brand" data-view="portfolio" data-panel="home" aria-label="Shan Wesley Bachain, back to home">
+      <img class="avatar" src="avatar.jpg" width="34" height="34" alt="">
+      <span class="name">Shan Wesley Bachain</span>
     </button>
+
+    <nav class="tabs" role="group" aria-label="Portfolio sections">
+      <button type="button" class="nav-item" data-view="portfolio" data-panel="home" aria-current="true">Home</button>
+      <button type="button" class="nav-item" data-view="portfolio" data-panel="projects" aria-current="false">Projects</button>
+      <button type="button" class="nav-item" data-view="portfolio" data-panel="thesis" aria-current="false">Thesis</button>
+      <button type="button" class="nav-item" data-view="portfolio" data-panel="skills" aria-current="false">Skills</button>
+      <button type="button" class="nav-item" data-view="portfolio" data-panel="about" aria-current="false">About</button>
+      <button type="button" class="nav-item" data-view="portfolio" data-panel="contact" aria-current="false">Contact</button>
+    </nav>
+
+    <div class="nav-actions">
+      <button type="button" class="nav-cta" data-new-chat>Ask my AI</button>
+      <a class="icon-link gh" href="https://github.com/shanxwesley" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5c0-1 .1-1.4-.5-2 2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.7 2.8 5.7 5.5 6-.6.5-.6 1.3-.5 2V21"/></svg>
+      </a>
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span class="sr-only" id="themeLabel">Dark</span>
+      </button>
+    </div>
   </div>
-</aside>
+</header>
 
 <noscript><p class="noscript">JavaScript is needed for the tabs and the AI chat. Email: <a href="mailto:bachainshanwesleyb@gmail.com">bachainshanwesleyb@gmail.com</a></p></noscript>
 
@@ -534,8 +525,15 @@
 
   <!-- Chat -->
   <div class="view view-chat" id="viewChat" hidden>
-    <div class="chat-main">
-      <div class="topbar">
+    <div class="chat-layout">
+      <aside class="chat-side" aria-label="Chats">
+        <button type="button" class="btn btn--primary btn-block" data-new-chat>New chat</button>
+        <p class="side-label">Recent chats</p>
+        <div class="recents" id="recents" aria-label="Recent chats"></div>
+      </aside>
+
+      <div class="chat-main">
+        <div class="topbar">
           <div class="topbar-title">Ask my AI <span>· Shan's assistant</span></div>
           <div class="topbar-actions">
             <button type="button" class="text-link" data-view="portfolio" data-panel="home">Back to portfolio</button>
@@ -565,6 +563,7 @@
           </form>
           <p class="chat-note">AI-generated and can be wrong. For anything important, email bachainshanwesleyb@gmail.com.</p>
         </div>
+      </div>
     </div>
   </div>
 
