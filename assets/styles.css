@@ -1253,6 +1253,48 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   .hm-fact span { font-size: .68rem; margin-top: .15rem; }
 }
 
+/* Phone header: one linear row (avatar + name + actions), then one scrolling line of tabs */
+@media (max-width: 600px) {
+  .nav-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .55rem;
+    padding: .6rem .8rem .4rem;
+    height: auto;
+  }
+  .brand { gap: .45rem; padding: .2rem 0; min-width: 0; }
+  .brand .avatar { width: 28px; height: 28px; flex-shrink: 0; }
+  .brand .name { display: inline; font-size: .82rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-actions { margin-left: auto; gap: .4rem; }
+  .nav-cta { padding: .4rem .75rem; font-size: .78rem; }
+  .icon-btn { width: 32px; height: 32px; }
+  .icon-btn svg { width: 14px; height: 14px; }
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: .2rem;
+    width: 100%;
+    margin: 0 -.8rem;
+    padding: .15rem .8rem .45rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs .nav-item {
+    width: auto;
+    flex-shrink: 0;
+    padding: .42rem .75rem;
+    font-size: .8rem;
+    text-align: left;
+    justify-content: initial;
+    border-radius: 999px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
