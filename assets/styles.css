@@ -491,7 +491,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 .hero-me {
   position: relative;
   width: 100%;
-  max-width: 460px;
+  max-width: 350px;
   margin: 0 auto;
 }
 .hm-me {
@@ -988,7 +988,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .hero { grid-template-columns: 1fr; }
-  .hero-me { max-width: 480px; order: 2; }
+  .hero-me { max-width: 320px; order: 2; }
   .icon-link.gh { display: none; }
   .nav-item { padding: .45rem .65rem; }
 }
@@ -1058,7 +1058,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   .skill-stats { grid-template-columns: 1fr 1fr; }
   .card { padding: 1.3rem; }
   .composer-wrap { padding: .4rem .75rem 0; }
-  .hero-me { max-width: 320px; }
+  .hero-me { max-width: 260px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
