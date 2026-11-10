@@ -1202,6 +1202,30 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   .text-link { font-size: .8rem; }
 }
 
+/* Phone polish: even tab grid (no clipped tabs) and even hero buttons */
+@media (max-width: 600px) {
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .35rem;
+    margin: 0;
+    padding: 0 0 .2rem;
+    overflow: visible;
+  }
+  .tabs .nav-item {
+    width: 100%;
+    padding: .5rem .3rem;
+    text-align: center;
+    justify-content: center;
+    font-size: .8rem;
+    border-radius: 10px;
+  }
+  .nav-inner { padding: .6rem .8rem .5rem; }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }
+  .btns > .btn:first-child { grid-column: 1 / -1; }
+  .btns .btn { width: 100%; flex: none; padding: .6rem .5rem; white-space: nowrap; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
