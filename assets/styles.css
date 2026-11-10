@@ -43,7 +43,6 @@
   --ok: #15803d;
   --ok-on-dark: #6ee7a0;
   --side: #f6f8fb;
-  --disc: #d7ecfb;
 
   /* Shape */
   --radius: 16px;
@@ -85,7 +84,6 @@
   --band-muted: #9aa7b8;
   --band-line: #2a3645;
   --side: #0f151d;
-  --disc: #1b3350;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .3);
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
@@ -247,7 +245,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 .pf {
   max-width: 1440px;
   margin: 0 auto;
-  padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 4vw, 3.5rem) 4rem;
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 4vw, 3.5rem) 4rem;
 }
 .panel[hidden] { display: none; }
 .panel:not([hidden]) > * { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
@@ -366,7 +364,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
+  align-items: start;
   padding-top: clamp(.5rem, 2vw, 1.5rem);
 }
 .hero > div:first-child > * { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
@@ -381,7 +379,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   display: inline-flex;
   align-items: center;
   gap: .55rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1rem;
   padding: .35rem .8rem;
   border-radius: 999px;
   background: var(--accent-soft);
@@ -396,7 +394,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   background: var(--accent-ink);
 }
 .hero h1 {
-  font-size: clamp(3.4rem, 7vw, 6.6rem);
+  font-size: clamp(3rem, 5.6vw, 5.2rem);
   font-weight: 800;
   letter-spacing: -.055em;
   line-height: .98;
@@ -405,14 +403,14 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 .hero h1 .ln { display: block; overflow: hidden; padding-bottom: .06em; }
 .hero h1 .ln > span { display: inline-block; animation: line-up 1s cubic-bezier(.2, .8, .2, 1) both; }
 .hero h1 .ln:nth-child(2) > span { animation-delay: .12s; }
-.role { margin-top: 1.4rem; font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.role { margin-top: 1rem; font-size: 1.1rem; font-weight: 700; color: var(--text); }
 .hl { color: var(--accent-ink); }
-.lead { margin-top: .9rem; max-width: 52ch; color: var(--muted); font-size: 1.08rem; }
+.lead { margin-top: .6rem; max-width: 52ch; color: var(--muted); font-size: 1.08rem; }
 .status {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  margin-top: 1.4rem;
+  margin-top: 1rem;
   padding: .4rem .85rem;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--ok) 25%, transparent);
@@ -429,9 +427,9 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   background: currentColor;
   animation: pulse 2.4s ease-out infinite;
 }
-.btns { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
+.btns { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.2rem; }
 
-.hero-ask { margin-top: 2.2rem; max-width: 600px; }
+.hero-ask { margin-top: 1.4rem; max-width: 600px; }
 .composer {
   display: flex;
   flex-direction: column;
@@ -489,45 +487,25 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 }
 .mini-chips button:hover { color: var(--text); border-color: var(--accent); background: var(--accent-soft); }
 
-/* Portrait: pastel disc, dashed orbit, and small icon badges (same character as before, in the site palette) */
+/* Portrait: one contained pastel panel. The photo sits on its bottom edge with headroom. */
 .hero-me {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  aspect-ratio: 0.92 / 1;
+  max-width: 440px;
+  aspect-ratio: 4 / 5;
   margin: 0 auto;
+  border-radius: 28px;
+  background: var(--accent-soft);
+  overflow: hidden;
   isolation: isolate;
   user-select: none;
   -webkit-user-select: none;
 }
-.hm-disc {
-  position: absolute;
-  left: 12%;
-  top: 22%;
-  width: 76%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background: var(--disc);
-  animation: wipe-in 1.2s cubic-bezier(.2, .8, .2, 1) both;
-}
-@keyframes wipe-in { from { transform: scale(.85); opacity: 0; } to { transform: none; opacity: 1; } }
-.hm-orbit {
-  position: absolute;
-  left: 7%;
-  top: 19%;
-  width: 86%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border: 1px dashed color-mix(in srgb, var(--accent-ink) 35%, transparent);
-  pointer-events: none;
-  animation: orbit 30s linear infinite;
-}
-@keyframes orbit { to { transform: rotate(360deg); } }
 .hm-me {
   position: absolute;
-  left: 52%;
+  left: 50%;
   bottom: 0;
-  height: 94%;
+  height: 86%;
   width: auto;
   max-width: none;
   transform: translateX(-50%);
@@ -542,26 +520,26 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 .hm-badge {
   position: absolute;
   z-index: 3;
-  width: 56px; height: 56px;
+  width: 52px; height: 52px;
   display: grid; place-items: center;
   border-radius: 50%;
   border: 2px solid var(--bg);
   box-shadow: 0 10px 24px rgba(11, 15, 20, .18);
   animation: float 6s ease-in-out infinite;
 }
-.hm-badge svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+.hm-badge svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
 .hm-dark { background: var(--band); color: #fff; }
 .hm-pastel { background: var(--btn-bg); color: var(--btn-text); }
-.hm-b1 { left: 2%; top: 44%; }
-.hm-b2 { right: 4%; top: 8%; animation-delay: -2s; }
-.hm-b3 { right: -1%; top: 52%; animation-delay: -4s; }
-.hm-b4 { left: 10%; bottom: 10%; animation-delay: -1s; }
+.hm-b1 { left: 6%; top: 36%; }
+.hm-b2 { right: 7%; top: 9%; animation-delay: -2s; }
+.hm-b3 { right: 6%; top: 52%; animation-delay: -4s; }
+.hm-b4 { left: 9%; bottom: 14%; animation-delay: -1s; }
 .hm-spark { position: absolute; z-index: 2; font-size: 13px; line-height: 1; color: var(--accent-ink); animation: twinkle 3s ease-in-out infinite; }
 @keyframes twinkle { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
-.hm-spark.s1 { left: 30%; top: 12%; }
-.hm-spark.s2 { left: 84%; top: 32%; animation-delay: -1s; }
-.hm-spark.s3 { left: 6%; top: 66%; animation-delay: -2s; }
+.hm-spark.s1 { left: 22%; top: 12%; }
+.hm-spark.s2 { left: 78%; top: 40%; animation-delay: -1s; }
+.hm-spark.s3 { left: 14%; top: 66%; animation-delay: -2s; }
 
 /* Stats band: the first dark section */
 .stats {
