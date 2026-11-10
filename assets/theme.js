@@ -1,19 +1,20 @@
 /* Shan Wesley Bachain: light/dark theme.
- * Loaded synchronously in <head> so the saved theme is applied before first paint
- * (no flash). No inline scripts: the CSP is script-src 'self'.
+ * Light is the default. A visitor's choice is saved and applied before first paint.
+ * Loaded synchronously in <head> so there is no flash. No inline scripts: the CSP is script-src 'self'.
  */
 (function () {
   "use strict";
 
   var KEY = "swb-theme";
   var root = document.documentElement;
-  var COLORS = { light: "#f4f7fb", dark: "#0a1019" };
+  var COLORS = { light: "#ffffff", dark: "#0c1117" };
   var MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
   var SUN =
     '<circle cx="12" cy="12" r="4"/>' +
     '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
 
-  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  // Tells the stylesheet that JavaScript is running, so scroll reveals can hide items until they enter.
+  root.classList.add("js");
 
   function readSaved() {
     try {
@@ -31,9 +32,7 @@
   }
 
   function effective() {
-    var attr = root.getAttribute("data-theme");
-    if (attr === "light" || attr === "dark") return attr;
-    return mq && mq.matches ? "dark" : "light";
+    return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
   }
 
   // Apply a saved choice immediately (this script runs before the body is parsed).
@@ -70,18 +69,6 @@
     var btn = document.getElementById("themeBtn");
     if (btn) btn.addEventListener("click", toggle);
     syncUi();
-  }
-
-  // Follow the OS setting live, unless the visitor has chosen a theme.
-  if (mq) {
-    var onChange = function () {
-      if (!readSaved()) {
-        root.removeAttribute("data-theme");
-        syncUi();
-      }
-    };
-    if (mq.addEventListener) mq.addEventListener("change", onChange);
-    else if (mq.addListener) mq.addListener(onChange);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
