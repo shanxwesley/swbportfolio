@@ -1226,6 +1226,33 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   .btns .btn { width: 100%; flex: none; padding: .6rem .5rem; white-space: nowrap; }
 }
 
+/* Phone hero: everything centered, photo with floating cards around it */
+@media (max-width: 900px) {
+  .hero > div:first-child { text-align: center; }
+  .lead { margin-inline: auto; }
+  .mini-chips { justify-content: center; }
+  .hero-ask { width: 100%; }
+
+  .hero-me { max-width: 380px; height: 360px; margin: 0 auto; }
+  .hm-me {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    transform: none;
+  }
+  .hm-facts { position: absolute; inset: 0; display: block; margin: 0; }
+  .hm-fact { position: absolute; width: 118px; padding: .6rem .7rem; border-radius: 12px; text-align: left; }
+  .hm-f1 { left: 0; top: 2%; }
+  .hm-f2 { right: 0; top: 30%; }
+  .hm-f3 { left: 0; top: 58%; }
+  .hm-f4 { right: 0; top: 82%; }
+  .hm-fact b { font-size: .78rem; }
+  .hm-fact span { font-size: .68rem; margin-top: .15rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
