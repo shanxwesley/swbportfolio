@@ -1107,6 +1107,101 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   .hm-me { max-width: 240px; }
 }
 
+/* ---------- Small phones: tighter type, buttons, and spacing (not just stacked) ---------- */
+@media (max-width: 600px) {
+  body { font-size: 14.5px; }
+  .pf { padding-inline: .9rem; padding-top: .9rem; }
+  .nav-inner { padding: .5rem .8rem .45rem; gap: .4rem .6rem; }
+  .tabs { margin: 0 -.8rem; padding: .1rem .8rem .5rem; }
+  .brand { font-size: .85rem; }
+  .brand .avatar { width: 26px; height: 26px; }
+  .nav-cta { padding: .42rem .8rem; font-size: .8rem; }
+  .icon-link, .icon-btn { width: 34px; height: 34px; }
+  .icon-link svg, .icon-btn svg { width: 15px; height: 15px; }
+  .nav-item { font-size: .8rem; padding: .38rem .65rem; }
+
+  .eyebrow-hi { font-size: .75rem; padding: .28rem .6rem; margin-bottom: .7rem; }
+  .hero h1 { font-size: clamp(2.2rem, 10.5vw, 2.8rem); letter-spacing: -.045em; }
+  .role { font-size: .9rem; margin-top: .6rem; }
+  .lead { font-size: .88rem; margin-top: .5rem; }
+  .status { font-size: .74rem; padding: .3rem .65rem; margin-top: .7rem; }
+  .btns { gap: .45rem; margin-top: .8rem; }
+  .btn { font-size: .8rem; padding: .55rem .8rem; border-radius: 10px; }
+  .hero-ask { margin-top: 1rem; }
+  .hero-ask textarea { font-size: .85rem; }
+  .composer { border-radius: 14px; }
+  .send { width: 30px; height: 30px; }
+  .mini-chips { gap: .35rem; margin-top: .6rem; }
+  .mini-chips button { font-size: .72rem; padding: .25rem .6rem; }
+
+  .panel-head { margin-bottom: 1.4rem; }
+  .panel-head h2 { font-size: clamp(1.7rem, 7.5vw, 2.1rem); }
+  .panel-head .intro { font-size: .88rem; }
+  .eyebrow { font-size: .68rem; }
+  .sec-head { margin: 2.5rem 0 1rem; }
+  .sec-head h2 { font-size: 1.3rem; }
+  .text-btn { font-size: .8rem; }
+  .block { margin-top: 2.2rem; }
+  .block > h3, .col-title { font-size: 1rem; }
+
+  .card { padding: 1.1rem; border-radius: 18px; gap: .5rem; }
+  .card h3 { font-size: 1.1rem; }
+  .card p { font-size: .85rem; }
+  .card dl div { font-size: .82rem; }
+  .card .links { font-size: .8rem; gap: .8rem; }
+  .card .result { font-size: .8rem; }
+  .gallery img { width: 140px; }
+
+  .fact { padding: .9rem; }
+  .fact b { font-size: 1.05rem; }
+  .fact span { font-size: .8rem; }
+  .role-callout { padding: 1.2rem; }
+  .role-callout h3 { font-size: 1.15rem; }
+  .steps li { font-size: .8rem; padding: .9rem; }
+  .timeline strong { font-size: .9rem; }
+  .timeline .note { font-size: .8rem; }
+
+  .skill-stat { padding: .9rem; }
+  .skill-stat b { font-size: 1.3rem; }
+  .skill-stat span { font-size: .75rem; }
+  .skill-grid > div { padding: 1rem; }
+  .skill-grid dt { font-size: .95rem; }
+  .skill-grid dd { font-size: .82rem; }
+  .pill { font-size: .72rem; padding: .18rem .55rem; }
+  .impact-stat { padding: 1.1rem; }
+  .impact-stat b { font-size: 1.9rem; }
+  .impact-stat span { font-size: .8rem; }
+  .softskills { padding: 1.1rem; }
+  .skill-soft { padding: 1.1rem; }
+  .skill-soft p { font-size: .82rem; }
+
+  .pull { font-size: 1.3rem; }
+  .prose p { font-size: .88rem; }
+  .awards div { grid-template-columns: 4rem 1fr; gap: .6rem; padding: .7rem 0; }
+  .awards span:last-child { font-size: .85rem; }
+
+  .contact-primary { padding: 1.3rem; }
+  .contact-primary h3 { font-size: 1.4rem; }
+  .contact-primary p { font-size: .85rem; }
+  .contact-card { padding: .9rem 1rem; min-height: 0; }
+  .contact-card a, .contact-card .value { font-size: .88rem; }
+  .resume-block .resume-card { padding: 1rem; gap: 1rem; }
+  .resume-info p { font-size: .82rem; }
+  .pf-foot { font-size: .75rem; }
+
+  .hm-fact { padding: .6rem .7rem; border-radius: 12px; }
+  .hm-fact b { font-size: .78rem; }
+  .hm-fact span { font-size: .7rem; }
+
+  .chips button { font-size: .8rem; padding: .6rem .75rem; }
+  .welcome h1 { font-size: 1.5rem; }
+  .msg-user, .msg-bot { font-size: .88rem; }
+  .composer-wrap { padding: .3rem .6rem 0; }
+  .chat-note { font-size: .66rem; padding: .4rem .6rem .5rem; }
+  .topbar-title { font-size: .85rem; }
+  .text-link { font-size: .8rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
