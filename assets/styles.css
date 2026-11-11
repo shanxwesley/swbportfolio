@@ -1347,3 +1347,48 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
   #contact .resume-info .btn-row { margin-top: .6rem; }
   #contact .resume-info .btn { padding: .55rem .95rem; }
 }
+
+/* ---------- Mobile header: one clean row (brand + actions), then one scrolling line of tabs ---------- */
+@media (max-width: 600px) {
+  .site-nav { overflow: hidden; }
+  .nav-inner {
+    height: auto;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .6rem;
+    padding: .7rem .9rem .3rem;
+  }
+  .brand { min-width: 0; gap: .5rem; padding: .2rem 0; }
+  .brand .avatar { width: 30px; height: 30px; flex-shrink: 0; }
+  .brand .name { display: inline; min-width: 0; font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav-actions { display: flex; align-items: center; gap: .4rem; justify-content: flex-end; margin: 0; }
+  .nav-cta { padding: .45rem .8rem; font-size: .82rem; white-space: nowrap; }
+  .icon-btn { width: 34px; height: 34px; }
+  .icon-btn svg { width: 15px; height: 15px; }
+
+  .tabs {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: .3rem;
+    width: auto;
+    margin: 0 -.9rem;
+    padding: .2rem .9rem .7rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs .nav-item {
+    width: auto;
+    flex-shrink: 0;
+    padding: .42rem .85rem;
+    font-size: .86rem;
+    border-radius: 999px;
+    text-align: center;
+  }
+}
