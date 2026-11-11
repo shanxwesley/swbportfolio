@@ -494,7 +494,7 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
 .hero-me {
   position: relative;
   width: 100%;
-  max-width: 350px;
+  max-width: 460px;
   margin: 0 auto;
 }
 .hm-facts { position: absolute; inset: 0; pointer-events: none; }
