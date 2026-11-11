@@ -36,7 +36,7 @@
       ]
     },
     {
-      "source": "/(profile.jpg|avatar.jpg|resume-preview.jpg|resume.pdf|og-image.jpg|favicon.svg|apple-touch-icon.png)",
+      "source": "/(avatar.jpg|resume-preview.jpg|resume.pdf|og-image.jpg|favicon.svg|apple-touch-icon.png)",
       "headers": [
         {
           "key": "Cache-Control",
