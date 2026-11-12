@@ -69,7 +69,7 @@
       /(https?:\/\/[^\s<]+[^\s<.,;:!?)])|([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g,
       function (m, url, email) {
         if (url) return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + "</a>";
-        return '<a href="mailto:' + email + '">' + email + "</a>";
+        return '<a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=' + encodeURIComponent(email) + '" target="_blank" rel="noopener noreferrer">' + email + "</a>";
       }
     );
   }
