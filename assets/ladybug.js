@@ -49,7 +49,7 @@
     about: "Get to know me \u2192",
     contact: "Say hi! Contact \u2192"
   };
-  var SCROLL_TOP_HINTS = ["Scroll down, there\u2019s more to read!", "Psst\u2026 more below \u2193"];
+  var SCROLL_TOP_HINTS = ["Scroll down, there\u2019s more to read!", "Hi\u2026 more below \u2193"];
   var SCROLL_MID_HINTS = ["Keep going \u2193 it gets good!", "Don\u2019t stop now, read more \u2193"];
 
   var visited = {};
