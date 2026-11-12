@@ -319,19 +319,28 @@
           </div>
 
           <div class="skill-stats" role="list">
-            <div class="skill-stat reveal" role="listitem"><b>4</b><span>Projects built across web and hardware</span></div>
-            <div class="skill-stat reveal" role="listitem"><b>3</b><span>Live web apps I have deployed</span></div>
+            <div class="skill-stat reveal" role="listitem"><b data-count="4">4</b><span>Projects built across web and hardware</span></div>
+            <div class="skill-stat reveal" role="listitem"><b data-count="3">3</b><span>Live web apps I have deployed</span></div>
             <div class="skill-stat reveal" role="listitem"><b>Winner</b><span>2025 System-Making Contest</span></div>
             <div class="skill-stat reveal" role="listitem"><b>2027</b><span>Expected graduation, B.S. Computer Engineering</span></div>
           </div>
 
           <div class="impact-row">
-            <div class="impact-stat reveal"><b>25%</b><span>Less time on documentation with DevKit</span></div>
-            <div class="impact-stat reveal"><b>90%</b><span>More reliable dosing with the chlorine doser app</span></div>
+            <div class="impact-stat reveal"><b data-count="25" data-suffix="%">25%</b><span>Less time on documentation with DevKit</span></div>
+            <div class="impact-stat reveal"><b data-count="90" data-suffix="%">90%</b><span>More reliable dosing with the chlorine doser app</span></div>
           </div>
 
+          <div class="skill-filter" role="group" aria-label="Filter skills by area">
+            <button type="button" class="chip-filter" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="chip-filter" data-filter="web" aria-pressed="false">Web</button>
+            <button type="button" class="chip-filter" data-filter="data" aria-pressed="false">Data</button>
+            <button type="button" class="chip-filter" data-filter="hardware" aria-pressed="false">Hardware</button>
+            <button type="button" class="chip-filter" data-filter="ai" aria-pressed="false">AI &amp; tools</button>
+          </div>
+          <p class="filter-count" id="skillCount" aria-live="polite"></p>
+
           <dl class="skill-grid">
-            <div class="reveal">
+            <div class="reveal" data-cat="web">
               <dt>Programming &amp; web</dt>
               <dd>
                 <div class="pill-row">
@@ -341,7 +350,7 @@
                 <p class="impact">Built and deployed three live web apps, from interview practice to developer tools and interactive design.</p>
               </dd>
             </div>
-            <div class="reveal">
+            <div class="reveal" data-cat="data">
               <dt>Databases &amp; backend</dt>
               <dd>
                 <div class="pill-row">
@@ -351,7 +360,7 @@
                 <p class="impact">Designed the backend for user data and session management with Firebase and MySQL.</p>
               </dd>
             </div>
-            <div class="reveal">
+            <div class="reveal" data-cat="hardware">
               <dt>Hardware &amp; embedded</dt>
               <dd>
                 <div class="pill-row">
@@ -361,7 +370,7 @@
                 <p class="impact">Developed a local app that reads sensor input and controls the automatic chlorine doser.</p>
               </dd>
             </div>
-            <div class="reveal">
+            <div class="reveal" data-cat="ai">
               <dt>AI &amp; tools</dt>
               <dd>
                 <div class="pill-row">
@@ -373,7 +382,7 @@
             </div>
           </dl>
 
-          <div class="softskills reveal">
+          <div class="softskills reveal soft-pill-float">
             <h3>Soft skills</h3>
             <div class="pill-row">
               <span class="pill">Ownership</span><span class="pill">Self-directed research</span><span class="pill">Clear technical communication</span><span class="pill">Team collaboration</span><span class="pill">Presenting to panelists</span><span class="pill">Explaining to non-technical users</span>
@@ -564,5 +573,6 @@
 <script src="assets/app.js" defer></script>
 <script src="assets/gallery.js" defer></script>
 <script src="assets/motion.js" defer></script>
+<script src="assets/skills.js" defer></script>
 </body>
 </html>
