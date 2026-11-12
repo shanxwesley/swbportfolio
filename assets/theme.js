@@ -1,5 +1,5 @@
 /* Shan Wesley Bachain: light/dark theme.
- * Light is the default. A visitor's choice is saved and applied before first paint.
+ * Dark is the default. A visitor's choice is saved and applied before first paint.
  * Loaded synchronously in <head> so there is no flash. No inline scripts: the CSP is script-src 'self'.
  */
 (function () {
@@ -32,12 +32,12 @@
   }
 
   function effective() {
-    return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    return root.getAttribute("data-theme") === "light" ? "light" : "dark";
   }
 
   // Apply a saved choice immediately (this script runs before the body is parsed).
   var saved = readSaved();
-  if (saved) root.setAttribute("data-theme", saved);
+  root.setAttribute("data-theme", saved || "dark");
 
   function syncUi() {
     var theme = effective();
