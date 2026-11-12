@@ -1,7 +1,8 @@
 /* Shan Wesley Bachain: ladybug guide.
- * A small ladybug crawls down the right edge as you scroll, flutters its wings, and
- * pops up a hint after a pause. Click it to scroll further, or to jump to the next tab
- * once you reach the bottom. No inline scripts: the CSP is script-src 'self'.
+ * A small ladybug crawls down the right edge as you scroll. When you pause it wakes up:
+ * it scuttles out sideways, flutters, hops, wiggles the tab it wants you to try next, and
+ * pops up a hint. It favors tabs you have not opened yet. Click it to scroll further or to
+ * jump to the suggested tab. No inline scripts: the CSP is script-src 'self'.
  */
 (function () {
   "use strict";
@@ -40,9 +41,24 @@
   document.body.appendChild(bug);
   var tip = bug.querySelector(".lbug-tip");
 
+  var TAB_HINTS = {
+    home: "Back to the start \u2192",
+    projects: "See what I\u2019ve built \u2192",
+    thesis: "Peek at my thesis \u2192",
+    skills: "Check out my skills \u2192",
+    about: "Get to know me \u2192",
+    contact: "Say hi! Contact \u2192"
+  };
+  var SCROLL_TOP_HINTS = ["Scroll down, there\u2019s more to read!", "Psst\u2026 more below \u2193"];
+  var SCROLL_MID_HINTS = ["Keep going \u2193 it gets good!", "Don\u2019t stop now, read more \u2193"];
+
+  var visited = {};
+  var hint = { kind: "scroll", panel: null };
   var lastTop = pf.scrollTop;
   var ticking = false;
-  var walkTimer, tipTimer, idleTimer, flutterTimer;
+  var idleCount = 0;
+  var dirBeforeWander = "down";
+  var walkTimer, tipTimer, idleTimer, flutterTimer, nudgeTimer, wanderTimers = [];
 
   function currentPanel() {
     var cur = document.querySelector('.nav-item[aria-current="true"][data-panel]');
@@ -57,18 +73,35 @@
     return pf.scrollHeight - pf.clientHeight > 40;
   }
 
-  function nextPanel() {
-    var i = PANELS.indexOf(currentPanel());
+  // The tab to push next: prefer one the visitor has not opened, starting after the current tab.
+  function suggestPanel() {
+    var cur = currentPanel();
+    var i = PANELS.indexOf(cur);
+    var order = PANELS.slice(i + 1).concat(PANELS.slice(0, Math.max(i, 0)));
+    for (var k = 0; k < order.length; k++) {
+      if (!visited[order[k]] && order[k] !== "home") return order[k];
+    }
     return i === -1 || i >= PANELS.length - 1 ? null : PANELS[i + 1];
   }
 
-  // What the bug is suggesting right now
-  function message() {
-    if (!canScroll() || atBottom()) {
-      var n = nextPanel();
-      return n ? "Next: " + LABELS[n] + " \u2192" : "Back to top \u2191";
+  function pick(list) {
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  // What the bug is suggesting right now. preferTab makes idle hints point at a tab.
+  function message(preferTab) {
+    var scrollable = canScroll() && !atBottom();
+    var s = suggestPanel();
+    if (!scrollable || (preferTab && s)) {
+      if (s) {
+        hint = { kind: "tab", panel: s };
+        return TAB_HINTS[s];
+      }
+      hint = { kind: "top", panel: null };
+      return "Back to top \u2191";
     }
-    return pf.scrollTop < 40 ? "Scroll down, there\u2019s more!" : "Keep going \u2193";
+    hint = { kind: "scroll", panel: null };
+    return pf.scrollTop < 40 ? pick(SCROLL_TOP_HINTS) : pick(SCROLL_MID_HINTS);
   }
 
   function setTip(text) {
@@ -86,9 +119,81 @@
     bug.style.top = Math.round(top) + "px";
 
     var dir = pf.scrollTop >= lastTop ? "down" : "up";
-    if (Math.abs(pf.scrollTop - lastTop) > 1) bug.setAttribute("data-dir", dir);
+    if (!wandering && Math.abs(pf.scrollTop - lastTop) > 1) bug.setAttribute("data-dir", dir);
     lastTop = pf.scrollTop;
-    setTip(message());
+    if (!bug.classList.contains("show-tip")) setTip(message(false));
+  }
+
+  var wandering = false;
+
+  function stopWander() {
+    wandering = false;
+    wanderTimers.forEach(clearTimeout);
+    wanderTimers = [];
+    bug.style.setProperty("--lbug-x", "0px");
+    bug.classList.remove("is-wander");
+    if (bug.getAttribute("data-dir") === "left" || bug.getAttribute("data-dir") === "right") {
+      bug.setAttribute("data-dir", dirBeforeWander);
+    }
+  }
+
+  function clearNudge() {
+    clearTimeout(nudgeTimer);
+    var n = document.querySelectorAll(".nav-item.lbug-nudge");
+    for (var i = 0; i < n.length; i++) n[i].classList.remove("lbug-nudge");
+  }
+
+  function nudgeTab(panel) {
+    clearNudge();
+    if (!panel || reduce) return;
+    var btn = document.querySelector('.nav-item[data-view="portfolio"][data-panel="' + panel + '"]');
+    if (!btn) return;
+    btn.classList.add("lbug-nudge");
+    nudgeTimer = setTimeout(clearNudge, 3200);
+  }
+
+  function showHint() {
+    idleCount++;
+    // Alternate: keep reading, then try a tab. The first hint on a short page is always a tab.
+    setTip(message(idleCount % 2 === 0 || !canScroll()));
+    bug.classList.add("show-tip");
+    if (hint.kind === "tab") nudgeTab(hint.panel);
+    if (!reduce) {
+      bug.classList.add("is-flutter");
+      clearTimeout(flutterTimer);
+      flutterTimer = setTimeout(function () {
+        bug.classList.remove("is-flutter");
+      }, 1100);
+    }
+    clearTimeout(tipTimer);
+    tipTimer = setTimeout(function () {
+      bug.classList.remove("show-tip");
+    }, 4800);
+  }
+
+  // The bug scuttles sideways out into the page and back, then speaks up.
+  function wander() {
+    if (reduce) {
+      showHint();
+      return;
+    }
+    wandering = true;
+    dirBeforeWander = bug.getAttribute("data-dir") === "up" ? "up" : "down";
+    bug.classList.remove("show-tip");
+    bug.classList.add("is-wander", "is-walking");
+    bug.setAttribute("data-dir", "left");
+    bug.style.setProperty("--lbug-x", "-54px");
+    wanderTimers.push(
+      setTimeout(function () {
+        bug.setAttribute("data-dir", "right");
+        bug.style.setProperty("--lbug-x", "0px");
+      }, 1350),
+      setTimeout(function () {
+        bug.classList.remove("is-walking");
+        stopWander();
+        showHint();
+      }, 2700)
+    );
   }
 
   function onScroll() {
@@ -96,7 +201,9 @@
       ticking = true;
       requestAnimationFrame(place);
     }
+    if (wandering) stopWander();
     bug.classList.remove("show-tip");
+    clearNudge();
     if (!reduce) {
       bug.classList.add("is-walking");
       clearTimeout(walkTimer);
@@ -104,40 +211,45 @@
         bug.classList.remove("is-walking");
       }, 260);
     }
-    armIdle();
+    idleCount = 0;
+    armIdle(2600);
   }
 
-  // After a pause, flutter and show a hint
-  function armIdle() {
+  // After a pause, wake up and urge the visitor on; repeat a few times, gently.
+  var repeats = 0;
+  function armIdle(delay) {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(function () {
       if (viewPortfolio.hidden) return;
-      setTip(message());
-      bug.classList.add("show-tip");
-      if (!reduce) {
-        bug.classList.add("is-flutter");
-        clearTimeout(flutterTimer);
-        flutterTimer = setTimeout(function () {
-          bug.classList.remove("is-flutter");
-        }, 1100);
-      }
-      clearTimeout(tipTimer);
-      tipTimer = setTimeout(function () {
-        bug.classList.remove("show-tip");
-      }, 4500);
-    }, 3500);
+      wander();
+      if (++repeats < 6) armIdle(9000);
+    }, delay || 2600);
   }
 
   bug.addEventListener("click", function () {
+    var h = hint;
+    stopWander();
+    clearNudge();
     bug.classList.remove("show-tip");
-    if (canScroll() && !atBottom()) {
+    bug.classList.add("is-flutter");
+    clearTimeout(flutterTimer);
+    flutterTimer = setTimeout(function () {
+      bug.classList.remove("is-flutter");
+    }, 600);
+    repeats = 0;
+    if (h.kind === "tab" && h.panel) {
+      var btn = document.querySelector('.nav-item[data-view="portfolio"][data-panel="' + h.panel + '"]');
+      if (btn) btn.click();
+      return;
+    }
+    if (h.kind === "scroll" && canScroll() && !atBottom()) {
       pf.scrollBy({ top: Math.round(pf.clientHeight * 0.8), behavior: reduce ? "auto" : "smooth" });
       return;
     }
-    var n = nextPanel();
-    if (n) {
-      var btn = document.querySelector('.nav-item[data-view="portfolio"][data-panel="' + n + '"]');
-      if (btn) btn.click();
+    var s = suggestPanel();
+    if (s) {
+      var b2 = document.querySelector('.nav-item[data-view="portfolio"][data-panel="' + s + '"]');
+      if (b2) b2.click();
     } else {
       pf.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
     }
@@ -147,10 +259,16 @@
   function sync() {
     bug.hidden = viewPortfolio.hidden;
     if (!bug.hidden) {
+      visited[currentPanel()] = true;
       lastTop = pf.scrollTop;
+      stopWander();
+      clearNudge();
+      bug.classList.remove("show-tip");
       bug.setAttribute("data-dir", "down");
+      idleCount = 0;
+      repeats = 0;
       place();
-      armIdle();
+      armIdle(2200);
     }
   }
 
