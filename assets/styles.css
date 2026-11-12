@@ -9,85 +9,97 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Anton";
+  src: url("anton-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- Design tokens ---------- */
+/* Vibe: cream and blue, bold condensed display type, pill buttons (UGC portfolio look). */
 :root {
   /* Surfaces */
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f5f7fa;
-  --surface-3: #edf2f7;
+  --bg: #f4e2a1;
+  --surface: #fbf3d6;
+  --surface-2: #f8ebc0;
+  --surface-3: #efd98a;
 
   /* Text */
-  --text: #0b0f14;
-  --text-2: #2b3442;
-  --muted: #5b6675;
+  --text: #26325a;
+  --text-2: #34406b;
+  --muted: #55608a;
 
-  /* Pastel blue accents */
-  --accent: #a9d4f4;
-  --accent-soft: #e9f5fd;
-  --accent-ink: #1f6aa8;
-  --btn-bg: #a9d4f4;
-  --btn-hover: #93c9ee;
-  --btn-text: #0b1d2e;
+  /* Blue accents */
+  --accent: #5b74ad;
+  --accent-soft: #e3e9f5;
+  --accent-ink: #3a5390;
+  --btn-bg: #5b74ad;
+  --btn-hover: #4a63a0;
+  --btn-text: #fbf3d6;
 
   /* Lines */
-  --border: #e4e9f0;
-  --border-strong: #cad3df;
+  --border: #d9c27a;
+  --border-strong: #5b74ad;
 
-  /* Dark sections (stats band, contact block) */
-  --band: #0b0f14;
-  --band-text: #f2f6fb;
-  --band-muted: #9aa7b8;
-  --band-line: #223040;
+  /* Blue block sections (stats band, contact block) */
+  --band: #4d66a3;
+  --band-text: #fbf3d6;
+  --band-muted: #dce4f4;
+  --band-line: #7e93c6;
 
-  --ok: #15803d;
-  --ok-on-dark: #6ee7a0;
-  --side: #f6f8fb;
+  --ok: #2f6b45;
+  --ok-on-dark: #bdf2cf;
+  --side: #f8ebc0;
 
   /* Shape */
-  --radius: 16px;
-  --radius-lg: 24px;
+  --radius: 14px;
+  --radius-lg: 22px;
 
   /* Elevation */
-  --shadow-sm: 0 1px 2px rgba(11, 15, 20, .05);
-  --shadow: 0 1px 2px rgba(11, 15, 20, .04), 0 12px 32px rgba(11, 15, 20, .07);
-  --shadow-hover: 0 2px 4px rgba(11, 15, 20, .05), 0 24px 48px rgba(11, 15, 20, .12);
+  --shadow-sm: 0 2px 0 rgba(38, 50, 90, .12);
+  --shadow: 0 2px 0 rgba(38, 50, 90, .12), 0 14px 30px rgba(38, 50, 90, .14);
+  --shadow-hover: 0 4px 0 rgba(38, 50, 90, .14), 0 22px 40px rgba(38, 50, 90, .2);
 
   /* Type */
   --sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --display: "Anton", "Impact", "Arial Narrow Bold", sans-serif;
 
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #0c1117;
-  --surface: #121a23;
-  --surface-2: #18212c;
-  --surface-3: #1e2a36;
+  --bg: #26356a;
+  --surface: #304580;
+  --surface-2: #3a5090;
+  --surface-3: #456099;
 
-  --text: #eef3f8;
-  --text-2: #d3dce6;
-  --muted: #98a4b4;
+  --text: #fbf3d6;
+  --text-2: #f1e6be;
+  --muted: #c9d3ee;
 
-  --accent: #a9d4f4;
-  --accent-soft: #15263a;
-  --accent-ink: #a9d4f4;
-  --btn-bg: #a9d4f4;
-  --btn-hover: #c3e3fa;
-  --btn-text: #0b1d2e;
+  --accent: #f2d98a;
+  --accent-soft: #3a5090;
+  --accent-ink: #f2d98a;
+  --btn-bg: #f2d98a;
+  --btn-hover: #f8e6a8;
+  --btn-text: #26325a;
 
-  --border: #1f2a36;
-  --border-strong: #2c3949;
+  --border: #4a5f99;
+  --border-strong: #f2d98a;
 
-  --band: #18222e;
-  --band-text: #f2f6fb;
-  --band-muted: #9aa7b8;
-  --band-line: #2a3645;
-  --side: #0f151d;
+  --band: #1f2c5c;
+  --band-text: #fbf3d6;
+  --band-muted: #c9d3ee;
+  --band-line: #3a4d85;
+  --side: #2c3d76;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .3);
-  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
-  --shadow-hover: 0 2px 4px rgba(0, 0, 0, .3), 0 24px 48px rgba(0, 0, 0, .5);
+  --ok-on-dark: #bdf2cf;
+
+  --shadow-sm: 0 2px 0 rgba(0, 0, 0, .25);
+  --shadow: 0 2px 0 rgba(0, 0, 0, .25), 0 14px 30px rgba(0, 0, 0, .35);
+  --shadow-hover: 0 4px 0 rgba(0, 0, 0, .25), 0 22px 40px rgba(0, 0, 0, .5);
 
   color-scheme: dark;
 }
@@ -1392,3 +1404,40 @@ h3 { font-size: 1.2rem; font-weight: 750; letter-spacing: -.02em; }
     text-align: center;
   }
 }
+
+/* ---------- Vibe layer: display type, pills, blocky cards ---------- */
+h1, h2, .panel-head h2, .sec-head h2, .hero h1, .welcome h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: 1;
+}
+.hero h1 { letter-spacing: .01em; }
+.card h3,
+.block > h3,
+.role-callout h3,
+.contact-primary h3,
+.softskills h3,
+.skill-soft h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.05;
+}
+.card h3 { font-size: 1.75rem; }
+.eyebrow, .eyebrow-hi, .side-label { letter-spacing: .12em; }
+
+.btn, .btn--primary, .nav-cta, .nav-item, .text-btn, .mini-chips button, .pill, .status-pill {
+  border-radius: 999px;
+}
+.btn { border: 2px solid var(--accent); }
+.nav-item[aria-current="true"] { background: var(--btn-bg); color: var(--btn-text); }
+.nav-item:hover { background: var(--surface-2); }
+
+.card {
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-lg);
+}
+.icon-link, .icon-btn { border: 2px solid var(--accent); }
