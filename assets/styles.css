@@ -1567,7 +1567,8 @@ h1, h2, .panel-head h2, .sec-head h2, .hero h1, .welcome h1 {
   border: 0;
   background: none;
   cursor: pointer;
-  transition: top .55s cubic-bezier(.3, 1, .4, 1), opacity .3s ease;
+  translate: var(--lbug-x, 0px) 0;
+  transition: top .55s cubic-bezier(.3, 1, .4, 1), translate 1.3s ease-in-out, opacity .3s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .lbug[hidden] { display: none; }
@@ -1575,6 +1576,10 @@ h1, h2, .panel-head h2, .sec-head h2, .hero h1, .welcome h1 {
 .lbug[data-dir="down"] svg { transform: rotate(180deg); }
 .lbug:hover svg { transform: scale(1.12) rotate(var(--lbug-rot, 0deg)); }
 .lbug[data-dir="down"] { --lbug-rot: 180deg; }
+.lbug[data-dir="left"] svg { transform: rotate(-90deg); }
+.lbug[data-dir="right"] svg { transform: rotate(90deg); }
+.lbug[data-dir="left"] { --lbug-rot: -90deg; }
+.lbug[data-dir="right"] { --lbug-rot: 90deg; }
 .lbug:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 50%; }
 .lbug .lbug-leg { transform-box: fill-box; transform-origin: center; }
 .lbug.is-walking .lbug-leg-a { animation: lbug-leg .22s ease-in-out infinite alternate; }
@@ -1616,8 +1621,13 @@ h1, h2, .panel-head h2, .sec-head h2, .hero h1, .welcome h1 {
   border-radius: 2px;
 }
 .lbug.show-tip .lbug-tip, .lbug:hover .lbug-tip, .lbug:focus-visible .lbug-tip { opacity: 1; transform: translateY(-50%) scale(1); }
-.lbug.show-tip { animation: lbug-hop 1s ease-in-out 2; }
-@keyframes lbug-hop { 0%, 100% { translate: 0 0; } 40% { translate: -5px 0; } 70% { translate: 0 0; } }
+.lbug.show-tip { animation: lbug-hop .9s ease-in-out 3; }
+@keyframes lbug-hop { 0%, 100% { margin-top: 0; } 35% { margin-top: -9px; } 60% { margin-top: 0; } 78% { margin-top: -4px; } }
+.lbug.is-wander .lbug-ant { animation-duration: .5s; }
+
+/* The tab the ladybug is pointing at gives a little wiggle and glow */
+.nav-item.lbug-nudge { animation: lbug-nudge .9s ease-in-out 3; box-shadow: 0 0 0 3px var(--accent); }
+@keyframes lbug-nudge { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-3px) rotate(-3deg); } 50% { transform: translateY(0) rotate(0); } 75% { transform: translateY(-3px) rotate(3deg); } }
 
 @media (max-width: 640px) {
   .lbug { width: 36px; height: 36px; right: 4px; }
@@ -1625,5 +1635,10 @@ h1, h2, .panel-head h2, .sec-head h2, .hero h1, .welcome h1 {
 }
 @media (prefers-reduced-motion: reduce) {
   .lbug, .lbug svg { transition: none; }
-  .lbug .lbug-ant, .lbug.is-walking .lbug-leg, .lbug.is-flutter .lbug-wing, .lbug.show-tip { animation: none !important; }
+  .lbug .lbug-ant, .lbug.is-walking .lbug-leg, .lbug.is-flutter .lbug-wing, .lbug.show-tip, .nav-item.lbug-nudge { animation: none !important; }
 }
+
+/* ---------- Shirt color follows the theme: blue in dark mode, golden yellow in light mode ---------- */
+.hm-me--light { display: none; }
+:root[data-theme="light"] .hm-me.hm-me--light { display: block; }
+:root[data-theme="light"] .hm-me.hm-me--dark { display: none; }
