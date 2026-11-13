@@ -121,7 +121,7 @@
     var dir = pf.scrollTop >= lastTop ? "down" : "up";
     if (!wandering && Math.abs(pf.scrollTop - lastTop) > 1) bug.setAttribute("data-dir", dir);
     lastTop = pf.scrollTop;
-    if (!bug.classList.contains("show-tip")) setTip(message(false));
+    if (!bug.classList.contains("show-tip") && !wandering) setTip(message(false));
   }
 
   var wandering = false;
@@ -203,6 +203,8 @@
     }
     if (wandering) stopWander();
     bug.classList.remove("show-tip");
+    clearTimeout(tipTimer);
+    if (document.activeElement === bug) bug.blur();
     clearNudge();
     if (!reduce) {
       bug.classList.add("is-walking");
@@ -231,6 +233,8 @@
     stopWander();
     clearNudge();
     bug.classList.remove("show-tip");
+    clearTimeout(tipTimer);
+    bug.blur();
     bug.classList.add("is-flutter");
     clearTimeout(flutterTimer);
     flutterTimer = setTimeout(function () {
